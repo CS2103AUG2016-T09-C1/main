@@ -1,6 +1,7 @@
 package guitests;
 
 import guitests.guihandles.*;
+import javafx.application.Platform;
 import javafx.stage.Stage;
 import org.junit.After;
 import org.junit.Before;
@@ -11,6 +12,7 @@ import org.testfx.api.FxToolkit;
 
 import seedu.inbx0.TestApp;
 import seedu.inbx0.commons.core.EventsCenter;
+import seedu.inbx0.commons.events.BaseEvent;
 import seedu.inbx0.commons.exceptions.IllegalValueException;
 import seedu.inbx0.model.TaskList;
 import seedu.inbx0.model.task.ReadOnlyTask;
@@ -121,5 +123,10 @@ public abstract class TaskListGuiTest {
      */
     protected void assertResultMessage(String expected) {
         assertEquals(expected, resultDisplay.getText());
+    }
+
+    public void raise(BaseEvent e) {
+        //JUnit doesn't run its test cases on the UI thread. Platform.runLater is used to post event on the UI thread.
+        Platform.runLater(() -> EventsCenter.getInstance().post(e));
     }
 }
