@@ -15,7 +15,6 @@ import seedu.inbx0.model.task.UniqueTaskList;
 import seedu.inbx0.model.task.UniqueTaskList.DuplicateTaskException;
 import seedu.inbx0.model.task.UniqueTaskList.TaskNotFoundException;
 
-import java.util.Collections;
 import java.util.Set;
 import java.util.logging.Logger;
 
@@ -203,7 +202,10 @@ public class ModelManager extends ComponentManager implements Model {
 
         @Override
         public boolean run(ReadOnlyTask task) {
-            return !Collections.disjoint(orKeywords, task.getAsTextSet());
+            return orKeywords.stream()
+                    .filter(keyword -> task.getAsText().contains(keyword))
+                    .findAny()
+                    .isPresent();
         }
 
         @Override

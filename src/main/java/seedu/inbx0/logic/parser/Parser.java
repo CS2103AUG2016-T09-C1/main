@@ -427,9 +427,7 @@ public class Parser {
             return new FindCommand(andRelation, keywordSet);
         }catch(IllegalValueException ive) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
-        }
-        
-        
+        }        
     }
         /*
         // keywords delimited by whitespace
@@ -465,36 +463,36 @@ public class Parser {
     private String convertKeywordsIntoDefinedFormat(String keyword) throws IllegalValueException{
         String convertedKeyword = null;
         if(keyword.contains(START_DATE)) {
-            convertedKeyword = keyword.replace(START_DATE, "").trim();
+            convertedKeyword = keyword.replace(START_DATE, "").trim().replace("'", " ");
             convertedKeyword = Task.formatInput("date", convertedKeyword);
             convertedKeyword = " Start Date: " + convertedKeyword;
         }
         else if(keyword.contains(START_TIME)) {
-            convertedKeyword = keyword.replace(START_TIME, "").trim();
+            convertedKeyword = keyword.replace(START_TIME, "").trim().replace("'", " ");
             convertedKeyword = Task.formatInput("time", convertedKeyword);
             convertedKeyword = " Start Time: " + convertedKeyword;
         }        
         else if(keyword.contains(END_DATE)) {
-            convertedKeyword = keyword.replace(END_DATE, "").trim();
+            convertedKeyword = keyword.replace(END_DATE, "").trim().replace("'", " ");
             convertedKeyword = Task.formatInput("date", convertedKeyword);
             convertedKeyword = " End Date: " + convertedKeyword;
         }
         else if(keyword.contains(END_TIME)) {
-            convertedKeyword = keyword.replace(END_TIME, "").trim();
+            convertedKeyword = keyword.replace(END_TIME, "").trim().replace("'", " ");
             convertedKeyword = Task.formatInput("time", convertedKeyword);
             convertedKeyword = " End Time: " + convertedKeyword;
         }
         else if(keyword.contains(IMPORTANCE)) {
-            convertedKeyword = keyword.replace(IMPORTANCE, "").trim();
+            convertedKeyword = keyword.replace(IMPORTANCE, "").trim().replace("'", " ");
             convertedKeyword = Task.formatInput("importance", convertedKeyword);
             convertedKeyword = " Importance: " + convertedKeyword;
         }
         else if(keyword.contains(TAG)) {
-            convertedKeyword = keyword.replace(TAG, "").trim();
-            convertedKeyword = " Tags: " + convertedKeyword;
+            convertedKeyword = keyword.replace(TAG, "").trim().replace("'", " ");
+            convertedKeyword = " Tags: [" + convertedKeyword + "]";
         }
         else {
-            convertedKeyword = keyword.replace(NAME, "").trim();
+            convertedKeyword = keyword.replace(NAME, "").trim().replace("'", " ");
         }
         System.out.println(convertedKeyword);
         return convertedKeyword;
