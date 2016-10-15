@@ -20,14 +20,15 @@ public class FindCommand extends Command {
             + "Example: " + COMMAND_WORD + " concert dance movie";
 
     private final Set<String> keywords;
-    private final int type;
+    private final boolean andRelation;
     
-    public FindCommand(int type, Set<String> keywords) throws IllegalValueException {
-        this.type = type;
-        this.keywords = ValidateInputFormat(keywords);
+    public FindCommand(boolean andRelation, Set<String> keywords) throws IllegalValueException {
+        this.andRelation = andRelation;
+        //this.keywords = ValidateInputFormat(keywords);
+        this.keywords = keywords;
     }
 
-    private Set<String> ValidateInputFormat(Set<String> keywords) throws IllegalValueException {
+/*    private Set<String> ValidateInputFormat(Set<String> keywords) throws IllegalValueException {
         Set<String> regex = keywords;
         switch(type) {
         case 1: 
@@ -46,10 +47,10 @@ public class FindCommand extends Command {
         }
         return regex;	
     }
-    
+*/    
 	@Override  
 	public CommandResult execute() {
-	    model.updateFilteredTaskList(type, keywords);
+	    model.updateFilteredTaskList(andRelation, keywords);
 	    return new CommandResult(getMessageForTaskListShownSummary(model.getFilteredTaskList().size()));
     }
 

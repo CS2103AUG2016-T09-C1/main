@@ -10,6 +10,7 @@ import java.util.regex.Pattern;
 import seedu.inbx0.commons.exceptions.IllegalValueException;
 import seedu.inbx0.commons.util.StringUtil;
 import seedu.inbx0.logic.commands.*;
+import seedu.inbx0.model.task.Task;
 
 /**
  * Parses user input.
@@ -24,7 +25,9 @@ public class Parser {
     private static final Pattern TASK_INDEX_ARGS_FORMAT = Pattern.compile("(?<targetIndex>.+)");
 
     private static final Pattern KEYWORDS_ARGS_FORMAT =
-            Pattern.compile("(?<keywords>\\S+(?:\\s+\\S+)*)"); // one or more keywords separated by whitespace
+            Pattern.compile("(?<keywords>[^&]+(?:\\s+)*)"); // one or more keywords separated by whitespace
+    private static final Pattern CONDITIONAL_KEYWORDS_ARGS_FORMAT = // '&' ampersand are reserved for AND relational indicators
+            Pattern.compile("(?<keywords>.*[&].*)"); // one or more keywords separated by ampersand
 
     private static final Pattern TASK_DATA_ARGS_FORMAT = // '/' forward slashes are reserved for delimiter prefixes
             Pattern.compile("(?<name>[^/]+)"
@@ -385,12 +388,50 @@ public class Parser {
      * @return the prepared command
      */
     private Command prepareFind(String args) {
-        final Matcher matcher = KEYWORDS_ARGS_FORMAT.matcher(args.trim());
-        if (!matcher.matches()) {
+        final Matcher matcher1 = KEYWORDS_ARGS_FORMAT.matcher(args.trim());
+        final Matcher matcher2 = CONDITIONAL_KEYWORDS_ARGS_FORMAT.matcher(args.trim());
+        boolean andRelation = false;
+        String[] keywords = null; 
+        Set<String> keywordSet = new HashSet<>();
+        if (!matcher1.matches() && !matcher2.matches()) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     FindCommand.MESSAGE_USAGE));
         }
-
+        
+        if(matcher2.matches()) {
+            System.out.println("match and");
+            andRelation = true;
+            keywords = matcher2.group("keywords").split("&");
+            try{
+                for(String keyword: keywords) {
+                    keywordSet.add(convertKeywordsIntoDefinedFormat(keyword));
+                }
+            }catch (IllegalValueException ive) {
+                return new IncorrectCommand(ive.getMessage());
+            }
+        }
+        else{
+            System.out.println("match or");
+            andRelation = false;
+            keywords = matcher1.group("keywords").split("\\s+");
+            try{
+                for(String keyword: keywords) {
+                    keywordSet.add(convertKeywordsIntoDefinedFormat(keyword));
+                }
+            }catch (IllegalValueException ive) {
+                return new IncorrectCommand(ive.getMessage());
+            }
+        }
+        System.out.println(keywordSet);
+        try{
+            return new FindCommand(andRelation, keywordSet);
+        }catch(IllegalValueException ive) {
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+        }
+        
+        
+    }
+        /*
         // keywords delimited by whitespace
         final String[] keywords = matcher.group("keywords").split("\\s+");
         final int type;
@@ -419,8 +460,46 @@ public class Parser {
 		} catch (IllegalValueException ive) {
 		    return new IncorrectCommand(ive.getMessage());
 		}
-    }
+    }*/
     
+    private String convertKeywordsIntoDefinedFormat(String keyword) throws IllegalValueException{
+        String convertedKeyword = null;
+        if(keyword.contains(START_DATE)) {
+            convertedKeyword = keyword.replace(START_DATE, "").trim();
+            convertedKeyword = Task.formatInput("date", convertedKeyword);
+            convertedKeyword = " Start Date: " + convertedKeyword;
+        }
+        else if(keyword.contains(START_TIME)) {
+            convertedKeyword = keyword.replace(START_TIME, "").trim();
+            convertedKeyword = Task.formatInput("time", convertedKeyword);
+            convertedKeyword = " Start Time: " + convertedKeyword;
+        }        
+        else if(keyword.contains(END_DATE)) {
+            convertedKeyword = keyword.replace(END_DATE, "").trim();
+            convertedKeyword = Task.formatInput("date", convertedKeyword);
+            convertedKeyword = " End Date: " + convertedKeyword;
+        }
+        else if(keyword.contains(END_TIME)) {
+            convertedKeyword = keyword.replace(END_TIME, "").trim();
+            convertedKeyword = Task.formatInput("time", convertedKeyword);
+            convertedKeyword = " End Time: " + convertedKeyword;
+        }
+        else if(keyword.contains(IMPORTANCE)) {
+            convertedKeyword = keyword.replace(IMPORTANCE, "").trim();
+            convertedKeyword = Task.formatInput("importance", convertedKeyword);
+            convertedKeyword = " Importance: " + convertedKeyword;
+        }
+        else if(keyword.contains(TAG)) {
+            convertedKeyword = keyword.replace(TAG, "").trim();
+            convertedKeyword = " Tags: " + convertedKeyword;
+        }
+        else {
+            convertedKeyword = keyword.replace(NAME, "").trim();
+        }
+        System.out.println(convertedKeyword);
+        return convertedKeyword;
+    }
+
     /**
      * Parses arguments in the context of the list task command.
      *

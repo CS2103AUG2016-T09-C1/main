@@ -1,5 +1,9 @@
 package seedu.inbx0.model.task;
 
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
+
 import seedu.inbx0.model.tag.UniqueTagList;
 
 /**
@@ -35,7 +39,7 @@ public interface ReadOnlyTask {
     }
 
     /**
-     * Formats the task as text, showing all contact details.
+     * Formats the task as text, showing all details.
      */
     default String getAsText() {
         final StringBuilder builder = new StringBuilder();
@@ -53,8 +57,31 @@ public interface ReadOnlyTask {
                 .append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();
+    }  
+    
+    /**
+     * Formats the task as text set containing all details.
+     */
+    
+    default Set<String> getAsTextSet() {
+        String[] textString = new String[20];
+        textString[0] = getName().getName();
+        textString[1] = " Start Date: " + getStartDate().getDate();
+        textString[2] = " Start Time: " + getStartTime().getTime();
+        textString[3] = " End Date: " + getEndDate().getDate();
+        textString[4] = " End Time: " + getEndTime().getTime();
+        textString[5] = " Importance: " + getLevel().getLevel();
+        String tags = tagsString();
+        String[] tagString = tags.split("\\s+");
+        for(int i=0; i<tagString.length; i++) {
+            textString[4+i] = " Tags: " + tagString[i];
+        }
+        
+        Set<String> textSet = new HashSet<>(Arrays.asList(textString));
+        return textSet;
     }
-
+    
+    
     /**
      * Returns a string representation of this Task's tags
      */

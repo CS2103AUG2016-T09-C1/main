@@ -37,6 +37,9 @@ public interface Model {
     
     /** Updates the filter of the filtered task list to filter by the given date and based on preposition*/
     void updateFilteredTaskList(String date, String preposition);
+    
+    /** Updates the filter of the filtered task list to filter by the given keywords*/
+    void updateFilteredTaskList(boolean andRelation, Set<String> keywords);
 
-    void updateFilteredTaskList(int type, Set<String> keywords);
+    //void updateFilteredTaskList(int type, Set<String> keywords);
 }

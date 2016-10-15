@@ -15,6 +15,7 @@ import seedu.inbx0.model.task.UniqueTaskList;
 import seedu.inbx0.model.task.UniqueTaskList.DuplicateTaskException;
 import seedu.inbx0.model.task.UniqueTaskList.TaskNotFoundException;
 
+import java.util.Collections;
 import java.util.Set;
 import java.util.logging.Logger;
 
@@ -98,7 +99,8 @@ public class ModelManager extends ComponentManager implements Model {
     public void updateFilteredListToShowAll() {
         filteredTasks.setPredicate(null);
     }
-
+    
+    /*
     @Override
     public void updateFilteredTaskList(int type, Set<String> keywords){
     	switch(type) {
@@ -114,6 +116,16 @@ public class ModelManager extends ComponentManager implements Model {
     				break;
     		default: ;
     	}
+    }*/
+    
+    @Override
+    public void updateFilteredTaskList(boolean andRelation, Set<String> keywords){
+        if(andRelation == true) {
+            updateFilteredTaskList(new PredicateExpression(new AndQualifier(keywords)));
+        }
+        else {
+            updateFilteredTaskList(new PredicateExpression(new OrQualifier(keywords)));
+        }
     }
     
     @Override
@@ -159,7 +171,47 @@ public class ModelManager extends ComponentManager implements Model {
         boolean run(ReadOnlyTask task);
         String toString();
     }
+    
+    private class AndQualifier implements Qualifier {
+        private Set<String> andKeywords;
 
+        AndQualifier(Set<String> andKeywords) {
+            this.andKeywords = andKeywords;
+        }
+
+        @Override
+        public boolean run(ReadOnlyTask task) {
+            return (task.getAsTextSet().containsAll(andKeywords));
+            //return andKeyWords.stream()
+              //      .filter(keyword -> StringUtil.containsIgnoreCase(task.getAsText(), keyword))
+                //    .findAny()
+                  //  .isPresent();
+        }
+
+        @Override
+        public String toString() {
+            return "AndSearchKeyword =" + String.join(", ", andKeywords);
+        }
+    }
+    
+    private class OrQualifier implements Qualifier {
+        private Set<String> orKeywords;
+
+        OrQualifier(Set<String> orKeywords) {
+            this.orKeywords = orKeywords;
+        }
+
+        @Override
+        public boolean run(ReadOnlyTask task) {
+            return !Collections.disjoint(orKeywords, task.getAsTextSet());
+        }
+
+        @Override
+        public String toString() {
+            return "OrSearchKeywords =" + String.join(", ", orKeywords);
+        }
+    }
+    /*
     private class NameQualifier implements Qualifier {
         private Set<String> nameKeyWords;
 
@@ -179,7 +231,7 @@ public class ModelManager extends ComponentManager implements Model {
         public String toString() {
             return "name=" + String.join(", ", nameKeyWords);
         }
-    }
+    }*/
     
     private class StartOnAndEndOnDateQualifier implements Qualifier {
         private String date;
@@ -243,7 +295,7 @@ public class ModelManager extends ComponentManager implements Model {
             return "date= " + date;
         }
     }
-
+    /*
     private class StartDateQualifier implements Qualifier {
         private Set<String> startDateKeyWords;
 
@@ -326,5 +378,5 @@ public class ModelManager extends ComponentManager implements Model {
         public String toString() {
             return "tag=" + String.join(", ", tagKeyWords);
         }
-    }
+    }*/
 }

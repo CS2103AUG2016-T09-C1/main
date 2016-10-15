@@ -172,5 +172,21 @@ public class Task implements ReadOnlyTask {
     public String toString() {
         return getAsText();
     }
+    
+    public static String formatInput(String type, String toFormat) throws IllegalValueException{
+        if(type.equals("date")) {
+            Date date = new Date(toFormat);
+            return date.getDate();
+        }
+        else if(type.equals("time")) {
+            Time time = new Time(toFormat);
+            return time.getTime();
+        }
+        else if(type.equals("importance")) {
+            Importance importance = new Importance(toFormat);
+            return importance.getLevel();
+        }
+        return toFormat;
+    }
 
 }
