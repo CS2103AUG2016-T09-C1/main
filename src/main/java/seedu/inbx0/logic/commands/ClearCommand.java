@@ -10,9 +10,6 @@ public class ClearCommand extends Command {
     public static final String COMMAND_WORD = "clr";
     public static final String MESSAGE_SUCCESS = "Tasklist has been cleared!";
 
-    public ClearCommand() {}
-
-
     @Override
     public CommandResult execute() {
         assert model != null;
