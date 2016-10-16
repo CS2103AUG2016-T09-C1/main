@@ -8,7 +8,11 @@ import seedu.inbx0.logic.commands.Command;
  */
 public class IncorrectCommandAttemptedEvent extends BaseEvent {
 
-    public IncorrectCommandAttemptedEvent(Command command) {}
+    private Command command;
+
+    public IncorrectCommandAttemptedEvent(Command command) {
+        this.command = command;
+    }
 
     @Override
     public String toString() {

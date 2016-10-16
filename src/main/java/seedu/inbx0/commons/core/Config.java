@@ -18,9 +18,6 @@ public class Config {
     private String taskListName = "MyTaskList";
 
 
-    public Config() {
-    }
-
     public String getAppTitle() {
         return appTitle;
     }
