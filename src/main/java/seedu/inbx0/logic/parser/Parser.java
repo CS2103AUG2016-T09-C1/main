@@ -293,7 +293,6 @@ public class Parser {
             }
     }
     
-
     private Pattern scanArgumentsAndBuildRegex(String arguments) {
         String regex = "";
         
@@ -399,7 +398,6 @@ public class Parser {
         }
         
         if(matcher2.matches()) {
-            System.out.println("match and");
             andRelation = true;
             keywords = matcher2.group("keywords").split("&");
             try{
@@ -411,7 +409,6 @@ public class Parser {
             }
         }
         else{
-            System.out.println("match or");
             andRelation = false;
             keywords = matcher1.group("keywords").split("\\s+");
             try{
@@ -422,7 +419,6 @@ public class Parser {
                 return new IncorrectCommand(ive.getMessage());
             }
         }
-        System.out.println(keywordSet);
         try{
             return new FindCommand(andRelation, keywordSet);
         }catch(IllegalValueException ive) {
@@ -494,7 +490,6 @@ public class Parser {
         else {
             convertedKeyword = keyword.replace(NAME, "").trim().replace("'", " ");
         }
-        System.out.println(convertedKeyword);
         return convertedKeyword;
     }
 
