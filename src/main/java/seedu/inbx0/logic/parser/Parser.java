@@ -41,6 +41,17 @@ public class Parser {
                     + " e/(?<endDate>[^$]+)"
                     + " et/(?<endTime>[^/]+)"
                     + "(?<tagArguments>(?: t/[^/]+)*)");
+    private static final Pattern TASK_DATA_ARGS_FORMAT_3 = // '/' forward slashes are reserved for delimiter prefixes
+            Pattern.compile("(?<name>[^/]+)"
+                    + " s/(?<startDate>[^$]+)"
+                    + " e/(?<endDate>[^$]+)"
+                    + " i/(?<level>[^/]+)"
+                    + "(?<tagArguments>(?: t/[^/]+)*)");
+    private static final Pattern TASK_DATA_ARGS_FORMAT_4 = // '/' forward slashes are reserved for delimiter prefixes
+            Pattern.compile("(?<name>[^/]+)"
+                    + " s/(?<startDate>[^$]+)"
+                    + " e/(?<endDate>[^$]+)"
+                    + "(?<tagArguments>(?: t/[^/]+)*)");  
     private static final Pattern DEADLINE_TASK_DATA_ARGS_FORMAT = // '/' forward slashes are reserved for delimiter prefixes
             Pattern.compile("(?<name>[^/]+)"
                     + " e/(?<endDate>[^$]+)"
@@ -52,6 +63,15 @@ public class Parser {
                     + " e/(?<endDate>[^$]+)"
                     + " et/(?<endTime>[^/]+)"
                     + "(?<tagArguments>(?: t/[^/]+)*)");
+    private static final Pattern DEADLINE_TASK_DATA_ARGS_FORMAT_3 = // '/' forward slashes are reserved for delimiter prefixes
+            Pattern.compile("(?<name>[^/]+)"
+                    + " e/(?<endDate>[^$]+)"
+                    + " i/(?<level>[^/]+)"
+                    + "(?<tagArguments>(?: t/[^/]+)*)");
+    private static final Pattern DEADLINE_TASK_DATA_ARGS_FORMAT_4 = // '/' forward slashes are reserved for delimiter prefixes
+            Pattern.compile("(?<name>[^/]+)"
+                    + " e/(?<endDate>[^$]+)"
+                    + "(?<tagArguments>(?: t/[^/]+)*)");
     private static final Pattern FLOATING_TASK_DATA_ARGS_FORMAT = // '/' forward slashes are reserved for delimiter prefixes
             Pattern.compile("(?<name>[^/]+)"
                     + " i/(?<level>[^/]+)"
@@ -61,7 +81,23 @@ public class Parser {
                     + "(?<tagArguments>(?: t/[^/]+)*)"); // variable number of tags
     private static final Pattern ADD_TAGS_ARGS_FORMAT = // '/' forward slashes are reserved for delimiter prefixes
             Pattern.compile("(?<targetIndex>\\S+)(?<tagArguments>(?: t/[^/]+)*)"); // variable number of tags
-
+    private static final Pattern DATE_TIME_FORMAT = 
+            Pattern.compile("(?<date>[0-9 ]+[./-][0-9 ]+[./-][0-9]+)"
+                    + "(?<time>(?: [^/]+))");
+    private static final Pattern DATE_TIME_FORMAT_2 = 
+            Pattern.compile("(?<time>(?:[^/]+))"
+                    + "(?<date> [0-9 ]+[./-][0-9 ]+[./-][0-9]+)");
+    private static final Pattern DATE_TIME_FORMAT_3 = 
+            Pattern.compile("(?<date>[0-9]{8})"
+                    + "(?<time>(?: [^/]+))");
+    private static final Pattern DATE_TIME_FORMAT_4 = 
+            Pattern.compile("(?<time>(?:[^/]+))"
+                    + "(?<date> [0-9]{8})");
+    private static final Pattern DATE_TIME_FORMAT_5 = 
+            Pattern.compile("(?<date>[0-9]{8})");
+    private static final Pattern DATE_TIME_FORMAT_6 = 
+            Pattern.compile("(?<date>[0-9 ]+[./-][0-9 ]+[./-][0-9]+)");
+    
     private static final Pattern TASK_EDIT_DATA_ARGS_FORMAT = Pattern.compile("(?<targetIndex>\\S+)(?<arguments>.*)");
     private static final CharSequence NAME = "n/";
     private static final CharSequence START_DATE = "s/";
@@ -135,15 +171,19 @@ public class Parser {
     private Command prepareAdd(String args){
         final Matcher matcher = TASK_DATA_ARGS_FORMAT.matcher(args.trim());
         final Matcher matcher2 = TASK_DATA_ARGS_FORMAT_2.matcher(args.trim());
-        final Matcher matcher3 = DEADLINE_TASK_DATA_ARGS_FORMAT.matcher(args.trim());
-        final Matcher matcher4 = DEADLINE_TASK_DATA_ARGS_FORMAT_2.matcher(args.trim());
-        final Matcher matcher5 = FLOATING_TASK_DATA_ARGS_FORMAT.matcher(args.trim());
-        final Matcher matcher6 = FLOATING_TASK_DATA_ARGS_FORMAT_2.matcher(args.trim());
+        final Matcher matcher3 = TASK_DATA_ARGS_FORMAT_3.matcher(args.trim());
+        final Matcher matcher4 = TASK_DATA_ARGS_FORMAT_4.matcher(args.trim());
+        final Matcher matcher5 = DEADLINE_TASK_DATA_ARGS_FORMAT.matcher(args.trim());
+        final Matcher matcher6 = DEADLINE_TASK_DATA_ARGS_FORMAT_2.matcher(args.trim());       
+        final Matcher matcher7 = DEADLINE_TASK_DATA_ARGS_FORMAT_3.matcher(args.trim());
+        final Matcher matcher8 = DEADLINE_TASK_DATA_ARGS_FORMAT_4.matcher(args.trim());     
+        final Matcher matcher9 = FLOATING_TASK_DATA_ARGS_FORMAT.matcher(args.trim());
+        final Matcher matcher10 = FLOATING_TASK_DATA_ARGS_FORMAT_2.matcher(args.trim());
         
         
         // Validate arg string format
         if (!matcher.matches() && !matcher2.matches() && !matcher3.matches() && !matcher4.matches() && !matcher5.matches()
-            && !matcher6.matches()) {
+            && !matcher6.matches() && !matcher7.matches() && !matcher8.matches() && !matcher9.matches() && !matcher10.matches()) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
         try {
@@ -169,33 +209,86 @@ public class Parser {
                         );
             }
             else if(matcher3.matches()) {
+                
+               String argStartDate = dateParse(matcher3.group("startDate"));
+               String argStartTime = timeParse(matcher3.group("startDate"));
+               String argEndDate = dateParse(matcher3.group("endDate"));
+               String argEndTime = timeParse(matcher3.group("endDate"));
+                
                 return new AddCommand(
                         matcher3.group("name"),
-                        matcher3.group("endDate"),
-                        matcher3.group("endTime"),
+                        argStartDate,
+                        argStartTime,
+                        argEndDate,
+                        argEndTime,
                         matcher3.group("level"),
                         getTagsFromArgs(matcher3.group("tagArguments"))
                         );
             }
             else if(matcher4.matches()) {
+                String argStartDate = dateParse(matcher4.group("startDate"));
+                String argStartTime = timeParse(matcher4.group("startDate"));
+                String argEndDate = dateParse(matcher4.group("endDate"));
+                String argEndTime = timeParse(matcher4.group("endDate"));
+                
                 return new AddCommand(
                         matcher4.group("name"),
-                        matcher4.group("endDate"),
-                        matcher4.group("endTime"),
+                        argStartDate,
+                        argStartTime,
+                        argEndDate,
+                        argEndTime,
                         getTagsFromArgs(matcher4.group("tagArguments"))
                         );
             }
             else if(matcher5.matches()) {
                 return new AddCommand(
                         matcher5.group("name"),
+                        matcher5.group("endDate"),
+                        matcher5.group("endTime"),
                         matcher5.group("level"),
                         getTagsFromArgs(matcher5.group("tagArguments"))
                         );
             }
-            else {
+            else if(matcher6.matches()) {
                 return new AddCommand(
                         matcher6.group("name"),
+                        matcher6.group("endDate"),
+                        matcher6.group("endTime"),
                         getTagsFromArgs(matcher6.group("tagArguments"))
+                        );
+            }
+            else if(matcher7.matches()) {
+                String argEndDate = dateParse(matcher7.group("endDate"));
+                String argEndTime = timeParse(matcher7.group("endDate"));
+                return new AddCommand(
+                        matcher7.group("name"),
+                        argEndDate,
+                        argEndTime,
+                        matcher7.group("level"),
+                        getTagsFromArgs(matcher7.group("tagArguments"))
+                        );
+            }
+            else if(matcher8.matches()) {
+                String argEndDate = dateParse(matcher8.group("endDate"));
+                String argEndTime = timeParse(matcher8.group("endDate"));
+                return new AddCommand(
+                        matcher8.group("name"),
+                        argEndDate,
+                        argEndTime,
+                        getTagsFromArgs(matcher8.group("tagArguments"))
+                        );
+            }
+            else if(matcher9.matches()) {
+                return new AddCommand(
+                        matcher9.group("name"),
+                        matcher9.group("level"),
+                        getTagsFromArgs(matcher9.group("tagArguments"))
+                        );
+            }
+            else {
+                return new AddCommand(
+                        matcher10.group("name"),
+                        getTagsFromArgs(matcher10.group("tagArguments"))
                         );
             }
                        
@@ -203,6 +296,57 @@ public class Parser {
             return new IncorrectCommand(ive.getMessage());
         }
     }
+
+    private String timeParse(String dateTimeString) {
+        Matcher matcher1 = DATE_TIME_FORMAT.matcher(dateTimeString.trim());
+        Matcher matcher2 = DATE_TIME_FORMAT_2.matcher(dateTimeString.trim());
+        Matcher matcher3 = DATE_TIME_FORMAT_3.matcher(dateTimeString.trim());
+        Matcher matcher4 = DATE_TIME_FORMAT_4.matcher(dateTimeString.trim());
+        Matcher matcher5 = DATE_TIME_FORMAT_5.matcher(dateTimeString.trim());
+        Matcher matcher6 = DATE_TIME_FORMAT_6.matcher(dateTimeString.trim());
+               
+        if(matcher1.matches()) 
+            return matcher1.group("time");
+        
+        if(matcher2.matches())
+            return matcher2.group("time");
+        
+        if(matcher3.matches()) 
+            return matcher3.group("time");
+        
+        if(matcher4.matches()) 
+            return matcher4.group("time");
+        
+        if(matcher5.matches()) 
+            return "";
+        
+        if(matcher6.matches()) 
+            return "";
+        
+        return dateTimeString;
+    }
+
+    private String dateParse(String dateTimeString) {
+        Matcher matcher1 = DATE_TIME_FORMAT.matcher(dateTimeString.trim());
+        Matcher matcher2 = DATE_TIME_FORMAT_2.matcher(dateTimeString.trim());
+        Matcher matcher3 = DATE_TIME_FORMAT_3.matcher(dateTimeString.trim());
+        Matcher matcher4 = DATE_TIME_FORMAT_4.matcher(dateTimeString.trim());
+               
+        if(matcher1.matches()) 
+            return matcher1.group("date");
+        
+        if(matcher2.matches())
+            return matcher2.group("date");
+        
+        if(matcher3.matches()) 
+            return matcher3.group("date");
+        
+        if(matcher4.matches()) 
+            return matcher4.group("date");
+        
+        return dateTimeString;
+    }
+
 
     /**
      * Extracts the new task's tags from the add command's tag arguments string.

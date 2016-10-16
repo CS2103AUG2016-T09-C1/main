@@ -34,9 +34,14 @@ public class Time {
         }
         else {
                 try{
-                    List<java.util.Date> getTime = new Parser().parse(time).get(0).getDates();
                     SimpleDateFormat ft = new SimpleDateFormat ("HH:mm");
-                    this.value = ft.format(getTime.get(0)); 
+                    List<java.util.Date> getTime = new Parser().parse(time).get(0).getDates();
+                    List<java.util.Date> current = new Parser().parse("now").get(0).getDates();
+                    
+                    if(ft.format(getTime.get(0)).equals(ft.format(current.get(0))))
+                        this.value = "";
+                    else
+                        this.value = ft.format(getTime.get(0)); 
                 } catch (IndexOutOfBoundsException e) {
                     throw new IllegalValueException(MESSAGE_TIME_CONSTRAINTS);
                 }

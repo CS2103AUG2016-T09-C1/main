@@ -19,8 +19,8 @@ public class Date {
 
     public static final String MESSAGE_DATE_CONSTRAINTS = "Date can either be a numeric string, alphanumeric string, or alphabet string \n"
                                                         + "Example: DD/MM/YYYY format OR 3rd Jan OR next year";
-    public static final Pattern DATE_NUMERIC_VALIDATION_REGEX = Pattern.compile("(?<front>[0-9]+)[./-](?<middle>[0-9]+)[./-](?<back>[0-9]+)");
-    public static final String DATE_NUMERIC_VALIDATION_REGEX_2 = "\\d+";
+    public static final Pattern DATE_NUMERIC_VALIDATION_REGEX = Pattern.compile("(?<front>[0-9 ]+)[./-](?<middle>[0-9 ]+)[./-](?<back>[0-9 ]+)");
+    public static final String DATE_NUMERIC_VALIDATION_REGEX_2 = "[0-9 ]+";
 /*    public static final String DATE_ALPHANUMERIC_VALIDATION_REGEX = "(?<=\\D)(?=\\d)|(?<=\\d)(?=\\D)";
     public static final String DATE_ALPHABETICAL_VALIDATION_REGEX = "[\\p{Alpha} ]+";
     public static final String SPLIT_NUM_AND_ALPHABET_REGEX = "(?<=\\D)(?=\\d)|(?<=\\d)(?=\\D)";
@@ -53,30 +53,33 @@ public class Date {
         }
         else if(date.matches(DATE_NUMERIC_VALIDATION_REGEX_2)) {
             
-            int numberDate = Integer.parseInt(date);
-            
-            if(date.length() == 8) {
-            this.day = numberDate / 1000000;
-            this.month = (numberDate / 10000) % 100;
-            this.year = numberDate % 10000;
+            String dateWithoutSpaces = date.replaceAll(" ","");
+            int numberDate = Integer.parseInt(dateWithoutSpaces);
 
-            String nattyFormat = Integer.toString(month) + "/" + Integer.toString(day) + "/" + Integer.toString(year);
-            List<java.util.Date> dates = new Parser().parse(nattyFormat).get(0).getDates();
-            SimpleDateFormat ft = new SimpleDateFormat ("dd.MM.yyyy");
-            SimpleDateFormat dayInWord = new SimpleDateFormat ("E, ");
-            
-            this.dayWord = dayInWord.format(dates.get(0));
-            this.DDMMYYYYFormat = ft.format(dates.get(0));
-            this.value = ft.format(dates.get(0)).replaceAll("\\D+","");
+            if(dateWithoutSpaces.length() == 8) {
+                this.day = numberDate / 1000000;
+                this.month = (numberDate / 10000) % 100;
+                this.year = numberDate % 10000;
+                
+                String nattyFormat = Integer.toString(month) + "/" + Integer.toString(day) + "/" + Integer.toString(year);
+
+                List<java.util.Date> dates = new Parser().parse(nattyFormat).get(0).getDates();
+                SimpleDateFormat ft = new SimpleDateFormat ("dd.MM.yyyy");
+                SimpleDateFormat dayInWord = new SimpleDateFormat ("E, ");
+                
+                this.dayWord = dayInWord.format(dates.get(0));
+                this.DDMMYYYYFormat = ft.format(dates.get(0));
+                this.value = ft.format(dates.get(0)).replaceAll("\\D+","");
+                System.out.println(value);
             }
             else
                 throw new IllegalValueException(MESSAGE_DATE_CONSTRAINTS);
         }
         else if(matcher.matches()) {
             
-            String dateFront = matcher.group("front");
-            String dateMiddle = matcher.group("middle");
-            String dateBack = matcher.group("back");
+            String dateFront = matcher.group("front").trim();
+            String dateMiddle = matcher.group("middle").trim();
+            String dateBack = matcher.group("back").trim();
             
             if(dateFront.length() == 4) {
                 this.year = Integer.parseInt(dateFront);

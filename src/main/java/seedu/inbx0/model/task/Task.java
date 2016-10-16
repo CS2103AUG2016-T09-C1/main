@@ -31,7 +31,8 @@ public class Task implements ReadOnlyTask {
     public Task(Name name, Date startDate, Time startTime, Date endDate, Time endTime, Importance level, UniqueTagList tags) throws IllegalValueException {
         assert !CollectionUtil.isAnyNull(name, startDate, startTime, endDate, endTime, level, tags);
         
-        if(startDate.getDate() == "" && startTime.getTime() == "") {
+        if((startDate.getDate() == "" && startTime.getTime() == "" && endDate.getDate() == "" && endTime.getTime() == "") |
+                startDate.getDate() == "" && startTime.getTime() == "" && endDate.getDate() != "") {
             this.isEvent = false;
         }
         else
@@ -59,9 +60,21 @@ public class Task implements ReadOnlyTask {
      */
     public static boolean isValidEvent(Date startDate, Time startTime, Date endDate, Time endTime) {
         boolean isValid = false;
+        
+        if(startTime.getTime() == "" && endTime.getTime() == "" && endDate.getDate() != "" && startDate.getDate() != "" ) {
+            if(endDate.getYear() > startDate.getYear())
+                isValid = true;
+            else if ((endDate.getYear() == startDate.getYear()) && (endDate.getMonth() > startDate.getMonth()))
+                isValid = true;
+            else if (((endDate.getYear() == startDate.getYear()) && 
+                    (endDate.getMonth() == startDate.getMonth())) &&
+                    (endDate.getDay() >= startDate.getDay()))
+               isValid = true;
+            
+            return isValid;            
+        }
         if(endTime.getTime() == "")
             return isValid;
-        
         int numStartTime = Integer.parseInt(startTime.getTime().replaceAll("\\D+",""));
         int numEndTime = Integer.parseInt(endTime.getTime().replaceAll("\\D+",""));
         
