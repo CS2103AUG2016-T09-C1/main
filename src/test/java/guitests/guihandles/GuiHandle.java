@@ -10,6 +10,7 @@ import javafx.stage.Window;
 import seedu.inbx0.TestApp;
 import seedu.inbx0.commons.core.LogsCenter;
 
+import java.util.Optional;
 import java.util.logging.Logger;
 
 /**
@@ -78,7 +79,7 @@ public class GuiHandle {
     }
 
     public void closeWindow() {
-        java.util.Optional<Window> window = guiRobot.listTargetWindows()
+        Optional<Window> window = guiRobot.listTargetWindows()
                 .stream()
                 .filter(w -> w instanceof Stage && ((Stage) w).getTitle().equals(stageTitle)).findAny();
 
