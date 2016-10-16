@@ -294,7 +294,7 @@ Priority | As a ... | I want to ... | So that I can...
 **MSS**
 
 1. User requests to add a task
-2. Inbx_0 creates the task and saves it into the storage file
+2. Inbx_0 creates the task and saves it into the storage file <br>
 Use case ends.
 
 **Extensions**
@@ -314,7 +314,7 @@ Use case ends.
 **MSS**
 
 1. User requests to list all tasks
-2. Inbx_0 shows the list of tasks
+2. Inbx_0 shows the list of tasks <br>
 Use case ends.
 
 **Extensions**
@@ -328,7 +328,7 @@ Use case ends.
 **MSS**
 
 1. User requests to list tasks that are due before a specific date
-2. Inbx_0 retrieves the required tasks and displays them in a list
+2. Inbx_0 retrieves the required tasks and displays them in a list <br>
 Use case ends.
 
 **Extensions**
@@ -363,7 +363,7 @@ Use case ends.
 **MSS**
 
 1. User requests to undo his add task action
-2. Inbx_0 deletes the most recenty added task
+2. Inbx_0 deletes the most recenty added task <br>
 Use case ends.
 
 #### Use case: Undo delete task
@@ -371,7 +371,7 @@ Use case ends.
 **MSS**
 
 1. User requests to undo his delete task action
-2. Inbx_0 readds the most recenty deleted task
+2. Inbx_0 readds the most recenty deleted task <br>
 Use case ends.
 
 #### Use case: Clear the tasklist
@@ -379,7 +379,7 @@ Use case ends.
 **MSS**
 
 1. User requests to clear the list of tasks
-2. Inbx_0 deletes the entire task list
+2. Inbx_0 deletes the entire task list <br>
 Use case ends.
 
 
