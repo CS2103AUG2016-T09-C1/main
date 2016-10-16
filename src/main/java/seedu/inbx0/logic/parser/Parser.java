@@ -79,6 +79,26 @@ public class Parser {
     private static final Pattern FLOATING_TASK_DATA_ARGS_FORMAT_2 = // '/' forward slashes are reserved for delimiter prefixes
             Pattern.compile("(?<name>[^/]+)"
                     + "(?<tagArguments>(?: t/[^/]+)*)"); // variable number of tags
+    private static final Pattern START_TASK_DATA_ARGS_FORMAT = // '/' forward slashes are reserved for delimiter prefixes
+            Pattern.compile("(?<name>[^/]+)"
+                    + " s/(?<startDate>[^$]+)"
+                    + " st/(?<startTime>[^/]+)"
+                    + " i/(?<level>[^/]+)"
+                    + "(?<tagArguments>(?: t/[^/]+)*)");
+    private static final Pattern START_TASK_DATA_ARGS_FORMAT_2 = // '/' forward slashes are reserved for delimiter prefixes
+            Pattern.compile("(?<name>[^/]+)"
+                    + " s/(?<startDate>[^$]+)"
+                    + " st/(?<startTime>[^/]+)"
+                    + "(?<tagArguments>(?: t/[^/]+)*)");
+    private static final Pattern START_TASK_DATA_ARGS_FORMAT_3 = // '/' forward slashes are reserved for delimiter prefixes
+            Pattern.compile("(?<name>[^/]+)"
+                    + " s/(?<startDate>[^$]+)"
+                    + " i/(?<level>[^/]+)"
+                    + "(?<tagArguments>(?: t/[^/]+)*)");
+    private static final Pattern START_TASK_DATA_ARGS_FORMAT_4 = // '/' forward slashes are reserved for delimiter prefixes
+            Pattern.compile("(?<name>[^/]+)"
+                    + " s/(?<startDate>[^$]+)"
+                    + "(?<tagArguments>(?: t/[^/]+)*)");
     private static final Pattern ADD_TAGS_ARGS_FORMAT = // '/' forward slashes are reserved for delimiter prefixes
             Pattern.compile("(?<targetIndex>\\S+)(?<tagArguments>(?: t/[^/]+)*)"); // variable number of tags
     private static final Pattern DATE_TIME_FORMAT = 
@@ -179,11 +199,15 @@ public class Parser {
         final Matcher matcher8 = DEADLINE_TASK_DATA_ARGS_FORMAT_4.matcher(args.trim());     
         final Matcher matcher9 = FLOATING_TASK_DATA_ARGS_FORMAT.matcher(args.trim());
         final Matcher matcher10 = FLOATING_TASK_DATA_ARGS_FORMAT_2.matcher(args.trim());
-        
+        final Matcher matcher11 = START_TASK_DATA_ARGS_FORMAT.matcher(args.trim());
+        final Matcher matcher12 = START_TASK_DATA_ARGS_FORMAT_2.matcher(args.trim());
+        final Matcher matcher13 = START_TASK_DATA_ARGS_FORMAT_3.matcher(args.trim());
+        final Matcher matcher14 = START_TASK_DATA_ARGS_FORMAT_4.matcher(args.trim());
         
         // Validate arg string format
         if (!matcher.matches() && !matcher2.matches() && !matcher3.matches() && !matcher4.matches() && !matcher5.matches()
-            && !matcher6.matches() && !matcher7.matches() && !matcher8.matches() && !matcher9.matches() && !matcher10.matches()) {
+            && !matcher6.matches() && !matcher7.matches() && !matcher8.matches() && !matcher9.matches() && !matcher10.matches()
+            && !matcher11.matches() && !matcher12.matches() && !matcher13.matches()&& !matcher14.matches()) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
         try {
@@ -285,10 +309,57 @@ public class Parser {
                         getTagsFromArgs(matcher9.group("tagArguments"))
                         );
             }
-            else {
+            else if(matcher10.matches()) {
                 return new AddCommand(
                         matcher10.group("name"),
                         getTagsFromArgs(matcher10.group("tagArguments"))
+                        );
+            
+            }
+            else if(matcher11.matches()) {
+                return new AddCommand(
+                        matcher11.group("name"),
+                        matcher11.group("startDate"),
+                        matcher11.group("startTime"),
+                        "",
+                        "",
+                        matcher11.group("level"),
+                        getTagsFromArgs(matcher11.group("tagArguments"))
+                        );
+            }
+            else if(matcher12.matches()) {
+                return new AddCommand(
+                        matcher12.group("name"),
+                        matcher12.group("startDate"),
+                        matcher12.group("startTime"),
+                        "",
+                        "",
+                        getTagsFromArgs(matcher12.group("tagArguments"))
+                        );
+            }
+            else if(matcher13.matches()) {
+                String argStartDate = dateParse(matcher13.group("startDate"));
+                String argStartTime = timeParse(matcher13.group("startDate"));
+                return new AddCommand(
+                        matcher13.group("name"),
+                        argStartDate,
+                        argStartTime,
+                        "",
+                        "",
+                        matcher13.group("level"),
+                        getTagsFromArgs(matcher13.group("tagArguments"))
+                        );
+            }
+            else {
+                String argStartDate = dateParse(matcher14.group("startDate"));
+                String argStartTime = timeParse(matcher14.group("startDate"));
+                return new AddCommand(
+                        matcher14.group("name"),
+                        argStartDate,
+                        argStartTime,
+                        "",
+                        "",
+                        getTagsFromArgs(matcher14.group("tagArguments"))
                         );
             }
                        

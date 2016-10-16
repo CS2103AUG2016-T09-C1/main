@@ -70,7 +70,6 @@ public class Date {
                 this.dayWord = dayInWord.format(dates.get(0));
                 this.DDMMYYYYFormat = ft.format(dates.get(0));
                 this.value = ft.format(dates.get(0)).replaceAll("\\D+","");
-                System.out.println(value);
             }
             else
                 throw new IllegalValueException(MESSAGE_DATE_CONSTRAINTS);
