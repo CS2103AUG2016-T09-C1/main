@@ -3,8 +3,6 @@ package seedu.inbx0.logic.commands;
 import java.util.Set;
 
 import seedu.inbx0.commons.exceptions.IllegalValueException;
-import seedu.inbx0.model.task.Date;
-import seedu.inbx0.model.task.Importance;
 
 /**
  * Finds and lists all tasks in tasklist whose name contains any of the argument keywords.
@@ -24,30 +22,9 @@ public class FindCommand extends Command {
     
     public FindCommand(boolean andRelation, Set<String> keywords) throws IllegalValueException {
         this.andRelation = andRelation;
-        //this.keywords = ValidateInputFormat(keywords);
         this.keywords = keywords;
     }
 
-/*    private Set<String> ValidateInputFormat(Set<String> keywords) throws IllegalValueException {
-        Set<String> regex = keywords;
-        switch(type) {
-        case 1: 
-        case 2: for(String keyword: keywords) {
-                    Date inputDate = new Date(keyword);
-                    regex.remove(keyword);
-                    regex.add(inputDate.value);
-                }
-                break;
-        case 3: for(String keyword: keywords) {
-                    Importance inputImportance = new Importance(keyword);
-                    regex.remove(keyword);
-    		        regex.add(inputImportance.value);
-    		    }
-                break;
-        }
-        return regex;	
-    }
-*/    
 	@Override  
 	public CommandResult execute() {
 	    model.updateFilteredTaskList(andRelation, keywords);
