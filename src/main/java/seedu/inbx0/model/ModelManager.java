@@ -99,24 +99,6 @@ public class ModelManager extends ComponentManager implements Model {
         filteredTasks.setPredicate(null);
     }
     
-    /*
-    @Override
-    public void updateFilteredTaskList(int type, Set<String> keywords){
-    	switch(type) {
-    		case 0: updateFilteredTaskList(new PredicateExpression(new NameQualifier(keywords)));
-    				break;
-    		case 1: updateFilteredTaskList(new PredicateExpression(new StartDateQualifier(keywords)));
-					break;
-    		case 2: updateFilteredTaskList(new PredicateExpression(new EndDateQualifier(keywords)));
-    				break;
-    		case 3: updateFilteredTaskList(new PredicateExpression(new LevelQualifier(keywords)));
-    				break;
-    		case 4: updateFilteredTaskList(new PredicateExpression(new TagQualifier(keywords)));
-    				break;
-    		default: ;
-    	}
-    }*/
-    
     @Override
     public void updateFilteredTaskList(boolean andRelation, Set<String> keywords){
         if(andRelation == true) {
@@ -180,11 +162,8 @@ public class ModelManager extends ComponentManager implements Model {
 
         @Override
         public boolean run(ReadOnlyTask task) {
-            return (task.getAsTextSet().containsAll(andKeywords));
-            //return andKeyWords.stream()
-              //      .filter(keyword -> StringUtil.containsIgnoreCase(task.getAsText(), keyword))
-                //    .findAny()
-                  //  .isPresent();
+            return andKeywords.stream()
+                   .allMatch(keyword -> task.getAsText().contains(keyword));
         }
 
         @Override
