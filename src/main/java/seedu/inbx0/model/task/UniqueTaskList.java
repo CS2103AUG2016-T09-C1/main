@@ -15,7 +15,7 @@ import java.util.*;
  * @see Task#equals(Object)
  * @see CollectionUtil#elementsAreUnique(Collection)
  */
-public class UniqueTaskList implements Iterable<Task> {
+public class UniqueTaskList implements Iterable<Task>{
 
     /**
      * Signals that an operation would have violated the 'no duplicates' property of the list.
@@ -39,6 +39,25 @@ public class UniqueTaskList implements Iterable<Task> {
      */
     public UniqueTaskList() {}
 
+    /**
+     * Sorts the task list according to the sorting type and order 
+     * @param order 
+     */
+    public void sortUniqueTaskList(String type, boolean defaultOrder) {
+        if(type.equals("Start Time")) {
+            FXCollections.sort(internalList, new StartTimeComparator());
+        }
+        else if(type.equals("End Time")) {
+            FXCollections.sort(internalList, new EndTimeComparator());
+        }
+        else if(type.equals("Importance")) {
+            FXCollections.sort(internalList, new ImportanceComparator());
+        }
+        if(!defaultOrder) {
+            FXCollections.reverse(internalList);
+        }
+    }
+    
     /**
      * Returns true if the list contains an equivalent task as the given argument.
      */
@@ -105,6 +124,27 @@ public class UniqueTaskList implements Iterable<Task> {
         
         return taskEdited;
     }
+    
+    /**
+     * Marks the equivalent task from the list as completed.
+     *
+     * @throws TaskNotFoundException if no such task could be found in the list.
+     */
+    public boolean markComplete(ReadOnlyTask toMarkComplete, Task completedTask) throws TaskNotFoundException {
+        assert toMarkComplete != null;
+        int markCompletedTaskIndex = internalList.indexOf(toMarkComplete);
+        if (markCompletedTaskIndex < 0) {
+            throw new TaskNotFoundException();
+        }
+        
+        boolean taskMarkedCompleted = false;
+        final Task taskFoundAndMarkedCompleted = internalList.set(markCompletedTaskIndex, completedTask);  
+        
+        if(taskFoundAndMarkedCompleted != null) 
+            taskMarkedCompleted = true;
+        
+        return taskMarkedCompleted;
+    }
     public ObservableList<Task> getInternalList() {
         return internalList;
     }
@@ -126,4 +166,68 @@ public class UniqueTaskList implements Iterable<Task> {
     public int hashCode() {
         return internalList.hashCode();
     }
+
+    /**
+     * A comparator use to compare the start time of two tasks
+     * return true if the first task happens earlier than the second one 
+     * @author peek-a-boo
+     */
+    class StartTimeComparator implements Comparator<Task> {
+        @Override
+        public int compare(Task task, Task taskToCompare) {
+            String startDate = task.getStartDate().getDateYYYYMMDDFormat();
+            String startTime = task.getStartTime().getTime();
+            String startDateToCompare = taskToCompare.getStartDate().getDateYYYYMMDDFormat();
+            String startTimeToCompare = taskToCompare.getStartTime().getTime();
+            if(startDate.equals("") || startDateToCompare.equals("")) {
+                return (0 - startDate.compareTo(startDateToCompare));
+            }
+            if(startDate.equals(startDateToCompare)) {
+                if(startTime.equals("") || startTimeToCompare.equals("")) {
+                    return (0 - startTime.compareTo(startTimeToCompare));
+                }
+                return startTime.compareTo(startTimeToCompare);
+            }
+            return startDate.compareTo(startDateToCompare);
+        }
+    }
+    
+    /**
+     * A comparator use to compare the end time of two tasks
+     * return true if the first task happens earlier than the second one 
+     * @author peek-a-boo
+     */
+    class EndTimeComparator implements Comparator<Task> {
+        @Override
+        public int compare(Task task, Task taskToCompare) {
+            String endDate = task.getEndDate().getDateYYYYMMDDFormat();
+            String endTime = task.getEndTime().getTime();
+            String endDateToCompare = taskToCompare.getEndDate().getDateYYYYMMDDFormat();
+            String endTimeToCompare = taskToCompare.getEndTime().getTime();
+            if(endDate.equals("") || endDateToCompare.equals("")) {
+                return (0 - endDate.compareTo(endDateToCompare));
+            }
+            else if(endDate.equals(endDateToCompare)) {
+                if(endTime.equals("") || endTimeToCompare.equals("")) {
+                    return (0 - endTime.compareTo(endTimeToCompare));
+                }
+                return endTime.compareTo(endTimeToCompare);
+            }
+            return endDate.compareTo(endDateToCompare);
+        }
+    }
+    
+    /**
+     * A comparator use to compare the importance of two tasks
+     * return true if the first task is more important than the second one
+     * Importance: Red > Yellow > Green > NULL 
+     * @author peek-a-boo
+     */
+    class ImportanceComparator implements Comparator<Task> {
+        @Override
+        public int compare(Task task, Task taskToCompare) {
+            return taskToCompare.getLevel().getNumberLevel() - task.getLevel().getNumberLevel();
+        }
+    }
+    
 }

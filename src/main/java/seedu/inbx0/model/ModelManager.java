@@ -19,7 +19,7 @@ import java.util.Set;
 import java.util.logging.Logger;
 
 /**
- * Represents the in-memory model of the address book data.
+ * Represents the in-memory model of the task list data.
  * All changes to any model should be synchronized.
  */
 public class ModelManager extends ComponentManager implements Model {
@@ -55,36 +55,48 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void resetData(ReadOnlyTaskList newData) {
         taskList.resetData(newData);
-        indicateAddressBookChanged();
+        indicateTaskListChanged();
     }
-
+    
+    @Override
+    public void sortTaskList(String type, boolean defaultOrder) {
+        taskList.getUniqueTaskList().sortUniqueTaskList(type, defaultOrder);
+        updateFilteredListToShowAll();
+        indicateTaskListChanged();
+    }
     @Override
     public ReadOnlyTaskList getTaskList() {
         return taskList;
     }
 
     /** Raises an event to indicate the model has changed */
-    private void indicateAddressBookChanged() {
+    private void indicateTaskListChanged() {
         raise(new TaskListChangedEvent(taskList));
     }
 
     @Override
     public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
         taskList.removeTask(target);
-        indicateAddressBookChanged();
+        indicateTaskListChanged();
     }
     
     @Override
     public synchronized void editTask(ReadOnlyTask target, Task task) throws TaskNotFoundException, DuplicateTaskException {
         taskList.editTask(target, task);
-        indicateAddressBookChanged();
+        indicateTaskListChanged();
+    }
+    
+    @Override
+    public synchronized void markTaskComplete(ReadOnlyTask target, Task task) throws TaskNotFoundException {
+        taskList.markTaskComplete(target, task);
+        indicateTaskListChanged();
     }
     
     @Override
     public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
         taskList.addTask(task);
         updateFilteredListToShowAll();
-        indicateAddressBookChanged();
+        indicateTaskListChanged();
     }
 
     //=========== Filtered Task List Accessors ===============================================================

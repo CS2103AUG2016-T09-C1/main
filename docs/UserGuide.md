@@ -79,7 +79,8 @@ Let's get started by adding tasks to the tasklist! You may use any of the below 
 1) Adds a floating task.<br>
 Format: `add TASK [i/IMPORTANCE] [t/TAGS]...` 
 
-> Floating tasks are tasks without deadlines.
+> Floating tasks are tasks without without any start dates or end dates. You can use this to keep track of tasks which may not be follow
+a time schedule.
 
 Examples: 
 * `add Buy Groceries` <br>
@@ -87,21 +88,35 @@ Examples:
 <br>
 
 2) Adds a task with deadlines.<br>
-Format: `add TASK e/END_DATE et/END_TIME i/IMPORTANCE [t/TAGS]` 
+Format: `add TASK e/[END_DATE] [END_TIME] [i/IMPORTANCE] [t/TAGS]` 
 
 Examples: 
-* `add Do CS2103 Homework e/tomorrow et/10am, i/red`
-* `add Finish Project Paper e/1 March et/12am i/green t/For GEH1027` <br>
+* `add Do CS2103 Homework e/tomorrow i/red`
+* `add Finish Project Paper e/1 March 12am i/green t/For GEH1027` <br>
 <br>
 
-3) Adds an event.<br>
-Format: `add TASK s/START_DATE st/START_TIME e/END_DATE et/END_TIME i/IMPORTANCE [t/TAGS]`
+> * Under the e/ parameter, it requires either the END_DATE or END_TIME. By providing only END_DATE, the END_TIME would not be specified.
+> *	If the END_DATE is not provided, the end date will be automatically assigned as the current date.
+
+3) Adds a task with starting point only.<br>
+Format: `add TASK s/[START_DATE] [START_TIME][i/IMPORTANCE] [t/TAGS]`
+
+Examples: 
+* `add Started Gym Training s/10012016 i/red`
+* `add On Diet s/18/10/2016 i/red t/health` <br>
+<br>
+
+> * Under the s/ parameter, it requires either the START_DATE or START_TIME. By providing only START_DATE, the START_TIME would not be specified.
+> *	If the START_DATE is not provided, the start date will be automatically assigned as the current date.
+
+4) Adds an event.<br>
+Format: `add TASK s/[START_DATE] [START_TIME] e/[END_DATE] [END_TIME] [i/IMPORTANCE] [t/TAGS]`
 
 > Events are tasks with a starting and ending point.
 
 Examples:
-* `add Doctor's appointment s/2 July 2016 st/5pm e/2 July 2016 et/7:30pm i/green t/painful`
-* `add SO’s Birthday s/29 Feb st/12am e/1 March et/12am i/green t/flowers t/chocolates`
+* `add Doctor's appointment s/2 July 2016 5pm e/2 July 2016 7:30pm i/green t/painful`
+* `add SO’s Birthday s/29 Feb 12am e/1 March 12am i/green t/flowers t/chocolates`
 
 <br><br>
 
@@ -156,7 +171,10 @@ Made a spelling mistake or your event was postponed? You can use the Edit Comman
 
 This can be done by typing the following:
 
-> edit INDEX [n/NAME] [s/START_DATE] [st/START_TIME] [e/END_DATE] [et/END_TIME] [i/IMPORTANCE]
+> edit INDEX [n/NAME] [s/START_DATE] [st/START_TIME] [e/END_DATE] [et/END_TIME] [i/IMPORTANCE] [t/TAG]...
+
+By specifying the parameters of the task and typing the corrected parameters, you will be able to change multiple parameters in that
+single task. Do note that one of the optional parameters is necessary.
 
 Examples
 * `list today`<br>
@@ -181,7 +199,26 @@ Examples:
 
 <br><br>
 
-#### <a id="del"></a>6. Deleting a task: `del`
+#### <a id="tag"></a>6. Tagging a task: `tag`
+Format: `tag INDEX t/TAGS [t/MORE_TAGS]`
+
+If you wish to add additional tags to any existing tasks, you can do it by typing the following: <br>
+
+> tag INDEX t/TAGS [t/MORE_TAGS]
+
+Note that adding tags and editing tags are totally different. Edit tags will remove all tags and add in the editted tag. This tag command will just append the new tag behind any existing tag names.
+
+> The index refers to the index number shown in the most recent listing.<br>
+  The index **must be a positive integer** 1, 2, 3, ...
+
+Examples: 
+* `list today`<br>
+  `tag 2 t/tonight`<br>
+  Adds the "tonight" tag to the 2nd task in the list.
+
+<br><br>
+
+#### <a id="del"></a>7. Deleting a task: `del`
 Format: `del INDEX`
 
 If you have wish to remove a particular task from the list, you can do it by typing the following: <br>
@@ -205,7 +242,7 @@ Examples:
 
 <br><br>
 
-#### <a id="sel"></a>7. Select a task : `sel`
+#### <a id="sel"></a>8. Select a task : `sel`
 Format: `sel INDEX`
 
 In order to view more details on a task that you have created, you can select the task identified by the index number in the last listing. The Select Command can be performed by typing:
@@ -229,7 +266,7 @@ Examples:
 
 <br><br>
 
-#### <a id="undo"></a>8. Undo previous action: `undo`
+#### <a id="undo"></a>9. Undo previous action: `undo`
 Format: `undo`
 
 Undos the previous action done in the task manager if you've made a mistake. <br>
@@ -238,7 +275,7 @@ Undos the previous action done in the task manager if you've made a mistake. <br
 
 <br><br>
 
-#### <a id="clr"></a>9. Clearing all tasks : `clr`
+#### <a id="clr"></a>10. Clearing all tasks : `clr`
 Format: `clr`
 
 Tasks can easily become obsolete and checking off tasks individually can be quite a hassle. The Clear command will help you to remove all tasks and can be accessed by typing the following:
@@ -251,26 +288,48 @@ Adding the date in the command line is optional and by default it will clear the
 
 <br><br>
 
-#### <a id="done"></a>10. Mark a task as `done`
-Format: `done + INDEX`
+#### <a id="done"></a>11. Mark a task as `done`
+1) Mark selected tasks as done
+Format: `done INDEX [INDEX]...`
 
 If you have finished a certain task and wish to mark it as finished you can give a `done` label to the specified task in the task list by typing the following: <br>
 
-> done INDEX
+> done INDEX [INDEX]...
 
-This will label a task as `done`, when you display the task, you will be reminded that you have finished the specified task.
+This will label a task as `done`, when task is shown, you will be reminded that you have finished the specified task. If there are more than one tasks that need to be
+marked, you can enter more index numbers with all of them separated with a whitespace. The tasks will be marked complete accordingly
 
 > The index refers to the index number shown in the most recent listing.<br>
   The index **must be a positive integer** 1, 2, 3, ...
+  If the task is already marked completed for one of the index numbers given, it will remind you that one of the tasks is already completed
 
 Example: 
 * `find today` <br>
-  `done 2` <br>
- Gives a `done` label to the 2nd task in today’s list
+  `done 2 4 7` <br>
+ Marks the 2nd, 4th and 7th tasks as completed in today’s list
+ 
+2) Mark tasks in consecutive index numbers as done
+Format: `done FIRST_INDEX to LAST_INDEX`
 
+If you wish to mark several tasks in a row as completed, you can type the following:
+
+> done FIRST_INDEX to LAST_INDEX
+
+This will allow multiple tasks specified by the first index to the last index to be marked as completed.
+
+> The index refers to the index number shown in the most recent listing.<br>
+  The index **must be a positive integer** 1, 2, 3, ...
+  If the task is already marked completed for one of the index numbers given, it will remind you that one of the tasks is already completed
+  The last index cannot be smaller than the first index and the last index cannot be equal to the first index
+  
+Example: 
+* `list next week` <br>
+  `done 1 to 5` <br>
+ Marks the 1st to 5th tasks as completed in next week’s list
+  
 <br><br>
 
-#### <a id="exit"></a>11. Exiting the program : 
+#### <a id="exit"></a>12. Exiting the program : 
 Format: `exit`
 
 After using Inbx_0, you can easily exit the program by typing the following in the command line:
@@ -297,6 +356,7 @@ Command | Format
 &nbsp; | `list i/[IMPORTANCE]`
 [Find](#find) | `find KEYWORD [MORE_KEYWORDS]`
 [Edit](#edit) | `edit INDEX [n/NAME] [s/START_DATE] [st/START_TIME] [e/END_DATE] [et/END_TIME] [i/IMPORTANCE]`
+[Tag](#tag) | `tag INDEX t/TAGS [t/MORE_TAGS]`
 [Delete](#del) | `del INDEX`
 [Select](#sel) | `sel INDEX`
 [Undo](#undo) | `undo`

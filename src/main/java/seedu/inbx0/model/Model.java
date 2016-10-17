@@ -20,6 +20,9 @@ public interface Model {
     /** Deletes the given task. */
     void deleteTask(ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException;
     
+    /** Marks the given task complete. */
+    void markTaskComplete(ReadOnlyTask target, Task task) throws UniqueTaskList.TaskNotFoundException;
+    
     /** Edits the given task. */
     void editTask(ReadOnlyTask target, Task task) throws UniqueTaskList.TaskNotFoundException, UniqueTaskList.DuplicateTaskException;
     
@@ -40,6 +43,7 @@ public interface Model {
     
     /** Updates the filter of the filtered task list to filter by the given keywords*/
     void updateFilteredTaskList(boolean andRelation, Set<String> keywords);
-
-    //void updateFilteredTaskList(int type, Set<String> keywords);
+    
+    /** Sorts the task list by the given type in the given order*/
+    void sortTaskList(String type, boolean defaultOrder);
 }

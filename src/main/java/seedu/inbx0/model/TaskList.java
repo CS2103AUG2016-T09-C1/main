@@ -5,6 +5,7 @@ import seedu.inbx0.model.task.Task;
 import seedu.inbx0.model.task.ReadOnlyTask;
 import seedu.inbx0.model.task.UniqueTaskList;
 import seedu.inbx0.model.task.UniqueTaskList.DuplicateTaskException;
+import seedu.inbx0.model.task.UniqueTaskList.TaskNotFoundException;
 import seedu.inbx0.commons.exceptions.IllegalValueException;
 import seedu.inbx0.model.tag.Tag;
 import seedu.inbx0.model.tag.UniqueTagList;
@@ -13,7 +14,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 /**
- * Wraps all data at the address-book level
+ * Wraps all data at the task manager level
  * Duplicates are not allowed (by .equals comparison)
  */
 public class TaskList implements ReadOnlyTaskList {
@@ -29,14 +30,14 @@ public class TaskList implements ReadOnlyTaskList {
     public TaskList() {}
 
     /**
-     * Tasks and Tags are copied into this addressbook
+     * Tasks and Tags are copied into this task manager
      */
     public TaskList(ReadOnlyTaskList toBeCopied) {
         this(toBeCopied.getUniqueTaskList(), toBeCopied.getUniqueTagList());
     }
 
     /**
-     * Tasks and Tags are copied into this addressbook
+     * Tasks and Tags are copied into this task manager
      */
     public TaskList(UniqueTaskList tasks, UniqueTagList tags) {
         resetData(tasks.getInternalList(), tags.getInternalList());
@@ -129,6 +130,15 @@ public class TaskList implements ReadOnlyTaskList {
         }
     }
     
+    public boolean markTaskComplete(ReadOnlyTask key, Task t) throws TaskNotFoundException {
+        if (tasks.markComplete(key, t)) {
+            return true;
+        } else {
+            throw new UniqueTaskList.TaskNotFoundException();
+        }
+        
+    }
+    
 //// tag-level operations
 
     public void addTag(Tag t) throws UniqueTagList.DuplicateTagException {
@@ -147,7 +157,7 @@ public class TaskList implements ReadOnlyTaskList {
     public List<ReadOnlyTask> getTaskList() {
         return Collections.unmodifiableList(tasks.getInternalList());
     }
-
+    
     @Override
     public List<Tag> getTagList() {
         return Collections.unmodifiableList(tags.getInternalList());
@@ -177,4 +187,6 @@ public class TaskList implements ReadOnlyTaskList {
         // use this method for custom fields hashing instead of implementing your own
         return Objects.hash(tasks, tags);
     }
+
+    
 }
