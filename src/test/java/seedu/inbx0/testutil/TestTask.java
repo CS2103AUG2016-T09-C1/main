@@ -14,6 +14,7 @@ public class TestTask implements ReadOnlyTask {
     private Date endDate;
     private Time endTime;
     private Importance level;
+    private boolean isCompleted;
     
     private UniqueTagList tags;
 
@@ -78,6 +79,11 @@ public class TestTask implements ReadOnlyTask {
     @Override
     public Importance getLevel() {
         return level;
+    }
+    
+    @Override
+    public boolean getIsCompleted() {
+        return isCompleted;
     }
     
     @Override

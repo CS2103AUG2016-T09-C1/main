@@ -5,6 +5,7 @@ import seedu.inbx0.model.task.Task;
 import seedu.inbx0.model.task.ReadOnlyTask;
 import seedu.inbx0.model.task.UniqueTaskList;
 import seedu.inbx0.model.task.UniqueTaskList.DuplicateTaskException;
+import seedu.inbx0.model.task.UniqueTaskList.TaskNotFoundException;
 import seedu.inbx0.commons.exceptions.IllegalValueException;
 import seedu.inbx0.model.tag.Tag;
 import seedu.inbx0.model.tag.UniqueTagList;
@@ -129,6 +130,15 @@ public class TaskList implements ReadOnlyTaskList {
         }
     }
     
+    public boolean markTaskComplete(ReadOnlyTask key, Task t) throws TaskNotFoundException {
+        if (tasks.markComplete(key, t)) {
+            return true;
+        } else {
+            throw new UniqueTaskList.TaskNotFoundException();
+        }
+        
+    }
+    
 //// tag-level operations
 
     public void addTag(Tag t) throws UniqueTagList.DuplicateTagException {
@@ -177,4 +187,6 @@ public class TaskList implements ReadOnlyTaskList {
         // use this method for custom fields hashing instead of implementing your own
         return Objects.hash(tasks, tags);
     }
+
+    
 }
