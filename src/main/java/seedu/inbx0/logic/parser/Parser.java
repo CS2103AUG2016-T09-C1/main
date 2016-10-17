@@ -673,7 +673,7 @@ public class Parser {
             if(keywords[1].equalsIgnoreCase("DESC") || keywords[1].equalsIgnoreCase("descending") || keywords[1].equalsIgnoreCase("descend")) {
                 defaultOrder = (type.equals("Importance")) ? true : false;
             }
-            else if(keywords[1].equalsIgnoreCase("ASC") || keywords[1].equalsIgnoreCase("asceding") || keywords[1].equalsIgnoreCase("ascend")) {
+            else if(keywords[1].equalsIgnoreCase("ASC") || keywords[1].equalsIgnoreCase("ascending") || keywords[1].equalsIgnoreCase("ascend")) {
                 defaultOrder = (type.equals("Importance")) ? false : true;
             }
             else {
