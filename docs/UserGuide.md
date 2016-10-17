@@ -95,9 +95,21 @@ Examples:
 * `add Finish Project Paper e/1 March 12am i/green t/For GEH1027` <br>
 <br>
 
-> * Under the e/ parameter, it requires either the END_DATE or END_TIME. By providing only END_DATE or END_TIME, this would cause the other not to be specified.
+> * Under the e/ parameter, it requires either the END_DATE or END_TIME. By providing only END_DATE, the END_TIME would not be specified.
+> *	If the END_DATE is not provided, the end date will be automatically assigned as the current date.
 
-3) Adds an event.<br>
+3) Adds a task with starting point only.<br>
+Format: `add TASK s/[START_DATE] [START_TIME][i/IMPORTANCE] [t/TAGS]`
+
+Examples: 
+* `add Started Gym Training s/10012016 i/red`
+* `add On Diet s/18/10/2016 i/red t/health` <br>
+<br>
+
+> * Under the s/ parameter, it requires either the START_DATE or START_TIME. By providing only START_DATE, the START_TIME would not be specified.
+> *	If the START_DATE is not provided, the start date will be automatically assigned as the current date.
+
+4) Adds an event.<br>
 Format: `add TASK s/[START_DATE] [START_TIME] e/[END_DATE] [END_TIME] [i/IMPORTANCE] [t/TAGS]`
 
 > Events are tasks with a starting and ending point.
