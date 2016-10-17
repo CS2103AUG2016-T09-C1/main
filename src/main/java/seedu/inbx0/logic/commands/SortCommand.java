@@ -9,7 +9,7 @@ public class SortCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Sort the tasks according to start time, end time or importance in descending or ascending order\n"
-            + "Example: " + COMMAND_WORD + " s|start|e|end|i|importance" + " [ASDC|ascending|ascend|DESC|descending|descend]";
+            + "Example: " + COMMAND_WORD + " s|start|e|end|i|importance" + " [ASC|ascending|ascend|DESC|descending|descend]";
 
     public static final String MESSAGE_SORT_TASK_SUCCESS = "Sorts Task Successfully";
     
