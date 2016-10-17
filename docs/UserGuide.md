@@ -79,7 +79,8 @@ Let's get started by adding tasks to the tasklist! You may use any of the below 
 1) Adds a floating task.<br>
 Format: `add TASK [i/IMPORTANCE] [t/TAGS]...` 
 
-> Floating tasks are tasks without deadlines.
+> Floating tasks are tasks without without any start dates or end dates. You can use this to keep track of tasks which may not be follow
+a time schedule.
 
 Examples: 
 * `add Buy Groceries` <br>
@@ -87,21 +88,23 @@ Examples:
 <br>
 
 2) Adds a task with deadlines.<br>
-Format: `add TASK e/END_DATE et/END_TIME i/IMPORTANCE [t/TAGS]` 
+Format: `add TASK e/[END_DATE] [END_TIME] [i/IMPORTANCE] [t/TAGS]` 
 
 Examples: 
-* `add Do CS2103 Homework e/tomorrow et/10am, i/red`
-* `add Finish Project Paper e/1 March et/12am i/green t/For GEH1027` <br>
+* `add Do CS2103 Homework e/tomorrow i/red`
+* `add Finish Project Paper e/1 March 12am i/green t/For GEH1027` <br>
 <br>
 
+> * Under the e/ parameter, it requires either the END_DATE or END_TIME. By providing only END_DATE or END_TIME, this would cause the other not to be specified.
+
 3) Adds an event.<br>
-Format: `add TASK s/START_DATE st/START_TIME e/END_DATE et/END_TIME i/IMPORTANCE [t/TAGS]`
+Format: `add TASK s/[START_DATE] [START_TIME] e/[END_DATE] [END_TIME] [i/IMPORTANCE] [t/TAGS]`
 
 > Events are tasks with a starting and ending point.
 
 Examples:
-* `add Doctor's appointment s/2 July 2016 st/5pm e/2 July 2016 et/7:30pm i/green t/painful`
-* `add SO’s Birthday s/29 Feb st/12am e/1 March et/12am i/green t/flowers t/chocolates`
+* `add Doctor's appointment s/2 July 2016 5pm e/2 July 2016 7:30pm i/green t/painful`
+* `add SO’s Birthday s/29 Feb 12am e/1 March 12am i/green t/flowers t/chocolates`
 
 <br><br>
 
@@ -156,7 +159,10 @@ Made a spelling mistake or your event was postponed? You can use the Edit Comman
 
 This can be done by typing the following:
 
-> edit INDEX [n/NAME] [s/START_DATE] [st/START_TIME] [e/END_DATE] [et/END_TIME] [i/IMPORTANCE]
+> edit INDEX [n/NAME] [s/START_DATE] [st/START_TIME] [e/END_DATE] [et/END_TIME] [i/IMPORTANCE] [t/TAG]...
+
+By specifying the parameters of the task and typing the corrected parameters, you will be able to change multiple parameters in that
+single task. Do note that one of the optional parameters is necessary.
 
 Examples
 * `list today`<br>
@@ -271,22 +277,44 @@ Adding the date in the command line is optional and by default it will clear the
 <br><br>
 
 #### <a id="done"></a>11. Mark a task as `done`
-Format: `done + INDEX`
+1) Mark selected tasks as done
+Format: `done INDEX [INDEX]...`
 
 If you have finished a certain task and wish to mark it as finished you can give a `done` label to the specified task in the task list by typing the following: <br>
 
-> done INDEX
+> done INDEX [INDEX]...
 
-This will label a task as `done`, when you display the task, you will be reminded that you have finished the specified task.
+This will label a task as `done`, when task is shown, you will be reminded that you have finished the specified task. If there are more than one tasks that need to be
+marked, you can enter more index numbers with all of them separated with a whitespace. The tasks will be marked complete accordingly
 
 > The index refers to the index number shown in the most recent listing.<br>
   The index **must be a positive integer** 1, 2, 3, ...
+  If the task is already marked completed for one of the index numbers given, it will remind you that one of the tasks is already completed
 
 Example: 
 * `find today` <br>
-  `done 2` <br>
- Gives a `done` label to the 2nd task in today’s list
+  `done 2 4 7` <br>
+ Marks the 2nd, 4th and 7th tasks as completed in today’s list
+ 
+2) Mark tasks in consecutive index numbers as done
+Format: `done FIRST_INDEX to LAST_INDEX`
 
+If you wish to mark several tasks in a row as completed, you can type the following:
+
+> done FIRST_INDEX to LAST_INDEX
+
+This will allow multiple tasks specified by the first index to the last index to be marked as completed.
+
+> The index refers to the index number shown in the most recent listing.<br>
+  The index **must be a positive integer** 1, 2, 3, ...
+  If the task is already marked completed for one of the index numbers given, it will remind you that one of the tasks is already completed
+  The last index cannot be smaller than the first index and the last index cannot be equal to the first index
+  
+Example: 
+* `list next week` <br>
+  `done 1 to 5` <br>
+ Marks the 1st to 5th tasks as completed in next week’s list
+  
 <br><br>
 
 #### <a id="exit"></a>12. Exiting the program : 
