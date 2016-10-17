@@ -57,7 +57,13 @@ public class ModelManager extends ComponentManager implements Model {
         taskList.resetData(newData);
         indicateTaskListChanged();
     }
-
+    
+    @Override
+    public void sortTaskList(String type, boolean defaultOrder) {
+        taskList.getUniqueTaskList().sortUniqueTaskList(type, defaultOrder);
+        updateFilteredListToShowAll();
+        indicateTaskListChanged();
+    }
     @Override
     public ReadOnlyTaskList getTaskList() {
         return taskList;

@@ -223,6 +223,16 @@ public class Date {
         return value;
     }
     
+    /**
+     * @return a string representation of date in YYYYMMDD format
+     */
+    public String getDateYYYYMMDDFormat() {
+        if (value.equals("")) {
+            return value;      
+        }
+        return value.substring(4,8) + value.substring(2,4) + value.substring(0,2);
+    }
+    
     public String getTotalDate() {
         return dayWord + DDMMYYYYFormat;
     }
