@@ -42,4 +42,7 @@ public interface Model {
     void updateFilteredTaskList(String date, String preposition);
 
     void updateFilteredTaskList(int type, Set<String> keywords);
+    
+    /** Sorts the task list by the given type in the given order*/
+    void sortTaskList(String type, boolean defaultOrder);
 }

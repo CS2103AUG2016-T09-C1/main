@@ -26,13 +26,16 @@ public class Parser {
 
     private static final Pattern KEYWORDS_ARGS_FORMAT =
             Pattern.compile("(?<keywords>\\S+(?:\\s+\\S+)*)"); // one or more keywords separated by whitespace
+    
+    private static final Pattern SORT_TASK_LIST_ARGS_FORMAT =
+            Pattern.compile("(?<keywords>\\S+(?:\\s+\\S+)?)"); // one or two keywords separated by whitespace
    
     private static final Pattern INDEX_NUMBER_ARGS_FORMAT = 
             Pattern.compile("(?<numbers>[0-9]+(?:\\s+[0-9]+)*)"); // one or more index numbers separated by whitespace
     
     private static final Pattern INDEX_NUM_TO_INDEX_NUM_ARGS_FORMAT =
             Pattern.compile("(?<first>[0-9]+) to (?<last>[0-9]+)");
-
+    
     private static final Pattern TASK_DATA_ARGS_FORMAT = // '/' forward slashes are reserved for delimiter prefixes
             Pattern.compile("(?<name>[^/]+)"
                     + " s/(?<startDate>[^$]+)"
@@ -163,6 +166,9 @@ public class Parser {
         case EditCommand.COMMAND_WORD:
             return prepareEdit(arguments);
             
+        case SortCommand.COMMAND_WORD:
+            return prepareSort(arguments);
+            
         case TagCommand.COMMAND_WORD:
             return prepareTag(arguments);
         
@@ -191,10 +197,7 @@ public class Parser {
             return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);
         }
     }
-
-
-
-
+    
     /**
      * Parses arguments in the context of the add task command.
      *
@@ -559,7 +562,7 @@ public class Parser {
         else
             return null;                
     }
-    
+      
     /**
      * Parses arguments in the context of the add task command.
      *
@@ -591,7 +594,6 @@ public class Parser {
     
     /**
      * Parses arguments in the context of the Mark Complete task command.
-     *
      * @param args full command args string
      * @return the prepared command
      */
@@ -632,7 +634,6 @@ public class Parser {
             Integer[] indexNumInteger = IntStream.of(indexNum).boxed().toArray(Integer[]::new);
             indexNumSet = new HashSet<Integer>(Arrays.asList(indexNumInteger));
         }
-
         try {
             
             return new MarkCompleteCommand(indexNumSet);
@@ -641,6 +642,47 @@ public class Parser {
             return new IncorrectCommand(e.getMessage());
         }
     }
+    /**
+     * Parses arguments in the context of the sort task command.
+     * @param args full command args string
+     * @return the prepared command
+     */
+    private Command prepareSort(String args){
+        System.out.println(args.trim());
+        final Matcher matcher = SORT_TASK_LIST_ARGS_FORMAT.matcher(args.trim());
+        if(!matcher.matches()) {
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
+        }
+        
+        String[] keywords = matcher.group("keywords").split("\\s+");
+        String type = null;
+        boolean defaultOrder = true;
+        if(keywords[0].equalsIgnoreCase("s")||keywords[0].equalsIgnoreCase("start")) {
+            type = "Start Time";
+        }
+        else if(keywords[0].equalsIgnoreCase("e")||keywords[0].equalsIgnoreCase("end")) {
+            type = "End Time";
+        } 
+        else if(keywords[0].equalsIgnoreCase("i")||keywords[0].equalsIgnoreCase("importance")) {
+            type = "Importance";
+        } 
+        else {
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
+        }
+        if(keywords.length == 2) {
+            if(keywords[1].equalsIgnoreCase("DESC") || keywords[1].equalsIgnoreCase("descending") || keywords[1].equalsIgnoreCase("descend")) {
+                defaultOrder = (type.equals("Importance")) ? true : false;
+            }
+            else if(keywords[1].equalsIgnoreCase("ASC") || keywords[1].equalsIgnoreCase("asceding") || keywords[1].equalsIgnoreCase("ascend")) {
+                defaultOrder = (type.equals("Importance")) ? false : true;
+            }
+            else {
+                return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
+            }
+        }            
+        return new SortCommand(type, defaultOrder);
+    }
+
     /**
      * Parses arguments in the context of the delete task command.
      *
