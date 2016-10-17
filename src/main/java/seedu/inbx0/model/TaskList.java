@@ -13,7 +13,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 /**
- * Wraps all data at the address-book level
+ * Wraps all data at the task manager level
  * Duplicates are not allowed (by .equals comparison)
  */
 public class TaskList implements ReadOnlyTaskList {
@@ -29,14 +29,14 @@ public class TaskList implements ReadOnlyTaskList {
     public TaskList() {}
 
     /**
-     * Tasks and Tags are copied into this addressbook
+     * Tasks and Tags are copied into this task manager
      */
     public TaskList(ReadOnlyTaskList toBeCopied) {
         this(toBeCopied.getUniqueTaskList(), toBeCopied.getUniqueTagList());
     }
 
     /**
-     * Tasks and Tags are copied into this addressbook
+     * Tasks and Tags are copied into this task manager
      */
     public TaskList(UniqueTaskList tasks, UniqueTagList tags) {
         resetData(tasks.getInternalList(), tags.getInternalList());
@@ -147,7 +147,7 @@ public class TaskList implements ReadOnlyTaskList {
     public List<ReadOnlyTask> getTaskList() {
         return Collections.unmodifiableList(tasks.getInternalList());
     }
-
+    
     @Override
     public List<Tag> getTagList() {
         return Collections.unmodifiableList(tags.getInternalList());
