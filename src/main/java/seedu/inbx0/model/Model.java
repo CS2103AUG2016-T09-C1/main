@@ -20,6 +20,9 @@ public interface Model {
     /** Deletes the given task. */
     void deleteTask(ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException;
     
+    /** Marks the given task complete. */
+    void markTaskComplete(ReadOnlyTask target, Task task) throws UniqueTaskList.TaskNotFoundException;
+    
     /** Edits the given task. */
     void editTask(ReadOnlyTask target, Task task) throws UniqueTaskList.TaskNotFoundException, UniqueTaskList.DuplicateTaskException;
     

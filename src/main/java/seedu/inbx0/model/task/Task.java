@@ -21,6 +21,7 @@ public class Task implements ReadOnlyTask {
     private Time endTime;
     private Importance level;
     private boolean isEvent;
+    private boolean isCompleted;
     
     private UniqueTagList tags;
 
@@ -53,9 +54,38 @@ public class Task implements ReadOnlyTask {
         this.endTime = endTime;
         this.level = level;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
+        this.isCompleted = false;
         
     }
     
+    public Task(Name name, Date startDate, Time startTime, Date endDate, Time endTime, Importance level, UniqueTagList tags, boolean isCompleted) throws IllegalValueException {
+        assert !CollectionUtil.isAnyNull(name, startDate, startTime, endDate, endTime, level, tags, isCompleted);
+        
+        if((startDate.getDate() == "" && startTime.getTime() == "" && endDate.getDate() == "" && endTime.getTime() == "") |
+            (startDate.getDate() == "" && startTime.getTime() == "" && endDate.getDate() != "")|
+            (startDate.getDate() != "" && startTime.getTime() != "" && endDate.getDate() == "" && endTime.getTime() == "") |
+            (startDate.getDate() != "" && startTime.getTime() == "" && endDate.getDate() == "" && endTime.getTime() == "")) {
+            this.isEvent = false;
+        }
+        else
+            this.isEvent = true;
+        
+        if(isEvent == true) {
+            if(!isValidEvent(startDate, startTime, endDate, endTime)) {
+                throw new IllegalValueException(MESSAGE_TIME_CONSTRAINTS);
+            }
+        }
+        
+        this.name = name;
+        this.startDate = startDate;
+        this.startTime = startTime;
+        this.endDate = endDate;
+        this.endTime = endTime;
+        this.level = level;
+        this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
+        this.isCompleted = isCompleted;
+       
+    }
     
     /**
      * Returns true if a given Date and Time allows it to be a valid event.
@@ -105,7 +135,7 @@ public class Task implements ReadOnlyTask {
      */
     
     public Task(ReadOnlyTask source) throws IllegalValueException {
-        this(source.getName(), source.getStartDate(), source.getStartTime(), source.getEndDate(), source.getEndTime(), source.getLevel(), source.getTags());
+        this(source.getName(), source.getStartDate(), source.getStartTime(), source.getEndDate(), source.getEndTime(), source.getLevel(), source.getTags(), source.getIsCompleted());
     }
 
     @Override
@@ -142,6 +172,12 @@ public class Task implements ReadOnlyTask {
     public UniqueTagList getTags() {
         return new UniqueTagList(tags);
     }
+    
+    @Override
+    public boolean getIsCompleted() {
+        return isCompleted;
+    }
+
 
     /**
      * Replaces this task's tags with the tags in the argument tag list.
@@ -169,7 +205,10 @@ public class Task implements ReadOnlyTask {
     public void setLevel(Importance level) {
         this.level = level;
     }
-
+    
+    public void setCompleted(boolean isCompleted) {
+        this.isCompleted = isCompleted;
+    }
 
     @Override
     public boolean equals(Object other) {
@@ -181,7 +220,7 @@ public class Task implements ReadOnlyTask {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, startDate, startTime, endDate, endTime, level, tags);
+        return Objects.hash(name, startDate, startTime, endDate, endTime, level, tags, isCompleted);
     }
 
     @Override

@@ -26,6 +26,8 @@ public class TaskCard extends UiPart{
     private Label endTime;
     @FXML
     private Label tags;
+    @FXML
+    private Label isCompleted;
 
     private ReadOnlyTask task;
     private int displayedIndex;
@@ -50,6 +52,7 @@ public class TaskCard extends UiPart{
         endDate.setText(task.getEndDate().getTotalDate());
         endTime.setText(task.getEndTime().value);
         tags.setText(task.tagsString());
+        isCompleted.setText("isCompleted: " + task.getIsCompleted());
         
         if(task.getLevel().getNumberLevel() == 1) 
             cardPane.setStyle("-fx-background-color: #7CFC00;");

@@ -6,6 +6,7 @@ import static seedu.inbx0.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.IntStream;
 
 import seedu.inbx0.commons.exceptions.IllegalValueException;
 import seedu.inbx0.commons.util.StringUtil;
@@ -25,6 +26,12 @@ public class Parser {
 
     private static final Pattern KEYWORDS_ARGS_FORMAT =
             Pattern.compile("(?<keywords>\\S+(?:\\s+\\S+)*)"); // one or more keywords separated by whitespace
+   
+    private static final Pattern INDEX_NUMBER_ARGS_FORMAT = 
+            Pattern.compile("(?<numbers>[0-9]+(?:\\s+[0-9]+)*)"); // one or more index numbers separated by whitespace
+    
+    private static final Pattern INDEX_NUM_TO_INDEX_NUM_ARGS_FORMAT =
+            Pattern.compile("(?<first>[0-9]+) to (?<last>[0-9]+)");
 
     private static final Pattern TASK_DATA_ARGS_FORMAT = // '/' forward slashes are reserved for delimiter prefixes
             Pattern.compile("(?<name>[^/]+)"
@@ -118,6 +125,7 @@ public class Parser {
     private static final Pattern DATE_TIME_FORMAT_6 = 
             Pattern.compile("(?<date>[0-9 ]+[./-][0-9 ]+[./-][0-9]+)");
     
+    
     private static final Pattern TASK_EDIT_DATA_ARGS_FORMAT = Pattern.compile("(?<targetIndex>\\S+)(?<arguments>.*)");
     private static final CharSequence NAME = "n/";
     private static final CharSequence START_DATE = "s/";
@@ -157,6 +165,9 @@ public class Parser {
             
         case TagCommand.COMMAND_WORD:
             return prepareTag(arguments);
+        
+        case MarkCompleteCommand.COMMAND_WORD:
+            return prepareMarkComplete(arguments);
 
         case DeleteCommand.COMMAND_WORD:
             return prepareDelete(arguments);
@@ -180,6 +191,8 @@ public class Parser {
             return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);
         }
     }
+
+
 
 
     /**
@@ -575,7 +588,59 @@ public class Parser {
         	   return new IncorrectCommand(ive.getMessage());
            }
     }
+    
+    /**
+     * Parses arguments in the context of the Mark Complete task command.
+     *
+     * @param args full command args string
+     * @return the prepared command
+     */
+    private Command prepareMarkComplete(String args) {
+        final Matcher matcher = INDEX_NUMBER_ARGS_FORMAT.matcher(args.trim());
+        final Matcher matcher2 = INDEX_NUM_TO_INDEX_NUM_ARGS_FORMAT.matcher(args.trim());
+        
+        if (!matcher.matches() && !matcher2.matches()) {
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    MarkCompleteCommand.MESSAGE_USAGE));
+        }
+        
+        Set<Integer> indexNumSet;
+        
+        if(matcher2.matches()) {
+            Integer front = Integer.valueOf(matcher2.group("first"));
+            Integer back = Integer.valueOf(matcher2.group("last"));
+            
+            if(back < front | front == back) {
+                return new IncorrectCommand(String.format(MarkCompleteCommand.MESSAGE_INVALID_ARGUMENTS,
+                        MarkCompleteCommand.MESSAGE_USAGE));
+            }
+            Integer[] indexNumInteger = new Integer[back - front + 1];
+            int index = 0;
+            for(Integer i = front; i <= back; i++) {
+               
+                indexNumInteger[index] = i;
+                index++;
+            }
+            
+            indexNumSet = new HashSet<Integer>(Arrays.asList(indexNumInteger));
+            
+            
+        }
+        else {
+            final String[] indexNumbers = matcher.group("numbers").split("\\s+");
+            final int[] indexNum = Arrays.asList(indexNumbers).stream().mapToInt(Integer::parseInt).toArray();
+            Integer[] indexNumInteger = IntStream.of(indexNum).boxed().toArray(Integer[]::new);
+            indexNumSet = new HashSet<Integer>(Arrays.asList(indexNumInteger));
+        }
 
+        try {
+            
+            return new MarkCompleteCommand(indexNumSet);
+        } catch (IllegalValueException e) {
+            
+            return new IncorrectCommand(e.getMessage());
+        }
+    }
     /**
      * Parses arguments in the context of the delete task command.
      *

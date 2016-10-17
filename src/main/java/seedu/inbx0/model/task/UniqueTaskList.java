@@ -105,6 +105,27 @@ public class UniqueTaskList implements Iterable<Task> {
         
         return taskEdited;
     }
+    
+    /**
+     * Marks the equivalent task from the list as completed.
+     *
+     * @throws TaskNotFoundException if no such task could be found in the list.
+     */
+    public boolean markComplete(ReadOnlyTask toMarkComplete, Task completedTask) throws TaskNotFoundException {
+        assert toMarkComplete != null;
+        int markCompletedTaskIndex = internalList.indexOf(toMarkComplete);
+        if (markCompletedTaskIndex < 0) {
+            throw new TaskNotFoundException();
+        }
+        
+        boolean taskMarkedCompleted = false;
+        final Task taskFoundAndMarkedCompleted = internalList.set(markCompletedTaskIndex, completedTask);  
+        
+        if(taskFoundAndMarkedCompleted != null) 
+            taskMarkedCompleted = true;
+        
+        return taskMarkedCompleted;
+    }
     public ObservableList<Task> getInternalList() {
         return internalList;
     }
