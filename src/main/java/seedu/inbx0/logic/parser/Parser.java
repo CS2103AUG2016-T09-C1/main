@@ -25,11 +25,25 @@ public class Parser {
 
     private static final Pattern TASK_INDEX_ARGS_FORMAT = Pattern.compile("(?<targetIndex>.+)");
 
-    private static final Pattern KEYWORDS_ARGS_FORMAT =
-            Pattern.compile("(?<keywords>[^&]+(?:\\s+)*)"); // one or more keywords separated by whitespace
+    //private static final Pattern KEYWORDS_ARGS_FORMAT =
+      //      Pattern.compile("(?<keywords>[^&]+(?:\\s+)*)"); // one or more keywords separated by whitespace
     
-    private static final Pattern CONDITIONAL_KEYWORDS_ARGS_FORMAT = // '&' ampersand are reserved for AND relational indicators
-            Pattern.compile("(?<keywords>.*[&].*)"); // one or more keywords separated by ampersand
+   // private static final Pattern CONDITIONAL_KEYWORDS_ARGS_FORMAT = // '&' ampersand are reserved for AND relational indicators
+     //       Pattern.compile("(?<keywords>.*[&].*)"); // one or more keywords separated by ampersand
+    private static final Pattern NORMAL_KEYWORDS_ARGS_FORMAT =   // '&', '|', '(', ')' are reserved for logic operation
+            Pattern.compile("(?<keywords>[^&|()]+(?:\\s+)*)"); // one or more keywords separated by whitespace
+    
+    private static final Pattern LOGIC_KEYWORDS_ARGS_FORMAT = // '&', '|', '(', ')' are reserved for logic operation
+            Pattern.compile("(?<arguments>.*[&|()].*)"); // one or more keywords separated by logic operation words
+    
+    private static final Pattern INVALID_LOGIC_SEARCH_ARGS1 =
+            Pattern.compile(".*\\w\\s*[(].*");                  //keywords followed by '(' is invalid in logic operation 
+    
+    private static final Pattern INVALID_LOGIC_SEARCH_ARGS2 =
+            Pattern.compile(".*[(&|]\\s*[&|)].*");            //no keywords between [(&|] and [&|)] is invalid in logic operation 
+
+    private static final Pattern INVALID_LOGIC_SEARCH_ARGS3 =
+            Pattern.compile(".*[&|]\\s*");                    //end with & or | is invalid       
     
     private static final Pattern SORT_TASK_LIST_ARGS_FORMAT =
             Pattern.compile("(?<keywords>\\S+(?:\\s+\\S+)?)"); // one or two keywords separated by whitespace
@@ -746,16 +760,17 @@ public class Parser {
      * @return the prepared command
      */
     private Command prepareFind(String args) {
-        final Matcher matcher1 = KEYWORDS_ARGS_FORMAT.matcher(args.trim());
-        final Matcher matcher2 = CONDITIONAL_KEYWORDS_ARGS_FORMAT.matcher(args.trim());
-        boolean andRelation = false;
+        final Matcher matcher1 = NORMAL_KEYWORDS_ARGS_FORMAT.matcher(args.trim());
+        final Matcher matcher2 = LOGIC_KEYWORDS_ARGS_FORMAT.matcher(args.trim());
+        //boolean andRelation = false;
+        boolean logicRelation = false;
         String[] keywords = null; 
-        Set<String> keywordSet = new HashSet<>();
+        List<String> keywordSet = new ArrayList<String>();
         if (!matcher1.matches() && !matcher2.matches()) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     FindCommand.MESSAGE_USAGE));
         }
-        
+        /*
         if(matcher2.matches()) {
             andRelation = true;
             keywords = matcher2.group("keywords").split("&");
@@ -767,8 +782,131 @@ public class Parser {
                 return new IncorrectCommand(ive.getMessage());
             }
         }
+        if(stackChar == "" || stackChar.matches("\\s+")) {
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, 
+                FindCommand.EMPTY_KEYWORDS_USAGE));
+        }
+        */
+        if(matcher2.matches()) {
+            logicRelation = true;
+            String arguments = matcher2.group("arguments").trim();
+            if(INVALID_LOGIC_SEARCH_ARGS1.matcher(arguments).matches() || 
+                    INVALID_LOGIC_SEARCH_ARGS2.matcher(arguments).matches() || 
+                    INVALID_LOGIC_SEARCH_ARGS3.matcher(arguments).matches()) {
+                return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        FindCommand.INVALID_LOGIC_SEARCH)); 
+            }
+            System.out.println("arguments: " + arguments);
+            String singleChar;
+            String stackChar = "";
+            boolean foundLeftBracket;
+            Stack<String> expressionStack = new Stack<String> ();
+            Stack<String> keywordStack = new Stack<String> ();
+            for(int index=0; index<arguments.length(); index++) {
+                singleChar = arguments.substring(index, index+1);
+                foundLeftBracket = false;
+                if (singleChar.matches("[(]")) {
+                    expressionStack.push(singleChar);
+                    keywordSet.add(singleChar);
+                }
+                else if(singleChar.matches("[)]")) {
+                    while(!expressionStack.empty()) {
+                        if(expressionStack.peek().matches("[(]")) {
+                            while(!keywordStack.empty()) {
+                                stackChar = stackChar.concat(keywordStack.pop());
+                            }  
+                            try {
+                                if(!stackChar.matches("\\s+")) {
+                                    keywordSet.add((convertKeywordsIntoDefinedFormat(stackChar)));
+                                }
+                            } catch (IllegalValueException ive) {
+                                return new IncorrectCommand(ive.getMessage());
+                            }
+                            keywordSet.add(singleChar);
+                            expressionStack.pop();
+                            stackChar = "";
+                            foundLeftBracket = true;
+                            break;
+                        }
+                        else {
+                            keywordStack.push(expressionStack.pop());
+                        }
+                    }
+                    if(!foundLeftBracket) {
+                        return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, 
+                                FindCommand.MESSAGE_BRACKET_USAGE));
+                    }
+                }
+                else if(singleChar.matches("[|&]")) {
+                    System.out.println("stack: " + expressionStack);
+                    while(!expressionStack.empty() && !expressionStack.peek().matches("[(]")) {
+                        keywordStack.push(expressionStack.pop());
+                    }
+                    while(!keywordStack.empty()) {
+                        stackChar = stackChar.concat(keywordStack.pop());
+                    }
+                    try {
+                        if(!stackChar.matches("\\s+")) {
+                            keywordSet.add((convertKeywordsIntoDefinedFormat(stackChar)));
+                        }
+                    } catch (IllegalValueException ive) {
+                        return new IncorrectCommand(ive.getMessage());
+                    }
+                    System.out.println("stackChar: " + stackChar);
+                    keywordSet.add(singleChar);
+                    stackChar = "";
+                }
+                else if(singleChar.matches(" ")) {
+                    //do nothing
+                }
+                else {
+                    expressionStack.push(singleChar);
+                }
+            }
+            while(!expressionStack.empty()){
+                keywordStack.push(expressionStack.pop());  
+            }
+            while(!keywordStack.empty()) {
+                stackChar = stackChar.concat(keywordStack.pop());
+            }
+            if(stackChar.contains("(")) {
+                return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, 
+                        FindCommand.MESSAGE_BRACKET_USAGE));
+            }
+            try {
+                keywordSet.add((convertKeywordsIntoDefinedFormat(stackChar)));
+            } catch (IllegalValueException ive) {
+                return new IncorrectCommand(ive.getMessage());
+            }
+            System.out.println("keyword1: " + keywordSet);
+        }
+
+                
+/*                if(arguments.substring(index, index+1).matches("[(&|)]")) {
+                    try {
+                        if(!arguments.substring(startIndex, index).matches("\\s+")) {
+                            keywordSet.add(convertKeywordsIntoDefinedFormat(arguments.substring(startIndex, index)));
+                        }
+                        System.out.println("keyword1: " + keywordSet);
+                    } catch (IllegalValueException ive) {
+                        return new IncorrectCommand(ive.getMessage());
+                    }
+                    keywordSet.add(arguments.substring(index, index+1));
+                    System.out.println("keyword2: " + keywordSet);
+                    startIndex = index+1;
+                }
+            }
+            System.out.println("keyword3: " + keywordSet);
+            try {
+                keywordSet.add(convertKeywordsIntoDefinedFormat(arguments.substring(startIndex, arguments.length())));
+            } catch (IllegalValueException ive) {
+                return new IncorrectCommand(ive.getMessage());
+            }        
+            System.out.println("keyword4: " + keywordSet);
+        }
+        */
         else{
-            andRelation = false;
+            logicRelation = false;
             keywords = matcher1.group("keywords").split("\\s+");
             try{
                 for(String keyword: keywords) {
@@ -777,9 +915,11 @@ public class Parser {
             }catch (IllegalValueException ive) {
                 return new IncorrectCommand(ive.getMessage());
             }
+            System.out.println("keyword2: " + keywordSet);
         }
         try{
-            return new FindCommand(andRelation, keywordSet);
+            System.out.println("findcommand");
+            return new FindCommand(logicRelation, keywordSet);
         }catch(IllegalValueException ive) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }        
