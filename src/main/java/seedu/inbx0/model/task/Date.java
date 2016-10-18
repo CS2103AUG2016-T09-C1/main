@@ -40,7 +40,6 @@ public class Date {
     
     public Date(String date) throws IllegalValueException {
         assert date != null;
-     //   date = date.trim();
         final Matcher matcher = DATE_NUMERIC_VALIDATION_REGEX.matcher(date.trim());
              
         if(date == "" | date.length() == 0 | date == null) {
