@@ -44,7 +44,10 @@ public class UniqueTaskList implements Iterable<Task>{
      * @param order 
      */
     public void sortUniqueTaskList(String type, boolean defaultOrder) {
-        if(type.equals("Start Time")) {
+        if(type.equals("Name")) {
+            FXCollections.sort(internalList, new NameComparator());
+        }
+        else if(type.equals("Start Time")) {
             FXCollections.sort(internalList, new StartTimeComparator());
         }
         else if(type.equals("End Time")) {
@@ -166,11 +169,23 @@ public class UniqueTaskList implements Iterable<Task>{
     public int hashCode() {
         return internalList.hashCode();
     }
+    
+    /**
+     * A comparator use to compare the name of tasks
+     * @author A0148044J
+     */
+    class NameComparator implements Comparator<Task> {
+        @Override
+        public int compare(Task task, Task taskToCompare) {
+            String name = task.getName().getName();
+            String nameToCompare = taskToCompare.getName().getName();
+            return name.compareTo(nameToCompare);
+        }
+    }
 
     /**
-     * A comparator use to compare the start time of two tasks
-     * return true if the first task happens earlier than the second one 
-     * @author peek-a-boo
+     * A comparator use to compare the start time of tasks
+     * float task is considered as appear lastly in the natural order
      */
     class StartTimeComparator implements Comparator<Task> {
         @Override
@@ -193,9 +208,8 @@ public class UniqueTaskList implements Iterable<Task>{
     }
     
     /**
-     * A comparator use to compare the end time of two tasks
-     * return true if the first task happens earlier than the second one 
-     * @author peek-a-boo
+     * A comparator use to compare the end time of tasks
+     * float task is considered as appear lastly in the natural order
      */
     class EndTimeComparator implements Comparator<Task> {
         @Override
@@ -218,10 +232,8 @@ public class UniqueTaskList implements Iterable<Task>{
     }
     
     /**
-     * A comparator use to compare the importance of two tasks
-     * return true if the first task is more important than the second one
+     * A comparator use to compare the importance of tasks
      * Importance: Red > Yellow > Green > NULL 
-     * @author peek-a-boo
      */
     class ImportanceComparator implements Comparator<Task> {
         @Override

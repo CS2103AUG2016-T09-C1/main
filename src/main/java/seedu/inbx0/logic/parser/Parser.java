@@ -719,6 +719,7 @@ public class Parser {
      * Parses arguments in the context of the sort task command.
      * @param args full command args string
      * @return the prepared command
+     * @author A0148044J
      */
     private Command prepareSort(String args){
         System.out.println(args.trim());
@@ -730,7 +731,10 @@ public class Parser {
         String[] keywords = matcher.group("keywords").split("\\s+");
         String type = null;
         boolean defaultOrder = true;
-        if(keywords[0].equalsIgnoreCase("s")||keywords[0].equalsIgnoreCase("start")) {
+        if(keywords[0].equalsIgnoreCase("n")||keywords[0].equalsIgnoreCase("Name")) {
+            type = "Name";
+        }
+        else if(keywords[0].equalsIgnoreCase("s")||keywords[0].equalsIgnoreCase("start")) {
             type = "Start Time";
         }
         else if(keywords[0].equalsIgnoreCase("e")||keywords[0].equalsIgnoreCase("end")) {

@@ -8,8 +8,8 @@ public class SortCommand extends Command {
     public static final String COMMAND_WORD = "sort";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Sort the tasks according to start time, end time or importance in descending or ascending order\n"
-            + "Example: " + COMMAND_WORD + " s|start|e|end|i|importance" + " [ASC|ascending|ascend|DESC|descending|descend]";
+            + ": Sort the tasks according to name, start time, end time or importance in descending or ascending order\n"
+            + "Example: " + COMMAND_WORD + " n|name|s|start|e|end|i|importance" + " [ASC|ascending|ascend|DESC|descending|descend]";
 
     public static final String MESSAGE_SORT_TASK_SUCCESS = "Sorts Task Successfully";
     
