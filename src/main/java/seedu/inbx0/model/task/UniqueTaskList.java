@@ -42,13 +42,13 @@ public class UniqueTaskList implements Iterable<Task>{
         if(type.equals("Name")) {
             FXCollections.sort(internalList, new NameComparator());
         }
-        else if(type.equals("Start Time")) {
+        else if("Start Time".equals(type)) {
             FXCollections.sort(internalList, new StartTimeComparator());
         }
-        else if(type.equals("End Time")) {
+        else if("End Time".equals(type)) {
             FXCollections.sort(internalList, new EndTimeComparator());
         }
-        else if(type.equals("Importance")) {
+        else if("Importance".equals(type)) {
             FXCollections.sort(internalList, new ImportanceComparator());
         }
         if(!defaultOrder) {
