@@ -13,7 +13,7 @@ import seedu.inbx0.model.tag.UniqueTagList;
 
 public class TagCommand extends Command{
 	
-	public static final String COMMAND_WORD = "tag";
+	public static final String COMMAND_WORD = "addt";
 	
 	public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Adds 1 or more tags to an existing task.\n"
