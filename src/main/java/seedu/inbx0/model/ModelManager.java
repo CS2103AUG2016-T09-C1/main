@@ -120,7 +120,6 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void updateFilteredTaskList(boolean logicRelation, List<String> keywords){
         if(logicRelation == true) {
-            System.out.println("update");
             updateFilteredTaskList(new PredicateExpression(new LogicQualifier(keywords)));
         }
         else {
@@ -200,8 +199,6 @@ public class ModelManager extends ComponentManager implements Model {
 
         @Override
         public boolean run(ReadOnlyTask task) {
-            System.out.println(orKeywords);
-            System.out.println(task.getAsText());
             return orKeywords.stream()
                     .filter(keyword -> task.getAsTextSet().contains(keyword))
                     .findAny()
@@ -227,8 +224,6 @@ public class ModelManager extends ComponentManager implements Model {
         
         @Override
         public boolean run(ReadOnlyTask task) {
-            System.out.println("running task filter");
-            System.out.println(copyKeywords);
             logicKeywords = new ArrayList<String>();
             for(String keyword: copyKeywords) {
                 if(!keyword.matches("[(&|)]")){
@@ -249,14 +244,10 @@ public class ModelManager extends ComponentManager implements Model {
                     logicKeywords.add(keyword);
                 }
             }
-            System.out.println("logic: " + logicKeywords);
             String logicExpression = String.join(" ", logicKeywords);
-            System.out.println("after logic: " + logicExpression);
             boolean result = false;
             try {
-                System.out.println("eval");
                 result = (boolean) se.eval(logicExpression);
-                System.out.println("result: " + result);
             } catch (ScriptException e) {
                 e.printStackTrace();
             }

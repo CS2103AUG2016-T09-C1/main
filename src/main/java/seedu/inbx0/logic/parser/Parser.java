@@ -796,7 +796,6 @@ public class Parser {
                 return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                         FindCommand.INVALID_LOGIC_SEARCH)); 
             }
-            System.out.println("arguments: " + arguments);
             String singleChar;
             String stackChar = "";
             boolean foundLeftBracket;
@@ -838,7 +837,6 @@ public class Parser {
                     }
                 }
                 else if(singleChar.matches("[|&]")) {
-                    System.out.println("stack: " + expressionStack);
                     while(!expressionStack.empty() && !expressionStack.peek().matches("[(]")) {
                         keywordStack.push(expressionStack.pop());
                     }
@@ -852,7 +850,6 @@ public class Parser {
                     } catch (IllegalValueException ive) {
                         return new IncorrectCommand(ive.getMessage());
                     }
-                    System.out.println("stackChar: " + stackChar);
                     keywordSet.add(singleChar);
                     stackChar = "";
                 }
@@ -878,7 +875,6 @@ public class Parser {
             } catch (IllegalValueException ive) {
                 return new IncorrectCommand(ive.getMessage());
             }
-            System.out.println("keyword1: " + keywordSet);
         }
 
                 
@@ -915,10 +911,8 @@ public class Parser {
             }catch (IllegalValueException ive) {
                 return new IncorrectCommand(ive.getMessage());
             }
-            System.out.println("keyword2: " + keywordSet);
         }
         try{
-            System.out.println("findcommand");
             return new FindCommand(logicRelation, keywordSet);
         }catch(IllegalValueException ive) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
