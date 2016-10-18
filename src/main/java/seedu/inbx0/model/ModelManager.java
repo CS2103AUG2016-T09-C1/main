@@ -6,9 +6,7 @@ import seedu.inbx0.commons.core.LogsCenter;
 import seedu.inbx0.commons.core.UnmodifiableObservableList;
 import seedu.inbx0.commons.events.model.TaskListChangedEvent;
 import seedu.inbx0.commons.exceptions.IllegalValueException;
-import seedu.inbx0.commons.util.StringUtil;
 import seedu.inbx0.model.task.Task;
-import seedu.inbx0.model.tag.Tag;
 import seedu.inbx0.model.task.Date;
 import seedu.inbx0.model.task.ReadOnlyTask;
 import seedu.inbx0.model.task.UniqueTaskList;
@@ -19,10 +17,12 @@ import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.logging.Logger;
+
+import javax.script.ScriptEngine;
+import javax.script.ScriptEngineManager;
+import javax.script.ScriptException;
 
 /**
  * Represents the in-memory model of the task list data.
@@ -200,7 +200,7 @@ public class ModelManager extends ComponentManager implements Model {
         @Override
         public boolean run(ReadOnlyTask task) {
             return orKeywords.stream()
-                    .filter(keyword -> task.getAsTextSet().contains(keyword))
+                    .filter(keyword -> task.getAsTextSet().contains(keyword.toLowerCase()))
                     .findAny()
                     .isPresent();
         }
@@ -227,7 +227,7 @@ public class ModelManager extends ComponentManager implements Model {
             logicKeywords = new ArrayList<String>();
             for(String keyword: copyKeywords) {
                 if(!keyword.matches("[(&|)]")){
-                    if(task.getAsTextSet().contains(keyword)) {
+                    if(task.getAsTextSet().contains(keyword.toLowerCase())) {
                         logicKeywords.add("true");
                     }
                     else {

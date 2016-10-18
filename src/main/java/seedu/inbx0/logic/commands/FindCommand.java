@@ -1,7 +1,6 @@
 package seedu.inbx0.logic.commands;
 
 import java.util.List;
-import java.util.Set;
 
 import seedu.inbx0.commons.exceptions.IllegalValueException;
 
@@ -30,17 +29,17 @@ public class FindCommand extends Command {
             + "Parameters: [LOGIC_OPERATOR] KEYWORD [MORE_KEYWORDS] [MORE_LOGIC_OPERATOR]...\n"
             + "Example: " + COMMAND_WORD + " (homework | assignment) & s/tmr & i/r";
     
-    private final List<String> keywords;
+    private final List<String> keywordSet;
     private final boolean logicRelation;
     
     public FindCommand(boolean logicRelation, List<String> keywordSet) throws IllegalValueException {
         this.logicRelation = logicRelation;
-        this.keywords = keywordSet;
+        this.keywordSet = keywordSet;
     }
 
 	@Override  
 	public CommandResult execute() {
-	    model.updateFilteredTaskList(logicRelation, keywords);
+	    model.updateFilteredTaskList(logicRelation, keywordSet);
 	    return new CommandResult(getMessageForTaskListShownSummary(model.getFilteredTaskList().size()));
     }
 

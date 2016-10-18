@@ -832,7 +832,6 @@ public class Parser {
     private Command prepareFind(final String args) {
         final Matcher matcher1 = NORMAL_KEYWORDS_ARGS_FORMAT.matcher(args.trim());
         final Matcher matcher2 = LOGIC_KEYWORDS_ARGS_FORMAT.matcher(args.trim());
-        //boolean andRelation = false;
         boolean logicRelation = false;
         String[] keywords = null; 
         List<String> keywordSet = new ArrayList<String>();
@@ -842,7 +841,7 @@ public class Parser {
         }
         /*
         if(matcher2.matches()) {
-            andRelation = true;
+            logicRelation = true;
             keywords = matcher2.group("keywords").split("&");
             try{
                 for(String keyword: keywords) {
@@ -1018,7 +1017,10 @@ public class Parser {
     
     private String convertKeywordsIntoDefinedFormat(final String keyword) throws IllegalValueException{
         String convertedKeyword = null;
-        if(keyword.contains(START_DATE)) {
+        if(keyword.contains(NAME)) {
+            convertedKeyword = keyword.replace(NAME, " Name: ").trim().replace("'", " ");
+        }
+        else if(keyword.contains(START_DATE)) {
             convertedKeyword = keyword.replace(START_DATE, "").trim().replace("'", " ");
             convertedKeyword = Task.formatInput("date", convertedKeyword);
             convertedKeyword = " Start Date: " + convertedKeyword;
@@ -1048,7 +1050,7 @@ public class Parser {
             convertedKeyword = " Tags: [" + convertedKeyword + "]";
         }
         else {
-            convertedKeyword = keyword.replace(NAME, "").trim().replace("'", " ");
+            convertedKeyword = keyword.trim().replace("'", " ");
         }
         return convertedKeyword;
     }

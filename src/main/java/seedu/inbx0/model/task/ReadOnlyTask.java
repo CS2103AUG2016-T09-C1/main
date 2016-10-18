@@ -1,6 +1,5 @@
 package seedu.inbx0.model.task;
 
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -61,30 +60,31 @@ public interface ReadOnlyTask {
     }  
     
     /**
-     * Formats the task as text set containing all details.
+     * Formats the task as all possible keywords containing all details for find command.
+     * @author A0148044J
      */
     
     default Set<String> getAsTextSet() {
-        String[] textString = new String[30];
-        textString[0] = getName().getName();
-        textString[1] = " Start Date: " + getStartDate().getDate();
-        textString[2] = getStartDate().getDate();
-        textString[3] = " Start Time: " + getStartTime().getTime();
-        textString[4] = getStartTime().getTime();
-        textString[5] = " End Date: " + getEndDate().getDate();
-        textString[6] = getEndDate().getDate();
-        textString[7] = " End Time: " + getEndTime().getTime();
-        textString[8] = getEndTime().getTime();
-        textString[9] = " Importance: " + getLevel().getLevel();
-        textString[10] = getLevel().getLevel(); 
-        String tags = tagsString();
-        String[] tagString = tags.split("\\s+");
-        for(int i=0; i<tagString.length; i++) {
-            textString[11+2*i] = " Tags: " + tagString[i];
-            textString[11+2*i+1] = tagString[i];
+        Set<String> textSet = new HashSet<>();
+        for(String nameString: getName().getName().split("\\s+")) {
+            textSet.add(nameString.toLowerCase());
+            textSet.add(" Name: " + nameString.toLowerCase());
         }
-        
-        Set<String> textSet = new HashSet<>(Arrays.asList(textString));
+        textSet.add(getName().getName().toLowerCase());
+        textSet.add(" Start Date: " + getStartDate().getDate());
+        textSet.add(getStartDate().getDate());
+        textSet.add(" Start Time: " + getStartTime().getTime());
+        textSet.add(getStartTime().getTime());
+        textSet.add(" End Date: " + getEndDate().getDate());
+        textSet.add(getEndDate().getDate());
+        textSet.add(" End Time: " + getEndTime().getTime());
+        textSet.add(getEndTime().getTime());
+        textSet.add(" Importance: " + getLevel().getLevel());
+        textSet.add(getLevel().getLevel()); 
+        for(String tagString: tagsString().split("\\s+")) {
+            textSet.add(" Tags: " + tagString.toLowerCase());
+            textSet.add(tagString.toLowerCase());
+        }
         return textSet;
     }
     
