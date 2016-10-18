@@ -65,17 +65,23 @@ public interface ReadOnlyTask {
      */
     
     default Set<String> getAsTextSet() {
-        String[] textString = new String[20];
+        String[] textString = new String[30];
         textString[0] = getName().getName();
         textString[1] = " Start Date: " + getStartDate().getDate();
-        textString[2] = " Start Time: " + getStartTime().getTime();
-        textString[3] = " End Date: " + getEndDate().getDate();
-        textString[4] = " End Time: " + getEndTime().getTime();
-        textString[5] = " Importance: " + getLevel().getLevel();
+        textString[2] = getStartDate().getDate();
+        textString[3] = " Start Time: " + getStartTime().getTime();
+        textString[4] = getStartTime().getTime();
+        textString[5] = " End Date: " + getEndDate().getDate();
+        textString[6] = getEndDate().getDate();
+        textString[7] = " End Time: " + getEndTime().getTime();
+        textString[8] = getEndTime().getTime();
+        textString[9] = " Importance: " + getLevel().getLevel();
+        textString[10] = getLevel().getLevel(); 
         String tags = tagsString();
         String[] tagString = tags.split("\\s+");
         for(int i=0; i<tagString.length; i++) {
-            textString[4+i] = " Tags: " + tagString[i];
+            textString[11+2*i] = " Tags: " + tagString[i];
+            textString[11+2*i+1] = tagString[i];
         }
         
         Set<String> textSet = new HashSet<>(Arrays.asList(textString));

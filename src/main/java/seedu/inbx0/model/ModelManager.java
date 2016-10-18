@@ -14,7 +14,13 @@ import seedu.inbx0.model.task.ReadOnlyTask;
 import seedu.inbx0.model.task.UniqueTaskList;
 import seedu.inbx0.model.task.UniqueTaskList.DuplicateTaskException;
 import seedu.inbx0.model.task.UniqueTaskList.TaskNotFoundException;
+import javax.script.ScriptEngine;
+import javax.script.ScriptEngineManager;
+import javax.script.ScriptException;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.logging.Logger;
 
@@ -59,7 +65,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
     
     @Override
-    public void sortTaskList(String type, boolean defaultOrder) {
+    public synchronized void sortTaskList(String type, boolean defaultOrder) {
         taskList.getUniqueTaskList().sortUniqueTaskList(type, defaultOrder);
         updateFilteredListToShowAll();
         indicateTaskListChanged();
@@ -112,9 +118,10 @@ public class ModelManager extends ComponentManager implements Model {
     }
     
     @Override
-    public void updateFilteredTaskList(boolean andRelation, Set<String> keywords){
-        if(andRelation == true) {
-            updateFilteredTaskList(new PredicateExpression(new AndQualifier(keywords)));
+    public void updateFilteredTaskList(boolean logicRelation, List<String> keywords){
+        if(logicRelation == true) {
+            System.out.println("update");
+            updateFilteredTaskList(new PredicateExpression(new LogicQualifier(keywords)));
         }
         else {
             updateFilteredTaskList(new PredicateExpression(new OrQualifier(keywords)));
@@ -164,7 +171,7 @@ public class ModelManager extends ComponentManager implements Model {
         boolean run(ReadOnlyTask task);
         String toString();
     }
-    
+    /*
     private class AndQualifier implements Qualifier {
         private Set<String> andKeywords;
 
@@ -182,19 +189,21 @@ public class ModelManager extends ComponentManager implements Model {
         public String toString() {
             return "AndSearchKeyword =" + String.join(", ", andKeywords);
         }
-    }
+    }*/
     
     private class OrQualifier implements Qualifier {
-        private Set<String> orKeywords;
+        private List<String> orKeywords;
 
-        OrQualifier(Set<String> orKeywords) {
-            this.orKeywords = orKeywords;
+        OrQualifier(List<String> keywords) {
+            this.orKeywords = keywords;
         }
 
         @Override
         public boolean run(ReadOnlyTask task) {
+            System.out.println(orKeywords);
+            System.out.println(task.getAsText());
             return orKeywords.stream()
-                    .filter(keyword -> task.getAsText().contains(keyword))
+                    .filter(keyword -> task.getAsTextSet().contains(keyword))
                     .findAny()
                     .isPresent();
         }
@@ -202,6 +211,61 @@ public class ModelManager extends ComponentManager implements Model {
         @Override
         public String toString() {
             return "OrSearchKeywords =" + String.join(", ", orKeywords);
+        }
+    }
+    
+    private class LogicQualifier implements Qualifier {
+        private List<String> copyKeywords;
+        private List<String> logicKeywords;
+        ScriptEngineManager sem = new ScriptEngineManager();
+        ScriptEngine se = sem.getEngineByName("JavaScript");
+
+        LogicQualifier(List<String> keywords) {
+            this.copyKeywords = keywords;
+        }
+        
+        
+        @Override
+        public boolean run(ReadOnlyTask task) {
+            System.out.println("running task filter");
+            System.out.println(copyKeywords);
+            logicKeywords = new ArrayList<String>();
+            for(String keyword: copyKeywords) {
+                if(!keyword.matches("[(&|)]")){
+                    if(task.getAsTextSet().contains(keyword)) {
+                        logicKeywords.add("true");
+                    }
+                    else {
+                        logicKeywords.add("false");
+                    }
+                }
+                else if(keyword.equals("&")) {
+                    logicKeywords.add("&&");
+                }
+                else if(keyword.equals("|")) {
+                    logicKeywords.add("||");
+                }
+                else {
+                    logicKeywords.add(keyword);
+                }
+            }
+            System.out.println("logic: " + logicKeywords);
+            String logicExpression = String.join(" ", logicKeywords);
+            System.out.println("after logic: " + logicExpression);
+            boolean result = false;
+            try {
+                System.out.println("eval");
+                result = (boolean) se.eval(logicExpression);
+                System.out.println("result: " + result);
+            } catch (ScriptException e) {
+                e.printStackTrace();
+            }
+            return result;       
+        }
+
+        @Override
+        public String toString() {
+            return "LogicSearchKeyword =" + String.join(", ", logicKeywords);
         }
     }
     /*
