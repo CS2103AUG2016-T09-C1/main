@@ -20,7 +20,6 @@ import seedu.inbx0.storage.StorageManager;
 import seedu.inbx0.ui.Ui;
 import seedu.inbx0.ui.UiManager;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Map;
 import java.util.Optional;

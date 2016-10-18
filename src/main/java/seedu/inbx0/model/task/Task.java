@@ -29,24 +29,24 @@ public class Task implements ReadOnlyTask {
      * Every field must be present and not null.
      * @throws IllegalValueException if it is an event and not valid
      */
-    public Task(Name name, Date startDate, Time startTime, Date endDate, Time endTime, Importance level, UniqueTagList tags) throws IllegalValueException {
+    public Task(final Name name, final Date startDate, final Time startTime, final Date endDate, final Time endTime, final Importance level, final UniqueTagList tags) throws IllegalValueException {
         assert !CollectionUtil.isAnyNull(name, startDate, startTime, endDate, endTime, level, tags);
         
-        if((startDate.getDate() == "" && startTime.getTime() == "" && endDate.getDate() == "" && endTime.getTime() == "") |
+        if ((startDate.getDate() == "" && startTime.getTime() == "" && endDate.getDate() == "" && endTime.getTime() == "") |
             (startDate.getDate() == "" && startTime.getTime() == "" && endDate.getDate() != "")|
             (startDate.getDate() != "" && startTime.getTime() != "" && endDate.getDate() == "" && endTime.getTime() == "") |
             (startDate.getDate() != "" && startTime.getTime() == "" && endDate.getDate() == "" && endTime.getTime() == "")) {
             this.isEvent = false;
-        }
-        else
+        } else {
             this.isEvent = true;
-        
-        if(isEvent == true) {
-            if(!isValidEvent(startDate, startTime, endDate, endTime)) {
+        }
+
+        if (isEvent) {
+            if (!isValidEvent(startDate, startTime, endDate, endTime)) {
                 throw new IllegalValueException(MESSAGE_TIME_CONSTRAINTS);
             }
         }
-        
+
         this.name = name;
         this.startDate = startDate;
         this.startTime = startTime;
@@ -55,27 +55,27 @@ public class Task implements ReadOnlyTask {
         this.level = level;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
         this.isCompleted = false;
-        
+
     }
-    
-    public Task(Name name, Date startDate, Time startTime, Date endDate, Time endTime, Importance level, UniqueTagList tags, boolean isCompleted) throws IllegalValueException {
+
+    public Task(final Name name, final Date startDate, final Time startTime, final Date endDate, final Time endTime, final Importance level, final UniqueTagList tags, final boolean isCompleted) throws IllegalValueException {
         assert !CollectionUtil.isAnyNull(name, startDate, startTime, endDate, endTime, level, tags, isCompleted);
         
-        if((startDate.getDate() == "" && startTime.getTime() == "" && endDate.getDate() == "" && endTime.getTime() == "") |
+        if ((startDate.getDate() == "" && startTime.getTime() == "" && endDate.getDate() == "" && endTime.getTime() == "") |
             (startDate.getDate() == "" && startTime.getTime() == "" && endDate.getDate() != "")|
             (startDate.getDate() != "" && startTime.getTime() != "" && endDate.getDate() == "" && endTime.getTime() == "") |
             (startDate.getDate() != "" && startTime.getTime() == "" && endDate.getDate() == "" && endTime.getTime() == "")) {
             this.isEvent = false;
-        }
-        else
+        } else {
             this.isEvent = true;
-        
-        if(isEvent == true) {
-            if(!isValidEvent(startDate, startTime, endDate, endTime)) {
+        }
+
+        if (isEvent) {
+            if (!isValidEvent(startDate, startTime, endDate, endTime)) {
                 throw new IllegalValueException(MESSAGE_TIME_CONSTRAINTS);
             }
         }
-        
+
         this.name = name;
         this.startDate = startDate;
         this.startTime = startTime;
@@ -84,26 +84,27 @@ public class Task implements ReadOnlyTask {
         this.level = level;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
         this.isCompleted = isCompleted;
-       
+
     }
-    
+
     /**
      * Returns true if a given Date and Time allows it to be a valid event.
      */
-    public static boolean isValidEvent(Date startDate, Time startTime, Date endDate, Time endTime) {
+    public static boolean isValidEvent(final Date startDate, final Time startTime, final Date endDate, final Time endTime) {
         boolean isValid = false;
-        
-        if((startTime.getTime() == "" && endTime.getTime() == "" && endDate.getDate() != "" && startDate.getDate() != "") | 
+
+        if ((startTime.getTime() == "" && endTime.getTime() == "" && endDate.getDate() != "" && startDate.getDate() != "") | 
            (startTime.getTime() == "" && endTime.getTime() != "" && endDate.getDate() != "" && startDate.getDate() != "") |
            (startTime.getTime() != "" && endTime.getTime() == "" && endDate.getDate() != "" && startDate.getDate() != "")) {
-            if(endDate.getYear() > startDate.getYear())
+            if (endDate.getYear() > startDate.getYear()) {
                 isValid = true;
-            else if ((endDate.getYear() == startDate.getYear()) && (endDate.getMonth() > startDate.getMonth()))
+            } else if ((endDate.getYear() == startDate.getYear()) && (endDate.getMonth() > startDate.getMonth())) {
                 isValid = true;
-            else if (((endDate.getYear() == startDate.getYear()) && 
+            } else if (((endDate.getYear() == startDate.getYear()) && 
                     (endDate.getMonth() == startDate.getMonth())) &&
-                    (endDate.getDay() >= startDate.getDay()))
-               isValid = true;
+                    (endDate.getDay() >= startDate.getDay())) {
+                isValid = true;
+            }
             
             return isValid;            
         }
@@ -111,70 +112,70 @@ public class Task implements ReadOnlyTask {
         int numStartTime = Integer.parseInt(startTime.getTime().replaceAll("\\D+",""));
         int numEndTime = Integer.parseInt(endTime.getTime().replaceAll("\\D+",""));
         
-        if(endDate.getYear() > startDate.getYear())
-           isValid = true; 
-        else if ((endDate.getYear() == startDate.getYear()) && (endDate.getMonth() > startDate.getMonth()))
+        if(endDate.getYear() > startDate.getYear()) {
             isValid = true;
-        else if (((endDate.getYear() == startDate.getYear()) && 
+        } else if ((endDate.getYear() == startDate.getYear()) && (endDate.getMonth() > startDate.getMonth())) {
+            isValid = true;
+        } else if (((endDate.getYear() == startDate.getYear()) && 
                  (endDate.getMonth() == startDate.getMonth())) &&
-                 (endDate.getDay() > startDate.getDay()))
+                 (endDate.getDay() > startDate.getDay())) {
             isValid = true;
-        else if (((endDate.getYear() == startDate.getYear()) && 
+        } else if (((endDate.getYear() == startDate.getYear()) && 
                 (endDate.getMonth() == startDate.getMonth())) &&
                 (endDate.getDay() == startDate.getDay()) &&
-                numEndTime > numStartTime)
-                isValid = true;
+                numEndTime > numStartTime) {
+            isValid = true;
+        }
            
-        
         return isValid;         
     }
-    
+
     /**
      * Copy constructor.
      * @throws IllegalValueException if it is an event and not valid
      */
-    
-    public Task(ReadOnlyTask source) throws IllegalValueException {
+
+    public Task(final ReadOnlyTask source) throws IllegalValueException {
         this(source.getName(), source.getStartDate(), source.getStartTime(), source.getEndDate(), source.getEndTime(), source.getLevel(), source.getTags(), source.getIsCompleted());
     }
 
     @Override
-    public Name getName() {
+    public final Name getName() {
         return name;
     }
     
     @Override
-    public Date getStartDate() {
+    public final Date getStartDate() {
         return startDate;
     }
     
     @Override
-    public Time getStartTime() {
+    public final Time getStartTime() {
         return startTime;
     }
     
     @Override
-    public Date getEndDate() {
+    public final Date getEndDate() {
         return endDate;
     }
     
     @Override
-    public Time getEndTime() {
+    public final Time getEndTime() {
         return endTime;
     }
     
     @Override
-    public Importance getLevel() {
+    public final Importance getLevel() {
         return level;
     }
     
     @Override
-    public UniqueTagList getTags() {
+    public final UniqueTagList getTags() {
         return new UniqueTagList(tags);
     }
     
     @Override
-    public boolean getIsCompleted() {
+    public final boolean getIsCompleted() {
         return isCompleted;
     }
 
@@ -182,62 +183,60 @@ public class Task implements ReadOnlyTask {
     /**
      * Replaces this task's tags with the tags in the argument tag list.
      */
-    public void setTags(UniqueTagList replacement) {
+    public final void setTags(final UniqueTagList replacement) {
         tags.setTags(replacement);
     }
-    
-    public void setStartDate(Date startDate) {
+
+    public final void setStartDate(final Date startDate) {
         this.startDate = startDate;
     }
-    
-    public void setStartTime(Time startTime) {
+
+    public final void setStartTime(final Time startTime) {
         this.startTime = startTime;
     }
 
-    public void setEndDate(Date endDate) {
+    public final void setEndDate(final Date endDate) {
         this.endDate = endDate;
     }
 
-    public void setEndTime(Time endTime) {
+    public final void setEndTime(final Time endTime) {
         this.endTime = endTime;
     }
 
-    public void setLevel(Importance level) {
+    public final void setLevel(final Importance level) {
         this.level = level;
     }
-    
-    public void setCompleted(boolean isCompleted) {
+
+    public final void setCompleted(final boolean isCompleted) {
         this.isCompleted = isCompleted;
     }
 
     @Override
-    public boolean equals(Object other) {
+    public final boolean equals(final Object other) {
         return other == this // short circuit if same object
                 || (other instanceof ReadOnlyTask // instanceof handles nulls
                 && this.isSameStateAs((ReadOnlyTask) other));
     }
 
     @Override
-    public int hashCode() {
+    public final int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
         return Objects.hash(name, startDate, startTime, endDate, endTime, level, tags, isCompleted);
     }
 
     @Override
-    public String toString() {
+    public final String toString() {
         return getAsText();
     }
-    
-    public static String formatInput(String type, String toFormat) throws IllegalValueException{
-        if(type.equals("date")) {
+
+    public static String formatInput(final String type, final String toFormat) throws IllegalValueException{
+        if (type.equals("date")) {
             Date date = new Date(toFormat);
             return date.getDate();
-        }
-        else if(type.equals("time")) {
+        } else if (type.equals("time")) {
             Time time = new Time(toFormat);
             return time.getTime();
-        }
-        else if(type.equals("importance")) {
+        } else if (type.equals("importance")) {
             Importance importance = new Importance(toFormat);
             return importance.getLevel();
         }
