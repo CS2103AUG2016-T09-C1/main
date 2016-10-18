@@ -32,11 +32,11 @@ public class MarkCompleteCommand extends Command {
     public final Set<Integer> indexNum;
 
     public MarkCompleteCommand(Set<Integer> indexNumSet) throws IllegalValueException {
-        this.indexNum = ValidateSet(indexNumSet);
+        this.indexNum = validateSet(indexNumSet);
     }
 
 
-    private Set<Integer> ValidateSet(Set<Integer> indexNumSet) throws IllegalValueException {
+    private Set<Integer> validateSet(Set<Integer> indexNumSet) throws IllegalValueException {
         if(indexNumSet.isEmpty())
             throw new IllegalValueException(MESSAGE_INVALID_ARGUMENTS);
         return indexNumSet;        

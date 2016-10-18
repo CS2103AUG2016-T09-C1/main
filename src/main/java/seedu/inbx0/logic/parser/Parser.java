@@ -520,18 +520,74 @@ public class Parser {
         
         Matcher matcher2 = editArguments.matcher(arguments);
         if(matcher2.matches()) {
-        if(arguments.contains(NAME)) 
-            argumentsForEdit[0] = matcher2.group("name");
-        if(arguments.contains(START_DATE))
-             argumentsForEdit[1] = matcher2.group("startDate");
-        if(arguments.contains(START_TIME))
-             argumentsForEdit[2] = matcher2.group("startTime");
-        if(arguments.contains(END_DATE))    
-             argumentsForEdit[3] = matcher2.group("endDate");
-        if(arguments.contains(END_TIME))
-             argumentsForEdit[4] = matcher2.group("endTime");
-        if(arguments.contains(IMPORTANCE))
-             argumentsForEdit[5] = matcher2.group("level");
+            if(arguments.contains(NAME)) 
+                argumentsForEdit[0] = matcher2.group("name");
+            if(arguments.contains(START_DATE) && !arguments.contains(START_TIME)) {
+                 if(matcher2.group("startDate").equals("nil")) {
+                     argumentsForEdit[1] = "";
+                     argumentsForEdit[2] = "";
+                 }
+                 else {
+                     argumentsForEdit[1] = dateParse(matcher2.group("startDate"));
+                     argumentsForEdit[2] = timeParse(matcher2.group("startDate"));
+                 }
+            }
+            else if(arguments.contains(START_DATE) && arguments.contains(START_TIME)) {
+                if(matcher2.group("startDate").equals("nil") && matcher2.group("startTime").equals("nil")) {
+                    argumentsForEdit[1] = "";
+                    argumentsForEdit[2] = "";                   
+                }
+                else {
+                argumentsForEdit[1] = matcher2.group("startDate");
+                argumentsForEdit[2] = matcher2.group("startTime");
+                }
+            }
+            else if(arguments.contains(START_TIME)) {
+                if(matcher2.group("startTime").equals("nil")) {
+                    argumentsForEdit[2] = "";
+                }
+                else
+                    argumentsForEdit[2] = matcher2.group("startTime");
+            }
+                
+            
+            if(arguments.contains(END_DATE) && !arguments.contains(END_TIME)) { 
+                if(matcher2.group("endDate").equals("nil")) {
+                    argumentsForEdit[3] = "";
+                    argumentsForEdit[4] = "";
+                }
+                else {
+                 argumentsForEdit[3] = dateParse(matcher2.group("endDate"));
+                 argumentsForEdit[4] = timeParse(matcher2.group("endDate"));
+                }
+            }
+            else if(arguments.contains(END_DATE) && arguments.contains(END_TIME)) {        
+                if(matcher2.group("endDate").equals("nil") && matcher2.group("endTime").equals("nil")) {
+                    argumentsForEdit[3] = "";
+                    argumentsForEdit[4] = "";              
+                }
+                else {
+                 argumentsForEdit[3] = matcher2.group("endDate");
+                 argumentsForEdit[4] = matcher2.group("endTime");
+                }
+            }
+            else if (arguments.contains(END_TIME)) {
+                if(matcher2.group("endTime").equals("nil")) {
+                    argumentsForEdit[4] = "";
+                }
+                else {
+                 argumentsForEdit[4] = timeParse(matcher2.group("endTime"));
+                }
+            }
+            
+            if(arguments.contains(IMPORTANCE)) {
+                if(matcher2.group("level").equals("nil")) {
+                    argumentsForEdit[5] = "";   
+                }
+                else {
+                argumentsForEdit[5] = matcher2.group("level");
+                }
+            }
         }  
           try{   
              return new EditCommand(

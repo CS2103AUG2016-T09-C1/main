@@ -10,6 +10,7 @@ import javafx.stage.Window;
 import seedu.inbx0.TestApp;
 import seedu.inbx0.commons.core.LogsCenter;
 
+import java.util.Optional;
 import java.util.logging.Logger;
 
 /**
@@ -18,6 +19,10 @@ import java.util.logging.Logger;
 public class GuiHandle {
     protected final GuiRobot guiRobot;
     protected final Stage primaryStage;
+    /**
+     * An optional stage that exists in the App other than the primaryStage, could be a alert dialog, popup window, etc.
+     */
+    protected Optional<Stage> intermediateStage = Optional.empty();
     protected final String stageTitle;
 
     private final Logger logger = LogsCenter.getLogger(this.getClass());
@@ -39,7 +44,7 @@ public class GuiHandle {
             logger.warning("Can't find stage " + stageTitle + ", Therefore, aborting focusing");
             return;
         }
-
+        intermediateStage = Optional.ofNullable((Stage) window.get());
         guiRobot.targetWindow(window.get());
         guiRobot.interact(() -> window.get().requestFocus());
         logger.info("Finishing focus " + stageTitle);
@@ -67,6 +72,10 @@ public class GuiHandle {
         return ((Label) guiRobot.from(parentNode).lookup(fieldId).tryQuery().get()).getText();
     }
 
+    protected String getTextFromLabel(String fieldId) {
+        return ((Label) guiRobot.lookup(fieldId).tryQuery().get()).getText();
+    }
+
     public void focusOnSelf() {
         if (stageTitle != null) {
             focusOnWindow(stageTitle);
@@ -78,7 +87,7 @@ public class GuiHandle {
     }
 
     public void closeWindow() {
-        java.util.Optional<Window> window = guiRobot.listTargetWindows()
+        Optional<Window> window = guiRobot.listTargetWindows()
                 .stream()
                 .filter(w -> w instanceof Stage && ((Stage) w).getTitle().equals(stageTitle)).findAny();
 
