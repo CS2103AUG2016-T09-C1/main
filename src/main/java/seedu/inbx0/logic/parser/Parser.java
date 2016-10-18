@@ -748,16 +748,16 @@ public class Parser {
     private Command prepareFind(String args) {
         final Matcher matcher1 = KEYWORDS_ARGS_FORMAT.matcher(args.trim());
         final Matcher matcher2 = CONDITIONAL_KEYWORDS_ARGS_FORMAT.matcher(args.trim());
-        boolean andRelation = false;
+        boolean logicRelation = false;
         String[] keywords = null; 
-        Set<String> keywordSet = new HashSet<>();
+        List<String> keywordSet = new ArrayList<String>();
         if (!matcher1.matches() && !matcher2.matches()) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     FindCommand.MESSAGE_USAGE));
         }
         
         if(matcher2.matches()) {
-            andRelation = true;
+            logicRelation = true;
             keywords = matcher2.group("keywords").split("&");
             try{
                 for(String keyword: keywords) {
@@ -768,7 +768,7 @@ public class Parser {
             }
         }
         else{
-            andRelation = false;
+            logicRelation = false;
             keywords = matcher1.group("keywords").split("\\s+");
             try{
                 for(String keyword: keywords) {
@@ -779,7 +779,7 @@ public class Parser {
             }
         }
         try{
-            return new FindCommand(andRelation, keywordSet);
+            return new FindCommand(logicRelation, keywordSet);
         }catch(IllegalValueException ive) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }        
@@ -817,7 +817,10 @@ public class Parser {
     
     private String convertKeywordsIntoDefinedFormat(String keyword) throws IllegalValueException{
         String convertedKeyword = null;
-        if(keyword.contains(START_DATE)) {
+        if(keyword.contains(NAME)) {
+            convertedKeyword = keyword.replace(NAME, " Name: ").trim().replace("'", " ");
+        }
+        else if(keyword.contains(START_DATE)) {
             convertedKeyword = keyword.replace(START_DATE, "").trim().replace("'", " ");
             convertedKeyword = Task.formatInput("date", convertedKeyword);
             convertedKeyword = " Start Date: " + convertedKeyword;
@@ -847,7 +850,7 @@ public class Parser {
             convertedKeyword = " Tags: [" + convertedKeyword + "]";
         }
         else {
-            convertedKeyword = keyword.replace(NAME, "").trim().replace("'", " ");
+            convertedKeyword = keyword.trim().replace("'", " ");
         }
         return convertedKeyword;
     }
