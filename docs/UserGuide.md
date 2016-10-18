@@ -141,27 +141,71 @@ Examples:
 
 <br><br>
 
+Want to find out what important things that you need to do? Or when is you next coming exam? If you need to find certain tasks by keywords, you can execute `find` command. 
+
 #### <a id="find"></a>4. Finding specific tasks: `find`
-Format: `find KEYWORD [MORE_KEYWORDS]`
+1. Normal search
+ 
+>Format: `find KEYWORD [MORE_KEYWORDS]...`
 
-The Find command will search all tasks which contain any of the given keywords.
-
-> find KEYWORD [MORE_KEYWORDS]
-
-> * The search is case sensitive. e.g `homework` will not match `Homework`
-> * The order of the keywords does not matter. e.g. `Movie Night` will match `Night Movie`
-> * Only the name is searched.
-> * Only full words will be matched e.g. `visit` will not match `visiting`
+> * Normal search will display a task that matches at least one keyword (i.e. `OR` search).
+> * You can use `INDICATOR/KEYWORD` to specify the keyword belong to a specific attributes, available INDICATOR: n/, s/, st/, e/, et/, i/
+> * You can use `'` to replace the whitespace if one search keyword contains whitespace, or inbx_0 treat it as multiple keywords
+ eg: `do'CS2103'homework` will match `do CS2103 homework' 
 > * Tasks matching at least one keyword will be returned (i.e. `OR` search).
-    e.g. `Concert` will match `Michael Jackson Concert`
+> * Keywords are non case-sensitive, ie, `homework` will match `HOMEWORK`
+> * The order of the keywords does not matter. e.g. `Movie Night` will match `Night Movie`
+> * Only full words will be matched e.g. `visit` will not match `visiting`
 
-Examples: 
-* `find meeting`<br>
-  Returns `Lunch meeting` but not `Lunch Meeting`
-* `find Fish Friday`<br>
-  Returns Any task having containing `Fish`, or `Friday` (eg. ‘Visit Fish Market’ and ‘Listen to Rebecca Black’s Friday’)
+Example: 
+`find meeting CS2103quiz`
+
+ Return `MEETING` or `CS2103Quiz` but not `meeting with CS2103 tutor` or `quiz` 
+
+2. Logic operation search
+
+> Format:  `[LOGIC_OPERATOR] KEYWORD [MORE_KEYWORDS] [MORE_LOGIC_OPERATOR]...`
+
+> * Logic operation search will display a task only when it fits the logic expression
+> * LOGIC_OPERATOR: `|` means OR, `&` means AND, `(` and `)` use for group the logic operation
+> * You can use `INDICATOR/KEYWORD` to specify the keyword belong to a specific attributes, available INDICATOR: n/, s/, st/, e/, et/, i/
+> * You can use any valid logic operation format
+> * valid logic operation format: 
+>  1. Bracket must be closed properly
+>  2.  Keywords must not contains whitespace and any keywords cannot followed by another keyword without `LOGIC_OPERATOR` in between
+>  3.  `|` `&` `(` cannot followed by '|' '&' )' without `keywords` in between
+
+Examples:
+
+`find homework | assignment`: 
+Return  `homework` or `assignment`
+
+`find homework & e/tmr`:
+Return `homework` that ends` tomorrow`
+
+`find (homework | assignment) & s/tmr & i/r`:
+Return `homework` or `meeting` that start on `tomorrow` with high importance `Red`
+
 
 <br><br>
+
+#### <a id="sort"></a>4. Sort the tasks by specific sorting criteria: `sort`
+> Format: sort `[Name]`/`[Start Time]`/`[End Time]`/`[Importance]` `[ASCENDING]`/`[]DESCENDING]`
+
+> * Sort the tasks according to name, start time, end time or importance in descending or ascending order
+> * acceptable input for 
+> * `NAME`: n, Name, `Start Time`: s, start, `End Time`: e, end, `Importance`: i, importance
+> *  `ASCENDING`: ASC, ascending, ascend, `DECENDING`: DESC, descending, descend
+> * All sort keywords are non-case sensitive, ie, `Importance` is `importance` 
+> * Default sorting order is `ASCENDING` for Name, Start Time and End Time but `DESCENDING` for Importance
+
+Example:
+
+`sort i`:
+Sort the lists such that the importance of the tasks decrease
+
+`sort n DESC`:
+Sort the lists such that the name of the tasks is in the reverse of natural alphabet order 
 
 #### <a id="edit"></a>5. Editing a task: `edit`
 1) Editing any parameter of a task <br>
@@ -354,7 +398,9 @@ Command | Format
 &nbsp; | `add NAME s/START_DATE st/START_TIME e/END_DATE et/END_TIME i/IMPORTANCE [t/TAGS]...`
 [List](#list) | `list [DATE]`
 &nbsp; | `list i/[IMPORTANCE]`
-[Find](#find) | `find KEYWORD [MORE_KEYWORDS]`
+[Find](#find) | Normal search: `find KEYWORD [MORE_KEYWORDS]...`
+&nbsp | Logic operation search: `[LOGIC_OPERATOR] KEYWORD [MORE_KEYWORDS] [MORE_LOGIC_OPERATOR]...`
+[Sort](#sort) | `sort [n|s|e|i] [ASC\DESC]`
 [Edit](#edit) | `edit INDEX [n/NAME] [s/START_DATE] [st/START_TIME] [e/END_DATE] [et/END_TIME] [i/IMPORTANCE]`
 [Tag](#tag) | `tag INDEX t/TAGS [t/MORE_TAGS]`
 [Delete](#del) | `del INDEX`
