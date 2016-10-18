@@ -8,8 +8,6 @@ import seedu.inbx0.logic.commands.CommandResult;
 import seedu.inbx0.logic.parser.Parser;
 import seedu.inbx0.model.Model;
 import seedu.inbx0.model.task.ReadOnlyTask;
-import seedu.inbx0.storage.Storage;
-
 import java.util.logging.Logger;
 
 /**
