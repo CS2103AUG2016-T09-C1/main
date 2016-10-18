@@ -35,11 +35,6 @@ public class UniqueTaskList implements Iterable<Task>{
     private final ObservableList<Task> internalList = FXCollections.observableArrayList();
 
     /**
-     * Constructs empty TaskList.
-     */
-    public UniqueTaskList() {}
-
-    /**
      * Sorts the task list according to the sorting type and order 
      * @param order 
      */

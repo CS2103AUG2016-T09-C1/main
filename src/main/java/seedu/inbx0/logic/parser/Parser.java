@@ -155,17 +155,14 @@ public class Parser {
     private static final CharSequence END_TIME = "et/";
     private static final CharSequence IMPORTANCE = "i/";
     private static final CharSequence TAG = "t/";
-    
-   
-    public Parser() {}
-
+  
     /**
      * Parses user input into command for execution.
      *
      * @param userInput full user input string
      * @return the command based on the user input
      */
-    public Command parseCommand(String userInput) {
+    public final Command parseCommand(final String userInput) {
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
@@ -180,16 +177,16 @@ public class Parser {
 
         case SelectCommand.COMMAND_WORD:
             return prepareSelect(arguments);
-            
+
         case EditCommand.COMMAND_WORD:
             return prepareEdit(arguments);
-            
+
         case SortCommand.COMMAND_WORD:
             return prepareSort(arguments);
-            
+
         case TagCommand.COMMAND_WORD:
             return prepareTag(arguments);
-        
+
         case MarkCompleteCommand.COMMAND_WORD:
             return prepareMarkComplete(arguments);
 
@@ -222,7 +219,7 @@ public class Parser {
      * @param args full command args string
      * @return the prepared command
      */
-    private Command prepareAdd(String args){
+    private Command prepareAdd(final String args){
         final Matcher matcher = TASK_DATA_ARGS_FORMAT.matcher(args.trim());
         final Matcher matcher2 = TASK_DATA_ARGS_FORMAT_2.matcher(args.trim());
         final Matcher matcher3 = TASK_DATA_ARGS_FORMAT_3.matcher(args.trim());
@@ -402,7 +399,7 @@ public class Parser {
         }
     }
 
-    private String timeParse(String dateTimeString) {
+    private String timeParse(final String dateTimeString) {
         Matcher matcher1 = DATE_TIME_FORMAT.matcher(dateTimeString.trim());
         Matcher matcher2 = DATE_TIME_FORMAT_2.matcher(dateTimeString.trim());
         Matcher matcher3 = DATE_TIME_FORMAT_3.matcher(dateTimeString.trim());
@@ -410,44 +407,54 @@ public class Parser {
         Matcher matcher5 = DATE_TIME_FORMAT_5.matcher(dateTimeString.trim());
         Matcher matcher6 = DATE_TIME_FORMAT_6.matcher(dateTimeString.trim());
                
-        if(matcher1.matches()) 
-            return matcher1.group("time");
+        if(matcher1.matches()) {
+			return matcher1.group("time");
+		}
         
-        if(matcher2.matches())
-            return matcher2.group("time");
+        if(matcher2.matches()) {
+			return matcher2.group("time");
+		}
         
-        if(matcher3.matches()) 
-            return matcher3.group("time");
+        if(matcher3.matches()) {
+			return matcher3.group("time");
+		}
         
-        if(matcher4.matches()) 
-            return matcher4.group("time");
+        if(matcher4.matches()) {
+			return matcher4.group("time");
+		}
         
-        if(matcher5.matches()) 
-            return "";
+        if(matcher5.matches()) {
+			return "";
+		}
         
-        if(matcher6.matches()) 
-            return "";
+        if(matcher6.matches()) {
+			return "";
+		}
         
         return dateTimeString;
     }
 
-    private String dateParse(String dateTimeString) {
+    private String dateParse(final String dateTimeString) {
         Matcher matcher1 = DATE_TIME_FORMAT.matcher(dateTimeString.trim());
         Matcher matcher2 = DATE_TIME_FORMAT_2.matcher(dateTimeString.trim());
         Matcher matcher3 = DATE_TIME_FORMAT_3.matcher(dateTimeString.trim());
         Matcher matcher4 = DATE_TIME_FORMAT_4.matcher(dateTimeString.trim());
                
-        if(matcher1.matches()) 
-            return matcher1.group("date");
+        if(matcher1.matches()) {
+			return matcher1.group("date");
+		}
         
-        if(matcher2.matches())
-            return matcher2.group("date");
+        if(matcher2.matches()) {
+			return matcher2.group("date");
+		}
         
-        if(matcher3.matches()) 
-            return matcher3.group("date");
+        if(matcher3.matches()) {
+			return matcher3.group("date");
+		}
         
-        if(matcher4.matches()) 
-            return matcher4.group("date");
+        if(matcher4.matches()) {
+			return matcher4.group("date");
+		}
         
         return dateTimeString;
     }
@@ -457,7 +464,7 @@ public class Parser {
      * Extracts the new task's tags from the add command's tag arguments string.
      * Merges duplicate tag strings.
      */
-    private static Set<String> getTagsFromArgs(String tagArguments) throws IllegalValueException {
+    private static Set<String> getTagsFromArgs(final String tagArguments) throws IllegalValueException {
         // no tags
         if (tagArguments.isEmpty()) {
             return Collections.emptySet();
@@ -473,7 +480,7 @@ public class Parser {
      * @param args full command args string
      * @return the prepared command
      */
-    private Command prepareEdit(String args) {
+    private Command prepareEdit(final String args) {
         final Matcher matcher = TASK_EDIT_DATA_ARGS_FORMAT.matcher(args.trim());
         if (!matcher.matches()) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
@@ -489,9 +496,10 @@ public class Parser {
         
         String arguments = matcher.group("arguments");
         
-        if(arguments.length() == 0)
-            return new IncorrectCommand(
+        if(arguments.length() == 0) {
+			return new IncorrectCommand(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
+		}
         
         if(arguments.trim().equals("float")) {
             argumentsForEdit[1] = "";
@@ -520,8 +528,9 @@ public class Parser {
         
         Matcher matcher2 = editArguments.matcher(arguments);
         if(matcher2.matches()) {
-            if(arguments.contains(NAME)) 
-                argumentsForEdit[0] = matcher2.group("name");
+            if(arguments.contains(NAME)) {
+				argumentsForEdit[0] = matcher2.group("name");
+			}
             if(arguments.contains(START_DATE) && !arguments.contains(START_TIME)) {
                  if(matcher2.group("startDate").equals("nil")) {
                      argumentsForEdit[1] = "";
@@ -545,9 +554,9 @@ public class Parser {
             else if(arguments.contains(START_TIME)) {
                 if(matcher2.group("startTime").equals("nil")) {
                     argumentsForEdit[2] = "";
-                }
-                else
-                    argumentsForEdit[2] = matcher2.group("startTime");
+                } else {
+					argumentsForEdit[2] = matcher2.group("startTime");
+				}
             }
                 
             
@@ -600,23 +609,23 @@ public class Parser {
             }
     }
     
-    private Pattern scanArgumentsAndBuildRegex(String arguments) {
+    private Pattern scanArgumentsAndBuildRegex(final String arguments) {
         String regex = "";
         
         if (arguments.contains(NAME)) {
             regex += " n/(?<name>[^/]+)";
         }
-        if(arguments.contains(START_DATE)) {
+        if (arguments.contains(START_DATE)) {
             regex += " s/(?<startDate>[^$]+)";
         }
-        if(arguments.contains(START_TIME)) {
+        if (arguments.contains(START_TIME)) {
             regex += " st/(?<startTime>[^/]+)";
         }
-        if(arguments.contains(END_DATE)) {
+        if (arguments.contains(END_DATE)) {
             regex += " e/(?<endDate>[^$]+)";
         }
         
-        if(arguments.contains(END_TIME)) {
+        if (arguments.contains(END_TIME)) {
             regex += " et/(?<endTime>[^/]+)";
         }
         
@@ -630,10 +639,11 @@ public class Parser {
         
         Matcher matcher = editArguments.matcher(arguments);
         
-        if(matcher.matches())
-            return editArguments;
-        else
-            return null;                
+        if(matcher.matches()) {
+			return editArguments;
+		} else {
+			return null;
+		}                
     }
       
     /**
@@ -643,7 +653,7 @@ public class Parser {
      * @return the prepared command
      */
     //@@author A0139481Y
-    private Command prepareTag(String args){
+    private Command prepareTag(final String args){
     	final Matcher matcher = ADD_TAGS_ARGS_FORMAT.matcher(args.trim());
     	if (!matcher.matches()) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TagCommand.MESSAGE_USAGE));
@@ -670,7 +680,7 @@ public class Parser {
      * @param args full command args string
      * @return the prepared command
      */
-    private Command prepareMarkComplete(String args) {
+    private Command prepareMarkComplete(final String args) {
         final Matcher matcher = INDEX_NUMBER_ARGS_FORMAT.matcher(args.trim());
         final Matcher matcher2 = INDEX_NUM_TO_INDEX_NUM_ARGS_FORMAT.matcher(args.trim());
         
@@ -721,7 +731,7 @@ public class Parser {
      * @return the prepared command
      * @author A0148044J
      */
-    private Command prepareSort(String args){
+    private Command prepareSort(final String args){
         System.out.println(args.trim());
         final Matcher matcher = SORT_TASK_LIST_ARGS_FORMAT.matcher(args.trim());
         if(!matcher.matches()) {
@@ -767,7 +777,7 @@ public class Parser {
      * @return the prepared command
      */
     //@@author generated
-    private Command prepareDelete(String args) {
+    private Command prepareDelete(final String args) {
 
         Optional<Integer> index = parseIndex(args);
         if(!index.isPresent()){
@@ -785,7 +795,7 @@ public class Parser {
      * @return the prepared command
      */
     //@@author generated
-    private Command prepareSelect(String args) {
+    private Command prepareSelect(final String args) {
         Optional<Integer> index = parseIndex(args);
         if(!index.isPresent()){
             return new IncorrectCommand(
@@ -799,7 +809,7 @@ public class Parser {
      * Returns the specified index in the {@code command} IF a positive unsigned integer is given as the index.
      *   Returns an {@code Optional.empty()} otherwise.
      */
-    private Optional<Integer> parseIndex(String command) {
+    private Optional<Integer> parseIndex(final String command) {
         final Matcher matcher = TASK_INDEX_ARGS_FORMAT.matcher(command.trim());
         if (!matcher.matches()) {
             return Optional.empty();
@@ -819,7 +829,7 @@ public class Parser {
      * @param args full command args string
      * @return the prepared command
      */
-    private Command prepareFind(String args) {
+    private Command prepareFind(final String args) {
         final Matcher matcher1 = NORMAL_KEYWORDS_ARGS_FORMAT.matcher(args.trim());
         final Matcher matcher2 = LOGIC_KEYWORDS_ARGS_FORMAT.matcher(args.trim());
         //boolean andRelation = false;
@@ -912,9 +922,6 @@ public class Parser {
                     }
                     keywordSet.add(singleChar);
                     stackChar = "";
-                }
-                else if(singleChar.matches(" ")) {
-                    //do nothing
                 }
                 else {
                     expressionStack.push(singleChar);
@@ -1009,7 +1016,7 @@ public class Parser {
 		}
     }*/
     
-    private String convertKeywordsIntoDefinedFormat(String keyword) throws IllegalValueException{
+    private String convertKeywordsIntoDefinedFormat(final String keyword) throws IllegalValueException{
         String convertedKeyword = null;
         if(keyword.contains(START_DATE)) {
             convertedKeyword = keyword.replace(START_DATE, "").trim().replace("'", " ");
@@ -1053,10 +1060,10 @@ public class Parser {
      * @return the prepared command
      */
     //@@author generated
-    private Command prepareList(String arguments) {
-        if (arguments.length() == 0)
-            return new ListCommand();
-        else {
+    private Command prepareList(final String arguments) {
+        if (arguments.length() == 0) {
+			return new ListCommand();
+		} else {
             try {
                 return new ListCommand(arguments);
             } catch (IllegalValueException e) {
