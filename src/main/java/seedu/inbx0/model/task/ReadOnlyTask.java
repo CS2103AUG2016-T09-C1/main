@@ -18,6 +18,7 @@ public interface ReadOnlyTask {
     Time getEndTime();
     Importance getLevel();
     boolean getIsCompleted();
+    boolean getIsExpired();
     
     /**
      * The returned TagList is a deep copy of the internal TagList,

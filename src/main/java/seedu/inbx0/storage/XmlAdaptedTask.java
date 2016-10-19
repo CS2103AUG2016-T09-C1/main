@@ -29,7 +29,9 @@ public class XmlAdaptedTask {
     private String level;
     @XmlElement(required = true)
     private boolean isCompleted;
-
+    @XmlElement(required = true)
+    private boolean isExpired;
+    
     @XmlElement
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
 
@@ -52,6 +54,7 @@ public class XmlAdaptedTask {
         endTime = source.getEndTime().value;
         level = source.getLevel().value;
         isCompleted = source.getIsCompleted();
+        isExpired = source.getIsExpired();
         tagged = new ArrayList<>();
         for (Tag tag : source.getTags()) {
             tagged.add(new XmlAdaptedTag(tag));
@@ -75,7 +78,8 @@ public class XmlAdaptedTask {
         final Time endTime = new Time(this.endTime);
         final Importance level = new Importance(this.level);
         final boolean isCompleted = this.isCompleted;
+        final boolean isExpired = this.isExpired;
         final UniqueTagList tags = new UniqueTagList(TaskTags);
-        return new Task(name, startDate, startTime, endDate, endTime, level, tags, isCompleted);
+        return new Task(name, startDate, startTime, endDate, endTime, level, tags, isCompleted, isExpired);
     }
 }

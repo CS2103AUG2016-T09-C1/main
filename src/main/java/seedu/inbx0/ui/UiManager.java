@@ -52,6 +52,8 @@ public class UiManager extends ComponentManager implements Ui {
             mainWindow = MainWindow.load(primaryStage, config, prefs, logic);
             mainWindow.show(); //This should be called before creating other UI parts
             mainWindow.fillInnerParts();
+            if(!logic.getFilteredOverdueTaskList().isEmpty())
+                mainWindow.handleOverdueTasks();
 
         } catch (Throwable e) {
             logger.severe(StringUtil.getDetails(e));
@@ -111,6 +113,7 @@ public class UiManager extends ComponentManager implements Ui {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         mainWindow.handleHelp();
     }
+   
 
     @Subscribe
     private void handleJumpToListRequestEvent(JumpToListRequestEvent event) {

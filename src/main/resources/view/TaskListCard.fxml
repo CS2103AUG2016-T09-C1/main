@@ -36,6 +36,7 @@
                         <Label fx:id="endDate" styleClass="cell_small_label" text="\$endDate" />
                         <Label fx:id="endTime" styleClass="cell_small_label" text="\$endTime" />
                         <Label fx:id="isCompleted" styleClass="cell_small_label" text="\$isCompleted" />
+                        <Label fx:id="isExpired" styleClass="cell_small_label" text="\$isExpired" />
                     </children>
                 </VBox>
             </children>

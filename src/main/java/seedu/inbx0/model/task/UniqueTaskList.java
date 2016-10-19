@@ -146,6 +146,34 @@ public class UniqueTaskList implements Iterable<Task>{
         
         return taskMarkedCompleted;
     }
+    
+    /**
+     * Checks expiry and sets the boolean isExpired accordingly for the tasks in the list.
+     *
+     * @throws TaskNotFoundException if no such task could be found in the list.
+     */
+    public boolean checkExpiry(Date currentDate, String currentTime) {
+        if(internalList.isEmpty()) {
+            return false;
+        }
+        
+        boolean changed = false;
+        for(Task t : internalList) { 
+            if(t.getEndDate().value.length() != 0 && t.getEndTime().value.length() != 0) {        
+                if((t.getEndDate().getYear() < currentDate.getYear()) |
+               ((t.getEndDate().getYear() == currentDate.getYear()) && (t.getEndDate().getMonth() < currentDate.getMonth())) |
+               ((t.getEndDate().getYear() == currentDate.getYear()) && (t.getEndDate().getMonth() == currentDate.getMonth())
+                 && (t.getEndDate().getDay() < currentDate.getDay())) |
+               (t.getEndDate().value.equals(currentDate.value) && (Integer.parseInt(t.getEndTime().value.replaceAll("\\D+","")) <= Integer.parseInt(currentTime.replaceAll("\\D+",""))))) {          
+                    if(t.getIsExpired() == false) {
+                        t.setExpired(true);
+                        changed = true;
+                    }
+                }
+            }
+        }  
+        return changed;
+    }
     public ObservableList<Task> getInternalList() {
         return internalList;
     }

@@ -164,7 +164,12 @@ public class MainWindow extends UiPart {
         HelpWindow helpWindow = HelpWindow.load(primaryStage);
         helpWindow.show();
     }
-
+    
+    @FXML
+    public void handleOverdueTasks() {
+        OverdueTaskWindow overdueTaskWindow = OverdueTaskWindow.load(primaryStage, logic);
+        overdueTaskWindow.show();
+    }
     public void show() {
         primaryStage.show();
     }
