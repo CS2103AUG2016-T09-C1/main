@@ -41,7 +41,7 @@ public class Date {
         assert date != null;
         final Matcher matcher = DATE_NUMERIC_VALIDATION_REGEX.matcher(date.trim());
              
-        if("".equals(date) | date.length() == 0 | date.equals(null)) {
+        if("".equals(date) | date.length() == 0 | date == null) {
             this.day = 0;
             this.month = 0;
             this.year = 0;
@@ -227,7 +227,7 @@ public class Date {
      * @return a string representation of date in YYYYMMDD format
      */
     public String getDateYYYYMMDDFormat() {
-        if (value.equals("")) {
+        if ("".equals(value)) {
             return value;      
         }
         return value.substring(4,8) + value.substring(2,4) + value.substring(0,2);

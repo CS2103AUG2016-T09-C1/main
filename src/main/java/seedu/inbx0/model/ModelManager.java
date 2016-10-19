@@ -130,7 +130,7 @@ public class ModelManager extends ComponentManager implements Model {
     
     @Override
     public void updateFilteredTaskList(boolean logicRelation, List<String> keywords){
-        if(logicRelation == true) {
+        if(logicRelation) {
             updateFilteredTaskList(new PredicateExpression(new LogicQualifier(keywords)));
         }
         else {
@@ -140,7 +140,7 @@ public class ModelManager extends ComponentManager implements Model {
     
     @Override
     public void updateFilteredTaskList(String date, String preposition){
-        if(preposition == "")
+        if("".equals(preposition))
             updateFilteredTaskList(new PredicateExpression(new StartOnAndEndOnDateQualifier(date)));
         else
             updateFilteredTaskList(new PredicateExpression(new EndUntilDateQualifier(date)));

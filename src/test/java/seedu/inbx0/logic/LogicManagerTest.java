@@ -462,7 +462,7 @@ public class LogicManagerTest {
         /**
          * Adds the given list of Tasks to the given TaskList
          */
-        void addToTaskList(final TaskList taskList, final List<Task> tasksToAdd) throws Exception{
+        private void addToTaskList(final TaskList taskList, final List<Task> tasksToAdd) throws Exception{
             for(Task p: tasksToAdd){
                 taskList.addTask(p);
             }
@@ -479,7 +479,7 @@ public class LogicManagerTest {
         /**
          * Adds the given list of Tasks to the given model
          */
-        void addToModel(final Model model, final List<Task> tasksToAdd) throws Exception{
+        private void addToModel(final Model model, final List<Task> tasksToAdd) throws Exception{
             for(Task p: tasksToAdd){
                 model.addTask(p);
             }

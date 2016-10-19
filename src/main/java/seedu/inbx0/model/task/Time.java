@@ -28,7 +28,7 @@ public class Time {
     public Time(String time) throws IllegalValueException {
         assert time != null;
        
-        if ( time == "" | time.length() == 0 | time == null) {
+        if ( "".equals(time) | time.length() == 0 | time == null) {
             this.value = "";
         }
         else {
