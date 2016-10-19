@@ -130,7 +130,7 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void updateFilteredTaskList(String date, String preposition){
         System.out.println(preposition);
-        if(preposition == "")
+        if("".equals(preposition))
             updateFilteredTaskList(new PredicateExpression(new StartOnAndEndOnDateQualifier(date)));
         else
             updateFilteredTaskList(new PredicateExpression(new EndUntilDateQualifier(date)));
@@ -215,7 +215,7 @@ public class ModelManager extends ComponentManager implements Model {
         private List<String> copyKeywords;
         private List<String> logicKeywords;
         ScriptEngineManager sem = new ScriptEngineManager();
-        ScriptEngine se = sem.getEngineByName("JavaScript");
+        private ScriptEngine se = sem.getEngineByName("JavaScript");
 
         LogicQualifier(List<String> keywords) {
             this.copyKeywords = keywords;

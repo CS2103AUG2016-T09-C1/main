@@ -32,10 +32,10 @@ public class Task implements ReadOnlyTask {
     public Task(final Name name, final Date startDate, final Time startTime, final Date endDate, final Time endTime, final Importance level, final UniqueTagList tags) throws IllegalValueException {
         assert !CollectionUtil.isAnyNull(name, startDate, startTime, endDate, endTime, level, tags);
         
-        if ((startDate.getDate() == "" && startTime.getTime() == "" && endDate.getDate() == "" && endTime.getTime() == "") |
-            (startDate.getDate() == "" && startTime.getTime() == "" && endDate.getDate() != "")|
-            (startDate.getDate() != "" && startTime.getTime() != "" && endDate.getDate() == "" && endTime.getTime() == "") |
-            (startDate.getDate() != "" && startTime.getTime() == "" && endDate.getDate() == "" && endTime.getTime() == "")) {
+        if ((startDate.getDate().equals("") && startTime.getTime().equals("") && endDate.getDate().equals("") && endTime.getTime().equals("")) |
+            (startDate.getDate().equals("") && startTime.getTime().equals("") && !endDate.getDate().equals(""))|
+            (!startDate.getDate().equals("") && !startTime.getTime().equals("") && endDate.getDate().equals("") && endTime.getTime().equals("")) |
+            (!startDate.getDate().equals("") && startTime.getTime().equals("") && endDate.getDate().equals("") && endTime.getTime().equals(""))) {
             this.isEvent = false;
         } else {
             this.isEvent = true;
@@ -61,10 +61,10 @@ public class Task implements ReadOnlyTask {
     public Task(final Name name, final Date startDate, final Time startTime, final Date endDate, final Time endTime, final Importance level, final UniqueTagList tags, final boolean isCompleted) throws IllegalValueException {
         assert !CollectionUtil.isAnyNull(name, startDate, startTime, endDate, endTime, level, tags, isCompleted);
         
-        if ((startDate.getDate() == "" && startTime.getTime() == "" && endDate.getDate() == "" && endTime.getTime() == "") |
-            (startDate.getDate() == "" && startTime.getTime() == "" && endDate.getDate() != "")|
-            (startDate.getDate() != "" && startTime.getTime() != "" && endDate.getDate() == "" && endTime.getTime() == "") |
-            (startDate.getDate() != "" && startTime.getTime() == "" && endDate.getDate() == "" && endTime.getTime() == "")) {
+        if ((startDate.getDate().equals("") && startTime.getTime().equals("") && endDate.getDate().equals("") && endTime.getTime().equals("")) |
+            (startDate.getDate().equals("")  && startTime.getTime().equals("") && !endDate.getDate().equals(""))|
+            (!startDate.getDate().equals("") && !startTime.getTime().equals("") && endDate.getDate().equals("") && endTime.getTime().equals("")) |
+            (!startDate.getDate().equals("") && startTime.getTime().equals("") && endDate.getDate().equals("") && endTime.getTime().equals(""))) {
             this.isEvent = false;
         } else {
             this.isEvent = true;
@@ -93,9 +93,9 @@ public class Task implements ReadOnlyTask {
     public static boolean isValidEvent(final Date startDate, final Time startTime, final Date endDate, final Time endTime) {
         boolean isValid = false;
 
-        if ((startTime.getTime() == "" && endTime.getTime() == "" && endDate.getDate() != "" && startDate.getDate() != "") | 
-           (startTime.getTime() == "" && endTime.getTime() != "" && endDate.getDate() != "" && startDate.getDate() != "") |
-           (startTime.getTime() != "" && endTime.getTime() == "" && endDate.getDate() != "" && startDate.getDate() != "")) {
+        if ((startTime.getTime().equals("") && endTime.getTime().equals("") && !endDate.getDate().equals("") && !startDate.getDate().equals("")) | 
+           (startTime.getTime().equals("") && !endTime.getTime().equals("") && !endDate.getDate().equals("") && !startDate.getDate().equals("")) |
+           (!startTime.getTime().equals("") && endTime.getTime().equals("") && !endDate.getDate().equals("") && !startDate.getDate().equals(""))) {
             if (endDate.getYear() > startDate.getYear()) {
                 isValid = true;
             } else if ((endDate.getYear() == startDate.getYear()) && (endDate.getMonth() > startDate.getMonth())) {
@@ -230,13 +230,13 @@ public class Task implements ReadOnlyTask {
     }
 
     public static String formatInput(final String type, final String toFormat) throws IllegalValueException{
-        if (type.equals("date")) {
+        if ("date".equals(type)) {
             Date date = new Date(toFormat);
             return date.getDate();
-        } else if (type.equals("time")) {
+        } else if ("time".equals(type)) {
             Time time = new Time(toFormat);
             return time.getTime();
-        } else if (type.equals("importance")) {
+        } else if ("importance".equals(type)) {
             Importance importance = new Importance(toFormat);
             return importance.getLevel();
         }

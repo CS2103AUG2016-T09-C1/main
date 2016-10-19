@@ -33,7 +33,7 @@ public class Importance {
     public Importance(String importance) throws IllegalValueException {
         assert importance != null;
         importance = importance.trim();
-        if(importance == "" | importance.length() == 0 | importance == null) {
+        if("".equals(importance) | importance.length() == 0 | importance.equals(null)) {
             this.value = "";
             this.level = 0;
         }
@@ -44,11 +44,11 @@ public class Importance {
             else {
                 this.value = changeStringIntoProperColorName(importance);
         
-                if (value.equals("Green"))
+                if ("Green".equals(value))
                     level = 1;
-                else if(value.equals("Yellow"))
+                else if("Yellow".equals(value))
                     level = 2;
-                else if (value.equals("Red"))
+                else if ("Red".equals(value))
                     level = 3;
                 else
                     level = 0;

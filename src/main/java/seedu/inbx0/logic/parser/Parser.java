@@ -695,7 +695,7 @@ public class Parser {
             Integer front = Integer.valueOf(matcher2.group("first"));
             Integer back = Integer.valueOf(matcher2.group("last"));
             
-            if(back < front | front == back) {
+            if(back < front | front.equals(back)) {
                 return new IncorrectCommand(String.format(MarkCompleteCommand.MESSAGE_INVALID_ARGUMENTS,
                         MarkCompleteCommand.MESSAGE_USAGE));
             }
@@ -758,10 +758,10 @@ public class Parser {
         }
         if(keywords.length == 2) {
             if(keywords[1].equalsIgnoreCase("DESC") || keywords[1].equalsIgnoreCase("descending") || keywords[1].equalsIgnoreCase("descend")) {
-                defaultOrder = (type.equals("Importance")) ? true : false;
+                defaultOrder = ("Importance".equals(type)) ? true : false;
             }
             else if(keywords[1].equalsIgnoreCase("ASC") || keywords[1].equalsIgnoreCase("ascending") || keywords[1].equalsIgnoreCase("ascend")) {
-                defaultOrder = (type.equals("Importance")) ? false : true;
+                defaultOrder = ("Importance".equals(type)) ? false : true;
             }
             else {
                 return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
