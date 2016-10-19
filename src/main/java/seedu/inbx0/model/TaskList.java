@@ -2,7 +2,6 @@ package seedu.inbx0.model;
 
 import javafx.collections.ObservableList;
 import seedu.inbx0.model.task.Task;
-import seedu.inbx0.model.task.Time;
 import seedu.inbx0.model.task.Date;
 import seedu.inbx0.model.task.ReadOnlyTask;
 import seedu.inbx0.model.task.UniqueTaskList;

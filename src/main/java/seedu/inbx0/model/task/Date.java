@@ -8,7 +8,6 @@ import java.util.regex.Pattern;
 import com.joestelmach.natty.Parser;
 
 import seedu.inbx0.commons.exceptions.IllegalValueException;
-import seedu.inbx0.logic.commands.IncorrectCommand;
 
 /**
  * Represents Date of a Task Event in the tasklist.
