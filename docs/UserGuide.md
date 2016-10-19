@@ -122,11 +122,13 @@ Examples:
 
 #### <a id="list"></a>3. Listing tasks: `list`
 1) Listing all the tasks. <br>
-Format: `list`
+Format: `list [DATE]`
 
-The List Command shows a list of all tasks in the task manager so that you can take a look at your tasks all at one Groceries.
+The List Command shows a list of all tasks in the task manager so that you can take a look at your tasks all at one go.
 
  There will be index numbers allocated at the side of each task which will be needed for other operations such as deleting a task or selecting a task.
+ 
+If you input a date, it will show all the tasks associated with that date.
 
 2) Listing tasks due before a specific date. <br>
 Format: `list due DATE`
@@ -138,6 +140,14 @@ You will be able to view all of today’s tasks and  tasks that are due before a
 Examples:
 * `list due tomorrow` shows every task from now to the end of tomorrow <br>
 * `list due 1st Jan` shows every task from now till the end of 1st January 2017 <br>
+
+3) Listing tasks that are overdue <br>
+Format: `list overdue`
+
+You will be able to view all of the tasks that had expired which can be keyed in the command with the following:
+
+> list overdue
+
 
 <br><br>
 
@@ -394,7 +404,8 @@ Command | Format
 &nbsp; | `add TASK s/[START_DATE] [START_TIME][i/IMPORTANCE] [t/TAGS]...`
 &nbsp; | `add TASK s/[START_DATE] [START_TIME] e/[END_DATE] [END_TIME] [i/IMPORTANCE] [t/TAGS]...`
 [List](#list) | `list [DATE]`
-&nbsp; | `list i/[IMPORTANCE]`
+&nbsp; | `list due DATE`
+&nbsp; | `list overdue`
 [Find](#find) | Normal search: `find KEYWORD [MORE_KEYWORDS]...`
 &nbsp; | Logic operation search: `find KEYWORD [LOGIC_OPERATOR] [MORE_KEYWORDS] [MORE_LOGIC_OPERATOR]...`
 [Sort](#sort) | `sort [n|s|e|i] [ASC\DESC]`

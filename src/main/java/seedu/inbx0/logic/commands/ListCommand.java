@@ -24,7 +24,7 @@ public class ListCommand extends Command {
             + "Parameters: due DATE\n"
             + "Example: " + COMMAND_WORD + " due next week\n"
             + "3. Lists all tasks that are overdue \n"
-            + "Parameters: overdue"
+            + "Parameters: overdue\n"
             + "Example: " + COMMAND_WORD + " overdue\n";
     
     private final String checkDate;
