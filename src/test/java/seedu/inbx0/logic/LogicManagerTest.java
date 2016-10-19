@@ -16,7 +16,6 @@ import seedu.inbx0.model.ReadOnlyTaskList;
 import seedu.inbx0.model.tag.Tag;
 import seedu.inbx0.model.tag.UniqueTagList;
 import seedu.inbx0.model.task.*;
-import seedu.inbx0.storage.StorageManager;
 
 import org.junit.After;
 import org.junit.Before;
@@ -401,7 +400,7 @@ public class LogicManagerTest {
          *
          * @param seed used to generate the task data field values
          */
-        Task generateTask(final int seed) throws Exception {
+        private Task generateTask(final int seed) throws Exception {
             return new Task(
                     new Name("Task " + seed),
                     new Date("24th Oct"),
@@ -414,7 +413,7 @@ public class LogicManagerTest {
         }
 
         /** Generates the correct add command based on the task given */
-        String generateAddCommand(final Task p) {
+       private String generateAddCommand(final Task p) {
             StringBuffer cmd = new StringBuffer();
 
             cmd.append("add ");
@@ -489,7 +488,7 @@ public class LogicManagerTest {
         /**
          * Generates a list of Tasks based on the flags.
          */
-        List<Task> generateTaskList(final int numGenerated) throws Exception{
+        private List<Task> generateTaskList(final int numGenerated) throws Exception{
             List<Task> tasks = new ArrayList<>();
             for(int i = 1; i <= numGenerated; i++){
                 tasks.add(generateTask(i));
@@ -504,7 +503,7 @@ public class LogicManagerTest {
         /**
          * Generates a Task object with given name. Other fields will have some dummy values.
          */
-        Task generateTaskWithName(final String name) throws Exception {
+        private Task generateTaskWithName(final String name) throws Exception {
             return new Task(
                     new Name(name),
                     new Date("9/1/23"),

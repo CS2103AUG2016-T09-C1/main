@@ -47,7 +47,7 @@ public class ListCommand extends Command {
 
     @Override
     public CommandResult execute() {
-        if(checkDate == "") {
+        if("".equals(checkDate)) {
             model.updateFilteredListToShowAll();
             return new CommandResult(MESSAGE_SUCCESS);
         }

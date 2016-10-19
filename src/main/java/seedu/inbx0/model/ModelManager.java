@@ -214,7 +214,7 @@ public class ModelManager extends ComponentManager implements Model {
     private class LogicQualifier implements Qualifier {
         private List<String> copyKeywords;
         private List<String> logicKeywords;
-        ScriptEngineManager sem = new ScriptEngineManager();
+        private ScriptEngineManager sem = new ScriptEngineManager();
         private ScriptEngine se = sem.getEngineByName("JavaScript");
 
         LogicQualifier(List<String> keywords) {

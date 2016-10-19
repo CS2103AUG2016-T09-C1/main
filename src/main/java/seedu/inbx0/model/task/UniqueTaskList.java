@@ -192,11 +192,11 @@ public class UniqueTaskList implements Iterable<Task>{
             String startTime = task.getStartTime().getTime();
             String startDateToCompare = taskToCompare.getStartDate().getDateYYYYMMDDFormat();
             String startTimeToCompare = taskToCompare.getStartTime().getTime();
-            if(startDate.equals("") || startDateToCompare.equals("")) {
+            if("".equals(startDate) || "".equals(startDateToCompare)) {
                 return (0 - startDate.compareTo(startDateToCompare));
             }
             if(startDate.equals(startDateToCompare)) {
-                if(startTime.equals("") || startTimeToCompare.equals("")) {
+                if("".equals(startTime) || "".equals(startTimeToCompare)) {
                     return (0 - startTime.compareTo(startTimeToCompare));
                 }
                 return startTime.compareTo(startTimeToCompare);
