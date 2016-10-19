@@ -7,6 +7,7 @@ import seedu.inbx0.commons.core.UnmodifiableObservableList;
 import seedu.inbx0.commons.events.model.TaskListChangedEvent;
 import seedu.inbx0.commons.exceptions.IllegalValueException;
 import seedu.inbx0.model.task.Task;
+import seedu.inbx0.model.task.Time;
 import seedu.inbx0.model.task.Date;
 import seedu.inbx0.model.task.ReadOnlyTask;
 import seedu.inbx0.model.task.UniqueTaskList;
@@ -102,6 +103,12 @@ public class ModelManager extends ComponentManager implements Model {
     public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
         taskList.addTask(task);
         updateFilteredListToShowAll();
+        indicateTaskListChanged();
+    }
+    
+    @Override
+    public synchronized void checkExpiry(Date currentDate, String currentTime) {
+        taskList.checkExpiry(currentDate, currentTime);
         indicateTaskListChanged();
     }
 

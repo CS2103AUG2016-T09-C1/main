@@ -14,6 +14,7 @@ import seedu.inbx0.commons.util.ConfigUtil;
 import seedu.inbx0.commons.util.StringUtil;
 import seedu.inbx0.logic.Logic;
 import seedu.inbx0.logic.LogicManager;
+import seedu.inbx0.logic.commands.ExpiredCommand;
 import seedu.inbx0.model.*;
 import seedu.inbx0.storage.Storage;
 import seedu.inbx0.storage.StorageManager;
@@ -60,6 +61,8 @@ public class MainApp extends Application {
         ui = new UiManager(logic, config, userPrefs);
 
         initEventsCenter();
+        
+        logic.executeCheckExpiry();
     }
 
     private String getApplicationParameter(String parameterName){

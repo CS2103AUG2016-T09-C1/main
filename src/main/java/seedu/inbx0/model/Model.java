@@ -3,6 +3,8 @@ package seedu.inbx0.model;
 import java.util.List;
 import seedu.inbx0.commons.core.UnmodifiableObservableList;
 import seedu.inbx0.model.task.Task;
+import seedu.inbx0.model.task.Time;
+import seedu.inbx0.model.task.Date;
 import seedu.inbx0.model.task.ReadOnlyTask;
 import seedu.inbx0.model.task.UniqueTaskList;
 
@@ -45,4 +47,7 @@ public interface Model {
     
     /** Sorts the task list by the given type in the given order*/
     void sortTaskList(String type, boolean defaultOrder);
+    
+    /** Checks expiry of tasks */
+    void checkExpiry(Date currentDate, String currentTime);
 }

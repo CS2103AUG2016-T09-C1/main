@@ -14,6 +14,12 @@ public interface Logic {
      * @return the result of the command execution.
      */
     CommandResult execute(String commandText);
+    
+    /**
+     * Executes internal command and returns the result..
+     * @return the result of the command execution.
+     */
+    CommandResult executeCheckExpiry();
 
     /** Returns the filtered list of tasks */
     ObservableList<ReadOnlyTask> getFilteredTaskList();

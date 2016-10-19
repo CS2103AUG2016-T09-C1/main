@@ -28,6 +28,8 @@ public class TaskCard extends UiPart{
     private Label tags;
     @FXML
     private Label isCompleted;
+    @FXML
+    private Label isExpired;
 
     private ReadOnlyTask task;
     private int displayedIndex;
@@ -49,6 +51,11 @@ public class TaskCard extends UiPart{
         endTime.setText(task.getEndTime().value);
         tags.setText(task.tagsString());
         isCompleted.setText("isCompleted: " + task.getIsCompleted());
+        
+        if(task.getStartDate().value.equals("") && task.getStartTime().value.equals("") && !task.getEndDate().value.equals("") && !task.getEndTime().value.equals(""))
+            isExpired.setText("isExpired: " + task.getIsExpired());
+        else
+            isExpired.setText("");
         
         if(task.getLevel().getNumberLevel() == 1) 
             cardPane.setStyle("-fx-background-color: #7CFC00;");

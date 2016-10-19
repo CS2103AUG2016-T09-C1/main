@@ -22,6 +22,7 @@ public class Task implements ReadOnlyTask {
     private Importance level;
     private boolean isEvent;
     private boolean isCompleted;
+    private boolean isExpired;
     
     private UniqueTagList tags;
 
@@ -55,10 +56,11 @@ public class Task implements ReadOnlyTask {
         this.level = level;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
         this.isCompleted = false;
+        this.isExpired = false;
 
     }
 
-    public Task(final Name name, final Date startDate, final Time startTime, final Date endDate, final Time endTime, final Importance level, final UniqueTagList tags, final boolean isCompleted) throws IllegalValueException {
+    public Task(final Name name, final Date startDate, final Time startTime, final Date endDate, final Time endTime, final Importance level, final UniqueTagList tags, final boolean isCompleted, final boolean isExpired) throws IllegalValueException {
         assert !CollectionUtil.isAnyNull(name, startDate, startTime, endDate, endTime, level, tags, isCompleted);
         
         if ((startDate.getDate() == "" && startTime.getTime() == "" && endDate.getDate() == "" && endTime.getTime() == "") |
@@ -84,6 +86,7 @@ public class Task implements ReadOnlyTask {
         this.level = level;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
         this.isCompleted = isCompleted;
+        this.isExpired = isExpired;
 
     }
 
@@ -136,7 +139,7 @@ public class Task implements ReadOnlyTask {
      */
 
     public Task(final ReadOnlyTask source) throws IllegalValueException {
-        this(source.getName(), source.getStartDate(), source.getStartTime(), source.getEndDate(), source.getEndTime(), source.getLevel(), source.getTags(), source.getIsCompleted());
+        this(source.getName(), source.getStartDate(), source.getStartTime(), source.getEndDate(), source.getEndTime(), source.getLevel(), source.getTags(), source.getIsCompleted(), source.getIsExpired());
     }
 
     @Override
@@ -178,7 +181,11 @@ public class Task implements ReadOnlyTask {
     public final boolean getIsCompleted() {
         return isCompleted;
     }
-
+    
+    @Override
+    public final boolean getIsExpired() {
+        return isExpired;
+    }
 
     /**
      * Replaces this task's tags with the tags in the argument tag list.
@@ -209,6 +216,10 @@ public class Task implements ReadOnlyTask {
 
     public final void setCompleted(final boolean isCompleted) {
         this.isCompleted = isCompleted;
+    }
+    
+    public final void setExpired(final boolean isExpired) {
+        this.isExpired = isExpired;
     }
 
     @Override

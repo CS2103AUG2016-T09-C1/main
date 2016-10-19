@@ -5,6 +5,7 @@ import seedu.inbx0.commons.core.ComponentManager;
 import seedu.inbx0.commons.core.LogsCenter;
 import seedu.inbx0.logic.commands.Command;
 import seedu.inbx0.logic.commands.CommandResult;
+import seedu.inbx0.logic.commands.ExpiredCommand;
 import seedu.inbx0.logic.parser.Parser;
 import seedu.inbx0.model.Model;
 import seedu.inbx0.model.task.ReadOnlyTask;
@@ -31,6 +32,14 @@ public class LogicManager extends ComponentManager implements Logic {
         command.setData(model);
         return command.execute();
     }
+    
+    @Override
+    public CommandResult executeCheckExpiry() {
+        Command command = new ExpiredCommand();
+        command.setData(model);
+        return command.execute();
+    }
+    
 
     @Override
     public ObservableList<ReadOnlyTask> getFilteredTaskList() {

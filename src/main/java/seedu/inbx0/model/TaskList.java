@@ -2,6 +2,8 @@ package seedu.inbx0.model;
 
 import javafx.collections.ObservableList;
 import seedu.inbx0.model.task.Task;
+import seedu.inbx0.model.task.Time;
+import seedu.inbx0.model.task.Date;
 import seedu.inbx0.model.task.ReadOnlyTask;
 import seedu.inbx0.model.task.UniqueTaskList;
 import seedu.inbx0.model.task.UniqueTaskList.DuplicateTaskException;
@@ -138,6 +140,16 @@ public class TaskList implements ReadOnlyTaskList {
         }
         
     }
+    
+    /**
+     * Checks tasks' expiry 
+     * and updates the boolean isExpired accordingly if found expired.
+     */
+    public boolean checkExpiry(Date currentDate, String currentTime) {
+        tasks.checkExpiry(currentDate, currentTime);
+        return true;
+    }
+
     
 //// tag-level operations
 
