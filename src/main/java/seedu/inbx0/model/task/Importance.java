@@ -32,17 +32,17 @@ public class Importance {
     
     public Importance(String importance) throws IllegalValueException {
         assert importance != null;
-        importance = importance.trim();
-        if("".equals(importance) | importance.length() == 0 | importance.equals(null)) {
+        String trimmedImportance = importance.trim();
+        if("".equals(trimmedImportance) | trimmedImportance.length() == 0 | trimmedImportance.equals(null)) {
             this.value = "";
             this.level = 0;
         }
         else {
-            if (!isValidImportance(importance)) {
+            if (!isValidImportance(trimmedImportance)) {
                 throw new IllegalValueException(MESSAGE_IMPORTANCE_CONSTRAINTS);
             }
             else {
-                this.value = changeStringIntoProperColorName(importance);
+                this.value = changeStringIntoProperColorName(trimmedImportance);
         
                 if ("Green".equals(value))
                     level = 1;
@@ -56,12 +56,13 @@ public class Importance {
         }
     }
     
-    private String changeStringIntoProperColorName(String importance) {
-        if(importance.equals("g") | importance.equals("G") | importance.equals("green"))
+    private String changeStringIntoProperColorName(String trimmedImportance) {
+        String importance = trimmedImportance;
+        if("g".equals(importance) | "G".equals(importance) | "green".equals(importance))
             importance = "Green";
-        else if (importance.equals("y") | importance.equals("Y") | importance.equals("yellow"))
+        else if ("y".equals(importance) | "Y".equals(importance) | "yellow".equals(importance))
             importance = "Yellow";
-        else if (importance.equals("r") | importance.equals("R") | importance.equals("red"))
+        else if ("r".equals(importance) | "R".equals(importance) | "red".equals(importance))
             importance = "Red";
         return importance;
     }

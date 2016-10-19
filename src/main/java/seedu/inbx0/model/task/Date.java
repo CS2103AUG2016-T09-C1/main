@@ -42,7 +42,7 @@ public class Date {
         assert date != null;
         final Matcher matcher = DATE_NUMERIC_VALIDATION_REGEX.matcher(date.trim());
              
-        if(date == "" | date.length() == 0 | date == null) {
+        if("".equals(date) | date.length() == 0 | date.equals(null)) {
             this.day = 0;
             this.month = 0;
             this.year = 0;

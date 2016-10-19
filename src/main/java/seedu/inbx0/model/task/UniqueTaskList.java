@@ -39,7 +39,7 @@ public class UniqueTaskList implements Iterable<Task>{
      * @param order 
      */
     public void sortUniqueTaskList(String type, boolean defaultOrder) {
-        if(type.equals("Name")) {
+        if("Name".equals(type)) {
             FXCollections.sort(internalList, new NameComparator());
         }
         else if("Start Time".equals(type)) {
@@ -216,11 +216,11 @@ public class UniqueTaskList implements Iterable<Task>{
             String endTime = task.getEndTime().getTime();
             String endDateToCompare = taskToCompare.getEndDate().getDateYYYYMMDDFormat();
             String endTimeToCompare = taskToCompare.getEndTime().getTime();
-            if(endDate.equals("") || endDateToCompare.equals("")) {
+            if("".equals(endDate) || "".equals(endDateToCompare)) {
                 return (0 - endDate.compareTo(endDateToCompare));
             }
             else if(endDate.equals(endDateToCompare)) {
-                if(endTime.equals("") || endTimeToCompare.equals("")) {
+                if("".equals(endTime) || "".equals(endTimeToCompare)) {
                     return (0 - endTime.compareTo(endTimeToCompare));
                 }
                 return endTime.compareTo(endTimeToCompare);

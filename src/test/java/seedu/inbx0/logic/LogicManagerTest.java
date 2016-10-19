@@ -64,7 +64,7 @@ public class LogicManagerTest {
     }
 
     @Before
-	public final void setup() {
+	public final void setUp() {
         model = new ModelManager();
         logic = new LogicManager(model);
         EventsCenter.getInstance().registerHandler(this);
@@ -75,7 +75,7 @@ public class LogicManagerTest {
     }
 
     @After
-	public final void teardown() {
+	public final void tearDown() {
         EventsCenter.clearSubscribers();
     }
 
@@ -381,7 +381,7 @@ public class LogicManagerTest {
      */
     class TestDataHelper{
 
-        Task adam() throws Exception {
+        private Task adam() throws Exception {
             Name name = new Name("Do CS2103");
             Date startDate = new Date("12 Nov");
             Time startTime = new Time("9am");
@@ -437,7 +437,7 @@ public class LogicManagerTest {
         /**
          * Generates an TaskList with auto-generated tasks.
          */
-        TaskList generateAddressBook(final int numGenerated) throws Exception{
+        private TaskList generateAddressBook(final int numGenerated) throws Exception{
             TaskList taskList = new TaskList();
             addToTaskList(taskList, numGenerated);
             return taskList;
@@ -446,7 +446,7 @@ public class LogicManagerTest {
         /**
          * Generates an TaskList based on the list of Tasks given.
          */
-        TaskList generateTaskList(final List<Task> tasks) throws Exception{
+        private TaskList generateTaskList(final List<Task> tasks) throws Exception{
             TaskList taskList = new TaskList();
             addToTaskList(taskList, tasks);
             return taskList;
@@ -456,7 +456,7 @@ public class LogicManagerTest {
          * Adds auto-generated Task objects to the given TaskList
          * @param taskList The TaskList to which the Tasks will be added
          */
-        void addToTaskList(final TaskList taskList, final int numGenerated) throws Exception{
+        private void addToTaskList(final TaskList taskList, final int numGenerated) throws Exception{
             addToTaskList(taskList, generateTaskList(numGenerated));
         }
 
@@ -473,7 +473,7 @@ public class LogicManagerTest {
          * Adds auto-generated Task objects to the given model
          * @param model The model to which the Tasks will be added
          */
-        void addToModel(final Model model, final int numGenerated) throws Exception{
+        private void addToModel(final Model model, final int numGenerated) throws Exception{
             addToModel(model, generateTaskList(numGenerated));
         }
 
@@ -497,7 +497,7 @@ public class LogicManagerTest {
             return tasks;
         }
 
-        List<Task> generateTaskList(final Task... tasks) {
+        private List<Task> generateTaskList(final Task... tasks) {
             return Arrays.asList(tasks);
         }
 

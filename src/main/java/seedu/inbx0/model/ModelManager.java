@@ -234,10 +234,10 @@ public class ModelManager extends ComponentManager implements Model {
                         logicKeywords.add("false");
                     }
                 }
-                else if(keyword.equals("&")) {
+                else if("&".equals(keyword)) {
                     logicKeywords.add("&&");
                 }
-                else if(keyword.equals("|")) {
+                else if("|".equals(keyword)) {
                     logicKeywords.add("||");
                 }
                 else {
