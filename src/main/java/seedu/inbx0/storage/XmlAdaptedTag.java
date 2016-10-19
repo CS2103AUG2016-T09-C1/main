@@ -3,7 +3,6 @@ package seedu.inbx0.storage;
 import javax.xml.bind.annotation.XmlValue;
 
 import seedu.inbx0.commons.exceptions.IllegalValueException;
-import seedu.inbx0.commons.util.CollectionUtil;
 import seedu.inbx0.model.tag.Tag;
 
 /**

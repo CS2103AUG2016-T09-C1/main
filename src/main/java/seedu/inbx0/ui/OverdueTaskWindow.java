@@ -1,21 +1,14 @@
 package seedu.inbx0.ui;
 
-import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.layout.*;
-import javafx.scene.control.*;
 import javafx.scene.Scene;
-import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 import seedu.inbx0.commons.core.LogsCenter;
-import seedu.inbx0.commons.util.FxViewUtil;
 import seedu.inbx0.logic.Logic;
-import javafx.stage.*;
-import javafx.geometry.*;
 import javafx.stage.Modality;
 
-import java.awt.Label;
 import java.util.logging.Logger;
 
 /**

@@ -60,7 +60,7 @@ public class MarkCompleteCommand extends Command {
             ReadOnlyTask toMarkTaskCompleted = lastShownList.get(i - 1);
             Task completedTask = null;
             
-            if(toMarkTaskCompleted.getIsCompleted() == true) {
+            if(toMarkTaskCompleted.getIsCompleted()) {
                 return new CommandResult(MESSAGE_TASK_ALREADY_COMPLETED);
             }
             try {

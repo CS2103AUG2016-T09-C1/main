@@ -7,7 +7,6 @@ import seedu.inbx0.commons.core.UnmodifiableObservableList;
 import seedu.inbx0.commons.events.model.TaskListChangedEvent;
 import seedu.inbx0.commons.exceptions.IllegalValueException;
 import seedu.inbx0.model.task.Task;
-import seedu.inbx0.model.task.Time;
 import seedu.inbx0.model.task.Date;
 import seedu.inbx0.model.task.ReadOnlyTask;
 import seedu.inbx0.model.task.UniqueTaskList;
@@ -20,10 +19,6 @@ import javax.script.ScriptException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
-
-import javax.script.ScriptEngine;
-import javax.script.ScriptEngineManager;
-import javax.script.ScriptException;
 
 /**
  * Represents the in-memory model of the task list data.
@@ -135,7 +130,7 @@ public class ModelManager extends ComponentManager implements Model {
     
     @Override
     public void updateFilteredTaskList(boolean logicRelation, List<String> keywords){
-        if(logicRelation == true) {
+        if(logicRelation) {
             updateFilteredTaskList(new PredicateExpression(new LogicQualifier(keywords)));
         }
         else {
@@ -145,7 +140,7 @@ public class ModelManager extends ComponentManager implements Model {
     
     @Override
     public void updateFilteredTaskList(String date, String preposition){
-        if(preposition == "")
+        if("".equals(preposition))
             updateFilteredTaskList(new PredicateExpression(new StartOnAndEndOnDateQualifier(date)));
         else
             updateFilteredTaskList(new PredicateExpression(new EndUntilDateQualifier(date)));

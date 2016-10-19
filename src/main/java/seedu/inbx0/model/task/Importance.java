@@ -33,7 +33,7 @@ public class Importance {
     public Importance(String importance) throws IllegalValueException {
         assert importance != null;
         String trimmedImportance = importance.trim();
-        if("".equals(trimmedImportance) | trimmedImportance.length() == 0 | trimmedImportance.equals(null)) {
+        if("".equals(trimmedImportance) | trimmedImportance.length() == 0 | trimmedImportance == null) {
             this.value = "";
             this.level = 0;
         }
