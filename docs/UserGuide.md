@@ -322,11 +322,7 @@ Undos the previous action done in the task manager if you've made a mistake. <br
 #### <a id="clr"></a>10. Clearing all tasks : `clr`
 Format: `clr`
 
-Tasks can easily become obsolete and checking off tasks individually can be quite a hassle. The Clear command will help you to remove all tasks and can be accessed by typing the following:
-
-> clr [DATE]
-
-Adding the date in the command line is optional and by default it will clear the whole task list. By including the date, this will enable you to clear tasks from specific dates.
+Tasks can easily become obsolete and checking off tasks individually can be quite a hassle. The Clear command will help you to remove all tasks and can be accessed by typing the following: `clr`
 
 > Please ensure that the tasks are the ones that you want to clear before initiating the Clear Command.
 
