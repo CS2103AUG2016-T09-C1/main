@@ -431,8 +431,8 @@ On Macs:
  2. Type `java -version`.
  3. The Java version and related information displays. For example:
 
->Users-MacBook-Pro:~ user$ java -version
-java version "1.6.0\_51"Java(TM) SE Runtime Environment (build 1.6.0_51-b11-457-11M4509)
+>Users-MacBook-Pro:~ user$ java -version <br>
+java version "1.6.0\_51"Java(TM) SE Runtime Environment (build 1.6.0_51-b11-457-11M4509) <br>
 Java HotSpot(TM) 64-Bit Server VM (build 20.51-b01-457, mixed mode)
 
 On Linux:
@@ -440,6 +440,6 @@ On Linux:
  2. Type `java -version`.
  3. The Java version and related information displays. For example:
 
->user@user-desktop:~$ java -version
-java version "1.7.0\_15"Java(TM) SE Runtime Environment (build 1.7.0_05-b06)
+>user@user-desktop:~$ java -version <br>
+java version "1.7.0\_15"Java(TM) SE Runtime Environment (build 1.7.0_05-b06) <br>
 Java HotSpot(TM) Client VM (build 23.1-b03, mixed mode)
