@@ -145,10 +145,7 @@ public class TaskList implements ReadOnlyTaskList {
      * and updates the boolean isExpired accordingly if found expired.
      */
     public boolean checkExpiry(Date currentDate, String currentTime) {
-        if(tasks.checkExpiry(currentDate, currentTime))
-            return true;
-        else
-            return false;
+        return (tasks.checkExpiry(currentDate, currentTime));
     }
 
     

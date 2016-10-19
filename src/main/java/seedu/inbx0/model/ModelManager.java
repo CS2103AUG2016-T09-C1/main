@@ -308,7 +308,7 @@ public class ModelManager extends ComponentManager implements Model {
         
         @Override
         public boolean run(ReadOnlyTask task) {
-            return (task.getIsExpired()== true && task.getIsCompleted() == false &&
+            return (task.getIsExpired() && !task.getIsCompleted() &&
                     task.getStartDate().value.equals("") && task.getStartTime().value.equals("") &&
                     !task.getEndDate().equals("") && !task.getEndTime().equals(""));
         }

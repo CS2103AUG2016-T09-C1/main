@@ -165,7 +165,7 @@ public class UniqueTaskList implements Iterable<Task>{
                ((t.getEndDate().getYear() == currentDate.getYear()) && (t.getEndDate().getMonth() == currentDate.getMonth())
                  && (t.getEndDate().getDay() < currentDate.getDay())) |
                (t.getEndDate().value.equals(currentDate.value) && (Integer.parseInt(t.getEndTime().value.replaceAll("\\D+","")) <= Integer.parseInt(currentTime.replaceAll("\\D+",""))))) {          
-                    if(t.getIsExpired() == false) {
+                    if(!t.getIsExpired()) {
                         t.setExpired(true);
                         changed = true;
                     }
