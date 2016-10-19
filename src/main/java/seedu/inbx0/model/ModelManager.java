@@ -140,8 +140,10 @@ public class ModelManager extends ComponentManager implements Model {
     
     @Override
     public void updateFilteredTaskList(String date, String preposition){
-        if("".equals(preposition))
+        if(preposition.equals(""))
             updateFilteredTaskList(new PredicateExpression(new StartOnAndEndOnDateQualifier(date)));
+        else if(preposition.equals("overdue"))
+            updateFilteredTaskList(new PredicateExpression(new OverdueTaskQualifier()));
         else
             updateFilteredTaskList(new PredicateExpression(new EndUntilDateQualifier(date)));
     }
