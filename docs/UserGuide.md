@@ -88,7 +88,7 @@ Examples:
 <br>
 
 2) Adds a task with deadlines.<br>
-Format: `add TASK e/[END_DATE] [END_TIME] [i/IMPORTANCE] [t/TAGS]` 
+Format: `add TASK e/[END_DATE] [END_TIME] [i/IMPORTANCE] [t/TAGS]...` 
 
 Examples: 
 * `add Do CS2103 Homework e/tomorrow i/red`
@@ -99,7 +99,7 @@ Examples:
 > *	If the END_DATE is not provided, the end date will be automatically assigned as the current date.
 
 3) Adds a task with starting point only.<br>
-Format: `add TASK s/[START_DATE] [START_TIME][i/IMPORTANCE] [t/TAGS]`
+Format: `add TASK s/[START_DATE] [START_TIME][i/IMPORTANCE] [t/TAGS]...`
 
 Examples: 
 * `add Started Gym Training s/10012016 i/red`
@@ -110,7 +110,7 @@ Examples:
 > *	If the START_DATE is not provided, the start date will be automatically assigned as the current date.
 
 4) Adds an event.<br>
-Format: `add TASK s/[START_DATE] [START_TIME] e/[END_DATE] [END_TIME] [i/IMPORTANCE] [t/TAGS]`
+Format: `add TASK s/[START_DATE] [START_TIME] e/[END_DATE] [END_TIME] [i/IMPORTANCE] [t/TAGS]...`
 
 > Events are tasks with a starting and ending point.
 
@@ -393,9 +393,10 @@ There is no need to save manually.
 Command | Format  
 -------- | :-------- 
 [Help](#help) | `help`
-[Add](#add) | `add NAME [i/IMPORTANCE] [t/TAGS]`
-&nbsp; | `add NAME e/END_DATE et/END_TIME i/IMPORTANCE [t/TAGS]...`
-&nbsp; | `add NAME s/START_DATE st/START_TIME e/END_DATE et/END_TIME i/IMPORTANCE [t/TAGS]...`
+[Add](#add) | `add TASK [i/IMPORTANCE] [t/TAGS]...`
+&nbsp; | `add TASK e/[END_DATE] [END_TIME] [i/IMPORTANCE] [t/TAGS]...`
+&nbsp; | `add TASK s/[START_DATE] [START_TIME][i/IMPORTANCE] [t/TAGS]...`
+&nbsp; | `add TASK s/[START_DATE] [START_TIME] e/[END_DATE] [END_TIME] [i/IMPORTANCE] [t/TAGS]...`
 [List](#list) | `list [DATE]`
 &nbsp; | `list i/[IMPORTANCE]`
 [Find](#find) | Normal search: `find KEYWORD [MORE_KEYWORDS]...`
@@ -407,7 +408,8 @@ Command | Format
 [Select](#sel) | `sel INDEX`
 [Undo](#undo) | `undo`
 [Clear](#clr) | `clr`
-[Done](#done) | `done INDEX`
+[Done](#done) | `done INDEX [INDEX]...`
+&nbsp; | `done FIRST_INDEX to LAST_INDEX`
 [Exit](#exit) | `exit`
 
 ## **FAQ**

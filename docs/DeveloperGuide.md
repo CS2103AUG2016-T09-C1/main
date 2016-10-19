@@ -420,4 +420,6 @@ A Product Survey was conducted to study existing products on the market to gathe
 
 For Google Keep, the application has a colorful design and a simple interface to use. It has both a mobile and desktop version, which synchronises with each other whenever a change is made. Users can add Notes, Lists or Reminders. Users can type anything they want into the text fields and even add images to the notes themselves. Notes can be shared with multiple people via email, useful for keeping a shared note such as grocery lists or todo lists. While it is possible to set reminders for individual notes, there is no way to represent the whole list of notes in chronological order as it is up to the user to shift the Notes Cards around the UI as they wish.
 
-
+S Planner has vaious fields for adding a event including location, reminders and allow users to repeat events.
+It has a friendly calendar interface where events would show up on the day of the calendar. 
+The disadvantage is that it only allows events which require start date, start time, end date and end time.
