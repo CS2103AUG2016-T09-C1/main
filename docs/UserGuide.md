@@ -399,7 +399,7 @@ Command | Format
 [List](#list) | `list [DATE]`
 &nbsp; | `list i/[IMPORTANCE]`
 [Find](#find) | Normal search: `find KEYWORD [MORE_KEYWORDS]...`
-&nbsp | Logic operation search: `[LOGIC_OPERATOR] KEYWORD [MORE_KEYWORDS] [MORE_LOGIC_OPERATOR]...`
+| Logic operation search: `find KEYWORD [LOGIC_OPERATOR] [MORE_KEYWORDS] [MORE_LOGIC_OPERATOR]...`
 [Sort](#sort) | `sort [n|s|e|i] [ASC\DESC]`
 [Edit](#edit) | `edit INDEX [n/NAME] [s/START_DATE] [st/START_TIME] [e/END_DATE] [et/END_TIME] [i/IMPORTANCE]`
 [Tag](#tag) | `tag INDEX t/TAGS [t/MORE_TAGS]`
