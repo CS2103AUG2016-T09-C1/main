@@ -423,3 +423,15 @@ For Google Keep, the application has a colorful design and a simple interface to
 S Planner has vaious fields for adding a event including location, reminders and allow users to repeat events.
 It has a friendly calendar interface where events would show up on the day of the calendar. 
 The disadvantage is that it only allows events which require start date, start time, end date and end time.
+
+Todoist has a beautiful and colorful user interface, with option provided for user to set their preference regarding
+ on keyword shortcut and notification. It has chrome and app version with support cross platform use with synchronization. 
+It can process and auto analyze different format of time input, and support different input of tasks like event, deadline and 
+recursive task. User can categorize their tasks and add PDF, excel form or even image to their tasks to add in more detail.
+ It support notification via email and app notification on mobile to remind users. User can also drag the task to delay it.
+The disadvantage is that it does not give any clear instruction for new user while at the same time, it does not analyze the
+ input very clear, so it may misunderstand user input but still accept it without notifying the user.  Besides, although it can 
+delay task by dragging it, the only option is tomorrow, which is no that user friendly. Moreover, when user want to 
+synchronize their data across platform, they have to click 'synchronization'. 
+
+
