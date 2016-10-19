@@ -1,6 +1,8 @@
 package seedu.inbx0.model;
 
 import java.util.List;
+
+import javafx.collections.transformation.FilteredList;
 import seedu.inbx0.commons.core.UnmodifiableObservableList;
 import seedu.inbx0.model.task.Task;
 import seedu.inbx0.model.task.Time;
@@ -32,9 +34,15 @@ public interface Model {
 
     /** Returns the filtered task list as an {@code UnmodifiableObservableList<ReadOnlyTask>} */
     UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList();
+    
+    /** Returns the filtered overdue task list as an {@code UnmodifiableObservableList<ReadOnlyTask>} */
+    UnmodifiableObservableList<ReadOnlyTask> getFilteredOverdueTaskList();
 
     /** Updates the filter of the filtered task list to show all tasks */
     void updateFilteredListToShowAll();
+    
+    /** Updates the filter of the filtered task list to filter overdue tasks */
+    void updateFilteredOverdueTaskList();
 
     /** Updates the filter of the filtered task list to filter by the given keywords*/
     // void updateFilteredTaskList(Set<String> keywords);
@@ -50,4 +58,6 @@ public interface Model {
     
     /** Checks expiry of tasks */
     void checkExpiry(Date currentDate, String currentTime);
+    
+    
 }

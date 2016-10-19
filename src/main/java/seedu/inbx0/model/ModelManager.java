@@ -34,6 +34,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     private final TaskList taskList;
     private final FilteredList<Task> filteredTasks;
+    private final FilteredList<Task> filteredOverdueTasks;
 
     /**
      * Initializes a ModelManager with the given TaskList
@@ -48,6 +49,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         taskList = new TaskList(src);
         filteredTasks = new FilteredList<>(taskList.getTasks());
+        filteredOverdueTasks = new FilteredList<>(taskList.getTasks());
     }
 
     public ModelManager() {
@@ -57,6 +59,7 @@ public class ModelManager extends ComponentManager implements Model {
     public ModelManager(ReadOnlyTaskList initialData, UserPrefs userPrefs) {
         taskList = new TaskList(initialData);
         filteredTasks = new FilteredList<>(taskList.getTasks());
+        filteredOverdueTasks = new FilteredList<>(taskList.getTasks());
     }
 
     @Override
@@ -108,8 +111,8 @@ public class ModelManager extends ComponentManager implements Model {
     
     @Override
     public synchronized void checkExpiry(Date currentDate, String currentTime) {
-        taskList.checkExpiry(currentDate, currentTime);
-        indicateTaskListChanged();
+        if(taskList.checkExpiry(currentDate, currentTime))
+            indicateTaskListChanged();
     }
 
     //=========== Filtered Task List Accessors ===============================================================
@@ -117,6 +120,12 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList() {
         return new UnmodifiableObservableList<>(filteredTasks);
+    }
+    
+    @Override
+    public UnmodifiableObservableList<ReadOnlyTask> getFilteredOverdueTaskList() {    
+        updateFilteredOverdueTaskList();
+        return new UnmodifiableObservableList<>(filteredOverdueTasks);
     }
 
     @Override
@@ -136,16 +145,25 @@ public class ModelManager extends ComponentManager implements Model {
     
     @Override
     public void updateFilteredTaskList(String date, String preposition){
-        System.out.println(preposition);
         if(preposition == "")
             updateFilteredTaskList(new PredicateExpression(new StartOnAndEndOnDateQualifier(date)));
         else
             updateFilteredTaskList(new PredicateExpression(new EndUntilDateQualifier(date)));
     }
+    
+    @Override
+    public void updateFilteredOverdueTaskList() {
+        updateFilteredOverdueTaskList(new PredicateExpression(new OverdueTaskQualifier()));
+    }
 
     private void updateFilteredTaskList(Expression expression) {
         filteredTasks.setPredicate(expression::satisfies);
     }
+    
+    private void updateFilteredOverdueTaskList(Expression expression) {
+        filteredOverdueTasks.setPredicate(expression::satisfies);
+    }
+    
 
     //========== Inner classes/interfaces used for filtering ==================================================
 
@@ -288,6 +306,23 @@ public class ModelManager extends ComponentManager implements Model {
         }
     }*/
     
+    private class OverdueTaskQualifier implements Qualifier {
+        
+        OverdueTaskQualifier() {
+        }
+        
+        @Override
+        public boolean run(ReadOnlyTask task) {
+            return (task.getIsExpired()== true && task.getIsCompleted() == false &&
+                    task.getStartDate().value.equals("") && task.getStartTime().value.equals("") &&
+                    !task.getEndDate().equals("") && !task.getEndTime().equals(""));
+        }
+        
+        @Override
+        public String toString() {
+            return "isExpired";
+        }
+    }
     private class StartOnAndEndOnDateQualifier implements Qualifier {
         private String date;
         
