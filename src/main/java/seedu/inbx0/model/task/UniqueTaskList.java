@@ -171,7 +171,18 @@ public class UniqueTaskList implements Iterable<Task>{
                     }
                 }
             }
-        }  
+            else if(t.getEndDate().value.length() != 0 && t.getEndTime().value.length() == 0) {
+                    if((t.getEndDate().getYear() < currentDate.getYear()) |
+                       ((t.getEndDate().getYear() == currentDate.getYear()) && (t.getEndDate().getMonth() < currentDate.getMonth())) |
+                       ((t.getEndDate().getYear() == currentDate.getYear()) && (t.getEndDate().getMonth() == currentDate.getMonth())
+                       && (t.getEndDate().getDay() < currentDate.getDay()))) {
+                        if(t.getIsExpired() == false) {
+                            t.setExpired(true);
+                            changed = true;
+                        }             
+                    }
+                }  
+            }  
         return changed;
     }
     public ObservableList<Task> getInternalList() {

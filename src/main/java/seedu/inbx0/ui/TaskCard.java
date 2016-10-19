@@ -52,7 +52,8 @@ public class TaskCard extends UiPart{
         tags.setText(task.tagsString());
         isCompleted.setText("isCompleted: " + task.getIsCompleted());
         
-        if(task.getStartDate().value.equals("") && task.getStartTime().value.equals("") && !task.getEndDate().value.equals("") && !task.getEndTime().value.equals(""))
+        if((task.getStartDate().value.equals("") && task.getStartTime().value.equals("") && !task.getEndDate().value.equals("") && !task.getEndTime().value.equals("")) |
+           (task.getStartDate().value.equals("") && task.getStartTime().value.equals("") && !task.getEndDate().value.equals("") && task.getEndTime().value.equals("")))
             isExpired.setText("isExpired: " + task.getIsExpired());
         else
             isExpired.setText("");
