@@ -19,6 +19,7 @@ public interface ReadOnlyTask {
     Importance getLevel();
     boolean getIsCompleted();
     boolean getIsExpired();
+    boolean getIsEvent();
     
     /**
      * The returned TagList is a deep copy of the internal TagList,
@@ -103,5 +104,6 @@ public interface ReadOnlyTask {
             return buffer.substring(0, buffer.length() - separator.length());
         }
     }
+    
 
 }

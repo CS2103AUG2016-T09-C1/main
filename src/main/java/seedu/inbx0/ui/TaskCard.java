@@ -58,12 +58,18 @@ public class TaskCard extends UiPart{
         else
             isExpired.setText("");
         
-        if(task.getLevel().getNumberLevel() == 1) 
-            cardPane.setStyle("-fx-background-color: #7CFC00;");
+        if(task.getLevel().getNumberLevel() == 1 && task.getIsExpired() == true && task.getIsEvent() == true) 
+            cardPane.setStyle("-fx-background-color: rgba(124, 252, 0, 0.5);");
+        else if(task.getLevel().getNumberLevel() == 1)
+            cardPane.setStyle("-fx-background-color: rgba(124, 252, 0, 1);");
+        else if(task.getLevel().getNumberLevel() == 2 && task.getIsExpired() == true && task.getIsEvent() == true)
+            cardPane.setStyle("-fx-background-color: rgba(255, 255, 0, 0.5);");
         else if(task.getLevel().getNumberLevel() == 2)
-            cardPane.setStyle("-fx-background-color: #FFFF00;");
+            cardPane.setStyle("-fx-background-color: rgba(255, 255, 0, 1);");
+        else if(task.getLevel().getNumberLevel() == 3 && task.getIsExpired() == true && task.getIsEvent() == true)
+            cardPane.setStyle("-fx-background-color: rgba(255, 69, 0, 0.5);");
         else if(task.getLevel().getNumberLevel() == 3)
-            cardPane.setStyle("-fx-background-color: #FF4500;");
+            cardPane.setStyle("-fx-background-color: rgba(255, 69, 0, 1);");
                     
     }
 

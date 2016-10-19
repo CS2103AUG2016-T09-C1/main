@@ -12,6 +12,7 @@ import seedu.inbx0.commons.exceptions.IllegalValueException;
 import seedu.inbx0.commons.util.StringUtil;
 import seedu.inbx0.logic.commands.*;
 import seedu.inbx0.model.task.Task;
+import seedu.inbx0.model.task.Time;
 
 /**
  * Parses user input.
@@ -539,6 +540,16 @@ public class Parser {
                  else {
                      argumentsForEdit[1] = dateParse(matcher2.group("startDate"));
                      argumentsForEdit[2] = timeParse(matcher2.group("startDate"));
+                     
+                     Time getTime = null;
+                    try {
+                        getTime = new Time(argumentsForEdit[2]);
+                    } catch (IllegalValueException e) {
+                        e.printStackTrace();
+                    }
+                     if(argumentsForEdit[2].equals("") | getTime.getTime().equals(""))
+                         argumentsForEdit[2] = null;
+                         
                  }
             }
             else if(arguments.contains(START_DATE) && arguments.contains(START_TIME)) {
@@ -568,6 +579,15 @@ public class Parser {
                 else {
                  argumentsForEdit[3] = dateParse(matcher2.group("endDate"));
                  argumentsForEdit[4] = timeParse(matcher2.group("endDate"));
+                 System.out.println(argumentsForEdit[4]);
+                 Time getTime = null;
+                 try {
+                     getTime = new Time(argumentsForEdit[4]);
+                 } catch (IllegalValueException e) {
+                     e.printStackTrace();
+                 }
+                 if(argumentsForEdit[4].equals("") | getTime.getTime().equals(""))
+                     argumentsForEdit[4] = null;
                 }
             }
             else if(arguments.contains(END_DATE) && arguments.contains(END_TIME)) {        

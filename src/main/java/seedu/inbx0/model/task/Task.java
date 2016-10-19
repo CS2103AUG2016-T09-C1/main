@@ -186,7 +186,10 @@ public class Task implements ReadOnlyTask {
     public final boolean getIsExpired() {
         return isExpired;
     }
-
+    
+    public final boolean getIsEvent() {
+        return isEvent;
+    }
     /**
      * Replaces this task's tags with the tags in the argument tag list.
      */
