@@ -371,7 +371,7 @@ Use case ends.
 **MSS**
 
 1. User requests to undo his delete task action
-2. Inbx_0 readds the most recenty deleted task <br>
+2. Inbx_0 re-adds the most recenty deleted task <br>
 Use case ends.
 
 #### Use case: Clear the tasklist
@@ -389,7 +389,10 @@ Use case ends.
 2. Should be able to hold up to 5000 tasks.
 3. Should come with automated unit tests and open source code.
 4. Should favor DOS style commands over Unix-style commands.
-5. Should have an easy to use GUI.
+5. Should work offline without any internet connection.
+6. Should save the data in a human editable XML file.
+7. Should be standalone without depending on any external plugin.
+8. Should not require any installer.
 
 ## Appendix D : Glossary
 
@@ -414,5 +417,7 @@ Use case ends.
 ## Appendix E : Product Survey
 
 A Product Survey was conducted to study existing products on the market to gather insights and inspiration for our own product. We looked at various Task Managers on the market such as Google Calendar, Wunerlist, Todo.txt, Evernote and Google Keep. We then evaluated their common features and benefits that they offer to the consumers. We will then implement the more useful features while leaving out the more superfluous ones.
+
+For Google Keep, the application has a colorful design and a simple interface to use. It has both a mobile and desktop version, which synchronises with each other whenever a change is made. Users can add Notes, Lists or Reminders. Users can type anything they want into the text fields and even add images to the notes themselves. Notes can be shared with multiple people via email, useful for keeping a shared note such as grocery lists or todo lists. While it is possible to set reminders for individual notes, there is no way to represent the whole list of notes in chronological order as it is up to the user to shift the Notes Cards around the UI as they wish.
 
 

@@ -26,9 +26,9 @@ Unlike all the other task managers out there, Inbx\_0 is a simple program that r
 5. Type a command in the command box and press <kbd>Enter</kbd> to execute it. <br>
    e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window. 
 6. Some example commands you can try:
-   * **`list`** : lists all tasks
    * **`add`**:`add EE2020` :  adds a task called `EE2020 Midterms` to the Task Manager
-   * **`delete`**` 3` : deletes the 3rd task shown in the current list
+   * **`list`** : lists all tasks
+   * **`delete`**`1` : deletes the 1st task shown in the current list
    * **`exit`** : exits the app
 7. Refer to the [Features](#features) section below for details of each command.<br>
 
@@ -426,7 +426,20 @@ On Windows:
  5. Click the Java tab.
  6. In the Java Application Runtime Setting box, click View. The JNLP Runtime Settings dialog box is displayed.
 
-       
+On Macs:
+ 1. Open Terminal (Navigate to **Applications** > **Utilities** > **Terminal**))
+ 2. Type `java -version`.
+ 3. The Java version and related information displays. For example:
 
+>Users-MacBook-Pro:~ user$ java -version
+java version "1.6.0\_51"Java(TM) SE Runtime Environment (build 1.6.0_51-b11-457-11M4509)
+Java HotSpot(TM) 64-Bit Server VM (build 20.51-b01-457, mixed mode)
 
+On Linux:
+ 1. Open Terminal (this can be different depending on which version of Linux you are running. For example, in Ubuntu, navigate to **Applications** > **Accessories** > **Terminal**). In Red Hat, right-click the desktop, and select Open in Terminal from the pull-down menu.
+ 2. Type `java -version`.
+ 3. The Java version and related information displays. For example:
 
+>user@user-desktop:~$ java -version
+java version "1.7.0\_15"Java(TM) SE Runtime Environment (build 1.7.0_05-b06)
+Java HotSpot(TM) Client VM (build 23.1-b03, mixed mode)
