@@ -351,6 +351,9 @@ public class ModelManager extends ComponentManager implements Model {
         @Override
         public boolean run(ReadOnlyTask task) {
             Date today = null;
+           
+            boolean taskIsAfterCurrentDate = false;
+            boolean taskIsBeforeDueDate = false;
             boolean isBeforeOrOnDueButAfterOrOnCurrent = false;
             try {
                 today = new Date("today");
@@ -362,20 +365,22 @@ public class ModelManager extends ComponentManager implements Model {
             int dueByDay = dueByNumberDate / 1000000;
             int dueByMonth = (dueByNumberDate / 10000) % 100;
             int dueByYear = dueByNumberDate % 10000;
-         
-            if(dueByYear > task.getEndDate().getYear() && task.getEndDate().getYear() > today.getYear()) 
+             
+            if(task.getEndDate().getYear() > today.getYear() |
+              (task.getEndDate().getYear() == today.getYear() && task.getEndDate().getMonth() > today.getMonth()) |
+              (task.getEndDate().getYear() == today.getYear() && task.getEndDate().getMonth() == today.getMonth() &&
+              task.getEndDate().getDay() >= today.getDay()))       
+                taskIsAfterCurrentDate = true;
+            
+            if((dueByYear > task.getEndDate().getYear()) |
+               (dueByYear == task.getEndDate().getYear() && dueByMonth > task.getEndDate().getMonth()) |
+               (dueByYear == task.getEndDate().getYear() && dueByMonth == task.getEndDate().getMonth() &&
+               dueByDay >= task.getEndDate().getDay()))
+                taskIsBeforeDueDate = true;
+            
+            if(taskIsAfterCurrentDate == true && taskIsBeforeDueDate == true)
                 isBeforeOrOnDueButAfterOrOnCurrent = true;
-            
-            
-            if(dueByYear == task.getEndDate().getYear() && task.getEndDate().getYear() == today.getYear() &&
-               dueByMonth > task.getEndDate().getMonth() && task.getEndDate().getMonth() > today.getMonth())
-                isBeforeOrOnDueButAfterOrOnCurrent = true;
-            
-            if(dueByYear == task.getEndDate().getYear() && task.getEndDate().getYear() == today.getYear() && 
-               dueByMonth == task.getEndDate().getMonth() && task.getEndDate().getMonth() == today.getMonth() &&
-               dueByDay >= task.getEndDate().getDay() && task.getEndDate().getDay() >= today.getDay())
-                isBeforeOrOnDueButAfterOrOnCurrent = true;
-            
+           
             return isBeforeOrOnDueButAfterOrOnCurrent;
                    
         }
