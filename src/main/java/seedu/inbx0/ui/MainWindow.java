@@ -13,7 +13,6 @@ import seedu.inbx0.commons.core.GuiSettings;
 import seedu.inbx0.commons.events.ui.ExitAppRequestEvent;
 import seedu.inbx0.logic.Logic;
 import seedu.inbx0.model.UserPrefs;
-import seedu.inbx0.model.task.ReadOnlyTask;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -30,8 +29,10 @@ public class MainWindow extends UiPart {
 
     // Independent Ui parts residing in this Ui container
     //private BrowserPanel browserPanel;
-    private TaskListPanel floatTaskListPanel;
-    private TaskListPanel taskListPanel;
+    //private TaskListPanel floatTaskListPanel;
+    //private TaskListPanel taskListPanel;
+    private TaskListPanel upperTaskListPanel;
+    private TaskListPanel bottomTaskListPanel;
     private ResultDisplay resultDisplay;
     private StatusBarFooter statusBarFooter;
     private CommandBox commandBox;
@@ -42,7 +43,7 @@ public class MainWindow extends UiPart {
     private VBox rootLayout;
     private Scene scene;
 
-    private String addressBookName;
+    private String taskManagerName;
 
     //@FXML
     //private AnchorPane browserPlaceholder;
@@ -53,11 +54,17 @@ public class MainWindow extends UiPart {
     @FXML
     private MenuItem helpMenuItem;
 
-    @FXML
-    private AnchorPane taskListPanelPlaceholder;
+    //@FXML
+    //private AnchorPane taskListPanelPlaceholder;
+    
+    //@FXML
+    //private AnchorPane floatTaskListPanelPlaceholder;
     
     @FXML
-    private AnchorPane floatTaskListPanelPlaceholder;
+    private AnchorPane upperTaskListPanelPlaceholder;
+    
+    @FXML
+    private AnchorPane bottomTaskListPanelPlaceholder;
 
     @FXML
     private AnchorPane resultDisplayPlaceholder;
@@ -82,12 +89,12 @@ public class MainWindow extends UiPart {
         return mainWindow;
     }
 
-    private void configure(String appTitle, String addressBookName, Config config, UserPrefs prefs,
+    private void configure(String appTitle, String taskManagerName, Config config, UserPrefs prefs,
                            Logic logic) {
 
         //Set dependencies
         this.logic = logic;
-        this.addressBookName = addressBookName;
+        this.taskManagerName = taskManagerName;
         this.config = config;
         this.userPrefs = prefs;
 
@@ -108,8 +115,8 @@ public class MainWindow extends UiPart {
 
     void fillInnerParts() {
         //browserPanel = BrowserPanel.load(browserPlaceholder);
-        taskListPanel = TaskListPanel.load(primaryStage, getTaskListPlaceholder(), logic.getFilteredTaskList());
-        floatTaskListPanel = TaskListPanel.load(primaryStage, getFloatTaskListPlaceholder(), logic.getFilteredFloatTaskList());
+        upperTaskListPanel = TaskListPanel.load(primaryStage, getUpperTaskListPlaceholder(), logic.getFilteredToDoTaskList());
+        bottomTaskListPanel = TaskListPanel.load(primaryStage, getBottomTaskListPlaceholder(), logic.getFilteredDoneTaskList());
         resultDisplay = ResultDisplay.load(primaryStage, getResultDisplayPlaceholder());
         statusBarFooter = StatusBarFooter.load(primaryStage, getStatusbarPlaceholder(), config.getTaskListFilePath());
         commandBox = CommandBox.load(primaryStage, getCommandBoxPlaceholder(), resultDisplay, logic);
@@ -127,13 +134,22 @@ public class MainWindow extends UiPart {
         return resultDisplayPlaceholder;
     }
 
-    public AnchorPane getTaskListPlaceholder() {
-        return taskListPanelPlaceholder;
+    
+    private AnchorPane getUpperTaskListPlaceholder() {
+        return upperTaskListPanelPlaceholder;
     }
 
-    public AnchorPane getFloatTaskListPlaceholder() {
-        return floatTaskListPanelPlaceholder;
+    private AnchorPane getBottomTaskListPlaceholder() {
+        return bottomTaskListPanelPlaceholder;
     }
+    
+    //public AnchorPane getTaskListPlaceholder() {
+        //return taskListPanelPlaceholder;
+    //}
+
+    //public AnchorPane getFloatTaskListPlaceholder() {
+        //return floatTaskListPanelPlaceholder;
+    //}
     
     public void hide() {
         primaryStage.hide();
@@ -191,13 +207,20 @@ public class MainWindow extends UiPart {
         raise(new ExitAppRequestEvent());
     }
 
-    public TaskListPanel getTaskListPanel() {
-        return this.taskListPanel;
-    }
+    //public TaskListPanel getTaskListPanel() {
+      //  return this.taskListPanel;
+    //}
+    
+     public TaskListPanel getBottomTaskListPanel() {
+         return this.bottomTaskListPanel;
+     }
+     public TaskListPanel getUpperTaskListPanel() {
+         return this.upperTaskListPanel;
+     }
 
-    public TaskListPanel getFloatTaskListPanel() {
-        return this.floatTaskListPanel;
-    }
+    //public TaskListPanel getFloatTaskListPanel() {
+       // return this.floatTaskListPanel;
+    //}
 
     //public void loadTaskPage(ReadOnlyTask task) {
       //  browserPanel.loadTaskPage(task);

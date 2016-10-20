@@ -29,7 +29,10 @@ public class ModelManager extends ComponentManager implements Model {
 
     private final TaskList taskList;
     private final FilteredList<Task> filteredTasks;
+    private final FilteredList<Task> filteredNormalTasks;
     private final FilteredList<Task> filteredFloatTasks;
+    private final FilteredList<Task> filteredDoneTasks;
+    private final FilteredList<Task> filteredToDoTasks;
     private final FilteredList<Task> filteredOverdueTasks;
 
     /**
@@ -45,7 +48,10 @@ public class ModelManager extends ComponentManager implements Model {
 
         taskList = new TaskList(src);
         filteredTasks = new FilteredList<>(taskList.getTasks());
+        filteredNormalTasks = new FilteredList<>(taskList.getTasks());
         filteredFloatTasks = new FilteredList<>(taskList.getTasks());
+        filteredToDoTasks = new FilteredList<>(taskList.getTasks());
+        filteredDoneTasks = new FilteredList<>(taskList.getTasks());
         filteredOverdueTasks = new FilteredList<>(taskList.getTasks());
     }
 
@@ -56,7 +62,10 @@ public class ModelManager extends ComponentManager implements Model {
     public ModelManager(ReadOnlyTaskList initialData, UserPrefs userPrefs) {
         taskList = new TaskList(initialData);
         filteredTasks = new FilteredList<>(taskList.getTasks());
+        filteredNormalTasks = new FilteredList<>(taskList.getTasks());
         filteredFloatTasks = new FilteredList<>(taskList.getTasks());
+        filteredToDoTasks = new FilteredList<>(taskList.getTasks());
+        filteredDoneTasks = new FilteredList<>(taskList.getTasks());
         filteredOverdueTasks = new FilteredList<>(taskList.getTasks());
     }
 
@@ -121,6 +130,24 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
+    public UnmodifiableObservableList<ReadOnlyTask> getFilteredNormalTaskList() {
+        updateFilteredNormalTaskList();
+        return new UnmodifiableObservableList<>(filteredNormalTasks);
+    }
+
+    @Override
+    public UnmodifiableObservableList<ReadOnlyTask> getFilteredDoneTaskList() {
+        updateFilteredDoneTaskList();
+        return new UnmodifiableObservableList<>(filteredDoneTasks);
+    }
+    
+    @Override
+    public UnmodifiableObservableList<ReadOnlyTask> getFilteredToDoTaskList() {
+        updateFilteredToDoTaskList();
+        return new UnmodifiableObservableList<>(filteredToDoTasks);
+    }
+    
+    @Override
     public UnmodifiableObservableList<ReadOnlyTask> getFilteredFloatTaskList() {
         updateFilteredFloatTaskList();
         return new UnmodifiableObservableList<>(filteredFloatTasks);
@@ -157,11 +184,25 @@ public class ModelManager extends ComponentManager implements Model {
             updateFilteredTaskList(new PredicateExpression(new EndUntilDateQualifier(date)));
     }
 
+    @Override
+    public void updateFilteredNormalTaskList() {
+        updateFilteredNormalTaskList(new PredicateExpression(new NormalTaskQualifier()));
+    }
     
     @Override
     public void updateFilteredFloatTaskList() {
         updateFilteredFloatTaskList(new PredicateExpression(new FloatTaskQualifier()));
     }
+    
+    @Override
+    public void updateFilteredDoneTaskList() {
+        updateFilteredDoneTaskList(new PredicateExpression(new DoneTaskQualifier()));
+    }
+    
+    @Override
+    public void updateFilteredToDoTaskList() {
+        updateFilteredToDoTaskList(new PredicateExpression(new ToDoTaskQualifier()));
+    }    
     
     @Override
     public void updateFilteredOverdueTaskList() {
@@ -172,8 +213,20 @@ public class ModelManager extends ComponentManager implements Model {
         filteredTasks.setPredicate(expression::satisfies);
     }
     
+    private void updateFilteredNormalTaskList(Expression expression) {
+        filteredNormalTasks.setPredicate(expression::satisfies);
+    }
+
     private void updateFilteredFloatTaskList(Expression expression) {
         filteredFloatTasks.setPredicate(expression::satisfies);
+    }
+    
+    private void updateFilteredDoneTaskList(Expression expression) {
+        filteredDoneTasks.setPredicate(expression::satisfies);
+    }
+    
+    private void updateFilteredToDoTaskList(Expression expression) {
+        filteredToDoTasks.setPredicate(expression::satisfies);
     }
     
     private void updateFilteredOverdueTaskList(Expression expression) {
@@ -300,27 +353,22 @@ public class ModelManager extends ComponentManager implements Model {
             return "LogicSearchKeyword =" + String.join(", ", logicKeywords);
         }
     }
-    /*
-    private class NameQualifier implements Qualifier {
-        private Set<String> nameKeyWords;
+    
+    private class NormalTaskQualifier implements Qualifier {
 
-        NameQualifier(Set<String> nameKeyWords) {
-            this.nameKeyWords = nameKeyWords;
+        NormalTaskQualifier() {
         }
 
         @Override
         public boolean run(ReadOnlyTask task) {
-            return nameKeyWords.stream()
-                    .filter(keyword -> StringUtil.containsIgnoreCase(task.getAsText(), keyword))
-                    .findAny()
-                    .isPresent();
+            return !task.getIsFloatTask();
         }
 
         @Override
         public String toString() {
-            return "name=" + String.join(", ", nameKeyWords);
+            return "isNotFloatTask";
         }
-    }*/
+    }
     
     private class FloatTaskQualifier implements Qualifier {
         
@@ -329,15 +377,44 @@ public class ModelManager extends ComponentManager implements Model {
         
         @Override
         public boolean run(ReadOnlyTask task) {
-            System.out.println("startDate: " + task.getStartDate().getDate());
-            System.out.println("endDate: " + task.getEndDate().getDate());
-            System.out.println(task.getIsFloatTask());
             return task.getIsFloatTask();
         }
         
         @Override
         public String toString() {
             return "isFloatTask";
+        }
+    }
+    
+    private class DoneTaskQualifier implements Qualifier {
+        
+        DoneTaskQualifier() {
+        }
+        
+        @Override
+        public boolean run(ReadOnlyTask task) {
+            return task.getIsCompleted();
+        }
+        
+        @Override
+        public String toString() {
+            return "isComplete";
+        }
+    }
+    
+    private class ToDoTaskQualifier implements Qualifier {
+        
+        ToDoTaskQualifier() {
+        }
+        
+        @Override
+        public boolean run(ReadOnlyTask task) {
+            return !task.getIsCompleted();
+        }
+        
+        @Override
+        public String toString() {
+            return "isNotComplete";
         }
     }
 

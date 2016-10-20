@@ -33,8 +33,17 @@ public interface Model {
     /** Returns the filtered task list as an {@code UnmodifiableObservableList<ReadOnlyTask>} */
     UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList();
 
-    /** Returns the filtered task list as an {@code UnmodifiableObservableList<ReadOnlyTask>} */
+    /** Returns the filtered task list of events or deadlines as an {@code UnmodifiableObservableList<ReadOnlyTask>} */
+    UnmodifiableObservableList<ReadOnlyTask> getFilteredNormalTaskList();
+    
+    /** Returns the filtered float task list as an {@code UnmodifiableObservableList<ReadOnlyTask>} */
     UnmodifiableObservableList<ReadOnlyTask> getFilteredFloatTaskList();
+    
+    /** Returns the filtered done task list as an {@code UnmodifiableObservableList<ReadOnlyTask>} */
+    UnmodifiableObservableList<ReadOnlyTask> getFilteredDoneTaskList();
+    
+    /** Returns the filtered to do task list as an {@code UnmodifiableObservableList<ReadOnlyTask>} */
+    UnmodifiableObservableList<ReadOnlyTask> getFilteredToDoTaskList();
     
     /** Returns the filtered overdue task list as an {@code UnmodifiableObservableList<ReadOnlyTask>} */
     UnmodifiableObservableList<ReadOnlyTask> getFilteredOverdueTaskList();
@@ -44,9 +53,18 @@ public interface Model {
     
     /** Updates the filter of the filtered task list to filter overdue tasks */
     void updateFilteredOverdueTaskList();
+    
+    /** Updates the filter of the filtered task list to filter events and deadline */
+    void updateFilteredNormalTaskList();
 
     /** Updates the filter of the filtered task list to filter float tasks*/
     void updateFilteredFloatTaskList();
+    
+    /** Updates the filter of the filtered task list to filter done tasks*/
+    void updateFilteredDoneTaskList();
+    
+    /** Updates the filter of the filtered task list to filter to do tasks */
+    void updateFilteredToDoTaskList();
     
     /** Updates the filter of the filtered task list to filter by the given keywords*/
     // void updateFilteredTaskList(Set<String> keywords);
@@ -61,7 +79,5 @@ public interface Model {
     void sortTaskList(String type, boolean defaultOrder);
     
     /** Checks expiry of tasks */
-    void checkExpiry(Date currentDate, String currentTime);
-
-    
+    void checkExpiry(Date currentDate, String currentTime);  
 }
