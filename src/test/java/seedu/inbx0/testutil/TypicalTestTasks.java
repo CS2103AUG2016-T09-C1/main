@@ -29,7 +29,6 @@ public class TypicalTestTasks {
             hoon = new TaskBuilder().withName("Hoon Meier").withStartDate("next week").withStartTime("1000").withEndDate("next week").withEndTime("1300").withImportance("G").build();
             ida = new TaskBuilder().withName("Ida Mueller").withStartDate("tmr").withStartTime("1000").withEndDate("next week").withEndTime("12pm").withImportance("Yellow").build();
         } catch (IllegalValueException e) {
-            e.printStackTrace();
             assert false : "not possible";
         }
     }
