@@ -32,6 +32,9 @@ public interface Model {
 
     /** Returns the filtered task list as an {@code UnmodifiableObservableList<ReadOnlyTask>} */
     UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList();
+
+    /** Returns the filtered task list as an {@code UnmodifiableObservableList<ReadOnlyTask>} */
+    UnmodifiableObservableList<ReadOnlyTask> getFilteredFloatTaskList();
     
     /** Returns the filtered overdue task list as an {@code UnmodifiableObservableList<ReadOnlyTask>} */
     UnmodifiableObservableList<ReadOnlyTask> getFilteredOverdueTaskList();
@@ -42,6 +45,9 @@ public interface Model {
     /** Updates the filter of the filtered task list to filter overdue tasks */
     void updateFilteredOverdueTaskList();
 
+    /** Updates the filter of the filtered task list to filter float tasks*/
+    void updateFilteredFloatTaskList();
+    
     /** Updates the filter of the filtered task list to filter by the given keywords*/
     // void updateFilteredTaskList(Set<String> keywords);
     
@@ -56,6 +62,6 @@ public interface Model {
     
     /** Checks expiry of tasks */
     void checkExpiry(Date currentDate, String currentTime);
-    
+
     
 }

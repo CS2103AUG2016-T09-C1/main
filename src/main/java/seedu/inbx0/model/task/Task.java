@@ -21,6 +21,7 @@ public class Task implements ReadOnlyTask {
     private Time endTime;
     private Importance level;
     private boolean isEvent;
+    private boolean isFloatTask;
     private boolean isCompleted;
     private boolean isExpired;
     
@@ -33,13 +34,17 @@ public class Task implements ReadOnlyTask {
     public Task(final Name name, final Date startDate, final Time startTime, final Date endDate, final Time endTime, final Importance level, final UniqueTagList tags) throws IllegalValueException {
         assert !CollectionUtil.isAnyNull(name, startDate, startTime, endDate, endTime, level, tags);
         
-        if ((startDate.getDate().equals("") && startTime.getTime().equals("") && endDate.getDate().equals("") && endTime.getTime().equals("")) |
-            (startDate.getDate().equals("") && startTime.getTime().equals("") && !endDate.getDate().equals(""))|
+        if (startDate.getDate().equals("") && startTime.getTime().equals("") && endDate.getDate().equals("") && endTime.getTime().equals("")) {
+            this.isFloatTask = true;
+            this.isEvent = false;
+        } else if ((startDate.getDate().equals("") && startTime.getTime().equals("") && !endDate.getDate().equals(""))|
             (!startDate.getDate().equals("") && !startTime.getTime().equals("") && endDate.getDate().equals("") && endTime.getTime().equals("")) |
             (!startDate.getDate().equals("") && startTime.getTime().equals("") && endDate.getDate().equals("") && endTime.getTime().equals(""))) {
-            this.isEvent = false;
+            this.isFloatTask = false;
+            this.isEvent = false;            
         } else {
             this.isEvent = true;
+            this.isFloatTask = false;
         }
 
         if (isEvent) {
@@ -187,6 +192,12 @@ public class Task implements ReadOnlyTask {
         return isExpired;
     }
     
+    @Override
+    public final boolean getIsFloatTask() {
+        return isFloatTask;
+    }
+    
+    @Override
     public final boolean getIsEvent() {
         return isEvent;
     }

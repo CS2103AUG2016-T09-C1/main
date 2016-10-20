@@ -29,6 +29,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     private final TaskList taskList;
     private final FilteredList<Task> filteredTasks;
+    private final FilteredList<Task> filteredFloatTasks;
     private final FilteredList<Task> filteredOverdueTasks;
 
     /**
@@ -44,6 +45,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         taskList = new TaskList(src);
         filteredTasks = new FilteredList<>(taskList.getTasks());
+        filteredFloatTasks = new FilteredList<>(taskList.getTasks());
         filteredOverdueTasks = new FilteredList<>(taskList.getTasks());
     }
 
@@ -54,6 +56,7 @@ public class ModelManager extends ComponentManager implements Model {
     public ModelManager(ReadOnlyTaskList initialData, UserPrefs userPrefs) {
         taskList = new TaskList(initialData);
         filteredTasks = new FilteredList<>(taskList.getTasks());
+        filteredFloatTasks = new FilteredList<>(taskList.getTasks());
         filteredOverdueTasks = new FilteredList<>(taskList.getTasks());
     }
 
@@ -116,6 +119,12 @@ public class ModelManager extends ComponentManager implements Model {
     public UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList() {
         return new UnmodifiableObservableList<>(filteredTasks);
     }
+
+    @Override
+    public UnmodifiableObservableList<ReadOnlyTask> getFilteredFloatTaskList() {
+        updateFilteredFloatTaskList();
+        return new UnmodifiableObservableList<>(filteredFloatTasks);
+    }
     
     @Override
     public UnmodifiableObservableList<ReadOnlyTask> getFilteredOverdueTaskList() {    
@@ -147,6 +156,12 @@ public class ModelManager extends ComponentManager implements Model {
         else
             updateFilteredTaskList(new PredicateExpression(new EndUntilDateQualifier(date)));
     }
+
+    
+    @Override
+    public void updateFilteredFloatTaskList() {
+        updateFilteredFloatTaskList(new PredicateExpression(new FloatTaskQualifier()));
+    }
     
     @Override
     public void updateFilteredOverdueTaskList() {
@@ -155,6 +170,10 @@ public class ModelManager extends ComponentManager implements Model {
 
     private void updateFilteredTaskList(Expression expression) {
         filteredTasks.setPredicate(expression::satisfies);
+    }
+    
+    private void updateFilteredFloatTaskList(Expression expression) {
+        filteredFloatTasks.setPredicate(expression::satisfies);
     }
     
     private void updateFilteredOverdueTaskList(Expression expression) {
@@ -303,6 +322,25 @@ public class ModelManager extends ComponentManager implements Model {
         }
     }*/
     
+    private class FloatTaskQualifier implements Qualifier {
+        
+        FloatTaskQualifier() {
+        }
+        
+        @Override
+        public boolean run(ReadOnlyTask task) {
+            System.out.println("startDate: " + task.getStartDate().getDate());
+            System.out.println("endDate: " + task.getEndDate().getDate());
+            System.out.println(task.getIsFloatTask());
+            return task.getIsFloatTask();
+        }
+        
+        @Override
+        public String toString() {
+            return "isFloatTask";
+        }
+    }
+
     private class OverdueTaskQualifier implements Qualifier {
         
         OverdueTaskQualifier() {

@@ -9,19 +9,19 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
+<HBox id="cardPane" fx:id="cardPane" maxHeight="80.0" minHeight="40.0" prefHeight="40.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <GridPane HBox.hgrow="ALWAYS">
             <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="150.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="150.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="150.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="150.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="150.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="150.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="250.0" prefWidth="250.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="200.0" prefWidth="200.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="200.0" prefWidth="200.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="200.0" prefWidth="200.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="200.0" prefWidth="200.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="250.0" prefWidth="250.0" />
             </columnConstraints>
             <children>
-                <VBox alignment="CENTER_LEFT" maxHeight="150.0" minHeight="105.0" prefHeight="115.0" spacing="8.0" GridPane.columnIndex="0">
+                <VBox alignment="CENTER_LEFT" maxHeight="80.0" minHeight="40.0" prefHeight="40.0" spacing="8.0" GridPane.columnIndex="0">
                     <stylesheets>
                         <URL value="@DarkTheme.css" />
                         <URL value="@Extensions.css" />
@@ -33,12 +33,11 @@
                     <children>
                         <HBox alignment="CENTER_LEFT" spacing="5.0">
                             <children>
-                                 <Label fx:id="id" styleClass="cell_big_label" />
+                              <Label fx:id="isCompleted" styleClass="cell_small_label" text="\$isCompleted" />
+                                 <Label fx:id="id" styleClass="cell_big_label" text="\$id" />
                                  <Label fx:id="name" styleClass="cell_big_label" text="\$first" />
-                              <Label fx:id="isExpired" styleClass="cell_small_label" text="\$isExpired" />
                             </children>
                         </HBox>
-                        <Label fx:id="isCompleted" styleClass="cell_small_label" text="\$isCompleted" />
                     </children>
                 </VBox>
                   <Label fx:id="endTime" styleClass="cell_small_label" text="\$endTime" GridPane.columnIndex="4" />

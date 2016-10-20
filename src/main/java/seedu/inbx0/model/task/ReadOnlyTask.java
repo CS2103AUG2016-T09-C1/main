@@ -19,6 +19,7 @@ public interface ReadOnlyTask {
     Importance getLevel();
     boolean getIsCompleted();
     boolean getIsExpired();
+    boolean getIsFloatTask();
     boolean getIsEvent();
     
     /**

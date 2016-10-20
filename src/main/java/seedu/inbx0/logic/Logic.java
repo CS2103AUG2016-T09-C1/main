@@ -26,5 +26,8 @@ public interface Logic {
     
     /** Returns the filtered list of overdue tasks */
     ObservableList<ReadOnlyTask> getFilteredOverdueTaskList();
+    
+    /** Returns the filtered list of float tasks */
+    ObservableList<ReadOnlyTask> getFilteredFloatTaskList();
 
 }
