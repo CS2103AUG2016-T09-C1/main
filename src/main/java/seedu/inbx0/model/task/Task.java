@@ -21,9 +21,9 @@ public class Task implements ReadOnlyTask {
     private Time endTime;
     private Importance level;
     private boolean isEvent;
-    private boolean isFloatTask;
     private boolean isCompleted;
     private boolean isExpired;
+    private boolean isFloatTask;
     
     private UniqueTagList tags;
 
@@ -65,7 +65,8 @@ public class Task implements ReadOnlyTask {
 
     }
 
-    public Task(final Name name, final Date startDate, final Time startTime, final Date endDate, final Time endTime, final Importance level, final UniqueTagList tags, final boolean isCompleted, final boolean isExpired) throws IllegalValueException {
+    public Task(final Name name, final Date startDate, final Time startTime, final Date endDate, final Time endTime, final Importance level, final UniqueTagList tags,
+            final boolean isCompleted, final boolean isExpired, final boolean isFloatTask) throws IllegalValueException {
         assert !CollectionUtil.isAnyNull(name, startDate, startTime, endDate, endTime, level, tags, isCompleted);
         
         if ((startDate.getDate().equals("") && startTime.getTime().equals("") && endDate.getDate().equals("") && endTime.getTime().equals("")) |
@@ -92,6 +93,7 @@ public class Task implements ReadOnlyTask {
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
         this.isCompleted = isCompleted;
         this.isExpired = isExpired;
+        this.isFloatTask = isFloatTask;
 
     }
 
@@ -144,7 +146,7 @@ public class Task implements ReadOnlyTask {
      */
 
     public Task(final ReadOnlyTask source) throws IllegalValueException {
-        this(source.getName(), source.getStartDate(), source.getStartTime(), source.getEndDate(), source.getEndTime(), source.getLevel(), source.getTags(), source.getIsCompleted(), source.getIsExpired());
+        this(source.getName(), source.getStartDate(), source.getStartTime(), source.getEndDate(), source.getEndTime(), source.getLevel(), source.getTags(), source.getIsCompleted(), source.getIsExpired(), source.getIsFloatTask());
     }
 
     @Override
@@ -235,6 +237,10 @@ public class Task implements ReadOnlyTask {
     public final void setExpired(final boolean isExpired) {
         this.isExpired = isExpired;
     }
+    
+    public final void setFloatTask(final boolean isFloatTask) {
+       this.isFloatTask = isFloatTask;
+    }
 
     @Override
     public final boolean equals(final Object other) {
@@ -246,7 +252,7 @@ public class Task implements ReadOnlyTask {
     @Override
     public final int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, startDate, startTime, endDate, endTime, level, tags, isCompleted);
+        return Objects.hash(name, startDate, startTime, endDate, endTime, level, tags, isCompleted, isExpired, isFloatTask);
     }
 
     @Override
