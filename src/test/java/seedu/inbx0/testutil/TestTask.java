@@ -17,6 +17,7 @@ public class TestTask implements ReadOnlyTask {
     private boolean isCompleted;
     private boolean isExpired;
     private boolean isEvent;
+    private boolean isFloatTask;
     
     
     private UniqueTagList tags;
@@ -97,6 +98,11 @@ public class TestTask implements ReadOnlyTask {
     @Override
     public boolean getIsEvent() {
         return isEvent;
+    }
+    
+    @Override
+    public boolean getIsFloatTask() {
+        return isFloatTask;
     }
     
     @Override

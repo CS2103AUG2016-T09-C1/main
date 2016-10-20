@@ -20,6 +20,7 @@ public interface ReadOnlyTask {
     boolean getIsCompleted();
     boolean getIsExpired();
     boolean getIsEvent();
+    boolean getIsFloatTask();
     
     /**
      * The returned TagList is a deep copy of the internal TagList,

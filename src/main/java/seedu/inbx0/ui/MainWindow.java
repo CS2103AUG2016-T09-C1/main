@@ -29,7 +29,8 @@ public class MainWindow extends UiPart {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private BrowserPanel browserPanel;
+    //private BrowserPanel browserPanel;
+    private TaskListPanel floatTaskListPanel;
     private TaskListPanel taskListPanel;
     private ResultDisplay resultDisplay;
     private StatusBarFooter statusBarFooter;
@@ -43,8 +44,8 @@ public class MainWindow extends UiPart {
 
     private String addressBookName;
 
-    @FXML
-    private AnchorPane browserPlaceholder;
+    //@FXML
+    //private AnchorPane browserPlaceholder;
 
     @FXML
     private AnchorPane commandBoxPlaceholder;
@@ -54,6 +55,9 @@ public class MainWindow extends UiPart {
 
     @FXML
     private AnchorPane taskListPanelPlaceholder;
+    
+    @FXML
+    private AnchorPane floatTaskListPanelPlaceholder;
 
     @FXML
     private AnchorPane resultDisplayPlaceholder;
@@ -103,8 +107,9 @@ public class MainWindow extends UiPart {
     }
 
     void fillInnerParts() {
-        browserPanel = BrowserPanel.load(browserPlaceholder);
+        //browserPanel = BrowserPanel.load(browserPlaceholder);
         taskListPanel = TaskListPanel.load(primaryStage, getTaskListPlaceholder(), logic.getFilteredTaskList());
+        floatTaskListPanel = TaskListPanel.load(primaryStage, getFloatTaskListPlaceholder(), logic.getFilteredFloatTaskList());
         resultDisplay = ResultDisplay.load(primaryStage, getResultDisplayPlaceholder());
         statusBarFooter = StatusBarFooter.load(primaryStage, getStatusbarPlaceholder(), config.getTaskListFilePath());
         commandBox = CommandBox.load(primaryStage, getCommandBoxPlaceholder(), resultDisplay, logic);
@@ -126,6 +131,10 @@ public class MainWindow extends UiPart {
         return taskListPanelPlaceholder;
     }
 
+    public AnchorPane getFloatTaskListPlaceholder() {
+        return floatTaskListPanelPlaceholder;
+    }
+    
     public void hide() {
         primaryStage.hide();
     }
@@ -186,11 +195,15 @@ public class MainWindow extends UiPart {
         return this.taskListPanel;
     }
 
-    public void loadTaskPage(ReadOnlyTask task) {
-        browserPanel.loadTaskPage(task);
+    public TaskListPanel getFloatTaskListPanel() {
+        return this.floatTaskListPanel;
     }
 
-    public void releaseResources() {
-        browserPanel.freeResources();
-    }
+    //public void loadTaskPage(ReadOnlyTask task) {
+      //  browserPanel.loadTaskPage(task);
+    //}
+
+    //public void releaseResources() {
+      //  browserPanel.freeResources();
+    //}
 }
