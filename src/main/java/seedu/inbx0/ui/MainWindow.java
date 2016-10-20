@@ -13,7 +13,6 @@ import seedu.inbx0.commons.core.GuiSettings;
 import seedu.inbx0.commons.events.ui.ExitAppRequestEvent;
 import seedu.inbx0.logic.Logic;
 import seedu.inbx0.model.UserPrefs;
-import seedu.inbx0.model.task.ReadOnlyTask;
 
 /**
  * The Main Window. Provides the basic application layout containing
