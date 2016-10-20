@@ -16,6 +16,8 @@ public class TestTask implements ReadOnlyTask {
     private Importance level;
     private boolean isCompleted;
     private boolean isExpired;
+    private boolean isEvent;
+    
     
     private UniqueTagList tags;
 
@@ -90,6 +92,11 @@ public class TestTask implements ReadOnlyTask {
     @Override
     public boolean getIsExpired() {
         return isExpired;
+    }
+    
+    @Override
+    public boolean getIsEvent() {
+        return isEvent;
     }
     
     @Override
