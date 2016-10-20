@@ -2,6 +2,8 @@ package guitests;
 
 import org.junit.Test;
 
+import seedu.inbx0.commons.core.Messages;
+import seedu.inbx0.logic.commands.SelectCommand;
 import seedu.inbx0.model.task.ReadOnlyTask;
 
 import static org.junit.Assert.assertEquals;
@@ -23,8 +25,9 @@ public class SelectCommandTest extends TaskListGuiTest {
 
         assertSelectionInvalid(taskCount + 1); //invalid index
         assertTaskSelected(middleIndex); //assert previous selection remains
-
-        /* Testing other invalid indexes such as -1 should be done when testing the SelectCommand */
+        
+        commandBox.runCommand("sel -1"); //invalid index
+        assertResultMessage(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, SelectCommand.MESSAGE_USAGE)); 
     }
 
     @Test
