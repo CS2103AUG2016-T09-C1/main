@@ -85,8 +85,7 @@ public abstract class TaskListGuiTest {
         try {
             TypicalTestTasks.loadTaskListWithSampleData(ab);
         } catch (IllegalValueException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            assert false : "not possible";
         }
         return ab;
     }

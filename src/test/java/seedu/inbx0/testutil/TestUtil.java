@@ -236,6 +236,17 @@ public class TestUtil {
         double y = getScreenPos(node).getMinY() + node.getLayoutBounds().getHeight() / 2;
         return new Point2D(x,y);
     }
+    
+    /**
+     * Gets leftpoint of a node relative to the screen.
+     * @param node
+     * @return
+     */
+    public static Point2D getScreenLeftPoint(Node node) {
+        double x = getScreenPos(node).getMinX() + node.getLayoutBounds().getWidth() / 4;
+        double y = getScreenPos(node).getMinY() + node.getLayoutBounds().getHeight() / 4;
+        return new Point2D(x,y);
+    }
 
     /**
      * Gets mid point of a node relative to its scene.

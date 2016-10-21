@@ -25,8 +25,6 @@ public class OverdueTaskWindow extends UiPart {
 
     private VBox mainPane;
     private Scene scene;
-    private Logic logic;
-    
     private Stage dialogStage;
     private TaskListPanel taskListPanel;
     
@@ -51,7 +49,6 @@ public class OverdueTaskWindow extends UiPart {
     }
 
     private void configure(Logic logic){
-        this.logic = logic;
         Stage dialogStage = new Stage();
         dialogStage.initModality(Modality.APPLICATION_MODAL);
         this.dialogStage = dialogStage;

@@ -25,6 +25,31 @@ public class AddCommandTest extends TaskListGuiTest {
         taskToAdd = td.ida;
         assertAddSuccess(taskToAdd, currentList);
         currentList = TestUtil.addTasksToList(currentList, taskToAdd);
+        
+        //add another task
+        taskToAdd = td.noImportance;
+        assertAddSuccess(taskToAdd, currentList);
+        currentList = TestUtil.addTasksToList(currentList, taskToAdd);
+        
+        //add floating task
+        taskToAdd = td.floating;
+        assertAddSuccess(taskToAdd, currentList);
+        currentList = TestUtil.addTasksToList(currentList, taskToAdd);
+        
+        //add floating task without importance
+        taskToAdd = td.floatingNoImportance;
+        assertAddSuccess(taskToAdd, currentList);
+        currentList = TestUtil.addTasksToList(currentList, taskToAdd);
+        
+        //add deadline task
+        taskToAdd = td.deadline;
+        assertAddSuccess(taskToAdd, currentList);
+        currentList = TestUtil.addTasksToList(currentList, taskToAdd);
+        
+        //add deadline task with no importance
+        taskToAdd = td.deadlineNoImportance;
+        assertAddSuccess(taskToAdd, currentList);
+        currentList = TestUtil.addTasksToList(currentList, taskToAdd);
 
         //add duplicate task
         commandBox.runCommand(td.hoon.getAddCommand());
