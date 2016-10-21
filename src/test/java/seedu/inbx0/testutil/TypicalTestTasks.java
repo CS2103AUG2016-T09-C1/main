@@ -28,9 +28,9 @@ public class TypicalTestTasks {
             //Manually added
             hoon = new TaskBuilder().withName("Hoon Meier").withStartDate("next week").withStartTime("1000").withEndDate("next week").withEndTime("1300").withImportance("G").build();
             ida = new TaskBuilder().withName("Ida Mueller").withStartDate("tmr").withStartTime("1000").withEndDate("next week").withEndTime("12pm").withImportance("Yellow").build();
-            noImportance = new TaskBuilder().withName("No importance").withStartDate("next wed").withStartTime("1000").withEndDate("next thurs").withEndTime("12pm").build();
+            noImportance = new TaskBuilder().withName("No importance").withStartDate("next wed").withStartTime("1000").withEndDate("next thurs").withEndTime("12pm").withTags("tagged").build();
             floating = new TaskBuilder().withName("Floating Task").withImportance("G").build();
-            deadline = new TaskBuilder().withName("Deadline").withEndDate("next week").withEndTime("12pm").withImportance("Red").build();
+            deadline = new TaskBuilder().withName("Deadline").withEndDate("next week").withEndTime("12pm").withImportance("Red").withTags("tagged").build();
         } catch (IllegalValueException e) {
             assert false : "not possible";
         }
