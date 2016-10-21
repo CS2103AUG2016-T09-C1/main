@@ -9,7 +9,7 @@ import seedu.inbx0.model.task.*;
  */
 public class TypicalTestTasks {
 
-    public static TestTask alice, benson, carl, daniel, elle, fiona, george, hoon, ida, noImportance, floating, deadline ;
+    public static TestTask alice, benson, carl, daniel, elle, fiona, george, hoon, ida, noImportance, floatingNoImportance, floating, deadline, deadlineNoImportance ;
 
     public TypicalTestTasks() {
         try {
@@ -29,8 +29,10 @@ public class TypicalTestTasks {
             hoon = new TaskBuilder().withName("Hoon Meier").withStartDate("next week").withStartTime("1000").withEndDate("next week").withEndTime("1300").withImportance("G").build();
             ida = new TaskBuilder().withName("Ida Mueller").withStartDate("tmr").withStartTime("1000").withEndDate("next week").withEndTime("12pm").withImportance("Yellow").build();
             noImportance = new TaskBuilder().withName("No importance").withStartDate("next wed").withStartTime("1000").withEndDate("next thurs").withEndTime("12pm").withTags("tagged").build();
-            floating = new TaskBuilder().withName("Floating Task").withImportance("G").build();
+            floatingNoImportance = new TaskBuilder().withName("Float no importance").withTags("tagged").build();
+            floating = new TaskBuilder().withName("Floating Task").withImportance("G").withTags("tagged").build();
             deadline = new TaskBuilder().withName("Deadline").withEndDate("next week").withEndTime("12pm").withImportance("Red").withTags("tagged").build();
+            deadlineNoImportance = new TaskBuilder().withName("Deadline no importance").withEndDate("next week").withEndTime("12pm").withTags("tagged").build();
         } catch (IllegalValueException e) {
             assert false : "not possible";
         }
