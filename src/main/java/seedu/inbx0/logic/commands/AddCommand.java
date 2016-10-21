@@ -74,8 +74,7 @@ public class AddCommand extends Command {
         );
     }
 
-    public AddCommand(String name, Set<String> tags)
-            throws IllegalValueException {
+    public AddCommand(String name, Set<String> tags) throws IllegalValueException {
         final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tags) {
             tagSet.add(new Tag(tagName));
@@ -91,8 +90,7 @@ public class AddCommand extends Command {
         );
     }
     
-    public AddCommand(String name, String level, Set<String> tags)
-            throws IllegalValueException {
+    public AddCommand(String name, String level, Set<String> tags) throws IllegalValueException {
         final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tags) {
             tagSet.add(new Tag(tagName));
