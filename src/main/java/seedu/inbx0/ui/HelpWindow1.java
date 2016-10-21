@@ -15,7 +15,7 @@ import javafx.stage.Modality;
 
 import java.util.logging.Logger;
 
-import ch.makery.address.model.Person;
+
 
 /**
  * Controller for a help page
@@ -25,37 +25,29 @@ public class HelpWindow1 extends UiPart {
     
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String ICON = "/images/help_icon.png";
-    private static final String FXML = "OverdueTaskWindow.fxml";
-    private static final String TITLE = "Overdue Tasks";
+    private static final String FXML = "helpWindow1.fxml";
+    private static final String TITLE = "Help";
     public static final int MIN_HEIGHT = 600;
     public static final int MIN_WIDTH = 450;
+    
+    private VBox mainPane;   
+    private Stage dialogStage;
+    private ResultDisplay resultDisplay;
     
     @FXML
     private TableView<String> helpTable;
     @FXML
-    private TableColumn<Command, String> commandColumn;
+    private TableColumn<String, String> commandColumn;
     @FXML
-    private TableColumn<Command, String> exampleColumn;
-    
-    private TitledPane mainPane;
-    private ResultDisplay resultDisplay;
-
-    private Stage dialaogStage;
-
-    private Scene scene;
-    private Logic logic;
-    
-    private Stage dialogStage;
-    private TaskListPanel taskListPanel;
-    
+    private TableColumn<String, String> exampleColumn;
     @FXML
-    private AnchorPane taskListPanelPlaceholder;
+    private AnchorPane resultDisplayPlaceholder;
 
-    public static HelpWindow1 load(Stage primaryStage, Logic logic) {
-        logger.fine("Showing overdue tasks.");
-        HelpWindow1 overdueTaskWindow = UiPartLoader.loadUiPart(primaryStage, new HelpWindow1());
-        overdueTaskWindow.configure(logic);
-        return overdueTaskWindow;
+    public static HelpWindow1 load(Stage primaryStage) {
+        logger.fine("Showing help page about the application.");
+        HelpWindow1 helpWindow1 = UiPartLoader.loadUiPart(primaryStage, new HelpWindow1());
+        helpWindow1.configure();
+        return helpWindow1;
     }
 
     @Override
@@ -68,45 +60,37 @@ public class HelpWindow1 extends UiPart {
         return FXML;
     }
 
-    private void configure(Logic logic){
-        this.logic = logic;
-        Stage dialogStage = new Stage();
-        dialogStage.initModality(Modality.APPLICATION_MODAL);
-        this.dialogStage = dialogStage;
-/*        dialogStage.initModality(Modality.APPLICATION_MODAL);
-        dialogStage.setTitle(TITLE);
-        dialogStage.setMinWidth(250);
-        this.dialogStage = dialogStage;
-        Label label = new Label();
-        label.setText("Overdue Tasks");
-        
-        VBox layout = new VBox(10);
-        layout.getChildren().add(label);
-        layout.setAlignment(Pos.CENTER);
-        Scene scene = new Scene(layout);     
-        dialogStage.setScene(layout);
-        dialogStage.showAndWait(); */
-        
-        setTitle(TITLE);
+    private void configure(){
+        Scene scene = new Scene(mainPane);
+        //Null passed as the parent stage to make it non-modal.
+        dialogStage = createDialogStage(TITLE, null, scene);
+        dialogStage.setMaximized(true); //TODO: set a more appropriate initial size
         setIcon(dialogStage, ICON);
-        setWindowMinSize();
-        scene = new Scene(mainPane);
+        
+
         dialogStage.setScene(scene);
-        taskListPanel = TaskListPanel.load(dialogStage, getTaskListPlaceholder(), logic.getFilteredOverdueTaskList());
+        resultDisplay = ResultDisplay.load(dialogStage, getResultDisplayPlaceholder());
+        
+        String command = helpTable.getSelectionModel().getSelectedItem();
+        showHelpDetail(command);
         
     }
     
+
+    private void showHelpDetail(String command) {
+        if (command != null) {
+            // Fill the labels with info from the person object.
+            resultDisplay.postMessage("");
+        }
+        
+    }
 
     public void show() {
         dialogStage.showAndWait();
     }
     
-    public AnchorPane getTaskListPlaceholder() {
-        return taskListPanelPlaceholder;
-    }
-    
-    public TaskListPanel getTaskListPanel() {
-        return this.taskListPanel;
+    public AnchorPane getResultDisplayPlaceholder() {
+        return resultDisplayPlaceholder;
     }
     
     private void setTitle(String title) {

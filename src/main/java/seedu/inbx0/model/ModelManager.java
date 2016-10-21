@@ -31,9 +31,14 @@ public class ModelManager extends ComponentManager implements Model {
     private final FilteredList<Task> filteredTasks;
     private final FilteredList<Task> filteredNormalTasks;
     private final FilteredList<Task> filteredFloatTasks;
+    private final FilteredList<Task> filteredEventTasks;
+    private final FilteredList<Task> filteredDeadlineTasks;
     private final FilteredList<Task> filteredDoneTasks;
     private final FilteredList<Task> filteredToDoTasks;
     private final FilteredList<Task> filteredOverdueTasks;
+    private final FilteredList<Task> filteredBeforedueTasks;
+    private final FilteredList<Task> filteredDayTasks;
+    private final FilteredList<Task> filteredImportanceTasks;
 
     /**
      * Initializes a ModelManager with the given TaskList
@@ -50,9 +55,14 @@ public class ModelManager extends ComponentManager implements Model {
         filteredTasks = new FilteredList<>(taskList.getTasks());
         filteredNormalTasks = new FilteredList<>(taskList.getTasks());
         filteredFloatTasks = new FilteredList<>(taskList.getTasks());
+        filteredEventTasks = new FilteredList<>(taskList.getTasks());
+        filteredDeadlineTasks = new FilteredList<>(taskList.getTasks());
         filteredToDoTasks = new FilteredList<>(taskList.getTasks());
         filteredDoneTasks = new FilteredList<>(taskList.getTasks());
         filteredOverdueTasks = new FilteredList<>(taskList.getTasks());
+        filteredBeforedueTasks = new FilteredList<>(taskList.getTasks());
+        filteredDayTasks = new FilteredList<>(taskList.getTasks());
+        filteredImportanceTasks = new FilteredList<>(taskList.getTasks());
     }
 
     public ModelManager() {
@@ -64,9 +74,14 @@ public class ModelManager extends ComponentManager implements Model {
         filteredTasks = new FilteredList<>(taskList.getTasks());
         filteredNormalTasks = new FilteredList<>(taskList.getTasks());
         filteredFloatTasks = new FilteredList<>(taskList.getTasks());
+        filteredEventTasks = new FilteredList<>(taskList.getTasks());
+        filteredDeadlineTasks = new FilteredList<>(taskList.getTasks());
         filteredToDoTasks = new FilteredList<>(taskList.getTasks());
         filteredDoneTasks = new FilteredList<>(taskList.getTasks());
         filteredOverdueTasks = new FilteredList<>(taskList.getTasks());
+        filteredBeforedueTasks = new FilteredList<>(taskList.getTasks());
+        filteredDayTasks = new FilteredList<>(taskList.getTasks());
+        filteredImportanceTasks = new FilteredList<>(taskList.getTasks());
     }
 
     @Override
@@ -158,6 +173,36 @@ public class ModelManager extends ComponentManager implements Model {
         updateFilteredOverdueTaskList();
         return new UnmodifiableObservableList<>(filteredOverdueTasks);
     }
+    
+    @Override
+    public UnmodifiableObservableList<ReadOnlyTask> getFilteredEventTaskList() {
+        updateFilteredEventTaskList();
+        return new UnmodifiableObservableList<>(filteredEventTasks);
+    }
+
+    @Override
+    public UnmodifiableObservableList<ReadOnlyTask> getFilteredDeadlineTaskList() {
+        updateFilteredDeadlineTaskList();
+        return new UnmodifiableObservableList<>(filteredDeadlineTasks);
+    }
+
+    @Override
+    public UnmodifiableObservableList<ReadOnlyTask> getFilteredBeforedueTaskList() {
+        updateFilteredBeforedueTaskList();
+        return new UnmodifiableObservableList<>(filteredBeforedueTasks);
+    }
+
+    @Override
+    public UnmodifiableObservableList<ReadOnlyTask> getFilteredDayTaskList(String day) {
+        updateFilteredDayTaskList(day);
+        return new UnmodifiableObservableList<>(filteredDayTasks);
+    }
+
+    @Override
+    public UnmodifiableObservableList<ReadOnlyTask> getFilteredImportanceTaskList(String importance) {
+        updateFilteredImportanceTaskList(importance);
+        return new UnmodifiableObservableList<>(filteredImportanceTasks);
+    }
 
     @Override
     public void updateFilteredListToShowAll() {
@@ -208,6 +253,35 @@ public class ModelManager extends ComponentManager implements Model {
     public void updateFilteredOverdueTaskList() {
         updateFilteredOverdueTaskList(new PredicateExpression(new OverdueTaskQualifier()));
     }
+    
+    @Override
+    public void updateFilteredBeforedueTaskList() {
+        updateFilteredBeforedueTaskList(new PredicateExpression(new BeforedueTaskQualifier()));
+    }
+    
+    @Override
+    public void updateFilteredEventTaskList() {
+        updateFilteredEventTaskList(new PredicateExpression(new EventTaskQualifier()));
+        
+    }
+
+    @Override
+    public void updateFilteredDeadlineTaskList() {
+        updateFilteredDeadlineTaskList(new PredicateExpression(new DeadlineTaskQualifier()));
+        
+    }
+
+    @Override
+    public void updateFilteredDayTaskList(String day) {
+        updateFilteredDayTaskList(new PredicateExpression(new DayTaskQualifier(day)));
+        
+    }
+
+    @Override
+    public void updateFilteredImportanceTaskList(String importance) {
+        updateFilteredImportanceTaskList(new PredicateExpression(new ImportanceTaskQualifier(importance)));
+        
+    }
 
     private void updateFilteredTaskList(Expression expression) {
         filteredTasks.setPredicate(expression::satisfies);
@@ -233,6 +307,25 @@ public class ModelManager extends ComponentManager implements Model {
         filteredOverdueTasks.setPredicate(expression::satisfies);
     }
     
+    private void updateFilteredBeforedueTaskList(Expression expression) {
+        filteredBeforedueTasks.setPredicate(expression::satisfies);
+    }
+    
+    private void updateFilteredEventTaskList(Expression expression) {
+        filteredEventTasks.setPredicate(expression::satisfies);
+    }
+    
+    private void updateFilteredDeadlineTaskList(Expression expression) {
+        filteredDeadlineTasks.setPredicate(expression::satisfies);
+    }
+    
+    private void updateFilteredDayTaskList(Expression expression) {
+        filteredDayTasks.setPredicate(expression::satisfies);
+    }
+    
+    private void updateFilteredImportanceTaskList(Expression expression) {
+        filteredImportanceTasks.setPredicate(expression::satisfies);
+    }
 
     //========== Inner classes/interfaces used for filtering ==================================================
 
@@ -386,38 +479,54 @@ public class ModelManager extends ComponentManager implements Model {
         }
     }
     
-    private class DoneTaskQualifier implements Qualifier {
+    private class EventTaskQualifier implements Qualifier {
         
-        DoneTaskQualifier() {
+        EventTaskQualifier() {
         }
         
         @Override
         public boolean run(ReadOnlyTask task) {
-            return task.getIsCompleted();
+            return task.getIsEvent();
         }
         
         @Override
         public String toString() {
-            return "isComplete";
+            return "isEvent";
+        }
+    }    
+    
+    private class DeadlineTaskQualifier implements Qualifier {
+        
+        DeadlineTaskQualifier() {
+        }
+        
+        @Override
+        public boolean run(ReadOnlyTask task) {
+            return !(task.getIsEvent() || task.getIsFloatTask());
+        }
+        
+        @Override
+        public String toString() {
+            return "isDeadline";
         }
     }
     
-    private class ToDoTaskQualifier implements Qualifier {
+    private class BeforedueTaskQualifier implements Qualifier {
         
-        ToDoTaskQualifier() {
+        BeforedueTaskQualifier() {
         }
         
         @Override
         public boolean run(ReadOnlyTask task) {
-            return !task.getIsCompleted();
+            return !task.getIsExpired();
         }
         
         @Override
         public String toString() {
-            return "isNotComplete";
+            return "isBeforedue";
         }
     }
-
+    
     private class OverdueTaskQualifier implements Qualifier {
         
         OverdueTaskQualifier() {
@@ -438,6 +547,83 @@ public class ModelManager extends ComponentManager implements Model {
             return "isExpired";
         }
     }
+    
+    private class ToDoTaskQualifier implements Qualifier {
+        
+        ToDoTaskQualifier() {
+        }
+        
+        @Override
+        public boolean run(ReadOnlyTask task) {
+            return !task.getIsCompleted();
+        }
+        
+        @Override
+        public String toString() {
+            return "isNotCompleted";
+        }
+    }
+    
+    private class DoneTaskQualifier implements Qualifier {
+        
+        DoneTaskQualifier() {
+        }
+        
+        @Override
+        public boolean run(ReadOnlyTask task) {
+            return task.getIsCompleted();
+        }
+        
+        @Override
+        public String toString() {
+            return "isCompleted";
+        }
+    }
+    
+    private class DayTaskQualifier implements Qualifier {
+        
+        Date day;
+        
+        DayTaskQualifier(String day)  {
+            try {
+                this.day = new Date(day);
+            } catch (IllegalValueException e) {
+                e.printStackTrace();
+            }
+        }
+        
+        @Override
+        public boolean run(ReadOnlyTask task) {
+            return task.getStartDate().getDate().equals(day.getDate());
+        }
+        
+        @Override
+        public String toString() {
+            return "Date: " + day.getDate();
+        }
+    }
+    
+    private class ImportanceTaskQualifier implements Qualifier {
+        
+        String importance;
+        
+        ImportanceTaskQualifier(String importance)  {
+            this.importance = importance;
+        }
+        
+        @Override
+        public boolean run(ReadOnlyTask task) {
+            System.out.println("task: " + task.getLevel().getLevel());
+            System.out.println("importance: " + importance);
+            return task.getLevel().getLevel().equals(this.importance);
+        }
+        
+        @Override
+        public String toString() {
+            return "Importance: " + this.importance;
+        }
+    }
+
     private class StartOnAndEndOnDateQualifier implements Qualifier {
         private String date;
         
@@ -584,4 +770,6 @@ public class ModelManager extends ComponentManager implements Model {
             return "tag=" + String.join(", ", tagKeyWords);
         }
     }*/
+
+
 }

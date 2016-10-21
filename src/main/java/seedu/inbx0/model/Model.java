@@ -2,6 +2,7 @@ package seedu.inbx0.model;
 
 import java.util.List;
 
+import javafx.collections.ObservableList;
 import seedu.inbx0.commons.core.UnmodifiableObservableList;
 import seedu.inbx0.model.task.Task;
 import seedu.inbx0.model.task.Date;
@@ -39,6 +40,12 @@ public interface Model {
     /** Returns the filtered float task list as an {@code UnmodifiableObservableList<ReadOnlyTask>} */
     UnmodifiableObservableList<ReadOnlyTask> getFilteredFloatTaskList();
     
+    /** Returns the filtered event task list as an {@code UnmodifiableObservableList<ReadOnlyTask>} */
+    UnmodifiableObservableList<ReadOnlyTask> getFilteredEventTaskList();
+    
+    /** Returns the filtered deadline task list as an {@code UnmodifiableObservableList<ReadOnlyTask>} */
+    UnmodifiableObservableList<ReadOnlyTask> getFilteredDeadlineTaskList();
+    
     /** Returns the filtered done task list as an {@code UnmodifiableObservableList<ReadOnlyTask>} */
     UnmodifiableObservableList<ReadOnlyTask> getFilteredDoneTaskList();
     
@@ -47,6 +54,15 @@ public interface Model {
     
     /** Returns the filtered overdue task list as an {@code UnmodifiableObservableList<ReadOnlyTask>} */
     UnmodifiableObservableList<ReadOnlyTask> getFilteredOverdueTaskList();
+    
+    /** Returns the filtered before due task list as an {@code UnmodifiableObservableList<ReadOnlyTask>} */
+    UnmodifiableObservableList<ReadOnlyTask> getFilteredBeforedueTaskList();
+    
+    /** Returns the filtered task list according to day as an {@code UnmodifiableObservableList<ReadOnlyTask>} */
+    UnmodifiableObservableList<ReadOnlyTask> getFilteredDayTaskList(String day);
+    
+    /** Returns the filtered task list according to importance as an {@code UnmodifiableObservableList<ReadOnlyTask>} */
+    UnmodifiableObservableList<ReadOnlyTask> getFilteredImportanceTaskList(String importance);
 
     /** Updates the filter of the filtered task list to show all tasks */
     void updateFilteredListToShowAll();
@@ -54,11 +70,20 @@ public interface Model {
     /** Updates the filter of the filtered task list to filter overdue tasks */
     void updateFilteredOverdueTaskList();
     
+    /** Updates the filter of the filtered task list to filter Beforedue tasks */
+    void updateFilteredBeforedueTaskList();  
+    
     /** Updates the filter of the filtered task list to filter events and deadline */
     void updateFilteredNormalTaskList();
 
     /** Updates the filter of the filtered task list to filter float tasks*/
     void updateFilteredFloatTaskList();
+    
+    /** Updates the filter of the filtered event list to filter float tasks*/
+    void updateFilteredEventTaskList();
+    
+    /** Updates the filter of the filtered deadline list to filter float tasks*/
+    void updateFilteredDeadlineTaskList();
     
     /** Updates the filter of the filtered task list to filter done tasks*/
     void updateFilteredDoneTaskList();
@@ -66,9 +91,12 @@ public interface Model {
     /** Updates the filter of the filtered task list to filter to do tasks */
     void updateFilteredToDoTaskList();
     
-    /** Updates the filter of the filtered task list to filter by the given keywords*/
-    // void updateFilteredTaskList(Set<String> keywords);
+    /** Updates the filter of the filtered task list according to day */
+    void updateFilteredDayTaskList(String day);
     
+    /** Updates the filter of the filtered task list according to importance */
+    void updateFilteredImportanceTaskList(String importance);
+       
     /** Updates the filter of the filtered task list to filter by the given date and based on preposition*/
     void updateFilteredTaskList(String date, String preposition);
     
@@ -79,5 +107,6 @@ public interface Model {
     void sortTaskList(String type, boolean defaultOrder);
     
     /** Checks expiry of tasks */
-    void checkExpiry(Date currentDate, String currentTime);  
+    void checkExpiry(Date currentDate, String currentTime);
+
 }

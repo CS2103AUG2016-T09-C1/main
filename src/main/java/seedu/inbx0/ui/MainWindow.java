@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.TitledPane;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
@@ -21,7 +22,7 @@ import seedu.inbx0.model.UserPrefs;
 public class MainWindow extends UiPart {
 
     private static final String ICON = "/images/address_book_32.png";
-    private static final String FXML = "MainWindow.fxml";
+    private static final String FXML = "MainWindow2.fxml";
     public static final int MIN_HEIGHT = 600;
     public static final int MIN_WIDTH = 450;
 
@@ -33,6 +34,7 @@ public class MainWindow extends UiPart {
     //private TaskListPanel taskListPanel;
     private TaskListPanel upperTaskListPanel;
     private TaskListPanel bottomTaskListPanel;
+    private TaskListPanel selectTaskListPanel;
     private ResultDisplay resultDisplay;
     private StatusBarFooter statusBarFooter;
     private CommandBox commandBox;
@@ -54,11 +56,14 @@ public class MainWindow extends UiPart {
     @FXML
     private MenuItem helpMenuItem;
 
-    //@FXML
-    //private AnchorPane taskListPanelPlaceholder;
+    @FXML
+    private TitledPane CategoryTitledPane;
     
-    //@FXML
-    //private AnchorPane floatTaskListPanelPlaceholder;
+    @FXML
+    private TitledPane NormalTitledPane;
+    
+    @FXML
+    private AnchorPane selectTaskListPanelPlaceholder;
     
     @FXML
     private AnchorPane upperTaskListPanelPlaceholder;
@@ -117,9 +122,12 @@ public class MainWindow extends UiPart {
         //browserPanel = BrowserPanel.load(browserPlaceholder);
         upperTaskListPanel = TaskListPanel.load(primaryStage, getUpperTaskListPlaceholder(), logic.getFilteredToDoTaskList());
         bottomTaskListPanel = TaskListPanel.load(primaryStage, getBottomTaskListPlaceholder(), logic.getFilteredDoneTaskList());
+        selectTaskListPanel = TaskListPanel.load(primaryStage, getSelectTaskListPlaceholder(), logic.getFilteredDayTaskList("today"));
         resultDisplay = ResultDisplay.load(primaryStage, getResultDisplayPlaceholder());
         statusBarFooter = StatusBarFooter.load(primaryStage, getStatusbarPlaceholder(), config.getTaskListFilePath());
         commandBox = CommandBox.load(primaryStage, getCommandBoxPlaceholder(), resultDisplay, logic);
+        CategoryTitledPane.setExpanded(false);
+        NormalTitledPane.setExpanded(true);
     }
 
     private AnchorPane getCommandBoxPlaceholder() {
@@ -141,6 +149,10 @@ public class MainWindow extends UiPart {
 
     private AnchorPane getBottomTaskListPlaceholder() {
         return bottomTaskListPanelPlaceholder;
+    }
+    
+    private AnchorPane getSelectTaskListPlaceholder() {
+        return selectTaskListPanelPlaceholder;
     }
     
     //public AnchorPane getTaskListPlaceholder() {
@@ -217,7 +229,10 @@ public class MainWindow extends UiPart {
      public TaskListPanel getUpperTaskListPanel() {
          return this.upperTaskListPanel;
      }
-
+     
+     public TaskListPanel getSelectListPanel() {
+         return this.selectTaskListPanel;
+     }
     //public TaskListPanel getFloatTaskListPanel() {
        // return this.floatTaskListPanel;
     //}
@@ -229,4 +244,120 @@ public class MainWindow extends UiPart {
     //public void releaseResources() {
       //  browserPanel.freeResources();
     //}
+     
+     @FXML
+     public void handleListToday() {
+         selectTaskListPanel = null;
+         selectTaskListPanel = TaskListPanel.load(primaryStage, 
+                 getSelectTaskListPlaceholder(), logic.getFilteredDayTaskList("today"));
+     }
+     @FXML
+     public void handleListMonday() {
+         selectTaskListPanel = null;
+         selectTaskListPanel = TaskListPanel.load(primaryStage, 
+                 getSelectTaskListPlaceholder(), logic.getFilteredDayTaskList("Monday"));
+     }
+     @FXML
+     public void handleListTuesday() {
+         selectTaskListPanel = null;
+         selectTaskListPanel = TaskListPanel.load(primaryStage, 
+                 getSelectTaskListPlaceholder(), logic.getFilteredDayTaskList("Tuesday"));
+     }
+
+     @FXML
+     public void handleListWednesday() {
+         selectTaskListPanel = null;
+         selectTaskListPanel = TaskListPanel.load(primaryStage, 
+                 getSelectTaskListPlaceholder(), logic.getFilteredDayTaskList("Wednesday"));
+     }
+     @FXML
+     public void handleListThursday() {
+         selectTaskListPanel = null;
+         selectTaskListPanel = TaskListPanel.load(primaryStage, 
+                 getSelectTaskListPlaceholder(), logic.getFilteredDayTaskList("Thursday"));
+     }
+     @FXML
+     public void handleListFriday() {
+         selectTaskListPanel = null;
+         selectTaskListPanel = TaskListPanel.load(primaryStage, 
+                 getSelectTaskListPlaceholder(), logic.getFilteredDayTaskList("Friday"));
+     }
+     @FXML
+     public void handleListSaturday() {
+         selectTaskListPanel = null;
+         selectTaskListPanel = TaskListPanel.load(primaryStage, 
+                 getSelectTaskListPlaceholder(), logic.getFilteredDayTaskList("Saturday"));
+     }
+     @FXML
+     public void handleListSunday() {
+         selectTaskListPanel = null;
+         selectTaskListPanel = TaskListPanel.load(primaryStage, 
+                 getSelectTaskListPlaceholder(), logic.getFilteredDayTaskList("Sunday"));
+     }
+     @FXML
+     public void handleListEvent() {
+         selectTaskListPanel = null;
+         selectTaskListPanel = TaskListPanel.load(primaryStage, 
+                 getSelectTaskListPlaceholder(), logic.getFilteredEventTaskList());
+     }
+     @FXML
+     public void handleListFloating() {
+         selectTaskListPanel = null;
+         selectTaskListPanel = TaskListPanel.load(primaryStage, 
+                 getSelectTaskListPlaceholder(), logic.getFilteredFloatTaskList());
+     }
+     @FXML
+     public void handleListDeadline() {
+         selectTaskListPanel = null;
+         selectTaskListPanel = TaskListPanel.load(primaryStage, 
+                 getSelectTaskListPlaceholder(), logic.getFilteredDeadlineTaskList());
+     }
+     @FXML
+     public void handleListRed() {
+         selectTaskListPanel = null;
+         selectTaskListPanel = TaskListPanel.load(primaryStage, 
+                 getSelectTaskListPlaceholder(), logic.getFilteredImportanceTaskList("Red"));
+     }
+     @FXML
+     public void handleListYellow() {
+         selectTaskListPanel = null;
+         selectTaskListPanel = TaskListPanel.load(primaryStage, 
+                 getSelectTaskListPlaceholder(), logic.getFilteredImportanceTaskList("Yellow"));
+     }
+     @FXML
+     public void handleListGreen() {
+         selectTaskListPanel = null;
+         selectTaskListPanel = TaskListPanel.load(primaryStage, 
+                 getSelectTaskListPlaceholder(), logic.getFilteredImportanceTaskList("Green"));
+     }
+     @FXML
+     public void handleListNone() {
+         selectTaskListPanel = null;
+         selectTaskListPanel = TaskListPanel.load(primaryStage, 
+                 getSelectTaskListPlaceholder(), logic.getFilteredImportanceTaskList(""));
+     }
+     @FXML
+     public void handleListComplete() {
+         selectTaskListPanel = null;
+         selectTaskListPanel = TaskListPanel.load(primaryStage, 
+                 getSelectTaskListPlaceholder(), logic.getFilteredDoneTaskList());
+     }
+     @FXML
+     public void handleListIncomplete() {
+         selectTaskListPanel = null;
+         selectTaskListPanel = TaskListPanel.load(primaryStage, 
+                 getSelectTaskListPlaceholder(), logic.getFilteredToDoTaskList());
+     }
+     @FXML
+     public void handleListExpire() {
+         selectTaskListPanel = null;
+         selectTaskListPanel = TaskListPanel.load(primaryStage, 
+                 getSelectTaskListPlaceholder(), logic.getFilteredOverdueTaskList());
+     }
+     @FXML
+     public void handleListValid() {
+         selectTaskListPanel = null;
+         selectTaskListPanel = TaskListPanel.load(primaryStage, 
+                 getSelectTaskListPlaceholder(), logic.getFilteredBeforedueTaskList());
+     }
 }

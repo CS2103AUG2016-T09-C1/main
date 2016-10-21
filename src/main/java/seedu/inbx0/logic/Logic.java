@@ -26,6 +26,9 @@ public interface Logic {
     
     /** Returns the filtered list of overdue tasks */
     ObservableList<ReadOnlyTask> getFilteredOverdueTaskList();
+        
+    /** Returns the filtered list of overdue tasks */
+    ObservableList<ReadOnlyTask> getFilteredBeforedueTaskList();
     
     /** Returns the filtered list of float tasks */
     ObservableList<ReadOnlyTask> getFilteredFloatTaskList();
@@ -33,10 +36,21 @@ public interface Logic {
     /** Returns the filtered list of event or deadline */
     ObservableList<ReadOnlyTask> getFilteredNormalTaskList();
     
+    /** Returns the filtered list of event or deadline */
+    ObservableList<ReadOnlyTask> getFilteredEventTaskList();
+    
+    /** Returns the filtered list of deadline */
+    ObservableList<ReadOnlyTask> getFilteredDeadlineTaskList();
+    
     /** Returns the filtered list of done tasks */
     ObservableList<ReadOnlyTask> getFilteredDoneTaskList();
     
     /** Returns the filtered list of uncompleted tasks */
     ObservableList<ReadOnlyTask> getFilteredToDoTaskList();
-
+    
+    /** Returns the filtered list of tasks according to a specific date */
+    ObservableList<ReadOnlyTask> getFilteredDayTaskList(String day);
+    
+    /** Returns the filtered list of tasks according to importance */
+    ObservableList<ReadOnlyTask> getFilteredImportanceTaskList(String importance);
 }
