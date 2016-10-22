@@ -12,6 +12,7 @@ import seedu.inbx0.commons.core.Config;
 import seedu.inbx0.commons.core.LogsCenter;
 import seedu.inbx0.commons.events.storage.DataSavingExceptionEvent;
 import seedu.inbx0.commons.events.ui.JumpToListRequestEvent;
+import seedu.inbx0.commons.events.ui.ShowFilteredListRequestEvent;
 import seedu.inbx0.commons.events.ui.TaskPanelSelectionChangedEvent;
 import seedu.inbx0.commons.events.ui.ShowHelpRequestEvent;
 import seedu.inbx0.commons.util.StringUtil;
@@ -126,6 +127,12 @@ public class UiManager extends ComponentManager implements Ui {
     private void handleTaskPanelSelectionChangedEvent(TaskPanelSelectionChangedEvent event){
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         //mainWindow.loadTaskPage(event.getNewSelection());
+    }
+    
+    @Subscribe
+    private void handleShowFilteredListRequestEvent(ShowFilteredListRequestEvent event){
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        mainWindow.handleShowFilteredListRequestByShowCommand(event.filterCondition);
     }
 
 }

@@ -47,7 +47,7 @@
        </AnchorPane>
       <Accordion prefHeight="756.0" prefWidth="1300.0" styleClass="anchor-pane" stylesheets="@DarkTheme.css">
         <panes>
-          <TitledPane fx:id="CategoryTitledPane" animated="false" prefHeight="554.0" prefWidth="1300.0" text="Catergory">
+          <TitledPane fx:id="UpperTitledPane" animated="false" prefHeight="554.0" prefWidth="1300.0" text="Category">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="626.0" prefWidth="1181.0" styleClass="grid-pane" stylesheets="@DarkTheme.css">
                      <children>
@@ -56,7 +56,7 @@
                               <Accordion styleClass="label-bright" stylesheets="@DarkTheme.css">
                                 <panes>
                                     <TitledPane animated="false" collapsible="false" expanded="false" onMouseClicked="#handleListToday" text="    Today" />
-                                  <TitledPane animated="false" text="Day">
+                                  <TitledPane fx:id="DayTitledPane" animated="false" text="Day">
                                        <content>
                                           <AnchorPane prefHeight="200.0" prefWidth="189.0">
                                              <children>
@@ -127,7 +127,7 @@
                                           </AnchorPane>
                                        </content>
                                     </TitledPane>
-                                    <TitledPane animated="false" text="Catogory">
+                                    <TitledPane fx:id="CategoryTitledPane" animated="false" text="Category">
                                       <content>
                                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                              <children>
@@ -166,7 +166,7 @@
                                           </AnchorPane>
                                       </content>
                                     </TitledPane>
-                                  <TitledPane animated="false" text="Importance">
+                                  <TitledPane fx:id="ImportanceTitledPane" animated="false" text="Importance">
                                        <content>
                                           <AnchorPane prefHeight="200.0" prefWidth="200.0">
                                              <children>
@@ -212,7 +212,7 @@
                                              </children></AnchorPane>
                                        </content>
                                     </TitledPane>
-                                    <TitledPane animated="false" text="Completeness">
+                                    <TitledPane fx:id="CompletenessTitledPane" animated="false" text="Completeness">
                                       <content>
                                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                              <children>
@@ -243,7 +243,7 @@
                                           </AnchorPane>
                                       </content>
                                     </TitledPane>
-                                    <TitledPane animated="false" text="Expire">
+                                    <TitledPane fx:id="ExpireTitledPane" animated="false" text="Expire">
                                       <content>
                                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                              <children>
@@ -357,7 +357,7 @@
                   </AnchorPane>
             </content>
           </TitledPane>
-          <TitledPane fx:id="NormalTitledPane" animated="false" text="Normal">
+          <TitledPane fx:id="LowerTitledPane" animated="false" text="Normal">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="550.0" prefWidth="1244.0" styleClass="grid-pane" stylesheets="@DarkTheme.css">
                      <children>

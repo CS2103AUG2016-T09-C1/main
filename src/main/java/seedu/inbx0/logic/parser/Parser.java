@@ -199,7 +199,10 @@ public class Parser {
 
         case FindCommand.COMMAND_WORD:
             return prepareFind(arguments);
-
+        
+        case ShowCommand.COMMAND_WORD:
+            return prepareShow(arguments);
+ 
         case ListCommand.COMMAND_WORD:
             return prepareList(arguments);
 
@@ -1073,6 +1076,53 @@ public class Parser {
             convertedKeyword = keyword.trim().replace("'", " ");
         }
         return convertedKeyword;
+    }
+    
+    private Command prepareShow(final String arguments) {
+        String keyword = arguments.trim();
+        if (keyword.length() == 0) {
+            return new ShowCommand();
+        } else if (keyword.equalsIgnoreCase("today") || keyword.equalsIgnoreCase("tod")) {
+            return new ShowCommand("today");
+        } else if (keyword.equalsIgnoreCase("Monday") || keyword.equalsIgnoreCase("Mon")) {
+            return new ShowCommand("Monday");
+        } else if (keyword.equalsIgnoreCase("Tuesday") || keyword.equalsIgnoreCase("Tue")) {
+            return new ShowCommand("Tuesday");
+        } else if (keyword.equalsIgnoreCase("Wednesday") || keyword.equalsIgnoreCase("Wed")) {
+            return new ShowCommand("Wednesday");
+        } else if (keyword.equalsIgnoreCase("Thursday") || keyword.equalsIgnoreCase("Thu")) {
+            return new ShowCommand("Thursday");
+        } else if (keyword.equalsIgnoreCase("Friday") || keyword.equalsIgnoreCase("Fri")) {
+            return new ShowCommand("Friday");
+        } else if (keyword.equalsIgnoreCase("Saturday") || keyword.equalsIgnoreCase("Sat")) {
+            return new ShowCommand("Saturday");
+        } else if (keyword.equalsIgnoreCase("Sunday") || keyword.equalsIgnoreCase("Sun")) {
+            return new ShowCommand("Sunday");
+        } else if (keyword.equalsIgnoreCase("Event") || keyword.equalsIgnoreCase("Eve")) {
+            return new ShowCommand("Event");
+        } else if (keyword.equalsIgnoreCase("Floating") || keyword.equalsIgnoreCase("Flo")) {
+            return new ShowCommand("Floating");
+        } else if (keyword.equalsIgnoreCase("Deadline") || keyword.equalsIgnoreCase("Dea")) {
+            return new ShowCommand("Deadline");
+        } else if (keyword.equalsIgnoreCase("Red")) {
+            return new ShowCommand("Red");
+        } else if (keyword.equalsIgnoreCase("Yellow") || keyword.equalsIgnoreCase("Yel")) {
+            return new ShowCommand("Yellow");
+        } else if (keyword.equalsIgnoreCase("Green") || keyword.equalsIgnoreCase("Gre")) {
+            return new ShowCommand("Green");
+        } else if (keyword.equalsIgnoreCase("None") || keyword.equalsIgnoreCase("Non")) {
+            return new ShowCommand("None");
+        } else if (keyword.equalsIgnoreCase("Complete") || keyword.equalsIgnoreCase("Com")) {
+            return new ShowCommand("Complete");
+        } else if (keyword.equalsIgnoreCase("Incomplete") || keyword.equalsIgnoreCase("Inc")) {
+            return new ShowCommand("Incomplete");
+        } else if (keyword.equalsIgnoreCase("Expire") || keyword.equalsIgnoreCase("Exp")) {
+            return new ShowCommand("Expire");
+        } else if (keyword.equalsIgnoreCase("Valid") || keyword.equalsIgnoreCase("Val")) {
+            return new ShowCommand("Valid");
+        } 
+        return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                ShowCommand.MESSAGE_USAGE));
     }
 
     /**

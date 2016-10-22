@@ -57,10 +57,25 @@ public class MainWindow extends UiPart {
     private MenuItem helpMenuItem;
 
     @FXML
+    private TitledPane UpperTitledPane;
+
+    @FXML
+    private TitledPane LowerTitledPane;
+    
+    @FXML
+    private TitledPane DayTitledPane;
+    
+    @FXML
     private TitledPane CategoryTitledPane;
     
     @FXML
-    private TitledPane NormalTitledPane;
+    private TitledPane ImportanceTitledPane;
+    
+    @FXML
+    private TitledPane CompletenessTitledPane;
+    
+    @FXML
+    private TitledPane ExpireTitledPane;
     
     @FXML
     private AnchorPane selectTaskListPanelPlaceholder;
@@ -126,8 +141,8 @@ public class MainWindow extends UiPart {
         resultDisplay = ResultDisplay.load(primaryStage, getResultDisplayPlaceholder());
         statusBarFooter = StatusBarFooter.load(primaryStage, getStatusbarPlaceholder(), config.getTaskListFilePath());
         commandBox = CommandBox.load(primaryStage, getCommandBoxPlaceholder(), resultDisplay, logic);
-        CategoryTitledPane.setExpanded(false);
-        NormalTitledPane.setExpanded(true);
+        UpperTitledPane.setExpanded(false);
+        LowerTitledPane.setExpanded(true);
     }
 
     private AnchorPane getCommandBoxPlaceholder() {
@@ -360,4 +375,91 @@ public class MainWindow extends UiPart {
          selectTaskListPanel = TaskListPanel.load(primaryStage, 
                  getSelectTaskListPlaceholder(), logic.getFilteredBeforedueTaskList());
      }
+
+    public void handleShowFilteredListRequestByShowCommand(String filterCondition) {
+        if(filterCondition.equals("")) {
+            UpperTitledPane.setExpanded(false);
+            LowerTitledPane.setExpanded(true);
+        }
+        else {   
+            UpperTitledPane.setExpanded(true);
+            LowerTitledPane.setExpanded(false);    
+            if(filterCondition.equals("today")) {
+                handleListToday();
+            }
+            else if(filterCondition.equals("Monday")) {
+                DayTitledPane.setExpanded(true);
+                handleListMonday();
+            }
+            else if(filterCondition.equals("Tuesday")) {
+                DayTitledPane.setExpanded(true);
+                handleListTuesday();
+            }
+            else if(filterCondition.equals("Wednesday")) {
+                DayTitledPane.setExpanded(true);
+                handleListWednesday();
+            }
+            else if(filterCondition.equals("Thursday")) {
+                DayTitledPane.setExpanded(true);
+                handleListThursday();
+            }
+            else if(filterCondition.equals("Friday")) {
+                DayTitledPane.setExpanded(true);
+                handleListFriday();
+            }
+            else if(filterCondition.equals("Saturday")) {
+                DayTitledPane.setExpanded(true);
+                handleListSaturday();
+            }
+            else if(filterCondition.equals("Sunday")) {
+                DayTitledPane.setExpanded(true);
+                handleListSunday();
+            }
+            else if(filterCondition.equals("Event")) {
+                CategoryTitledPane.setExpanded(true);
+                handleListEvent();
+            }
+            else if(filterCondition.equals("Floating")) {
+                CategoryTitledPane.setExpanded(true);
+                handleListFloating();
+            }
+            else if(filterCondition.equals("Deadline")) {
+                CategoryTitledPane.setExpanded(true);
+                handleListDeadline();
+            }
+            else if(filterCondition.equals("Red")) {
+                ImportanceTitledPane.setExpanded(true);
+                handleListRed();
+            }
+            else if(filterCondition.equals("Yellow")) {
+                ImportanceTitledPane.setExpanded(true);
+                handleListYellow();
+            }
+            else if(filterCondition.equals("Green")) {
+                ImportanceTitledPane.setExpanded(true);
+                handleListGreen();
+            }
+            else if(filterCondition.equals("None")) {
+                ImportanceTitledPane.setExpanded(true);
+                handleListNone();
+            }
+            else if(filterCondition.equals("Complete")) {
+                CompletenessTitledPane.setExpanded(true);
+                handleListComplete();
+            }
+            else if(filterCondition.equals("Incomplete")) {
+                CompletenessTitledPane.setExpanded(true);
+                handleListIncomplete();
+            }
+            else if(filterCondition.equals("Expire")) {
+                ExpireTitledPane.setExpanded(true);
+                handleListExpire();
+            }
+            else if(filterCondition.equals("Valid")) {
+                ExpireTitledPane.setExpanded(true);
+                handleListValid();
+            }        
+            
+        }
+    }
 }
