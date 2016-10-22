@@ -11,9 +11,10 @@ import seedu.inbx0.model.task.UniqueTaskList.TaskNotFoundException;
 import seedu.inbx0.model.tag.Tag;
 import seedu.inbx0.model.tag.UniqueTagList;
 
+//@@author A0139481Y
 public class DelTagCommand extends Command {
     
-public static final String COMMAND_WORD = "deltag";
+    public static final String COMMAND_WORD = "deltag";
     
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes 1 or more tags from an existing task.\n"
@@ -101,5 +102,4 @@ public static final String COMMAND_WORD = "deltag";
         
         return new CommandResult(MESSAGE_SUCCESS);
     }
-
 }
