@@ -49,7 +49,7 @@ public class ModelManager extends ComponentManager implements Model {
         assert src != null;
         assert userPrefs != null;
 
-        logger.fine("Initializing with address book: " + src + " and user prefs " + userPrefs);
+        logger.fine("Initializing with task list: " + src + " and user prefs " + userPrefs);
 
         taskList = new TaskList(src);
         filteredTasks = new FilteredList<>(taskList.getTasks());
@@ -136,7 +136,12 @@ public class ModelManager extends ComponentManager implements Model {
         if(taskList.checkExpiry(currentDate, currentTime))
             indicateTaskListChanged();
     }
-
+    
+    @Override
+    public synchronized void checkReminders() {
+        if(taskList.checkReminders())
+            indicateTaskListChanged();
+    }
     //=========== Filtered Task List Accessors ===============================================================
 
     @Override
@@ -775,6 +780,8 @@ public class ModelManager extends ComponentManager implements Model {
             return "tag=" + String.join(", ", tagKeyWords);
         }
     }*/
+
+    
 
 
 }

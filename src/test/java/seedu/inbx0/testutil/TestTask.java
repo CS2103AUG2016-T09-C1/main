@@ -1,5 +1,6 @@
 package seedu.inbx0.testutil;
 
+import seedu.inbx0.model.reminder.UniqueReminderList;
 import seedu.inbx0.model.tag.UniqueTagList;
 import seedu.inbx0.model.task.*;
 
@@ -21,7 +22,8 @@ public class TestTask implements ReadOnlyTask {
     
     
     private UniqueTagList tags;
-
+    private UniqueReminderList reminders;
+    
     public TestTask() {
         tags = new UniqueTagList();
     }
@@ -58,6 +60,11 @@ public class TestTask implements ReadOnlyTask {
     @Override
     public UniqueTagList getTags() {
         return tags;
+    }
+    
+    @Override
+    public UniqueReminderList getReminders() {
+        return reminders;
     }
 
     @Override
@@ -113,12 +120,19 @@ public class TestTask implements ReadOnlyTask {
     public String getAddCommand() {
         StringBuilder sb = new StringBuilder();
         sb.append("add " + this.getName().fullName + " ");
-        sb.append("s/" + this.getStartDate().value + " ");
-        sb.append("st/" + this.getStartTime().value + " ");
-        sb.append("e/" + this.getEndDate().value + " ");
-        sb.append("et/" + this.getEndTime().value + " ");
-        sb.append("i/" + this.getLevel().value + " ");
+        if (this.getStartDate() != null)
+            sb.append("s/" + this.getStartDate().value + " ");
+        if (this.getStartTime() != null)
+            sb.append("st/" + this.getStartTime().value + " ");
+        if (this.getEndDate() != null)
+            sb.append("e/" + this.getEndDate().value + " ");
+        if (this.getEndTime() != null)
+            sb.append("et/" + this.getEndTime().value + " ");
+        if (this.getLevel() != null)
+            sb.append("i/" + this.getLevel().value + " ");
         this.getTags().getInternalList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
         return sb.toString();
     }
+
+    
 }

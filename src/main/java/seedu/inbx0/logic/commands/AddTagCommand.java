@@ -8,12 +8,14 @@ import seedu.inbx0.commons.core.UnmodifiableObservableList;
 import seedu.inbx0.commons.exceptions.IllegalValueException;
 import seedu.inbx0.model.task.*;
 import seedu.inbx0.model.task.UniqueTaskList.TaskNotFoundException;
+import seedu.inbx0.model.reminder.UniqueReminderList;
 import seedu.inbx0.model.tag.Tag;
 import seedu.inbx0.model.tag.UniqueTagList;
 
-public class TagCommand extends Command{
+//@@author A0139481Y
+public class AddTagCommand extends Command {
 	
-	public static final String COMMAND_WORD = "addt";
+	public static final String COMMAND_WORD = "addtag";
 	
 	public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Adds 1 or more tags to an existing task.\n"
@@ -27,7 +29,7 @@ public class TagCommand extends Command{
 	public final int targetIndex;
     public UniqueTagList tags;
 	
-    public TagCommand(int targetIndex,  Set<String> tags) throws IllegalValueException {
+    public AddTagCommand(int targetIndex,  Set<String> tags) throws IllegalValueException {
     	
     	this.targetIndex = targetIndex;
         
@@ -63,7 +65,8 @@ public class TagCommand extends Command{
                 new Date(taskToEdit.getEndDate().getDate()),
                 new Time(taskToEdit.getEndTime().getTime()),
                 new Importance(taskToEdit.getLevel().getLevel()),
-                tags
+                tags,
+                new UniqueReminderList(taskToEdit.getReminders())
                 );
         return toEditWith;
     }

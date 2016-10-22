@@ -108,5 +108,8 @@ public interface Model {
     
     /** Checks expiry of tasks */
     void checkExpiry(Date currentDate, String currentTime);
+    
+    /** Checks expiry of reminders */
+    void checkReminders();
 
 }

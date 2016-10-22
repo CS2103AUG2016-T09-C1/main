@@ -71,7 +71,8 @@ public class MarkCompleteCommand extends Command {
                     new Date(toMarkTaskCompleted.getEndDate().getDate()),
                     new Time(toMarkTaskCompleted.getEndTime().getTime()),
                     new Importance(toMarkTaskCompleted.getLevel().getLevel()),
-                    toMarkTaskCompleted.getTags()
+                    toMarkTaskCompleted.getTags(),
+                    toMarkTaskCompleted.getReminders()
                     );
             } catch (IllegalValueException e) {
                 return new CommandResult(String.format(MESSAGE_INVALID_ARGUMENTS, MESSAGE_USAGE));

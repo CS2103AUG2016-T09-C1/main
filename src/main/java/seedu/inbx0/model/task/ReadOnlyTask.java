@@ -3,6 +3,7 @@ package seedu.inbx0.model.task;
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.inbx0.model.reminder.UniqueReminderList;
 import seedu.inbx0.model.tag.UniqueTagList;
 
 /**
@@ -27,7 +28,13 @@ public interface ReadOnlyTask {
      * changes on the returned list will not affect the task's internal tags.
      */
     UniqueTagList getTags();
-
+    
+    /**
+     * The returned ReminderList is a deep copy of the internal ReminderList,
+     * changes on the returned list will not affect the task's internal reminders.
+     */
+    UniqueReminderList getReminders();
+   
     /**
      * Returns true if both have the same state. (interfaces cannot override .equals)
      */

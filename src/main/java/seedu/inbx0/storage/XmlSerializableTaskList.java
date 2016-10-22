@@ -5,6 +5,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 import seedu.inbx0.commons.exceptions.IllegalValueException;
 import seedu.inbx0.model.ReadOnlyTaskList;
+import seedu.inbx0.model.reminder.ReminderTask;
+import seedu.inbx0.model.reminder.UniqueReminderList;
+import seedu.inbx0.model.reminder.UniqueReminderList.DuplicateReminderException;
 import seedu.inbx0.model.tag.Tag;
 import seedu.inbx0.model.tag.UniqueTagList;
 import seedu.inbx0.model.task.ReadOnlyTask;
@@ -25,10 +28,13 @@ public class XmlSerializableTaskList implements ReadOnlyTaskList {
     private List<XmlAdaptedTask> tasks;
     @XmlElement
     private List<Tag> tags;
+    @XmlElement
+    private List<XmlAdaptedReminder> reminders;
 
     {
         tasks = new ArrayList<>();
         tags = new ArrayList<>();
+        reminders = new ArrayList<>();
     }
 
     /**
@@ -42,6 +48,7 @@ public class XmlSerializableTaskList implements ReadOnlyTaskList {
     public XmlSerializableTaskList(ReadOnlyTaskList src) {
         tasks.addAll(src.getTaskList().stream().map(XmlAdaptedTask::new).collect(Collectors.toList()));
         tags = src.getTagList();
+        reminders.addAll(src.getReminderList().stream().map(XmlAdaptedReminder::new).collect(Collectors.toList()));
     }
 
     @Override
@@ -53,6 +60,19 @@ public class XmlSerializableTaskList implements ReadOnlyTaskList {
             e.printStackTrace();
             return null;
         }
+    }
+    
+    @Override
+    public UniqueReminderList getUniqueReminderList() {
+        UniqueReminderList lists = new UniqueReminderList();
+        for (XmlAdaptedReminder r : reminders) {
+            try {
+                lists.add(r.toModelType());
+            } catch (IllegalValueException e) {
+                //TODO: better error handling
+            }
+        }
+        return lists;
     }
 
     @Override
@@ -84,6 +104,19 @@ public class XmlSerializableTaskList implements ReadOnlyTaskList {
     @Override
     public List<Tag> getTagList() {
         return Collections.unmodifiableList(tags);
+    }
+    
+    @Override
+    public List<ReminderTask> getReminderList() {
+        return reminders.stream().map(p -> {
+            try {
+                return p.toModelType();
+            } catch (IllegalValueException e) {
+                e.printStackTrace();
+                //TODO: better error handling
+                return null;
+            }
+        }).collect(Collectors.toCollection(ArrayList::new));
     }
 
 }

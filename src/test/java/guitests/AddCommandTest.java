@@ -12,7 +12,7 @@ import seedu.inbx0.testutil.TestUtil;
 import static org.junit.Assert.assertTrue;
 
 public class AddCommandTest extends TaskListGuiTest {
-
+    
     @Test
     public void add() throws IllegalArgumentException, IllegalValueException {
         //add one task
@@ -25,6 +25,33 @@ public class AddCommandTest extends TaskListGuiTest {
         taskToAdd = td.ida;
         assertAddSuccess(taskToAdd, currentList);
         currentList = TestUtil.addTasksToList(currentList, taskToAdd);
+        
+        //@@author A0139481Y
+        //add another task
+        taskToAdd = td.noImportance;
+        assertAddSuccess(taskToAdd, currentList);
+        currentList = TestUtil.addTasksToList(currentList, taskToAdd);
+        
+        //add floating task
+        taskToAdd = td.floating;
+        assertAddSuccess(taskToAdd, currentList);
+        currentList = TestUtil.addTasksToList(currentList, taskToAdd);
+        
+        //add floating task without importance
+        taskToAdd = td.floatingNoImportance;
+        assertAddSuccess(taskToAdd, currentList);
+        currentList = TestUtil.addTasksToList(currentList, taskToAdd);
+        
+        //add deadline task
+        taskToAdd = td.deadline;
+        assertAddSuccess(taskToAdd, currentList);
+        currentList = TestUtil.addTasksToList(currentList, taskToAdd);
+        
+        //add deadline task with no importance
+        taskToAdd = td.deadlineNoImportance;
+        assertAddSuccess(taskToAdd, currentList);
+        currentList = TestUtil.addTasksToList(currentList, taskToAdd);
+        //@@author
 
         //add duplicate task
         commandBox.runCommand(td.hoon.getAddCommand());

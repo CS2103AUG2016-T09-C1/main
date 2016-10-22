@@ -9,7 +9,7 @@ import seedu.inbx0.model.task.*;
  */
 public class TypicalTestTasks {
 
-    public static TestTask alice, benson, carl, daniel, elle, fiona, george, hoon, ida;
+    public static TestTask alice, benson, carl, daniel, elle, fiona, george, hoon, ida, noImportance, floatingNoImportance, floating, deadline, deadlineNoImportance ;
 
     public TypicalTestTasks() {
         try {
@@ -28,25 +28,26 @@ public class TypicalTestTasks {
             //Manually added
             hoon = new TaskBuilder().withName("Hoon Meier").withStartDate("next week").withStartTime("1000").withEndDate("next week").withEndTime("1300").withImportance("G").build();
             ida = new TaskBuilder().withName("Ida Mueller").withStartDate("tmr").withStartTime("1000").withEndDate("next week").withEndTime("12pm").withImportance("Yellow").build();
+            //@@author A0139481Y
+            noImportance = new TaskBuilder().withName("No importance").withStartDate("next wed").withStartTime("1000").withEndDate("next thurs").withEndTime("12pm").withTags("tagged").build();
+            floatingNoImportance = new TaskBuilder().withName("Float no importance").withTags("tagged").build();
+            floating = new TaskBuilder().withName("Floating Task").withImportance("G").withTags("tagged").build();
+            deadline = new TaskBuilder().withName("Deadline").withEndDate("next week").withEndTime("12pm").withImportance("Red").withTags("tagged").build();
+            deadlineNoImportance = new TaskBuilder().withName("Deadline no importance").withEndDate("next week").withEndTime("12pm").withTags("tagged").build();
+            //@@author
         } catch (IllegalValueException e) {
-            e.printStackTrace();
             assert false : "not possible";
         }
     }
 
     public static void loadTaskListWithSampleData(TaskList ab) throws IllegalValueException {
-
-        try {
-            ab.addTask(new Task(alice));
-            ab.addTask(new Task(benson));
-            ab.addTask(new Task(carl));
-            ab.addTask(new Task(daniel));
-            ab.addTask(new Task(elle));
-            ab.addTask(new Task(fiona));
-            ab.addTask(new Task(george));
-        } catch (UniqueTaskList.DuplicateTaskException e) {
-            assert false : "not possible";
-        }
+        ab.addTask(new Task(alice));
+        ab.addTask(new Task(benson));
+        ab.addTask(new Task(carl));
+        ab.addTask(new Task(daniel));
+        ab.addTask(new Task(elle));
+        ab.addTask(new Task(fiona));
+        ab.addTask(new Task(george));
     }
 
     public TestTask[] getTypicalTasks() {
