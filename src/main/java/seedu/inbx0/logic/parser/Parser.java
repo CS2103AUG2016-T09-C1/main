@@ -147,6 +147,9 @@ public class Parser {
     private static final Pattern DATE_TIME_FORMAT_6 = 
             Pattern.compile("(?<date>[0-9 ]+[./-][0-9 ]+[./-][0-9]+)");
     
+    private static final Pattern TASK_REMINDER_ARGS_FORMAT = 
+            Pattern.compile("(?<targetIndex>[0-9]+)"
+                           + " s/(?<startDate>[^$]+)");
     
     private static final Pattern TASK_EDIT_DATA_ARGS_FORMAT = Pattern.compile("(?<targetIndex>\\S+)(?<arguments>.*)");
     private static final CharSequence NAME = "n/";
@@ -190,7 +193,10 @@ public class Parser {
             
         case DelTagCommand.COMMAND_WORD:
             return prepareDelTag(arguments);
-
+        
+        case RemindCommand.COMMAND_WORD:
+            return prepareRemind(arguments);
+        
         case MarkCompleteCommand.COMMAND_WORD:
             return prepareMarkComplete(arguments);
 
@@ -775,7 +781,28 @@ public class Parser {
             return new IncorrectCommand(e.getMessage());
         }
     }
-    
+    /**
+     * Parses arguments in the context of the Remind command.
+     * @param args full command args string
+     * @return the prepared command
+     */
+    private Command prepareRemind(String arguments) {
+        // TODO Auto-generated method stub
+        final Matcher matcher = TASK_REMINDER_ARGS_FORMAT.matcher(arguments.trim());
+        if(!matcher.matches()) {
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, RemindCommand.MESSAGE_USAGE));
+        }
+        
+        Optional<Integer> index = parseIndex(matcher.group("targetIndex"));
+        if(!index.isPresent()){
+            return new IncorrectCommand(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, RemindCommand.MESSAGE_USAGE));
+        }
+        
+        int targetIndex = Integer.parseInt(matcher.group("targetIndex"));
+        
+        return new RemindCommand(targetIndex, matcher.group("startDate"));
+    }
     /**
      * Parses arguments in the context of the sort task command.
      * @param args full command args string

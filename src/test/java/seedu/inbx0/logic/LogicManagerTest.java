@@ -10,6 +10,7 @@ import seedu.inbx0.logic.Logic;
 import seedu.inbx0.logic.LogicManager;
 import seedu.inbx0.logic.commands.*;
 import seedu.inbx0.model.TaskList;
+import seedu.inbx0.model.reminder.UniqueReminderList;
 import seedu.inbx0.model.Model;
 import seedu.inbx0.model.ModelManager;
 import seedu.inbx0.model.ReadOnlyTaskList;
@@ -390,7 +391,8 @@ public class LogicManagerTest {
             Tag tag1 = new Tag("tag1");
             Tag tag2 = new Tag("tag2");
             UniqueTagList tags = new UniqueTagList(tag1, tag2);
-            return new Task(name, startDate, startTime, endDate, endTime, level, tags);
+            UniqueReminderList reminders = new UniqueReminderList();
+            return new Task(name, startDate, startTime, endDate, endTime, level, tags, reminders);
         }
 
         /**
@@ -408,7 +410,8 @@ public class LogicManagerTest {
                     new Date("26th Nov") ,
                     new Time(seed + "pm"),
                     new Importance("g"),
-                    new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1)))
+                    new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1))),
+                    new UniqueReminderList()
             );
         }
 
@@ -511,7 +514,8 @@ public class LogicManagerTest {
                     new Date("10/12/34"),
                     new Time("1pm"),
                     new Importance("R"),
-                    new UniqueTagList(new Tag("tag"))
+                    new UniqueTagList(new Tag("tag")),
+                    new UniqueReminderList()
             );
         }
     }

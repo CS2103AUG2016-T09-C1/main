@@ -3,6 +3,8 @@ package seedu.inbx0.storage;
 import javax.xml.bind.annotation.XmlElement;
 
 import seedu.inbx0.commons.exceptions.IllegalValueException;
+import seedu.inbx0.model.reminder.ReminderTask;
+import seedu.inbx0.model.reminder.UniqueReminderList;
 import seedu.inbx0.model.tag.Tag;
 import seedu.inbx0.model.tag.UniqueTagList;
 import seedu.inbx0.model.task.*;
@@ -37,6 +39,9 @@ public class XmlAdaptedTask {
     
     @XmlElement
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
+    
+    @XmlElement
+    private List<XmlAdaptedReminder> reminders = new ArrayList<>();
 
     /**
      * No-arg constructor for JAXB use.
@@ -63,6 +68,9 @@ public class XmlAdaptedTask {
         for (Tag tag : source.getTags()) {
             tagged.add(new XmlAdaptedTag(tag));
         }
+        for (ReminderTask reminder : source.getReminders()) {
+            reminders.add(new XmlAdaptedReminder(reminder));
+        }
     }
 
     /**
@@ -75,6 +83,10 @@ public class XmlAdaptedTask {
         for (XmlAdaptedTag tag : tagged) {
             TaskTags.add(tag.toModelType());
         }
+        final List<ReminderTask> TaskReminders = new ArrayList<>();
+        for (XmlAdaptedReminder reminder : reminders) {
+            TaskReminders.add(reminder.toModelType());
+        }
         final Name name = new Name(this.name);
         final Date startDate = new Date(this.startDate);
         final Time startTime = new Time(this.startTime);
@@ -85,6 +97,7 @@ public class XmlAdaptedTask {
         final boolean isExpired = this.isExpired;
         final boolean isFloatTask = this.isFloatTask;
         final UniqueTagList tags = new UniqueTagList(TaskTags);
-        return new Task(name, startDate, startTime, endDate, endTime, level, tags, isCompleted, isExpired, isFloatTask );
+        final UniqueReminderList reminders = new UniqueReminderList(TaskReminders);
+        return new Task(name, startDate, startTime, endDate, endTime, level, tags, reminders, isCompleted, isExpired, isFloatTask );
     }
 }

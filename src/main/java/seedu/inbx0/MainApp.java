@@ -166,6 +166,7 @@ public class MainApp extends Application {
     @Override
     public void stop() {
         logger.info("============================ [ Stopping TaskList ] =============================");
+        logic.removeReminders();
         ui.stop();
         try {
             storage.saveUserPrefs(userPrefs);

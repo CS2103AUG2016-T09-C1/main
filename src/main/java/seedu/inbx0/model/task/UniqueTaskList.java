@@ -4,6 +4,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.inbx0.commons.exceptions.DuplicateDataException;
 import seedu.inbx0.commons.util.CollectionUtil;
+import seedu.inbx0.model.reminder.ReminderTask;
+import seedu.inbx0.model.reminder.UniqueReminderList;
 
 import java.util.*;
 
@@ -185,6 +187,32 @@ public class UniqueTaskList implements Iterable<Task>{
             }  
         return changed;
     }
+    
+    /**
+     * Checks expiry and sets the boolean isExpired accordingly for the tasks in the list.
+     *
+     * @throws TaskNotFoundException if no such task could be found in the list.
+     */
+    public boolean checkReminders() {
+        if(internalList.isEmpty()) {
+            return false;
+        }
+        
+        boolean changed = false;
+        for(Task t : internalList) { 
+            UniqueReminderList reminders = t.getReminders();
+            Iterator<ReminderTask> check = reminders.iterator();
+            while(check.hasNext()) {
+                if(check.next().getIsAlive() == false) {
+                    check.remove();
+                    changed = true;
+                }
+            }
+          t.setReminders(reminders);
+        }
+        return changed;
+    }
+    
     public ObservableList<Task> getInternalList() {
         return internalList;
     }

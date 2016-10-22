@@ -136,7 +136,12 @@ public class ModelManager extends ComponentManager implements Model {
         if(taskList.checkExpiry(currentDate, currentTime))
             indicateTaskListChanged();
     }
-
+    
+    @Override
+    public synchronized void checkReminders() {
+        if(taskList.checkReminders())
+            indicateTaskListChanged();
+    }
     //=========== Filtered Task List Accessors ===============================================================
 
     @Override
@@ -775,6 +780,8 @@ public class ModelManager extends ComponentManager implements Model {
             return "tag=" + String.join(", ", tagKeyWords);
         }
     }*/
+
+    
 
 
 }

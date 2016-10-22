@@ -1,6 +1,7 @@
 package seedu.inbx0.testutil;
 
 import seedu.inbx0.commons.exceptions.IllegalValueException;
+import seedu.inbx0.model.reminder.ReminderTask;
 import seedu.inbx0.model.tag.Tag;
 import seedu.inbx0.model.task.*;
 
@@ -23,6 +24,13 @@ public class TaskBuilder {
     public TaskBuilder withTags(String ... tags) throws IllegalValueException {
         for (String tag: tags) {
             task.getTags().add(new Tag(tag));
+        }
+        return this;
+    }
+    
+    public TaskBuilder withReminders(ReminderTask ... reminders) throws IllegalValueException {
+        for (ReminderTask reminder: reminders) {
+            task.getReminders().add(new ReminderTask(reminder));
         }
         return this;
     }

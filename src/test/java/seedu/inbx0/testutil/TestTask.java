@@ -1,5 +1,6 @@
 package seedu.inbx0.testutil;
 
+import seedu.inbx0.model.reminder.UniqueReminderList;
 import seedu.inbx0.model.tag.UniqueTagList;
 import seedu.inbx0.model.task.*;
 
@@ -21,7 +22,8 @@ public class TestTask implements ReadOnlyTask {
     
     
     private UniqueTagList tags;
-
+    private UniqueReminderList reminders;
+    
     public TestTask() {
         tags = new UniqueTagList();
     }
@@ -58,6 +60,11 @@ public class TestTask implements ReadOnlyTask {
     @Override
     public UniqueTagList getTags() {
         return tags;
+    }
+    
+    @Override
+    public UniqueReminderList getReminders() {
+        return reminders;
     }
 
     @Override
@@ -126,4 +133,6 @@ public class TestTask implements ReadOnlyTask {
         this.getTags().getInternalList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
         return sb.toString();
     }
+
+    
 }

@@ -5,6 +5,7 @@ import java.util.Set;
 
 import seedu.inbx0.commons.exceptions.IllegalValueException;
 import seedu.inbx0.model.task.*;
+import seedu.inbx0.model.reminder.UniqueReminderList;
 import seedu.inbx0.model.tag.Tag;
 import seedu.inbx0.model.tag.UniqueTagList;
 
@@ -52,7 +53,8 @@ public class AddCommand extends Command {
                 new Date(endDate),
                 new Time(endTime),
                 new Importance(level),
-                new UniqueTagList(tagSet)
+                new UniqueTagList(tagSet),
+                new UniqueReminderList()
         );
     }
     
@@ -70,7 +72,8 @@ public class AddCommand extends Command {
                 new Date(endDate),
                 new Time(endTime),
                 new Importance(""),
-                new UniqueTagList(tagSet)
+                new UniqueTagList(tagSet),
+                new UniqueReminderList()
         );
     }
 
@@ -86,7 +89,8 @@ public class AddCommand extends Command {
                 new Date(""),
                 new Time(""),
                 new Importance(""),
-                new UniqueTagList(tagSet)
+                new UniqueTagList(tagSet),
+                new UniqueReminderList()
         );
     }
     
@@ -102,7 +106,8 @@ public class AddCommand extends Command {
                 new Date(""),
                 new Time(""),
                 new Importance(level),
-                new UniqueTagList(tagSet)
+                new UniqueTagList(tagSet),
+                new UniqueReminderList()
         );
     }
     
@@ -119,7 +124,8 @@ public class AddCommand extends Command {
                 new Date(endDate),
                 new Time(endTime),
                 new Importance(level),
-                new UniqueTagList(tagSet)
+                new UniqueTagList(tagSet),
+                new UniqueReminderList()
         );
     }
     
@@ -136,7 +142,8 @@ public class AddCommand extends Command {
                 new Date(endDate),
                 new Time(endTime),
                 new Importance(""),
-                new UniqueTagList(tagSet)
+                new UniqueTagList(tagSet),
+                new UniqueReminderList()
         );
     }
     

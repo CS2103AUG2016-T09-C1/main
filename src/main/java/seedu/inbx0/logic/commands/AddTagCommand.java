@@ -8,6 +8,7 @@ import seedu.inbx0.commons.core.UnmodifiableObservableList;
 import seedu.inbx0.commons.exceptions.IllegalValueException;
 import seedu.inbx0.model.task.*;
 import seedu.inbx0.model.task.UniqueTaskList.TaskNotFoundException;
+import seedu.inbx0.model.reminder.UniqueReminderList;
 import seedu.inbx0.model.tag.Tag;
 import seedu.inbx0.model.tag.UniqueTagList;
 
@@ -64,7 +65,8 @@ public class AddTagCommand extends Command {
                 new Date(taskToEdit.getEndDate().getDate()),
                 new Time(taskToEdit.getEndTime().getTime()),
                 new Importance(taskToEdit.getLevel().getLevel()),
-                tags
+                tags,
+                new UniqueReminderList(taskToEdit.getReminders())
                 );
         return toEditWith;
     }

@@ -18,6 +18,7 @@ import seedu.inbx0.commons.exceptions.IllegalValueException;
 import seedu.inbx0.commons.util.FileUtil;
 import seedu.inbx0.commons.util.XmlUtil;
 import seedu.inbx0.model.TaskList;
+import seedu.inbx0.model.reminder.UniqueReminderList;
 import seedu.inbx0.model.tag.Tag;
 import seedu.inbx0.model.tag.UniqueTagList;
 import seedu.inbx0.model.task.*;
@@ -68,15 +69,15 @@ public class TestUtil {
     private static Task[] getSampleTaskData() {
         try {
             return new Task[]{
-                    new Task(new Name("Alice Pauline"), new Date("4th Nov"), new Time("3pm"), new Date("6th Nov"), new Time("4pm"), new Importance("green"), new UniqueTagList(new Tag("lunch"))),
-                    new Task(new Name("Benson Meier"), new Date("6th September"), new Time("9am"), new Date("7th September"), new Time("9pm"), new Importance("y"), new UniqueTagList(new Tag("owesMoney"),new Tag("friends"))),
-                    new Task(new Name("Carl Kurz"), new Date("tomorrow"), new Time("3pm"), new Date("tomorrow"), new Time("9pm"), new Importance("r"), new UniqueTagList()),
-                    new Task(new Name("Daniel Meier"), new Date("next week"), new Time("12pm"), new Date("next week"), new Time("9pm"), new Importance("red"), new UniqueTagList()),
-                    new Task(new Name("Elle Meyer"), new Date("next wednesday"), new Time("12pm"), new Date("next friday"), new Time("3pm"), new Importance("yellow"), new UniqueTagList()),
-                    new Task(new Name("Fiona Kunz"), new Date("next month"), new Time("12pm"), new Date("next month"), new Time("5pm"), new Importance("g"), new UniqueTagList()),
-                    new Task(new Name("George Best"), new Date("4th November"), new Time("0930"), new Date("5th November"), new Time("3pm"), new Importance("R"), new UniqueTagList()),
-                    new Task(new Name("Hoon Meier"), new Date("6 Oct"), new Time("1000"), new Date("7 Oct"), new Time("0300"), new Importance("G"), new UniqueTagList()),
-                    new Task(new Name("Ida Mueller"), new Date("tmr"), new Time("1000"), new Date("next week"), new Time("12pm"), new Importance("Yellow"), new UniqueTagList())
+                    new Task(new Name("Alice Pauline"), new Date("4th Nov"), new Time("3pm"), new Date("6th Nov"), new Time("4pm"), new Importance("green"), new UniqueTagList(new Tag("lunch")), new UniqueReminderList()),
+                    new Task(new Name("Benson Meier"), new Date("6th September"), new Time("9am"), new Date("7th September"), new Time("9pm"), new Importance("y"), new UniqueTagList(new Tag("owesMoney"),new Tag("friends")), new UniqueReminderList()),
+                    new Task(new Name("Carl Kurz"), new Date("tomorrow"), new Time("3pm"), new Date("tomorrow"), new Time("9pm"), new Importance("r"), new UniqueTagList(), new UniqueReminderList()),
+                    new Task(new Name("Daniel Meier"), new Date("next week"), new Time("12pm"), new Date("next week"), new Time("9pm"), new Importance("red"), new UniqueTagList(), new UniqueReminderList()),
+                    new Task(new Name("Elle Meyer"), new Date("next wednesday"), new Time("12pm"), new Date("next friday"), new Time("3pm"), new Importance("yellow"), new UniqueTagList(), new UniqueReminderList()),
+                    new Task(new Name("Fiona Kunz"), new Date("next month"), new Time("12pm"), new Date("next month"), new Time("5pm"), new Importance("g"), new UniqueTagList(), new UniqueReminderList()),
+                    new Task(new Name("George Best"), new Date("4th November"), new Time("0930"), new Date("5th November"), new Time("3pm"), new Importance("R"), new UniqueTagList(), new UniqueReminderList()),
+                    new Task(new Name("Hoon Meier"), new Date("6 Oct"), new Time("1000"), new Date("7 Oct"), new Time("0300"), new Importance("G"), new UniqueTagList(), new UniqueReminderList()),
+                    new Task(new Name("Ida Mueller"), new Date("tmr"), new Time("1000"), new Date("next week"), new Time("12pm"), new Importance("Yellow"), new UniqueTagList(), new UniqueReminderList())
             };
         } catch (IllegalValueException e) {
             assert false;
@@ -136,7 +137,7 @@ public class TestUtil {
     }
 
     public static TaskList generateEmptyTaskList() {
-        return new TaskList(new UniqueTaskList(), new UniqueTagList());
+        return new TaskList(new UniqueTaskList(), new UniqueTagList(), new UniqueReminderList());
     }
 
     public static XmlSerializableTaskList generateSampleStorageTaskList() {
