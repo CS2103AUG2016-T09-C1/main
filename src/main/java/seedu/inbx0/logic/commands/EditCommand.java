@@ -6,6 +6,8 @@ import java.util.Set;
 import seedu.inbx0.commons.core.Messages;
 import seedu.inbx0.commons.core.UnmodifiableObservableList;
 import seedu.inbx0.commons.exceptions.IllegalValueException;
+import seedu.inbx0.model.reminder.ReminderTask;
+import seedu.inbx0.model.reminder.UniqueReminderList;
 import seedu.inbx0.model.tag.Tag;
 import seedu.inbx0.model.tag.UniqueTagList;
 import seedu.inbx0.model.task.Date;
@@ -74,6 +76,13 @@ public class EditCommand extends Command {
             
       return original;
     }
+    
+    private UniqueReminderList obtainUniqueReminderList(ReadOnlyTask taskToEdit) {
+        
+        UniqueReminderList original = taskToEdit.getReminders();
+              
+        return original;
+    }
 
 
     private String[] obtainArguments(String[] editArguments, ReadOnlyTask taskToEdit) {
@@ -112,13 +121,17 @@ public class EditCommand extends Command {
         if(tags == null)
             this.tags = obtainUniqueTagList(taskToEdit);
         
+        UniqueReminderList reminders = obtainUniqueReminderList(taskToEdit);
+        
         Task toEditWith = null;
         try {
-            toEditWith = createToEditWithTask(editArguments, tags);
+            toEditWith = createToEditWithTask(editArguments, tags, reminders);
         } catch (IllegalValueException e1) {
             return new CommandResult(String.format(MESSAGE_INVALID_ARGUMENTS, MESSAGE_USAGE));
         }
-
+        
+        Task updatedReminders = updateReminders(toEditWith);
+        
         try {
             model.editTask(taskToEdit, toEditWith);
         } catch (TaskNotFoundException tnfe) {
@@ -131,7 +144,21 @@ public class EditCommand extends Command {
     }
 
 
-    private Task createToEditWithTask(String[] editArguments, UniqueTagList tags) throws IllegalValueException {
+    private Task updateReminders(Task toEditWith) {
+        Task newTask = toEditWith;
+        UniqueReminderList reminders = toEditWith.getReminders();
+        for(ReminderTask r: reminders) {
+            r.setReadableOnlyTask(newTask);
+        }
+        toEditWith.setReminders(reminders);
+        Task newUpdatedTask = toEditWith;
+        
+        return newUpdatedTask;
+        
+    }
+
+
+    private Task createToEditWithTask(String[] editArguments, UniqueTagList tags, UniqueReminderList reminders) throws IllegalValueException {
         Task toEditWith = new Task (
                 new Name(editArguments[0]),
                 new Date(editArguments[1]),
@@ -139,7 +166,8 @@ public class EditCommand extends Command {
                 new Date(editArguments[3]),
                 new Time(editArguments[4]),
                 new Importance(editArguments[5]),
-                tags
+                tags,
+                reminders
                 );
         return toEditWith;
     }

@@ -175,6 +175,12 @@ public class MainWindow extends UiPart {
     }
     
     @FXML
+    public void handleReminder() {
+        ReminderWindow reminderWindow = ReminderWindow.load(primaryStage, logic);
+        reminderWindow.show();
+    }
+    
+    @FXML
     public void handleOverdueTasks() {
         OverdueTaskWindow overdueTaskWindow = OverdueTaskWindow.load(primaryStage, logic);
         overdueTaskWindow.show();

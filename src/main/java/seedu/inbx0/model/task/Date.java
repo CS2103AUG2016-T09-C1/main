@@ -19,7 +19,7 @@ public class Date {
     public static final String MESSAGE_DATE_CONSTRAINTS = "Date can either be a numeric string, alphanumeric string, or alphabet string \n"
                                                         + "Example: DD/MM/YYYY format OR 3rd Jan OR next year";
     public static final Pattern DATE_NUMERIC_VALIDATION_REGEX = Pattern.compile("(?<front>[0-9 ]+)[./-](?<middle>[0-9 ]+)[./-](?<back>[0-9 ]+)");
-    public static final String DATE_NUMERIC_VALIDATION_REGEX_2 = "[0-9 ]{8,8}";
+    public static final String DATE_NUMERIC_VALIDATION_REGEX_2 = "^[0-9]{8,8}$";
 /*    public static final String DATE_ALPHANUMERIC_VALIDATION_REGEX = "(?<=\\D)(?=\\d)|(?<=\\d)(?=\\D)";
     public static final String DATE_ALPHABETICAL_VALIDATION_REGEX = "[\\p{Alpha} ]+";
     public static final String SPLIT_NUM_AND_ALPHABET_REGEX = "(?<=\\D)(?=\\d)|(?<=\\d)(?=\\D)";

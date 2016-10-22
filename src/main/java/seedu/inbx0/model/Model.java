@@ -4,6 +4,8 @@ import java.util.List;
 
 import seedu.inbx0.commons.core.UnmodifiableObservableList;
 import seedu.inbx0.model.task.Task;
+import seedu.inbx0.model.reminder.ReminderTask;
+import seedu.inbx0.model.reminder.UniqueReminderList;
 import seedu.inbx0.model.task.Date;
 import seedu.inbx0.model.task.ReadOnlyTask;
 import seedu.inbx0.model.task.UniqueTaskList;
@@ -29,7 +31,7 @@ public interface Model {
     
     /** Adds the given task */
     void addTask(Task task) throws UniqueTaskList.DuplicateTaskException;
-
+    
     /** Returns the filtered task list as an {@code UnmodifiableObservableList<ReadOnlyTask>} */
     UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList();
 
@@ -62,6 +64,9 @@ public interface Model {
     
     /** Checks expiry of tasks */
     void checkExpiry(Date currentDate, String currentTime);
+    
+    /** Checks expiry of reminders */
+    void checkReminders();
 
     
 }

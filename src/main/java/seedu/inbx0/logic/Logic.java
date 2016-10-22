@@ -20,7 +20,13 @@ public interface Logic {
      * @return the result of the command execution.
      */
     CommandResult executeCheckExpiry();
-
+    
+    /**
+     * Executes internal command and returns the result..
+     * @return the result of the command execution.
+     */
+    CommandResult removeReminders();
+    
     /** Returns the filtered list of tasks */
     ObservableList<ReadOnlyTask> getFilteredTaskList();
     

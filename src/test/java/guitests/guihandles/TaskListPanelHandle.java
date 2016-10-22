@@ -55,7 +55,7 @@ public class TaskListPanelHandle extends GuiHandle {
      * Clicks on the ListView.
      */
     public void clickOnListView() {
-        Point2D point= TestUtil.getScreenMidPoint(getListView());
+        Point2D point= TestUtil.getScreenLeftPoint(getListView());
         guiRobot.clickOn(point.getX(), point.getY());
     }
 

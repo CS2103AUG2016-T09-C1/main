@@ -54,6 +54,10 @@ public class Parser {
     
     private static final Pattern INDEX_NUM_TO_INDEX_NUM_ARGS_FORMAT =
             Pattern.compile("(?<first>[0-9]+) to (?<last>[0-9]+)");
+    
+    private static final Pattern TASK_REMINDER_ARGS_FORMAT = 
+            Pattern.compile("(?<targetIndex>[0-9]+)"
+                           + " s/(?<startDate>[^$]+)");
  
     private static final Pattern TASK_DATA_ARGS_FORMAT = // '/' forward slashes are reserved for delimiter prefixes
             Pattern.compile("(?<name>[^/]+)"
@@ -181,7 +185,10 @@ public class Parser {
 
         case EditCommand.COMMAND_WORD:
             return prepareEdit(arguments);
-
+        
+        case RemindCommand.COMMAND_WORD:
+            return prepareRemind(arguments);
+            
         case SortCommand.COMMAND_WORD:
             return prepareSort(arguments);
 
@@ -214,6 +221,7 @@ public class Parser {
         }
     }
     
+
     /**
      * Parses arguments in the context of the add task command.
      *
@@ -265,7 +273,6 @@ public class Parser {
                         );
             }
             else if(matcher3.matches()) {
-                
                String argStartDate = dateParse(matcher3.group("startDate"));
                String argStartTime = timeParse(matcher3.group("startDate"));
                String argEndDate = dateParse(matcher3.group("endDate"));
@@ -306,6 +313,7 @@ public class Parser {
                         );
             }
             else if(matcher6.matches()) {
+      //          System.out.println("Matches 6");
                 return new AddCommand(
                         matcher6.group("name"),
                         matcher6.group("endDate"),
@@ -314,6 +322,7 @@ public class Parser {
                         );
             }
             else if(matcher7.matches()) {
+        //        System.out.println("Matches 7");
                 String argEndDate = dateParse(matcher7.group("endDate"));
                 String argEndTime = timeParse(matcher7.group("endDate"));
                 return new AddCommand(
@@ -325,6 +334,7 @@ public class Parser {
                         );
             }
             else if(matcher8.matches()) {
+          //      System.out.println("Matches 8");
                 String argEndDate = dateParse(matcher8.group("endDate"));
                 String argEndTime = timeParse(matcher8.group("endDate"));
                 return new AddCommand(
@@ -335,6 +345,7 @@ public class Parser {
                         );
             }
             else if(matcher9.matches()) {
+            //    System.out.println("Matches 9");
                 return new AddCommand(
                         matcher9.group("name"),
                         matcher9.group("level"),
@@ -342,6 +353,7 @@ public class Parser {
                         );
             }
             else if(matcher10.matches()) {
+              //  System.out.println("Matches 10");
                 return new AddCommand(
                         matcher10.group("name"),
                         getTagsFromArgs(matcher10.group("tagArguments"))
@@ -349,6 +361,7 @@ public class Parser {
             
             }
             else if(matcher11.matches()) {
+        //        System.out.println("Matches 11");
                 return new AddCommand(
                         matcher11.group("name"),
                         matcher11.group("startDate"),
@@ -360,6 +373,7 @@ public class Parser {
                         );
             }
             else if(matcher12.matches()) {
+         //       System.out.println("Matches 12");
                 return new AddCommand(
                         matcher12.group("name"),
                         matcher12.group("startDate"),
@@ -370,6 +384,7 @@ public class Parser {
                         );
             }
             else if(matcher13.matches()) {
+          //      System.out.println("Matches 13");
                 String argStartDate = dateParse(matcher13.group("startDate"));
                 String argStartTime = timeParse(matcher13.group("startDate"));
                 return new AddCommand(
@@ -383,6 +398,7 @@ public class Parser {
                         );
             }
             else {
+          //      System.out.println("Matches 14");
                 String argStartDate = dateParse(matcher14.group("startDate"));
                 String argStartTime = timeParse(matcher14.group("startDate"));
                 return new AddCommand(
@@ -744,6 +760,29 @@ public class Parser {
             
             return new IncorrectCommand(e.getMessage());
         }
+    }
+    
+    /**
+     * Parses arguments in the context of the Remind command.
+     * @param args full command args string
+     * @return the prepared command
+     */
+    private Command prepareRemind(String arguments) {
+        // TODO Auto-generated method stub
+        final Matcher matcher = TASK_REMINDER_ARGS_FORMAT.matcher(arguments.trim());
+        if(!matcher.matches()) {
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, RemindCommand.MESSAGE_USAGE));
+        }
+        
+        Optional<Integer> index = parseIndex(matcher.group("targetIndex"));
+        if(!index.isPresent()){
+            return new IncorrectCommand(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, RemindCommand.MESSAGE_USAGE));
+        }
+        
+        int targetIndex = Integer.parseInt(matcher.group("targetIndex"));
+        
+        return new RemindCommand(targetIndex, matcher.group("startDate"));
     }
     /**
      * Parses arguments in the context of the sort task command.

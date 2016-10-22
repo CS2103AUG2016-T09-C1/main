@@ -16,7 +16,7 @@ import java.util.logging.Logger;
  */
 public class OverdueTaskWindow extends UiPart {
 
-    private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
+    private static final Logger logger = LogsCenter.getLogger(OverdueTaskWindow.class);
     private static final String ICON = "/images/help_icon.png";
     private static final String FXML = "OverdueTaskWindow.fxml";
     private static final String TITLE = "Overdue Tasks";

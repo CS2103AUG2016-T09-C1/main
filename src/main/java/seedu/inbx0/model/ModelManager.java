@@ -7,6 +7,8 @@ import seedu.inbx0.commons.core.UnmodifiableObservableList;
 import seedu.inbx0.commons.events.model.TaskListChangedEvent;
 import seedu.inbx0.commons.exceptions.IllegalValueException;
 import seedu.inbx0.model.task.Task;
+import seedu.inbx0.model.reminder.ReminderTask;
+import seedu.inbx0.model.reminder.UniqueReminderList;
 import seedu.inbx0.model.task.Date;
 import seedu.inbx0.model.task.ReadOnlyTask;
 import seedu.inbx0.model.task.UniqueTaskList;
@@ -107,9 +109,16 @@ public class ModelManager extends ComponentManager implements Model {
         indicateTaskListChanged();
     }
     
+    
     @Override
     public synchronized void checkExpiry(Date currentDate, String currentTime) {
         if(taskList.checkExpiry(currentDate, currentTime))
+            indicateTaskListChanged();
+    }
+    
+    @Override
+    public synchronized void checkReminders() {
+        if(taskList.checkReminders())
             indicateTaskListChanged();
     }
 

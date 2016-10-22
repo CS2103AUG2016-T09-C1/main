@@ -4,6 +4,7 @@ import java.util.Objects;
 
 import seedu.inbx0.commons.exceptions.IllegalValueException;
 import seedu.inbx0.commons.util.CollectionUtil;
+import seedu.inbx0.model.reminder.UniqueReminderList;
 import seedu.inbx0.model.tag.UniqueTagList;
 
 /**
@@ -26,13 +27,14 @@ public class Task implements ReadOnlyTask {
     private boolean isFloatTask;
     
     private UniqueTagList tags;
-
+    private UniqueReminderList reminders;
+    
     /**
      * Every field must be present and not null.
-     * @throws IllegalValueException if it is an event and not valid
+     * @throws IllegalValueException if not valid
      */
-    public Task(final Name name, final Date startDate, final Time startTime, final Date endDate, final Time endTime, final Importance level, final UniqueTagList tags) throws IllegalValueException {
-        assert !CollectionUtil.isAnyNull(name, startDate, startTime, endDate, endTime, level, tags);
+    public Task(final Name name, final Date startDate, final Time startTime, final Date endDate, final Time endTime, final Importance level, final UniqueTagList tags, final UniqueReminderList reminders) throws IllegalValueException {
+        assert !CollectionUtil.isAnyNull(name, startDate, startTime, endDate, endTime, level, tags, reminders);
         
         if (startDate.getDate().equals("") && startTime.getTime().equals("") && endDate.getDate().equals("") && endTime.getTime().equals("")) {
             this.isFloatTask = true;
@@ -60,13 +62,14 @@ public class Task implements ReadOnlyTask {
         this.endTime = endTime;
         this.level = level;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
+        this.reminders = new UniqueReminderList(reminders); // protect internal tags from changes in the arg list
         this.isCompleted = false;
         this.isExpired = false;
 
     }
 
     public Task(final Name name, final Date startDate, final Time startTime, final Date endDate, final Time endTime, final Importance level, final UniqueTagList tags,
-            final boolean isCompleted, final boolean isExpired, final boolean isFloatTask) throws IllegalValueException {
+            final UniqueReminderList reminders, final boolean isCompleted, final boolean isExpired, final boolean isFloatTask) throws IllegalValueException {
         assert !CollectionUtil.isAnyNull(name, startDate, startTime, endDate, endTime, level, tags, isCompleted);
         
         if ((startDate.getDate().equals("") && startTime.getTime().equals("") && endDate.getDate().equals("") && endTime.getTime().equals("")) |
@@ -91,6 +94,7 @@ public class Task implements ReadOnlyTask {
         this.endTime = endTime;
         this.level = level;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
+        this.reminders = new UniqueReminderList(reminders); // protect internal tags from changes in the arg list
         this.isCompleted = isCompleted;
         this.isExpired = isExpired;
         this.isFloatTask = isFloatTask;
@@ -142,11 +146,11 @@ public class Task implements ReadOnlyTask {
 
     /**
      * Copy constructor.
-     * @throws IllegalValueException if it is an event and not valid
+     * @throws IllegalValueException if not valid
      */
 
     public Task(final ReadOnlyTask source) throws IllegalValueException {
-        this(source.getName(), source.getStartDate(), source.getStartTime(), source.getEndDate(), source.getEndTime(), source.getLevel(), source.getTags(), source.getIsCompleted(), source.getIsExpired(), source.getIsFloatTask());
+        this(source.getName(), source.getStartDate(), source.getStartTime(), source.getEndDate(), source.getEndTime(), source.getLevel(), source.getTags(), source.getReminders(), source.getIsCompleted(), source.getIsExpired(), source.getIsFloatTask());
     }
 
     @Override
@@ -182,6 +186,11 @@ public class Task implements ReadOnlyTask {
     @Override
     public final UniqueTagList getTags() {
         return new UniqueTagList(tags);
+    }
+    
+    @Override
+    public final UniqueReminderList getReminders() {
+        return new UniqueReminderList(reminders);
     }
     
     @Override
@@ -241,6 +250,10 @@ public class Task implements ReadOnlyTask {
     public final void setFloatTask(final boolean isFloatTask) {
        this.isFloatTask = isFloatTask;
     }
+    
+    public final void setReminders(final UniqueReminderList reminders) {
+        this.reminders = reminders;
+     }
 
     @Override
     public final boolean equals(final Object other) {
@@ -252,7 +265,7 @@ public class Task implements ReadOnlyTask {
     @Override
     public final int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, startDate, startTime, endDate, endTime, level, tags, isCompleted, isExpired, isFloatTask);
+        return Objects.hash(name, startDate, startTime, endDate, endTime, level, tags, reminders, isCompleted, isExpired, isFloatTask);
     }
 
     @Override

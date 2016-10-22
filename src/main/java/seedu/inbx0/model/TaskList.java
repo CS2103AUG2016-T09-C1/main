@@ -8,6 +8,8 @@ import seedu.inbx0.model.task.UniqueTaskList;
 import seedu.inbx0.model.task.UniqueTaskList.DuplicateTaskException;
 import seedu.inbx0.model.task.UniqueTaskList.TaskNotFoundException;
 import seedu.inbx0.commons.exceptions.IllegalValueException;
+import seedu.inbx0.model.reminder.ReminderTask;
+import seedu.inbx0.model.reminder.UniqueReminderList;
 import seedu.inbx0.model.tag.Tag;
 import seedu.inbx0.model.tag.UniqueTagList;
 
@@ -22,10 +24,12 @@ public class TaskList implements ReadOnlyTaskList {
 
     private final UniqueTaskList tasks;
     private final UniqueTagList tags;
+    private final UniqueReminderList reminders;
 
     {
         tasks = new UniqueTaskList();
         tags = new UniqueTagList();
+        reminders = new UniqueReminderList();
     }
 
     public TaskList() {}
@@ -34,14 +38,14 @@ public class TaskList implements ReadOnlyTaskList {
      * Tasks and Tags are copied into this task manager
      */
     public TaskList(ReadOnlyTaskList toBeCopied) {
-        this(toBeCopied.getUniqueTaskList(), toBeCopied.getUniqueTagList());
+        this(toBeCopied.getUniqueTaskList(), toBeCopied.getUniqueTagList(), toBeCopied.getUniqueReminderList());
     }
 
     /**
      * Tasks and Tags are copied into this task manager
      */
-    public TaskList(UniqueTaskList tasks, UniqueTagList tags) {
-        resetData(tasks.getInternalList(), tags.getInternalList());
+    public TaskList(UniqueTaskList tasks, UniqueTagList tags, UniqueReminderList reminders) {
+        resetData(tasks.getInternalList(), tags.getInternalList(), reminders.getInternalList());
     }
 
     public static ReadOnlyTaskList getEmptyTaskList() {
@@ -57,12 +61,15 @@ public class TaskList implements ReadOnlyTaskList {
     public void setTasks(List<Task> tasks) {
         this.tasks.getInternalList().setAll(tasks);
     }
-
+    
+    public void setReminders(Collection<ReminderTask> reminders) {
+        this.reminders.getInternalList().setAll(reminders);
+    }
     public void setTags(Collection<Tag> tags) {
         this.tags.getInternalList().setAll(tags);
     }
 
-    public void resetData(Collection<? extends ReadOnlyTask> newTasks, Collection<Tag> newTags) {
+    public void resetData(Collection<? extends ReadOnlyTask> newTasks, Collection<Tag> newTags, Collection<ReminderTask> newReminders) {
         setTasks(newTasks.stream().map(t -> {
             try {
                 return new Task(t);
@@ -71,11 +78,20 @@ public class TaskList implements ReadOnlyTaskList {
             }
             return null;
         }).collect(Collectors.toList()));
+        setReminders(newReminders.stream().map(r -> {
+            try {
+                return new ReminderTask(r);
+            } catch (IllegalValueException e) {
+              System.out.println(Task.MESSAGE_TIME_CONSTRAINTS);
+            }
+            return null;
+        }).collect(Collectors.toList()));
         setTags(newTags);
+
     }
 
     public void resetData(ReadOnlyTaskList newData) {
-        resetData(newData.getTaskList(), newData.getTagList());
+        resetData(newData.getTaskList(), newData.getTagList(), newData.getReminderList());
     }
 
 //// task-level operations
@@ -147,7 +163,14 @@ public class TaskList implements ReadOnlyTaskList {
     public boolean checkExpiry(Date currentDate, String currentTime) {
         return (tasks.checkExpiry(currentDate, currentTime));
     }
-
+    
+    /**
+     * Checks reminders' expiry 
+     * and updates the boolean isExpired accordingly if found expired.
+     */
+    public boolean checkReminders() {
+        return (tasks.checkReminders());
+    }
     
 //// tag-level operations
 
@@ -155,11 +178,17 @@ public class TaskList implements ReadOnlyTaskList {
         tags.add(t);
     }
 
+////reminder-level operations
+    
+    public void addReminder(ReminderTask r, ReadOnlyTask task) throws UniqueReminderList.DuplicateReminderException {
+        reminders.add(r);
+    }
 //// util methods
 
     @Override
     public String toString() {
-        return tasks.getInternalList().size() + " tasks, " + tags.getInternalList().size() +  " tags";
+        return tasks.getInternalList().size() + " tasks, " + tags.getInternalList().size() +  " tags, "
+                + reminders.getInternalList().size() + " reminders";
         // TODO: refine later
     }
 
@@ -172,6 +201,11 @@ public class TaskList implements ReadOnlyTaskList {
     public List<Tag> getTagList() {
         return Collections.unmodifiableList(tags.getInternalList());
     }
+    
+    @Override
+    public List<ReminderTask> getReminderList() {
+        return Collections.unmodifiableList(reminders.getInternalList());
+    }
 
     @Override
     public UniqueTaskList getUniqueTaskList() {
@@ -182,6 +216,11 @@ public class TaskList implements ReadOnlyTaskList {
     public UniqueTagList getUniqueTagList() {
         return this.tags;
     }
+    
+    @Override
+    public UniqueReminderList getUniqueReminderList() {
+        return this.reminders;
+    }
 
 
     @Override
@@ -189,13 +228,14 @@ public class TaskList implements ReadOnlyTaskList {
         return other == this // short circuit if same object
                 || (other instanceof TaskList // instanceof handles nulls
                 && this.tasks.equals(((TaskList) other).tasks)
-                && this.tags.equals(((TaskList) other).tags));
+                && this.tags.equals(((TaskList) other).tags)
+                && this.reminders.equals(((TaskList) other).reminders));
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(tasks, tags);
+        return Objects.hash(tasks, tags, reminders);
     }
 
     

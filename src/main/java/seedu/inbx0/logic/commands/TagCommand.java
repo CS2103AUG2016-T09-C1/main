@@ -8,6 +8,7 @@ import seedu.inbx0.commons.core.UnmodifiableObservableList;
 import seedu.inbx0.commons.exceptions.IllegalValueException;
 import seedu.inbx0.model.task.*;
 import seedu.inbx0.model.task.UniqueTaskList.TaskNotFoundException;
+import seedu.inbx0.model.reminder.UniqueReminderList;
 import seedu.inbx0.model.tag.Tag;
 import seedu.inbx0.model.tag.UniqueTagList;
 
@@ -53,7 +54,14 @@ public class TagCommand extends Command{
         return original;
     }
     
-    private Task createToEditWithTask(ReadOnlyTask taskToEdit, UniqueTagList tags) throws IllegalValueException{
+    private UniqueReminderList obtainUniqueReminderList(ReadOnlyTask taskToEdit) {
+
+        UniqueReminderList original = taskToEdit.getReminders();
+        
+        return original;
+    }
+    
+    private Task createToEditWithTask(ReadOnlyTask taskToEdit, UniqueTagList tags, UniqueReminderList reminders) throws IllegalValueException{
     	
     	
     	Task toEditWith = new Task (
@@ -63,7 +71,8 @@ public class TagCommand extends Command{
                 new Date(taskToEdit.getEndDate().getDate()),
                 new Time(taskToEdit.getEndTime().getTime()),
                 new Importance(taskToEdit.getLevel().getLevel()),
-                tags
+                tags,
+                reminders
                 );
         return toEditWith;
     }
@@ -80,13 +89,14 @@ public class TagCommand extends Command{
         ReadOnlyTask taskToEdit = lastShownList.get(targetIndex - 1);
         
         UniqueTagList originalTags = obtainUniqueTagList(taskToEdit);
+        UniqueReminderList originalReminders = obtainUniqueReminderList(taskToEdit);
         
         originalTags.mergeFrom(tags);
         
         Task toEditWith = null;
         
         try {
-            toEditWith = createToEditWithTask(taskToEdit, originalTags);
+            toEditWith = createToEditWithTask(taskToEdit, originalTags, originalReminders);
         } catch (IllegalValueException e1) {
             return new CommandResult(TAGS_INVALID_ARGUMENTS);
         }
@@ -101,4 +111,6 @@ public class TagCommand extends Command{
         
         return new CommandResult(MESSAGE_SUCCESS);
     }
+
+
 }

@@ -5,6 +5,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 import seedu.inbx0.commons.exceptions.IllegalValueException;
 import seedu.inbx0.model.ReadOnlyTaskList;
+import seedu.inbx0.model.reminder.ReminderTask;
+import seedu.inbx0.model.reminder.UniqueReminderList;
 import seedu.inbx0.model.tag.Tag;
 import seedu.inbx0.model.tag.UniqueTagList;
 import seedu.inbx0.model.task.ReadOnlyTask;
@@ -25,10 +27,13 @@ public class XmlSerializableTaskList implements ReadOnlyTaskList {
     private List<XmlAdaptedTask> tasks;
     @XmlElement
     private List<Tag> tags;
+    @XmlElement
+    private List<ReminderTask> reminders;
 
     {
         tasks = new ArrayList<>();
         tags = new ArrayList<>();
+        reminders = new ArrayList<>();
     }
 
     /**
@@ -41,7 +46,9 @@ public class XmlSerializableTaskList implements ReadOnlyTaskList {
      */
     public XmlSerializableTaskList(ReadOnlyTaskList src) {
         tasks.addAll(src.getTaskList().stream().map(XmlAdaptedTask::new).collect(Collectors.toList()));
+        reminders = src.getReminderList();
         tags = src.getTagList();
+        
     }
 
     @Override
@@ -67,6 +74,17 @@ public class XmlSerializableTaskList implements ReadOnlyTaskList {
         }
         return lists;
     }
+    
+    @Override
+    public UniqueReminderList getUniqueReminderList() {
+        try {
+            return new UniqueReminderList(reminders);
+        } catch (UniqueReminderList.DuplicateReminderException e) {
+            //TODO: better error handling
+            e.printStackTrace();
+            return null;
+        }
+    }
 
     @Override
     public List<ReadOnlyTask> getTaskList() {
@@ -80,7 +98,12 @@ public class XmlSerializableTaskList implements ReadOnlyTaskList {
             }
         }).collect(Collectors.toCollection(ArrayList::new));
     }
-
+    
+    @Override
+    public List<ReminderTask> getReminderList() {
+        return Collections.unmodifiableList(reminders);
+    }
+    
     @Override
     public List<Tag> getTagList() {
         return Collections.unmodifiableList(tags);
