@@ -185,8 +185,11 @@ public class Parser {
         case SortCommand.COMMAND_WORD:
             return prepareSort(arguments);
 
-        case TagCommand.COMMAND_WORD:
-            return prepareTag(arguments);
+        case AddTagCommand.COMMAND_WORD:
+            return prepareAddTag(arguments);
+            
+        case DelTagCommand.COMMAND_WORD:
+            return prepareDelTag(arguments);
 
         case MarkCompleteCommand.COMMAND_WORD:
             return prepareMarkComplete(arguments);
@@ -667,31 +670,58 @@ public class Parser {
     }
       
     /**
-     * Parses arguments in the context of the add task command.
+     * Parses arguments in the context of the add tag command.
      *
      * @param args full command args string
      * @return the prepared command
      */
     //@@author A0139481Y
-    private Command prepareTag(final String args){
+    private Command prepareAddTag(final String args){
     	final Matcher matcher = ADD_TAGS_ARGS_FORMAT.matcher(args.trim());
     	if (!matcher.matches()) {
-            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TagCommand.MESSAGE_USAGE));
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddTagCommand.MESSAGE_USAGE));
         }
     	
     	Optional<Integer> index = parseIndex(matcher.group("targetIndex"));
-    	System.out.println(index);
     	if(!index.isPresent()){
             return new IncorrectCommand(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, TagCommand.MESSAGE_USAGE));
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddTagCommand.MESSAGE_USAGE));
         }
     	try{   
-            return new TagCommand(
+            return new AddTagCommand(
                    index.get(),
                    getTagsFromArgs(matcher.group("tagArguments"))
            );            
            } catch (IllegalValueException ive) {
         	   return new IncorrectCommand(ive.getMessage());
+           }
+    }
+    
+    /**
+     * Parses arguments in the context of the delete tag command.
+     *
+     * @param args full command args string
+     * @return the prepared command
+     */
+    //@@author A0139481Y
+    private Command prepareDelTag(final String args){
+        final Matcher matcher = ADD_TAGS_ARGS_FORMAT.matcher(args.trim());
+        if (!matcher.matches()) {
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DelTagCommand.MESSAGE_USAGE));
+        }
+        
+        Optional<Integer> index = parseIndex(matcher.group("targetIndex"));
+        if(!index.isPresent()){
+            return new IncorrectCommand(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DelTagCommand.MESSAGE_USAGE));
+        }
+        try{   
+            return new DelTagCommand(
+                   index.get(),
+                   getTagsFromArgs(matcher.group("tagArguments"))
+           );            
+           } catch (IllegalValueException ive) {
+               return new IncorrectCommand(ive.getMessage());
            }
     }
     
@@ -745,6 +775,7 @@ public class Parser {
             return new IncorrectCommand(e.getMessage());
         }
     }
+    
     /**
      * Parses arguments in the context of the sort task command.
      * @param args full command args string
