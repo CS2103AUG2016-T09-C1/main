@@ -217,13 +217,7 @@ public class MainWindow extends UiPart {
         HelpWindow helpWindow = HelpWindow.load(primaryStage);
         helpWindow.show();
     }
-    
-    @FXML
-    public void handleReminder(ReadOnlyTask task) {
-        ReminderWindow reminderWindow = ReminderWindow.load(primaryStage, logic, task);
-        reminderWindow.show();
-    }
-    
+      
     @FXML
     public void handleOverdueTasks() {
         OverdueTaskWindow overdueTaskWindow = OverdueTaskWindow.load(primaryStage, logic);
@@ -383,90 +377,94 @@ public class MainWindow extends UiPart {
                  getSelectTaskListPlaceholder(), logic.getFilteredBeforedueTaskList());
      }
 
-    public void handleShowFilteredListRequestByShowCommand(String filterCondition) {
-        if(filterCondition.equals("")) {
-            UpperTitledPane.setExpanded(false);
-            LowerTitledPane.setExpanded(true);
-        }
-        else {   
-            UpperTitledPane.setExpanded(true);
-            LowerTitledPane.setExpanded(false);    
-            if(filterCondition.equals("today")) {
-                handleListToday();
-            }
-            else if(filterCondition.equals("Monday")) {
-                DayTitledPane.setExpanded(true);
-                handleListMonday();
-            }
-            else if(filterCondition.equals("Tuesday")) {
-                DayTitledPane.setExpanded(true);
-                handleListTuesday();
-            }
-            else if(filterCondition.equals("Wednesday")) {
-                DayTitledPane.setExpanded(true);
-                handleListWednesday();
-            }
-            else if(filterCondition.equals("Thursday")) {
-                DayTitledPane.setExpanded(true);
-                handleListThursday();
-            }
-            else if(filterCondition.equals("Friday")) {
-                DayTitledPane.setExpanded(true);
-                handleListFriday();
-            }
-            else if(filterCondition.equals("Saturday")) {
-                DayTitledPane.setExpanded(true);
-                handleListSaturday();
-            }
-            else if(filterCondition.equals("Sunday")) {
-                DayTitledPane.setExpanded(true);
-                handleListSunday();
-            }
-            else if(filterCondition.equals("Event")) {
-                CategoryTitledPane.setExpanded(true);
-                handleListEvent();
-            }
-            else if(filterCondition.equals("Floating")) {
-                CategoryTitledPane.setExpanded(true);
-                handleListFloating();
-            }
-            else if(filterCondition.equals("Deadline")) {
-                CategoryTitledPane.setExpanded(true);
-                handleListDeadline();
-            }
-            else if(filterCondition.equals("Red")) {
-                ImportanceTitledPane.setExpanded(true);
-                handleListRed();
-            }
-            else if(filterCondition.equals("Yellow")) {
-                ImportanceTitledPane.setExpanded(true);
-                handleListYellow();
-            }
-            else if(filterCondition.equals("Green")) {
-                ImportanceTitledPane.setExpanded(true);
-                handleListGreen();
-            }
-            else if(filterCondition.equals("None")) {
-                ImportanceTitledPane.setExpanded(true);
-                handleListNone();
-            }
-            else if(filterCondition.equals("Complete")) {
-                CompletenessTitledPane.setExpanded(true);
-                handleListComplete();
-            }
-            else if(filterCondition.equals("Incomplete")) {
-                CompletenessTitledPane.setExpanded(true);
-                handleListIncomplete();
-            }
-            else if(filterCondition.equals("Expire")) {
-                ExpireTitledPane.setExpanded(true);
-                handleListExpire();
-            }
-            else if(filterCondition.equals("Valid")) {
-                ExpireTitledPane.setExpanded(true);
-                handleListValid();
-            }        
-            
-        }
-    }
+     public void handleShowFilteredListRequestByShowCommand(String filterCondition) {
+         if(filterCondition.equals("")) {
+             UpperTitledPane.setExpanded(false);
+             LowerTitledPane.setExpanded(true);
+         }
+         else {   
+             UpperTitledPane.setExpanded(true);
+             LowerTitledPane.setExpanded(false);    
+             if(filterCondition.equals("today")) {
+                 handleListToday();
+             } 
+             else if(filterCondition.equals("Monday")) {
+                 DayTitledPane.setExpanded(true);
+                 handleListMonday();
+             }
+             else if(filterCondition.equals("Tuesday")) {
+                 DayTitledPane.setExpanded(true);
+                 handleListTuesday();
+             }
+             else if(filterCondition.equals("Wednesday")) {
+                 DayTitledPane.setExpanded(true);
+                 handleListWednesday();
+             }
+             else if(filterCondition.equals("Thursday")) {
+                 DayTitledPane.setExpanded(true);
+                 handleListThursday();
+             } 
+             else if(filterCondition.equals("Friday")) {
+                 DayTitledPane.setExpanded(true);
+                 handleListFriday();
+             }
+             else if(filterCondition.equals("Saturday")) {
+                 DayTitledPane.setExpanded(true);
+                 handleListSaturday();
+             }
+             else if(filterCondition.equals("Sunday")) {
+                 DayTitledPane.setExpanded(true);
+                 handleListSunday();
+             }
+             else if(filterCondition.equals("Event")) {
+                 CategoryTitledPane.setExpanded(true);
+                 handleListEvent();
+             }
+             else if(filterCondition.equals("Floating")) {
+                 CategoryTitledPane.setExpanded(true);
+                 handleListFloating();
+             }
+             else if(filterCondition.equals("Deadline")) {
+                 CategoryTitledPane.setExpanded(true);
+                 handleListDeadline();
+             }
+             else if(filterCondition.equals("Red")) {
+                 ImportanceTitledPane.setExpanded(true);
+                 handleListRed();
+             }
+             else if(filterCondition.equals("Yellow")) {
+                 ImportanceTitledPane.setExpanded(true);
+                 handleListYellow();
+             }
+             else if(filterCondition.equals("Green")) {
+                 ImportanceTitledPane.setExpanded(true);
+                 handleListGreen();
+             }
+             else if(filterCondition.equals("None")) {
+                 ImportanceTitledPane.setExpanded(true);
+                 handleListNone();
+             }
+             else if(filterCondition.equals("Complete")) {
+                 CompletenessTitledPane.setExpanded(true);
+                 handleListComplete();
+             }
+             else if(filterCondition.equals("Incomplete")) {
+                 CompletenessTitledPane.setExpanded(true);
+                 handleListIncomplete();
+             }
+             else if(filterCondition.equals("Expire")) {
+                 ExpireTitledPane.setExpanded(true);
+                 handleListExpire();
+             }
+             else if(filterCondition.equals("Valid")) {
+                 ExpireTitledPane.setExpanded(true);
+                 handleListValid();
+             }                
+         }
+     }
+     
+     public void handleReminder(ReadOnlyTask task) {
+         ReminderWindow reminderWindow = ReminderWindow.load(primaryStage, task);
+         reminderWindow.show();
+     }
 }

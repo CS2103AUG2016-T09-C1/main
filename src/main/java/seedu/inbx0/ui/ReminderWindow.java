@@ -32,38 +32,31 @@ public class ReminderWindow extends UiPart {
     private Label endTime;
     
     private ReadOnlyTask task;
-    private Logic logic;
     private Scene scene;
-    private Stage reminderStage;
     private VBox mainPane;
     
-    public static ReminderWindow load(Stage primaryStage, Logic logic, ReadOnlyTask task){
+    public static ReminderWindow load(Stage primaryStage, ReadOnlyTask task){
         logger.fine("Showing reminders");
         ReminderWindow reminderWindow = UiPartLoader.loadUiPart(primaryStage, new ReminderWindow());
-        reminderWindow.configure(logic, task);
-        return UiPartLoader.loadUiPart(reminderWindow);
+        reminderWindow.configure(task);
+        return reminderWindow;
     }
     
-    @FXML
-    public void initialize() {
-        name.setText(task.getName().fullName);
+    public void displayInfo() {
+        name.setText(task.getName().getName());
         startDate.setText(task.getStartDate().getTotalDate());
-        startTime.setText(task.getStartTime().value);
+        startTime.setText(task.getStartTime().getTime());
         endDate.setText(task.getEndDate().getTotalDate());
-        endTime.setText(task.getEndTime().value);
+        endTime.setText(task.getEndTime().getTime());
     }
     
-    private void configure(Logic logic, ReadOnlyTask task){
-        this.logic = logic;
+    private void configure(ReadOnlyTask task){
         this.task = task;
-        Stage reminderStage = new Stage();
-        reminderStage.initModality(Modality.APPLICATION_MODAL);
-        this.reminderStage = reminderStage;
         setTitle(TITLE);
-        setIcon(reminderStage, ICON);
+        setIcon(ICON);
         scene = new Scene(mainPane);
-        reminderStage.setScene(scene);
-        initialize();
+        primaryStage.setScene(scene);
+        displayInfo();
     }
     
     @Override
@@ -77,10 +70,10 @@ public class ReminderWindow extends UiPart {
     }
     
     private void setTitle(String title) {
-        reminderStage.setTitle(title);
+        primaryStage.setTitle(title);
     }
     
     public void show() {
-        reminderStage.showAndWait();
+        primaryStage.showAndWait();
     }
 }
