@@ -15,6 +15,7 @@ import seedu.inbx0.commons.events.ui.JumpToListRequestEvent;
 import seedu.inbx0.commons.events.ui.ShowFilteredListRequestEvent;
 import seedu.inbx0.commons.events.ui.TaskPanelSelectionChangedEvent;
 import seedu.inbx0.commons.events.ui.ShowHelpRequestEvent;
+import seedu.inbx0.commons.events.ui.ShowReminderRequestEvent;
 import seedu.inbx0.commons.util.StringUtil;
 import seedu.inbx0.logic.Logic;
 import seedu.inbx0.model.UserPrefs;
@@ -115,6 +116,11 @@ public class UiManager extends ComponentManager implements Ui {
         mainWindow.handleHelp();
     }
    
+    @Subscribe
+    private void handleShowReminderEvent(ShowReminderRequestEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        mainWindow.handleReminder(event.task);
+    }
 
     @Subscribe
     private void handleJumpToListRequestEvent(JumpToListRequestEvent event) {

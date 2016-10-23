@@ -14,6 +14,7 @@ import seedu.inbx0.commons.core.GuiSettings;
 import seedu.inbx0.commons.events.ui.ExitAppRequestEvent;
 import seedu.inbx0.logic.Logic;
 import seedu.inbx0.model.UserPrefs;
+import seedu.inbx0.model.task.ReadOnlyTask;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -215,6 +216,12 @@ public class MainWindow extends UiPart {
     public void handleHelp() {
         HelpWindow helpWindow = HelpWindow.load(primaryStage);
         helpWindow.show();
+    }
+    
+    @FXML
+    public void handleReminder(ReadOnlyTask task) {
+        ReminderWindow reminderWindow = ReminderWindow.load(primaryStage, logic, task);
+        reminderWindow.show();
     }
     
     @FXML
