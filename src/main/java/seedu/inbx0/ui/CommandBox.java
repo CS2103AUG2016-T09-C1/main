@@ -148,7 +148,7 @@ public class CommandBox extends UiPart {
             commandTextField.setText("del");
         } else if(currentText.matches("^del$|^delt$|^delta$")) {
                 commandTextField.setText("deltag");
-        } else if(currentText.matches("^do$|")) {
+        } else if(currentText.matches("^do$")) {
             commandTextField.setText("done");
         } else if(currentText.matches("^ed$|^edi$")) {
             commandTextField.setText("edit");
@@ -169,6 +169,7 @@ public class CommandBox extends UiPart {
         } else if(currentText.matches("^so$|^sor$")) {
             commandTextField.setText("sort");
         }
+        commandTextField.positionCaret(commandTextField.getText().length());
     }
     
     /**
@@ -185,7 +186,7 @@ public class CommandBox extends UiPart {
         else if(evt.getCode().equals(KeyCode.DOWN)) {
             goToNextCommandText();
         }
-        else if(evt.getCode().equals(KeyCode.TAB)) {
+        else if(evt.getCode().equals(KeyCode.RIGHT)) {
             autoFillInCommandText();
         }
     }
