@@ -76,23 +76,23 @@ public interface ReadOnlyTask {
     
     default Set<String> getAsTextSet() {
         Set<String> textSet = new HashSet<>();
-        for(String nameString: getName().getName().split("\\s+")) {
+        for(String nameString: getName().getName().trim().split("\\s+")) {
             textSet.add(nameString.toLowerCase());
-            textSet.add(" Name: " + nameString.toLowerCase());
+            textSet.add(" name: " + nameString.toLowerCase());
         }
         textSet.add(getName().getName().toLowerCase());
-        textSet.add(" Start Date: " + getStartDate().getDate());
+        textSet.add(" start date: " + getStartDate().getDate());
         textSet.add(getStartDate().getDate());
-        textSet.add(" Start Time: " + getStartTime().getTime());
+        textSet.add(" start sime: " + getStartTime().getTime());
         textSet.add(getStartTime().getTime());
-        textSet.add(" End Date: " + getEndDate().getDate());
+        textSet.add(" end date: " + getEndDate().getDate());
         textSet.add(getEndDate().getDate());
-        textSet.add(" End Time: " + getEndTime().getTime());
+        textSet.add(" end time: " + getEndTime().getTime());
         textSet.add(getEndTime().getTime());
-        textSet.add(" Importance: " + getLevel().getLevel());
-        textSet.add(getLevel().getLevel()); 
+        textSet.add(" importance: " + getLevel().getLevel().toLowerCase());
+        textSet.add(getLevel().getLevel().toLowerCase()); 
         for(String tagString: tagsString().split("\\s+")) {
-            textSet.add(" Tags: " + tagString.toLowerCase());
+            textSet.add(" tags: " + tagString.toLowerCase());
             textSet.add(tagString.toLowerCase());
         }
         return textSet;

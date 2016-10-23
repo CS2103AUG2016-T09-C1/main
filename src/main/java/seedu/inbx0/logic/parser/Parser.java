@@ -26,11 +26,6 @@ public class Parser {
 
     private static final Pattern TASK_INDEX_ARGS_FORMAT = Pattern.compile("(?<targetIndex>.+)");
 
-    //private static final Pattern KEYWORDS_ARGS_FORMAT =
-      //      Pattern.compile("(?<keywords>[^&]+(?:\\s+)*)"); // one or more keywords separated by whitespace
-    
-   // private static final Pattern CONDITIONAL_KEYWORDS_ARGS_FORMAT = // '&' ampersand are reserved for AND relational indicators
-     //       Pattern.compile("(?<keywords>.*[&].*)"); // one or more keywords separated by ampersand
     private static final Pattern NORMAL_KEYWORDS_ARGS_FORMAT =   // '&', '|', '(', ')' are reserved for logic operation
             Pattern.compile("(?<keywords>[^&|()]+(?:\\s+)*)"); // one or more keywords separated by whitespace
     
@@ -919,26 +914,10 @@ public class Parser {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     FindCommand.MESSAGE_USAGE));
         }
-        /*
-        if(matcher2.matches()) {
-            logicRelation = true;
-            keywords = matcher2.group("keywords").split("&");
-            try{
-                for(String keyword: keywords) {
-                    keywordSet.add(convertKeywordsIntoDefinedFormat(keyword));
-                }
-            }catch (IllegalValueException ive) {
-                return new IncorrectCommand(ive.getMessage());
-            }
-        }
-        if(stackChar == "" || stackChar.matches("\\s+")) {
-            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, 
-                FindCommand.EMPTY_KEYWORDS_USAGE));
-        }
-        */
         if(matcher2.matches()) {
             logicRelation = true;
             String arguments = matcher2.group("arguments").trim();
+            System.out.println(arguments);
             if(INVALID_LOGIC_SEARCH_ARGS1.matcher(arguments).matches() || 
                     INVALID_LOGIC_SEARCH_ARGS2.matcher(arguments).matches() || 
                     INVALID_LOGIC_SEARCH_ARGS3.matcher(arguments).matches()) {
@@ -1022,31 +1001,6 @@ public class Parser {
                 return new IncorrectCommand(ive.getMessage());
             }
         }
-
-                
-/*                if(arguments.substring(index, index+1).matches("[(&|)]")) {
-                    try {
-                        if(!arguments.substring(startIndex, index).matches("\\s+")) {
-                            keywordSet.add(convertKeywordsIntoDefinedFormat(arguments.substring(startIndex, index)));
-                        }
-                        System.out.println("keyword1: " + keywordSet);
-                    } catch (IllegalValueException ive) {
-                        return new IncorrectCommand(ive.getMessage());
-                    }
-                    keywordSet.add(arguments.substring(index, index+1));
-                    System.out.println("keyword2: " + keywordSet);
-                    startIndex = index+1;
-                }
-            }
-            System.out.println("keyword3: " + keywordSet);
-            try {
-                keywordSet.add(convertKeywordsIntoDefinedFormat(arguments.substring(startIndex, arguments.length())));
-            } catch (IllegalValueException ive) {
-                return new IncorrectCommand(ive.getMessage());
-            }        
-            System.out.println("keyword4: " + keywordSet);
-        }
-        */
         else{
             logicRelation = false;
             keywords = matcher1.group("keywords").split("\\s+");
