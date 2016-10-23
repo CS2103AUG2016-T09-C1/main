@@ -5,6 +5,8 @@ import java.util.Calendar;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import javafx.application.Platform;
+
 import seedu.inbx0.commons.core.EventsCenter;
 import seedu.inbx0.commons.events.ui.ShowHelpRequestEvent;
 import seedu.inbx0.commons.events.ui.ShowReminderRequestEvent;
@@ -103,13 +105,9 @@ public class ReminderTask {
     class ReminderMessage extends TimerTask {
         public void run() {
             toolkit.beep();
+            Platform.runLater(() -> {
             EventsCenter.getInstance().post(new ShowReminderRequestEvent(task));
-            System.out.println("Here's a reminder!");
-            System.out.println(task.getName());
-            System.out.println("Start Date: " + task.getStartDate());
-            System.out.println("Start Time: " + task.getStartTime());
-            System.out.println("End Date: " + task.getEndDate());
-            System.out.println("End Time: " + task.getEndTime());
+            });
             isAlive = false;
             timer.cancel();
             
