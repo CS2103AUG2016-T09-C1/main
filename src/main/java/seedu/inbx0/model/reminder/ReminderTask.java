@@ -13,6 +13,7 @@ import seedu.inbx0.commons.events.ui.ShowReminderRequestEvent;
 import seedu.inbx0.commons.exceptions.IllegalValueException;
 import seedu.inbx0.logic.commands.Command;
 import seedu.inbx0.logic.commands.RemindCommand;
+import seedu.inbx0.model.tag.Tag;
 import seedu.inbx0.model.task.Date;
 import seedu.inbx0.model.task.ReadOnlyTask;
 import seedu.inbx0.model.task.Time;
@@ -100,6 +101,19 @@ public class ReminderTask {
                 .append(" Start Time: ")
                 .append(getStartTime());
         return builder.toString();
+    }
+    
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof ReminderTask // this is first to avoid NPE below 
+                && this.date.value.equals(((ReminderTask) other).date.value) // state checks here onwards
+                && this.time.value.equals(((ReminderTask) other).time.value)
+                && this.task.getName().equals(((ReminderTask) other).task.getName())
+                && this.task.getStartDate().equals(((ReminderTask) other).task.getStartDate())
+                && this.task.getStartTime().equals(((ReminderTask) other).task.getStartTime())
+                && this.task.getEndDate().equals(((ReminderTask) other).task.getEndDate())
+                && this.task.getEndTime().equals(((ReminderTask) other).task.getEndTime()));
     }
     
     class ReminderMessage extends TimerTask {
