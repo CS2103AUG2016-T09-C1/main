@@ -103,7 +103,7 @@ public class ReminderTask {
     class ReminderMessage extends TimerTask {
         public void run() {
             toolkit.beep();
-//            EventsCenter.getInstance().post(new ShowReminderRequestEvent());
+    //        EventsCenter.getInstance().post(new ShowReminderRequestEvent(task));
             System.out.println("Here's a reminder!");
             System.out.println(task.getName());
             System.out.println("Start Date: " + task.getStartDate());

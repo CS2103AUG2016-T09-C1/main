@@ -56,80 +56,80 @@ public class Parser {
             Pattern.compile("(?<first>[0-9]+) to (?<last>[0-9]+)");
  
     private static final Pattern TASK_DATA_ARGS_FORMAT = // '/' forward slashes are reserved for delimiter prefixes
-            Pattern.compile("(?<name>[^/]+)"
-                    + " s/(?<startDate>[^$]+)"
-                    + " st/(?<startTime>[^/]+)"
-                    + " e/(?<endDate>[^$]+)"
-                    + " et/(?<endTime>[^/]+)"
-                    + " i/(?<level>[^/]+)"
-                    + "(?<tagArguments>(?: t/[^/]+)*)"); // variable number of tags
+            Pattern.compile("(?<name>[^=]+)"
+                    + " s=(?<startDate>[^=]+)"
+                    + " st=(?<startTime>[^=]+)"
+                    + " e=(?<endDate>[^=]+)"
+                    + " et=(?<endTime>[^=]+)"
+                    + " i=(?<level>[^=]+)"
+                    + "(?<tagArguments>(?: t=[^=]+)*)"); // variable number of tags
     private static final Pattern TASK_DATA_ARGS_FORMAT_2 = // '/' forward slashes are reserved for delimiter prefixes
-            Pattern.compile("(?<name>[^/]+)"
-                    + " s/(?<startDate>[^$]+)"
-                    + " st/(?<startTime>[^/]+)"
-                    + " e/(?<endDate>[^$]+)"
-                    + " et/(?<endTime>[^/]+)"
-                    + "(?<tagArguments>(?: t/[^/]+)*)");
+            Pattern.compile("(?<name>[^=]+)"
+                    + " s=(?<startDate>[^=]+)"
+                    + " st=(?<startTime>[^=]+)"
+                    + " e=(?<endDate>[^=]+)"
+                    + " et=(?<endTime>[^=]+)"
+                    + "(?<tagArguments>(?: t=[^=]+)*)");
     private static final Pattern TASK_DATA_ARGS_FORMAT_3 = // '/' forward slashes are reserved for delimiter prefixes
-            Pattern.compile("(?<name>[^/]+)"
-                    + " s/(?<startDate>[^$]+)"
-                    + " e/(?<endDate>[^$]+)"
-                    + " i/(?<level>[^/]+)"
-                    + "(?<tagArguments>(?: t/[^/]+)*)");
+            Pattern.compile("(?<name>[^=]+)"
+                    + " s=(?<startDate>[^=]+)"
+                    + " e=(?<endDate>[^=]+)"
+                    + " i=(?<level>[^=]+)"
+                    + "(?<tagArguments>(?: t=[^=]+)*)");
     private static final Pattern TASK_DATA_ARGS_FORMAT_4 = // '/' forward slashes are reserved for delimiter prefixes
-            Pattern.compile("(?<name>[^/]+)"
-                    + " s/(?<startDate>[^$]+)"
-                    + " e/(?<endDate>[^$]+)"
-                    + "(?<tagArguments>(?: t/[^/]+)*)");  
+            Pattern.compile("(?<name>[^=]+)"
+                    + " s=(?<startDate>[^=]+)"
+                    + " e=(?<endDate>[^=]+)"
+                    + "(?<tagArguments>(?: t=[^=]+)*)");  
     private static final Pattern DEADLINE_TASK_DATA_ARGS_FORMAT = // '/' forward slashes are reserved for delimiter prefixes
-            Pattern.compile("(?<name>[^/]+)"
-                    + " e/(?<endDate>[^$]+)"
-                    + " et/(?<endTime>[^/]+)"
-                    + " i/(?<level>[^/]+)"
-                    + "(?<tagArguments>(?: t/[^/]+)*)");
+            Pattern.compile("(?<name>[^=]+)"
+                    + " e=(?<endDate>[^=]+)"
+                    + " et=(?<endTime>[^=]+)"
+                    + " i=(?<level>[^=]+)"
+                    + "(?<tagArguments>(?: t=[^=]+)*)");
     private static final Pattern DEADLINE_TASK_DATA_ARGS_FORMAT_2 = // '/' forward slashes are reserved for delimiter prefixes
-            Pattern.compile("(?<name>[^/]+)"
-                    + " e/(?<endDate>[^$]+)"
-                    + " et/(?<endTime>[^/]+)"
-                    + "(?<tagArguments>(?: t/[^/]+)*)");
+            Pattern.compile("(?<name>[^=]+)"
+                    + " e=(?<endDate>[^=]+)"
+                    + " et=(?<endTime>[^=]+)"
+                    + "(?<tagArguments>(?: t=[^=]+)*)");
     private static final Pattern DEADLINE_TASK_DATA_ARGS_FORMAT_3 = // '/' forward slashes are reserved for delimiter prefixes
-            Pattern.compile("(?<name>[^/]+)"
-                    + " e/(?<endDate>[^$]+)"
-                    + " i/(?<level>[^/]+)"
-                    + "(?<tagArguments>(?: t/[^/]+)*)");
+            Pattern.compile("(?<name>[^=]+)"
+                    + " e=(?<endDate>[^=]+)"
+                    + " i=(?<level>[^=]+)"
+                    + "(?<tagArguments>(?: t=[^=]+)*)");
     private static final Pattern DEADLINE_TASK_DATA_ARGS_FORMAT_4 = // '/' forward slashes are reserved for delimiter prefixes
-            Pattern.compile("(?<name>[^/]+)"
-                    + " e/(?<endDate>[^$]+)"
-                    + "(?<tagArguments>(?: t/[^/]+)*)");
+            Pattern.compile("(?<name>[^=]+)"
+                    + " e=(?<endDate>[^=]+)"
+                    + "(?<tagArguments>(?: t=[^=]+)*)");
     private static final Pattern FLOATING_TASK_DATA_ARGS_FORMAT = // '/' forward slashes are reserved for delimiter prefixes
-            Pattern.compile("(?<name>[^/]+)"
-                    + " i/(?<level>[^/]+)"
-                    + "(?<tagArguments>(?: t/[^/]+)*)"); // variable number of tags
+            Pattern.compile("(?<name>[^=]+)"
+                    + " i=(?<level>[^=]+)"
+                    + "(?<tagArguments>(?: t=[^=]+)*)"); // variable number of tags
     private static final Pattern FLOATING_TASK_DATA_ARGS_FORMAT_2 = // '/' forward slashes are reserved for delimiter prefixes
-            Pattern.compile("(?<name>[^/]+)"
-                    + "(?<tagArguments>(?: t/[^/]+)*)"); // variable number of tags
+            Pattern.compile("(?<name>[^=]+)"
+                    + "(?<tagArguments>(?: t=[^=]+)*)"); // variable number of tags
     private static final Pattern START_TASK_DATA_ARGS_FORMAT = // '/' forward slashes are reserved for delimiter prefixes
-            Pattern.compile("(?<name>[^/]+)"
-                    + " s/(?<startDate>[^$]+)"
-                    + " st/(?<startTime>[^/]+)"
-                    + " i/(?<level>[^/]+)"
-                    + "(?<tagArguments>(?: t/[^/]+)*)");
+            Pattern.compile("(?<name>[^=]+)"
+                    + " s=(?<startDate>[^=]+)"
+                    + " st=(?<startTime>[^=]+)"
+                    + " i=(?<level>[^=]+)"
+                    + "(?<tagArguments>(?: t=[^=]+)*)");
     private static final Pattern START_TASK_DATA_ARGS_FORMAT_2 = // '/' forward slashes are reserved for delimiter prefixes
-            Pattern.compile("(?<name>[^/]+)"
-                    + " s/(?<startDate>[^$]+)"
-                    + " st/(?<startTime>[^/]+)"
-                    + "(?<tagArguments>(?: t/[^/]+)*)");
+            Pattern.compile("(?<name>[^=]+)"
+                    + " s=(?<startDate>[^=]+)"
+                    + " st=(?<startTime>[^=]+)"
+                    + "(?<tagArguments>(?: t=[^=]+)*)");
     private static final Pattern START_TASK_DATA_ARGS_FORMAT_3 = // '/' forward slashes are reserved for delimiter prefixes
-            Pattern.compile("(?<name>[^/]+)"
-                    + " s/(?<startDate>[^$]+)"
-                    + " i/(?<level>[^/]+)"
-                    + "(?<tagArguments>(?: t/[^/]+)*)");
+            Pattern.compile("(?<name>[^=]+)"
+                    + " s=(?<startDate>[^=]+)"
+                    + " i=(?<level>[^=]+)"
+                    + "(?<tagArguments>(?: t=[^=]+)*)");
     private static final Pattern START_TASK_DATA_ARGS_FORMAT_4 = // '/' forward slashes are reserved for delimiter prefixes
-            Pattern.compile("(?<name>[^/]+)"
-                    + " s/(?<startDate>[^$]+)"
-                    + "(?<tagArguments>(?: t/[^/]+)*)");
+            Pattern.compile("(?<name>[^=]+)"
+                    + " s=(?<startDate>[^=]+)"
+                    + "(?<tagArguments>(?: t=[^=]+)*)");
     private static final Pattern ADD_TAGS_ARGS_FORMAT = // '/' forward slashes are reserved for delimiter prefixes
-            Pattern.compile("(?<targetIndex>\\S+)(?<tagArguments>(?: t/[^/]+)*)"); // variable number of tags
+            Pattern.compile("(?<targetIndex>\\S+)(?<tagArguments>(?: t=[^=]+)*)"); // variable number of tags
     private static final Pattern DATE_TIME_FORMAT = 
             Pattern.compile("(?<date>[0-9 ]+[./-][0-9 ]+[./-][0-9]+)"
                     + "(?<time>(?: [^/]+))");
@@ -149,16 +149,16 @@ public class Parser {
     
     private static final Pattern TASK_REMINDER_ARGS_FORMAT = 
             Pattern.compile("(?<targetIndex>[0-9]+)"
-                           + " s/(?<startDate>[^$]+)");
+                           + " s=(?<startDate>[^=]+)");
     
     private static final Pattern TASK_EDIT_DATA_ARGS_FORMAT = Pattern.compile("(?<targetIndex>\\S+)(?<arguments>.*)");
-    private static final CharSequence NAME = "n/";
-    private static final CharSequence START_DATE = "s/";
-    private static final CharSequence START_TIME = "st/";
-    private static final CharSequence END_DATE = "e/";
-    private static final CharSequence END_TIME = "et/";
-    private static final CharSequence IMPORTANCE = "i/";
-    private static final CharSequence TAG = "t/";
+    private static final CharSequence NAME = "n=";
+    private static final CharSequence START_DATE = "s=";
+    private static final CharSequence START_TIME = "st=";
+    private static final CharSequence END_DATE = "e=";
+    private static final CharSequence END_TIME = "et=";
+    private static final CharSequence IMPORTANCE = "i=";
+    private static final CharSequence TAG = "t=";
   
     /**
      * Parses user input into command for execution.
@@ -483,7 +483,7 @@ public class Parser {
             return Collections.emptySet();
         }
         // replace first delimiter prefix, then split
-        final Collection<String> tagStrings = Arrays.asList(tagArguments.replaceFirst(" t/", "").split(" t/"));
+        final Collection<String> tagStrings = Arrays.asList(tagArguments.replaceFirst(" t=", "").split(" t="));
         return new HashSet<>(tagStrings);
     }
     
@@ -645,27 +645,27 @@ public class Parser {
         String regex = "";
         
         if (arguments.contains(NAME)) {
-            regex += " n/(?<name>[^/]+)";
+            regex += " n=(?<name>[^=]+)";
         }
         if (arguments.contains(START_DATE)) {
-            regex += " s/(?<startDate>[^$]+)";
+            regex += " s=(?<startDate>[^=]+)";
         }
         if (arguments.contains(START_TIME)) {
-            regex += " st/(?<startTime>[^/]+)";
+            regex += " st=(?<startTime>[^=]+)";
         }
         if (arguments.contains(END_DATE)) {
-            regex += " e/(?<endDate>[^$]+)";
+            regex += " e=(?<endDate>[^=]+)";
         }
         
         if (arguments.contains(END_TIME)) {
-            regex += " et/(?<endTime>[^/]+)";
+            regex += " et=(?<endTime>[^=]+)";
         }
         
         if(arguments.contains(IMPORTANCE)) {
-            regex += " i/(?<level>[^/]+)";            
+            regex += " i=(?<level>[^=]+)";            
         }
                 
-        regex += "(?<tagArguments>(?: t/[^/]+)*)";
+        regex += "(?<tagArguments>(?: t=[^=]+)*)";
         
         Pattern editArguments = Pattern.compile(regex);
         
@@ -790,7 +790,6 @@ public class Parser {
      * @return the prepared command
      */
     private Command prepareRemind(String arguments) {
-        // TODO Auto-generated method stub
         final Matcher matcher = TASK_REMINDER_ARGS_FORMAT.matcher(arguments.trim());
         if(!matcher.matches()) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, RemindCommand.MESSAGE_USAGE));
