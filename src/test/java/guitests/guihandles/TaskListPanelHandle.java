@@ -37,6 +37,7 @@ public class TaskListPanelHandle extends GuiHandle {
         return taskList.getSelectionModel().getSelectedItems();
     }
 
+    @SuppressWarnings("unchecked")
     public ListView<ReadOnlyTask> getListView() {
         return (ListView<ReadOnlyTask>) getNode(TASK_LIST_VIEW_ID);
     }
@@ -128,7 +129,22 @@ public class TaskListPanelHandle extends GuiHandle {
         guiRobot.sleep(100);
         return getTaskCardHandle(task);
     }
-
+    
+    /**
+     * Navigates the listview to display and select the task by index.
+     * @throws IllegalValueException 
+     */
+    //@@author A0139481Y
+    public TaskCardHandle navigateToTask(int index) throws IllegalValueException {
+           guiRobot.interact(() -> {
+            getListView().scrollTo(index);
+            guiRobot.sleep(150);
+            getListView().getSelectionModel().select(index);
+        });
+        guiRobot.sleep(100);
+        return getTaskCardHandle(index);
+    }
+    //@@author
 
     /**
      * Returns the position of the task given, {@code NOT_FOUND} if not found in the list.
