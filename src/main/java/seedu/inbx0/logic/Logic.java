@@ -1,5 +1,7 @@
 package seedu.inbx0.logic;
 
+import java.util.Stack;
+
 import javafx.collections.ObservableList;
 import seedu.inbx0.logic.commands.CommandResult;
 import seedu.inbx0.model.task.ReadOnlyTask;
@@ -59,4 +61,22 @@ public interface Logic {
     
     /** Returns the filtered list of tasks according to importance */
     ObservableList<ReadOnlyTask> getFilteredImportanceTaskList(String importance);
+    
+    /** Returns the command text of the previous command */
+    Stack<String> getPreviousCommandText();
+    
+    /** Returns the command text of the next command */
+    Stack<String> getNextCommandText();
+    
+    /** Pop the command text of the previous command */
+    String popPreviousCommandText();
+
+    /** Pop the command text of the next command */
+    String popNextCommandText();
+    
+    /** Push the command text to the previousCommand stack*/
+    void setPreviousCommandText(String commandText);
+    
+    /** Push the command text to the nextCommand stack*/
+    void setNextCommandText(String commandText);
 }

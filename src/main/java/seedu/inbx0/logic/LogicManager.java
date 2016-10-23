@@ -10,6 +10,8 @@ import seedu.inbx0.logic.internalcommands.RemoveReminder;
 import seedu.inbx0.logic.parser.Parser;
 import seedu.inbx0.model.Model;
 import seedu.inbx0.model.task.ReadOnlyTask;
+
+import java.util.Stack;
 import java.util.logging.Logger;
 
 /**
@@ -20,16 +22,44 @@ public class LogicManager extends ComponentManager implements Logic {
 
     private final Model model;
     private final Parser parser;
+    private Stack<String> previousCommandText = new Stack<String> ();
+    private Stack<String> nextCommandText = new Stack<String> ();
 
     public LogicManager(Model model) {
         this.model = model;
         this.parser = new Parser();
     }
+    
+    public Stack<String> getPreviousCommandText() {
+        return previousCommandText;
+    }
 
+    public Stack<String> getNextCommandText() {
+        return nextCommandText;
+    }
+    
+    public String popPreviousCommandText() {
+        return previousCommandText.pop();
+    }
+
+    public String popNextCommandText() {
+        return nextCommandText.pop();
+    }
+    
+    public void setPreviousCommandText(String commandText) {
+        previousCommandText.push(commandText);
+    }
+    
+    public void setNextCommandText(String commandText) {
+        nextCommandText.push(commandText);
+    }
+    
     @Override
     public CommandResult execute(String commandText) {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
         Command command = parser.parseCommand(commandText);
+        System.out.println(commandText);
+        previousCommandText.push(commandText);
         command.setData(model);
         return command.execute();
     }
