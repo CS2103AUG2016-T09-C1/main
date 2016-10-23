@@ -69,6 +69,7 @@ public class OverdueTaskWindow extends UiPart {
         setTitle(TITLE);
         setIcon(dialogStage, ICON);
         setWindowMinSize();
+        dialogStage.setResizable(false);
         scene = new Scene(mainPane);
         dialogStage.setScene(scene);
         taskListPanel = TaskListPanel.load(dialogStage, getTaskListPlaceholder(), logic.getFilteredOverdueTaskList());
