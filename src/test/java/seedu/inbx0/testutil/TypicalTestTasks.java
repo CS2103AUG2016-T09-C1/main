@@ -30,8 +30,8 @@ public class TypicalTestTasks {
             ida = new TaskBuilder().withName("Ida Mueller").withStartDate("tmr").withStartTime("1000").withEndDate("next week").withEndTime("12pm").withImportance("Yellow").build();
             //@@author A0139481Y
             noImportance = new TaskBuilder().withName("No importance").withStartDate("next wed").withStartTime("1000").withEndDate("next thurs").withEndTime("12pm").withTags("tagged").build();
-            floatingNoImportance = new TaskBuilder().withName("Float no importance").withTags("tag#123").build();
-            floating = new TaskBuilder().withName("Floating Task").withImportance("G").withTags("tag#1515").build();
+            floatingNoImportance = new TaskBuilder().withName("Float no importance").withTags("tag123").build();
+            floating = new TaskBuilder().withName("Floating Task").withImportance("G").withTags("tag1515").build();
             deadline = new TaskBuilder().withName("Deadline").withEndDate("next week").withEndTime("12pm").withImportance("Red").withTags("tagged").build();
             deadlineNoImportance = new TaskBuilder().withName("Deadline no importance").withEndDate("next week").withEndTime("12pm").withTags("tagged").build();
             //@@author

@@ -151,23 +151,23 @@ public class LogicManagerTest {
 	public final void execute_add_invalidArgsFormat() throws Exception {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
         assertCommandBehavior(
-                "add Valid Name Buy Grocery es/valid@email.butNoPhonePrefix a/valid, address", expectedMessage);
+                "add Valid Name e=invalid time t=valid", expectedMessage);
         assertCommandBehavior(
-                "add Valid Name p/12345 valid@email.butNoPrefix a/valid, address", expectedMessage);
+                "add Valid Name i=red s=invalid st=9am ", expectedMessage);
         assertCommandBehavior(
-                "add Valid Name p/12345 es/valid@email.butNoAddressPrefix valid, address", expectedMessage);
+                "add Valid Name t=valid s=tomorrow st=9am i=green", expectedMessage);
     }
 
     @Test
 	public final void execute_add_invalidTaskData() throws Exception {
         assertCommandBehavior(
-                "add Valid Name s/invalid st/12pm e/today et/4pm i/r", Date.MESSAGE_DATE_CONSTRAINTS);
+                "add Valid Name s=invalid st=12pm e=today et=4pm i=r", Date.MESSAGE_DATE_CONSTRAINTS);
         assertCommandBehavior(
-                "add Valid Name s/today st/invalid e/today et/4pm i/r", Time.MESSAGE_TIME_CONSTRAINTS);
+                "add Valid Name s=today st=invalid e=today et=4pm i=r", Time.MESSAGE_TIME_CONSTRAINTS);
         assertCommandBehavior(
-                "add Valid Name s/today st/12pm e/today et/4pm i/invalid", Importance.MESSAGE_IMPORTANCE_CONSTRAINTS);
+                "add Valid Name s=today st=12pm e=today et=4pm i=invalid", Importance.MESSAGE_IMPORTANCE_CONSTRAINTS);
         assertCommandBehavior(
-                "add Valid Name s/today st/12pm e/today et/4pm i/r t/invalid_-[.tag", Tag.MESSAGE_TAG_CONSTRAINTS);
+                "add Valid Name s=today st=12pm e=today et=4pm i=r t=invalid_-[.tag", Tag.MESSAGE_TAG_CONSTRAINTS);
 
     }
 
@@ -422,15 +422,15 @@ public class LogicManagerTest {
             cmd.append("add ");
 
             cmd.append(p.getName().toString());
-            cmd.append(" s/").append(p.getStartDate());
-            cmd.append(" st/").append(p.getStartTime());
-            cmd.append(" e/").append(p.getEndDate());
-            cmd.append(" et/").append(p.getEndTime());
-            cmd.append(" i/").append(p.getLevel());
+            cmd.append(" s=").append(p.getStartDate());
+            cmd.append(" st=").append(p.getStartTime());
+            cmd.append(" e=").append(p.getEndDate());
+            cmd.append(" et=").append(p.getEndTime());
+            cmd.append(" i=").append(p.getLevel());
 
             UniqueTagList tags = p.getTags();
             for(Tag t: tags){
-                cmd.append(" t/").append(t.tagName);
+                cmd.append(" t=").append(t.tagName);
             }
 
             return cmd.toString();
