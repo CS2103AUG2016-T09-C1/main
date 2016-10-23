@@ -12,15 +12,11 @@ public class ShowCommand extends Command {
     public static final String COMMAND_WORD = "show";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Show a filtered list by the specific filter condition\n"
-            + "Example: " + COMMAND_WORD + "today";
+            + "Example: " + COMMAND_WORD + " today";
 
     public static final String SHOWING_FILTERED_LIST_MESSAGE = "Show a filtered list";
     
     private String filterCondition;
-    
-    public ShowCommand() {
-        this.filterCondition = "";
-    }
     
     public ShowCommand (String filterCondition) {
         this.filterCondition = filterCondition;

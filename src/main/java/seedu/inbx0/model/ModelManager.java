@@ -28,17 +28,18 @@ public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private final TaskList taskList;
+    private final FilteredList<Task> backingTaskList;
     private final FilteredList<Task> filteredTasks;
-    private final FilteredList<Task> filteredNormalTasks;
-    private final FilteredList<Task> filteredFloatTasks;
-    private final FilteredList<Task> filteredEventTasks;
-    private final FilteredList<Task> filteredDeadlineTasks;
-    private final FilteredList<Task> filteredDoneTasks;
-    private final FilteredList<Task> filteredToDoTasks;
-    private final FilteredList<Task> filteredOverdueTasks;
-    private final FilteredList<Task> filteredBeforedueTasks;
-    private final FilteredList<Task> filteredDayTasks;
-    private final FilteredList<Task> filteredImportanceTasks;
+    //private final FilteredList<Task> filteredNormalTasks;
+    //private final FilteredList<Task> filteredFloatTasks;
+    //private final FilteredList<Task> filteredEventTasks;
+    //private final FilteredList<Task> filteredDeadlineTasks;
+    //private final FilteredList<Task> filteredDoneTasks;
+    //private final FilteredList<Task> filteredToDoTasks;
+    //private final FilteredList<Task> filteredOverdueTasks;
+    //private final FilteredList<Task> filteredBeforedueTasks;
+    //private final FilteredList<Task> filteredDayTasks;
+    //private final FilteredList<Task> filteredImportanceTasks;
 
     /**
      * Initializes a ModelManager with the given TaskList
@@ -53,16 +54,17 @@ public class ModelManager extends ComponentManager implements Model {
 
         taskList = new TaskList(src);
         filteredTasks = new FilteredList<>(taskList.getTasks());
-        filteredNormalTasks = new FilteredList<>(taskList.getTasks());
-        filteredFloatTasks = new FilteredList<>(taskList.getTasks());
-        filteredEventTasks = new FilteredList<>(taskList.getTasks());
-        filteredDeadlineTasks = new FilteredList<>(taskList.getTasks());
-        filteredToDoTasks = new FilteredList<>(taskList.getTasks());
-        filteredDoneTasks = new FilteredList<>(taskList.getTasks());
-        filteredOverdueTasks = new FilteredList<>(taskList.getTasks());
-        filteredBeforedueTasks = new FilteredList<>(taskList.getTasks());
-        filteredDayTasks = new FilteredList<>(taskList.getTasks());
-        filteredImportanceTasks = new FilteredList<>(taskList.getTasks());
+        backingTaskList = new FilteredList<>(taskList.getTasks());
+        //filteredNormalTasks = new FilteredList<>(taskList.getTasks());
+        //filteredFloatTasks = new FilteredList<>(taskList.getTasks());
+        //filteredEventTasks = new FilteredList<>(taskList.getTasks());
+        //filteredDeadlineTasks = new FilteredList<>(taskList.getTasks());
+        //filteredToDoTasks = new FilteredList<>(taskList.getTasks());
+        //filteredDoneTasks = new FilteredList<>(taskList.getTasks());
+        //filteredOverdueTasks = new FilteredList<>(taskList.getTasks());
+        //filteredBeforedueTasks = new FilteredList<>(taskList.getTasks());
+        //filteredDayTasks = new FilteredList<>(taskList.getTasks());
+        //filteredImportanceTasks = new FilteredList<>(taskList.getTasks());
     }
 
     public ModelManager() {
@@ -72,16 +74,17 @@ public class ModelManager extends ComponentManager implements Model {
     public ModelManager(ReadOnlyTaskList initialData, UserPrefs userPrefs) {
         taskList = new TaskList(initialData);
         filteredTasks = new FilteredList<>(taskList.getTasks());
-        filteredNormalTasks = new FilteredList<>(taskList.getTasks());
-        filteredFloatTasks = new FilteredList<>(taskList.getTasks());
-        filteredEventTasks = new FilteredList<>(taskList.getTasks());
-        filteredDeadlineTasks = new FilteredList<>(taskList.getTasks());
-        filteredToDoTasks = new FilteredList<>(taskList.getTasks());
-        filteredDoneTasks = new FilteredList<>(taskList.getTasks());
-        filteredOverdueTasks = new FilteredList<>(taskList.getTasks());
-        filteredBeforedueTasks = new FilteredList<>(taskList.getTasks());
-        filteredDayTasks = new FilteredList<>(taskList.getTasks());
-        filteredImportanceTasks = new FilteredList<>(taskList.getTasks());
+        backingTaskList = new FilteredList<>(taskList.getTasks());
+        //filteredNormalTasks = new FilteredList<>(taskList.getTasks());
+        //filteredFloatTasks = new FilteredList<>(taskList.getTasks());
+        //filteredEventTasks = new FilteredList<>(taskList.getTasks());
+        //filteredDeadlineTasks = new FilteredList<>(taskList.getTasks());
+        //filteredToDoTasks = new FilteredList<>(taskList.getTasks());
+        //filteredDoneTasks = new FilteredList<>(taskList.getTasks());
+        //filteredOverdueTasks = new FilteredList<>(taskList.getTasks());
+        //filteredBeforedueTasks = new FilteredList<>(taskList.getTasks());
+        //filteredDayTasks = new FilteredList<>(taskList.getTasks());
+        //filteredImportanceTasks = new FilteredList<>(taskList.getTasks());
     }
 
     @Override
@@ -96,6 +99,7 @@ public class ModelManager extends ComponentManager implements Model {
         updateFilteredListToShowAll();
         indicateTaskListChanged();
     }
+    
     @Override
     public ReadOnlyTaskList getTaskList() {
         return taskList;
@@ -143,7 +147,12 @@ public class ModelManager extends ComponentManager implements Model {
             indicateTaskListChanged();
     }
     //=========== Filtered Task List Accessors ===============================================================
-
+    
+    @Override 
+    public UnmodifiableObservableList<ReadOnlyTask> getBackingTaskList() {
+        return new UnmodifiableObservableList<>(backingTaskList);
+    }
+    
     @Override
     public UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList() {
         return new UnmodifiableObservableList<>(filteredTasks);
@@ -152,61 +161,68 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public UnmodifiableObservableList<ReadOnlyTask> getFilteredNormalTaskList() {
         updateFilteredNormalTaskList();
-        return new UnmodifiableObservableList<>(filteredNormalTasks);
+        return new UnmodifiableObservableList<>(filteredTasks);
     }
 
     @Override
     public UnmodifiableObservableList<ReadOnlyTask> getFilteredDoneTaskList() {
         updateFilteredDoneTaskList();
-        return new UnmodifiableObservableList<>(filteredDoneTasks);
+        return new UnmodifiableObservableList<>(filteredTasks);
     }
     
     @Override
     public UnmodifiableObservableList<ReadOnlyTask> getFilteredToDoTaskList() {
         updateFilteredToDoTaskList();
-        return new UnmodifiableObservableList<>(filteredToDoTasks);
+        return new UnmodifiableObservableList<>(filteredTasks);
     }
     
     @Override
     public UnmodifiableObservableList<ReadOnlyTask> getFilteredFloatTaskList() {
         updateFilteredFloatTaskList();
-        return new UnmodifiableObservableList<>(filteredFloatTasks);
+        return new UnmodifiableObservableList<>(filteredTasks);
     }
     
     @Override
     public UnmodifiableObservableList<ReadOnlyTask> getFilteredOverdueTaskList() {    
         updateFilteredOverdueTaskList();
-        return new UnmodifiableObservableList<>(filteredOverdueTasks);
+        return new UnmodifiableObservableList<>(filteredTasks);
     }
     
     @Override
     public UnmodifiableObservableList<ReadOnlyTask> getFilteredEventTaskList() {
         updateFilteredEventTaskList();
-        return new UnmodifiableObservableList<>(filteredEventTasks);
+        return new UnmodifiableObservableList<>(filteredTasks);
     }
 
     @Override
     public UnmodifiableObservableList<ReadOnlyTask> getFilteredDeadlineTaskList() {
         updateFilteredDeadlineTaskList();
-        return new UnmodifiableObservableList<>(filteredDeadlineTasks);
+        return new UnmodifiableObservableList<>(filteredTasks);
     }
 
     @Override
     public UnmodifiableObservableList<ReadOnlyTask> getFilteredBeforedueTaskList() {
         updateFilteredBeforedueTaskList();
-        return new UnmodifiableObservableList<>(filteredBeforedueTasks);
+        return new UnmodifiableObservableList<>(filteredTasks);
     }
 
     @Override
     public UnmodifiableObservableList<ReadOnlyTask> getFilteredDayTaskList(String day) {
         updateFilteredDayTaskList(day);
-        return new UnmodifiableObservableList<>(filteredDayTasks);
+        return new UnmodifiableObservableList<>(filteredTasks);
     }
 
     @Override
     public UnmodifiableObservableList<ReadOnlyTask> getFilteredImportanceTaskList(String importance) {
         updateFilteredImportanceTaskList(importance);
-        return new UnmodifiableObservableList<>(filteredImportanceTasks);
+        return new UnmodifiableObservableList<>(filteredTasks);
+    }
+    
+    @Override
+    public UnmodifiableObservableList<ReadOnlyTask> 
+        getFilteredTaskListAfterFindCommand(boolean logicRelation, List<String> keywords) {
+        updateFilteredTaskList(logicRelation, keywords);
+        return new UnmodifiableObservableList<>(filteredTasks);
     }
 
     @Override
@@ -293,43 +309,43 @@ public class ModelManager extends ComponentManager implements Model {
     }
     
     private void updateFilteredNormalTaskList(Expression expression) {
-        filteredNormalTasks.setPredicate(expression::satisfies);
+        filteredTasks.setPredicate(expression::satisfies);
     }
 
     private void updateFilteredFloatTaskList(Expression expression) {
-        filteredFloatTasks.setPredicate(expression::satisfies);
+        filteredTasks.setPredicate(expression::satisfies);
     }
     
     private void updateFilteredDoneTaskList(Expression expression) {
-        filteredDoneTasks.setPredicate(expression::satisfies);
+        filteredTasks.setPredicate(expression::satisfies);
     }
     
     private void updateFilteredToDoTaskList(Expression expression) {
-        filteredToDoTasks.setPredicate(expression::satisfies);
+        filteredTasks.setPredicate(expression::satisfies);
     }
     
     private void updateFilteredOverdueTaskList(Expression expression) {
-        filteredOverdueTasks.setPredicate(expression::satisfies);
+        filteredTasks.setPredicate(expression::satisfies);
     }
     
     private void updateFilteredBeforedueTaskList(Expression expression) {
-        filteredBeforedueTasks.setPredicate(expression::satisfies);
+        filteredTasks.setPredicate(expression::satisfies);
     }
     
     private void updateFilteredEventTaskList(Expression expression) {
-        filteredEventTasks.setPredicate(expression::satisfies);
+        filteredTasks.setPredicate(expression::satisfies);
     }
     
     private void updateFilteredDeadlineTaskList(Expression expression) {
-        filteredDeadlineTasks.setPredicate(expression::satisfies);
+        filteredTasks.setPredicate(expression::satisfies);
     }
     
     private void updateFilteredDayTaskList(Expression expression) {
-        filteredDayTasks.setPredicate(expression::satisfies);
+        filteredTasks.setPredicate(expression::satisfies);
     }
     
     private void updateFilteredImportanceTaskList(Expression expression) {
-        filteredImportanceTasks.setPredicate(expression::satisfies);
+        filteredTasks.setPredicate(expression::satisfies);
     }
 
     //========== Inner classes/interfaces used for filtering ==================================================
@@ -618,8 +634,6 @@ public class ModelManager extends ComponentManager implements Model {
         
         @Override
         public boolean run(ReadOnlyTask task) {
-            System.out.println("task: " + task.getLevel().getLevel());
-            System.out.println("importance: " + importance);
             return task.getLevel().getLevel().equals(this.importance);
         }
         

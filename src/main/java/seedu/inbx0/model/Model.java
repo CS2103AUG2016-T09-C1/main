@@ -30,6 +30,9 @@ public interface Model {
     
     /** Adds the given task */
     void addTask(Task task) throws UniqueTaskList.DuplicateTaskException;
+    
+    /** Returns the backing task list as an {@code UnmodifiableObservableList<ReadOnlyTask>} */
+    UnmodifiableObservableList<ReadOnlyTask> getBackingTaskList();
 
     /** Returns the filtered task list as an {@code UnmodifiableObservableList<ReadOnlyTask>} */
     UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList();
@@ -63,6 +66,11 @@ public interface Model {
     
     /** Returns the filtered task list according to importance as an {@code UnmodifiableObservableList<ReadOnlyTask>} */
     UnmodifiableObservableList<ReadOnlyTask> getFilteredImportanceTaskList(String importance);
+    
+    /** Returns the filtered task list after find command as an {@code UnmodifiableObservableList<ReadOnlyTask>} */
+    UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskListAfterFindCommand(boolean logicRelation,
+            List<String> keywords);
+
 
     /** Updates the filter of the filtered task list to show all tasks */
     void updateFilteredListToShowAll();
@@ -111,5 +119,4 @@ public interface Model {
     
     /** Checks expiry of reminders */
     void checkReminders();
-
 }

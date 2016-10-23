@@ -24,6 +24,7 @@ public class LogicManager extends ComponentManager implements Logic {
     private final Parser parser;
     private Stack<String> previousCommandText = new Stack<String> ();
     private Stack<String> nextCommandText = new Stack<String> ();
+    //private Stack<>
 
     public LogicManager(Model model) {
         this.model = model;
@@ -78,6 +79,11 @@ public class LogicManager extends ComponentManager implements Logic {
         return command.execute();
     }
 
+    @Override
+    public ObservableList<ReadOnlyTask> getBackingTaskList() {
+        return model.getBackingTaskList();
+    }
+    
     @Override
     public ObservableList<ReadOnlyTask> getFilteredTaskList() {
         return model.getFilteredTaskList();

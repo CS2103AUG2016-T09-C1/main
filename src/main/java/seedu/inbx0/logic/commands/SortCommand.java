@@ -24,7 +24,7 @@ public class SortCommand extends Command {
     @Override
     public CommandResult execute() {
         model.sortTaskList(type, defaultOrder);
-
+        indicateShowNormalTaskListEvent();
         return new CommandResult(MESSAGE_SORT_TASK_SUCCESS);
     }
 
