@@ -3,7 +3,11 @@ package seedu.inbx0.ui;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyCombination;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.web.WebView;
@@ -32,6 +36,8 @@ public class ReminderWindow extends UiPart {
     private Label endDate;
     @FXML
     private Label endTime;
+    @FXML
+    private Button OkayButton;
     
     private ReadOnlyTask task;
     private Stage reminderStage;
@@ -73,5 +79,18 @@ public class ReminderWindow extends UiPart {
     
     public void show() {
         reminderStage.showAndWait();
+    }
+    
+    @FXML
+    public void handleCloseReminder() {
+        reminderStage.close();
+    }
+    
+    @FXML
+    public void keyPressed(KeyEvent evt) {
+        if(evt.getCode().equals(KeyCode.ENTER)) {
+            handleCloseReminder();
+        }
+        
     }
 }
