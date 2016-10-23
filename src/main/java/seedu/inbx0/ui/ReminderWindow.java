@@ -6,11 +6,13 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.web.WebView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import seedu.inbx0.model.task.ReadOnlyTask;
 import java.util.logging.Logger;
 import seedu.inbx0.commons.core.LogsCenter;
+import seedu.inbx0.commons.util.FxViewUtil;
 import seedu.inbx0.logic.Logic;
 
 public class ReminderWindow extends UiPart {
@@ -32,7 +34,7 @@ public class ReminderWindow extends UiPart {
     private Label endTime;
     
     private ReadOnlyTask task;
-    private Scene scene;
+    private Stage reminderStage;
     private VBox mainPane;
     
     public static ReminderWindow load(Stage primaryStage, ReadOnlyTask task){
@@ -51,11 +53,11 @@ public class ReminderWindow extends UiPart {
     }
     
     private void configure(ReadOnlyTask task){
-        this.task = task;
-        setTitle(TITLE);
-        setIcon(ICON);
-        scene = new Scene(mainPane);
-        primaryStage.setScene(scene);
+        this.task = task;        
+        Scene scene = new Scene(mainPane);
+        //Null passed as the parent stage to make it non-modal.
+        reminderStage = createDialogStage(TITLE, null, scene);
+        setIcon(reminderStage, ICON);
         displayInfo();
     }
     
@@ -69,11 +71,7 @@ public class ReminderWindow extends UiPart {
         return FXML;
     }
     
-    private void setTitle(String title) {
-        primaryStage.setTitle(title);
-    }
-    
     public void show() {
-        primaryStage.showAndWait();
+        reminderStage.showAndWait();
     }
 }
