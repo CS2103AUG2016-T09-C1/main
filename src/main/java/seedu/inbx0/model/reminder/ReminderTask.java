@@ -104,12 +104,20 @@ public class ReminderTask {
     
     class ReminderMessage extends TimerTask {
         public void run() {
-            toolkit.beep();
+            toolkit.beep();           
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
             Platform.runLater(() -> {
             EventsCenter.getInstance().post(new ShowReminderRequestEvent(task));
             });
             isAlive = false;
             timer.cancel();
+            
+         
             
         }
     }

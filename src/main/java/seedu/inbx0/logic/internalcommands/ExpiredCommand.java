@@ -1,4 +1,4 @@
-package seedu.inbx0.logic.commands;
+package seedu.inbx0.logic.internalcommands;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -6,6 +6,8 @@ import java.util.List;
 import com.joestelmach.natty.Parser;
 
 import seedu.inbx0.commons.exceptions.IllegalValueException;
+import seedu.inbx0.logic.commands.Command;
+import seedu.inbx0.logic.commands.CommandResult;
 import seedu.inbx0.model.task.Date;
 
 public class ExpiredCommand extends Command {

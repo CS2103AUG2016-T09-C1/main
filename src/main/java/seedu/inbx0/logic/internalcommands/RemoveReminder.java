@@ -1,4 +1,7 @@
-package seedu.inbx0.logic.commands;
+package seedu.inbx0.logic.internalcommands;
+
+import seedu.inbx0.logic.commands.Command;
+import seedu.inbx0.logic.commands.CommandResult;
 
 public class RemoveReminder extends Command {
     

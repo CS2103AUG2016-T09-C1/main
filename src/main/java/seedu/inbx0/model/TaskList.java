@@ -160,12 +160,11 @@ public class TaskList implements ReadOnlyTaskList {
     
     /**
      * Checks reminders' expiry 
-     * and updates the boolean isExpired accordingly if found expired.
+     * and removes them if it has already been activated.
      */
     public boolean checkReminders() {
         return (tasks.checkReminders());
     }
-
     
 //// tag-level operations
 
