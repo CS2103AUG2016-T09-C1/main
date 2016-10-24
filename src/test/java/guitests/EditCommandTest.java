@@ -27,7 +27,7 @@ public class EditCommandTest extends TaskListGuiTest {
         
         //edit tags
         Tag tagToAdd = new Tag("urgent");
-        commandBox.runCommand("update " + targetIndex + " t=newTag");
+        commandBox.runCommand("addtag " + targetIndex + " t=urgent");
         ReadOnlyTask newTask = taskListPanel.getTask(targetIndex - 1);
         assertTrue(newTask.getTags().contains(tagToAdd));
 
