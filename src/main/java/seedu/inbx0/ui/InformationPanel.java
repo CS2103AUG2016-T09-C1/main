@@ -93,6 +93,7 @@ public class InformationPanel extends UiPart {
 
     private void addToPlaceholder() {
         SplitPane.setResizableWithParent(placeHolderPane, false);
+        SplitPane.setResizableWithParent(reminderListView, false);
         placeHolderPane.getChildren().add(mainPane);
     }
     

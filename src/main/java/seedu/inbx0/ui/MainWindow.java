@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.SplitPane;
 import javafx.scene.control.TitledPane;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.AnchorPane;
@@ -79,6 +80,12 @@ public class MainWindow extends UiPart {
 
     @FXML
     private AnchorPane resultDisplayPlaceholder;
+    
+    @FXML
+    private AnchorPane mainDisplayPlaceholder;
+    
+    @FXML
+    private AnchorPane listDisplayPlaceholder;
 
     @FXML
     private AnchorPane statusbarPlaceholder;
@@ -115,7 +122,9 @@ public class MainWindow extends UiPart {
         setWindowDefaultSize(prefs);
         scene = new Scene(rootLayout);
         primaryStage.setScene(scene);
-
+        SplitPane.setResizableWithParent(mainDisplayPlaceholder, false);
+        SplitPane.setResizableWithParent(listDisplayPlaceholder, false);
+        
         setAccelerators();
     }
 
