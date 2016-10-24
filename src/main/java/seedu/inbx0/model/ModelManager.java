@@ -87,6 +87,7 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void resetData(ReadOnlyTaskList newData) {
         taskList.resetData(newData);
+        updateFilteredListToShowAll();
         indicateTaskListChanged();
     }
     
@@ -109,6 +110,7 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
         taskList.removeTask(target);
+        updateFilteredListToShowAll();
         indicateTaskListChanged();
     }
     
@@ -116,6 +118,7 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public synchronized void editTask(ReadOnlyTask target, Task task) throws TaskNotFoundException, DuplicateTaskException {
         taskList.editTask(target, task);
+        updateFilteredListToShowAll();
         indicateTaskListChanged();
     }
     

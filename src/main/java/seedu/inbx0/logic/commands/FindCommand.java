@@ -40,6 +40,7 @@ public class FindCommand extends Command {
 	@Override  
 	public CommandResult execute() {
 	    model.updateFilteredTaskList(logicRelation, keywordSet);
+	    indicateShowNormalTaskListEventCommand();
 	    return new CommandResult(getMessageForTaskListShownSummary(model.getFilteredTaskList().size()));
     }
 

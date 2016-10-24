@@ -23,7 +23,7 @@ import seedu.inbx0.model.task.ReadOnlyTask;
 public class MainWindow extends UiPart {
 
     private static final String ICON = "/images/address_book_32.png";
-    private static final String FXML = "MainWindow2.fxml";
+    private static final String FXML = "MainWindow.fxml";
     public static final int MIN_HEIGHT = 600;
     public static final int MIN_WIDTH = 450;
 
@@ -358,6 +358,7 @@ public class MainWindow extends UiPart {
 
     public void handleShowFilteredListRequestByShowCommand(String filterCondition) {
         if (filterCondition.equals("today")) {
+            closeAllTitledPane();
             handleListToday();
         } else if (filterCondition.equals("Monday")) {
             DayTitledPane.setExpanded(true);
@@ -419,5 +420,19 @@ public class MainWindow extends UiPart {
     public void handleReminder(ReadOnlyTask task) {
         ReminderWindow reminderWindow = ReminderWindow.load(primaryStage, task);
         reminderWindow.show();
+    }
+    
+    public void handleShowNormalTaskList() {
+        closeAllTitledPane();
+        upperTaskListPanel = TaskListPanel.load(primaryStage, getUpperTaskListPlaceholder(),
+                logic.getFilteredTaskList());
+    }
+
+    private void closeAllTitledPane() {
+        DayTitledPane.setExpanded(false);
+        CategoryTitledPane.setExpanded(false);
+        ImportanceTitledPane.setExpanded(false);
+        CompletenessTitledPane.setExpanded(false);
+        ExpireTitledPane.setExpanded(false);
     }
 }
