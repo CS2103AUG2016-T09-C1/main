@@ -588,7 +588,6 @@ public class Parser {
                 } else {
                     argumentsForEdit[3] = dateParse(matcher2.group("endDate"));
                     argumentsForEdit[4] = timeParse(matcher2.group("endDate"));
-                    System.out.println(argumentsForEdit[4]);
                     Time getTime = null;
                     try {
                         getTime = new Time(argumentsForEdit[4]);

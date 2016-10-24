@@ -30,9 +30,9 @@ public class EditCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Edits the task identified by the index number used in the last task listing.\n"
-            + "Parameters: INDEX (must be a positive integer) [n/NAME] [s/STARTDATE] [st/STARTTIME] \n"
-            + "[e/ENDDATE] [et/ENDTIME] [i/IMPORTANCE] [t/TAG]... (one optional parameter is required)\n"
-            + "Example: " + COMMAND_WORD + " 1 s/tomorrow st/9a e/next week et/9a i/r t/CS2103 t/project \n \n"
+            + "Parameters: INDEX (must be a positive integer) [n=NAME] [s=STARTDATE] [st=STARTTIME] \n"
+            + "[e=ENDDATE] [et=ENDTIME] [i=IMPORTANCE] [t=TAG]... (one optional parameter is required)\n"
+            + "Example: " + COMMAND_WORD + " 1 s=tomorrow st=9a e=next week et=9a i=r t=CS2103 t=project \n \n"
             + "You can also change an event or a deadline task to a floating task \n"
             + "Parameters: INDEX (must be a positive integer) \n"
             + "Example: " + COMMAND_WORD + " 1 float \n";

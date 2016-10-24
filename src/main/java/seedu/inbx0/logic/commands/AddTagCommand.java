@@ -19,8 +19,8 @@ public class AddTagCommand extends Command {
 	
 	public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Adds 1 or more tags to an existing task.\n"
-            + "Parameters: INDEX (must be a positive integer) [t/TAG]... (must have at least one tag) \n"
-            + "Example: " + COMMAND_WORD + " 1 " + "t/cute \n";
+            + "Parameters: INDEX (must be a positive integer) [t=TAG]... (must have at least one tag) \n"
+            + "Example: " + COMMAND_WORD + " 1 " + "t=cute \n";
 	
 	public static final String MESSAGE_SUCCESS = "Tag successfully added!";
 	public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the tasklist";

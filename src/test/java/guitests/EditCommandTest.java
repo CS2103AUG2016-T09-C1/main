@@ -11,6 +11,7 @@ import seedu.inbx0.model.task.ReadOnlyTask;
 import seedu.inbx0.testutil.TestTask;
 import seedu.inbx0.testutil.TestUtil;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 public class EditCommandTest extends TaskListGuiTest {
@@ -25,11 +26,25 @@ public class EditCommandTest extends TaskListGuiTest {
         assertEditSuccess(targetIndex, td.hoon, currentList);
         currentList = TestUtil.replaceTaskFromList(currentList, td.hoon, targetIndex - 1);
         
-        //edit tags
+        //add a tag
         Tag tagToAdd = new Tag("urgent");
-        commandBox.runCommand("update " + targetIndex + " t=newTag");
+        commandBox.runCommand("addtag " + targetIndex + " t=urgent");
         ReadOnlyTask newTask = taskListPanel.getTask(targetIndex - 1);
         assertTrue(newTask.getTags().contains(tagToAdd));
+        
+         //invalid index for adding tag
+        commandBox.runCommand("deltag " + 13 + " t=urgent");
+        assertResultMessage(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
+        
+        //delete a tag
+        Tag tagToDelete = new Tag("urgent");
+        commandBox.runCommand("deltag " + targetIndex + " t=urgent");
+        ReadOnlyTask newTask2 = taskListPanel.getTask(targetIndex - 1);
+        assertFalse(newTask2.getTags().contains(tagToDelete));
+        
+        //invalid index for delete tag
+        commandBox.runCommand("deltag " + 13 + " t=urgent");
+        assertResultMessage(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
 
         // invalid command
         commandBox.runCommand("edit Kitty");

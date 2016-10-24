@@ -415,6 +415,8 @@ public class MainWindow extends UiPart {
     public void handleReminder(ReadOnlyTask task) {
         ReminderWindow reminderWindow = ReminderWindow.load(primaryStage, task);
         reminderWindow.show();
+        upperTaskListPanel = TaskListPanel.load(primaryStage, getUpperTaskListPlaceholder(),
+                logic.getFilteredTaskList());
     }
     
     public void handleShowNormalTaskList() {

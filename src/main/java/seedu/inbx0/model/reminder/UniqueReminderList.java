@@ -11,10 +11,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.inbx0.commons.exceptions.DuplicateDataException;
 import seedu.inbx0.commons.util.CollectionUtil;
-import seedu.inbx0.model.tag.Tag;
-import seedu.inbx0.model.tag.UniqueTagList;
-import seedu.inbx0.model.tag.UniqueTagList.DuplicateTagException;
-import seedu.inbx0.model.task.UniqueTaskList.DuplicateTaskException;
 /**
  * A list of reminders that enforces no nulls.
  *
@@ -29,6 +25,7 @@ public class UniqueReminderList implements Iterable<ReminderTask> {
     /**
      * Signals that an operation would have violated the 'no duplicates' property of the list.
      */
+    @SuppressWarnings("serial")
     public static class DuplicateReminderException extends DuplicateDataException {
         protected DuplicateReminderException() {
             super("Operation would result in duplicate reminders");
@@ -39,6 +36,7 @@ public class UniqueReminderList implements Iterable<ReminderTask> {
      * Signals that an operation targeting a specified reminder in the list would fail because
      * there is no such matching reminder in the list.
      */
+    @SuppressWarnings("serial")
     public static class ReminderNotFoundException extends Exception {}
     
     private final ObservableList<ReminderTask> internalList = FXCollections.observableArrayList();

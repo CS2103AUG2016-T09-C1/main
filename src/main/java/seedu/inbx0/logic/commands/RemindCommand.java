@@ -1,7 +1,9 @@
 package seedu.inbx0.logic.commands;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.text.SimpleDateFormat;
+import java.util.List;
+
+import com.joestelmach.natty.Parser;
 
 import seedu.inbx0.commons.core.Messages;
 import seedu.inbx0.commons.core.UnmodifiableObservableList;
@@ -9,7 +11,6 @@ import seedu.inbx0.commons.exceptions.IllegalValueException;
 import seedu.inbx0.model.reminder.ReminderTask;
 import seedu.inbx0.model.reminder.UniqueReminderList;
 import seedu.inbx0.model.reminder.UniqueReminderList.DuplicateReminderException;
-import seedu.inbx0.model.tag.Tag;
 import seedu.inbx0.model.tag.UniqueTagList;
 import seedu.inbx0.model.task.Date;
 import seedu.inbx0.model.task.Importance;
@@ -30,10 +31,11 @@ public class RemindCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Adds a reminder for the task identified by the index number used in the last task listing.\n"
-            + "Parameters: INDEX s/[START DATE] [START TIME] ( Index must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " 1 s/5 minutes from now";
+            + "Parameters: INDEX s=[START DATE] [START TIME] ( Index must be a positive integer)\n"
+            + "Example: " + COMMAND_WORD + " 1 s=5 minutes from now";
 
     public static final String MESSAGE_REMINDER_TASK_SUCCESS = "Added Reminder for Task: %1$s";
+    public static final String MESSAGE_REMINDER_CONSTRAINTS = "The reminder date and time cannot be in the past.";
     public static final int TOTAL_NUMBER_OF_ARGUMENTS = 6;
     
     public final int targetIndex;
@@ -56,6 +58,56 @@ public class RemindCommand extends Command {
         this.startTime = startTime;
     }
     
+    private boolean isValidDateAndTime(Date date, Time time) {
+        boolean isValidDate = false;
+        boolean isValidTime = false;
+        
+        Date currentDate = null;
+        try {
+          currentDate = new Date("now");
+        } catch (IllegalValueException e) {
+            e.printStackTrace();
+        }
+        
+        SimpleDateFormat ft = new SimpleDateFormat ("HHmm");
+        List<java.util.Date> current = new Parser().parse("now").get(0).getDates();
+        int currentTime = Integer.parseInt(ft.format(current.get(0)));
+        
+        int currentHour = currentTime / 100;
+        int currentMin = currentTime % 100;
+        
+        if(("").equals(startTime.value)) {
+            isValidTime = true;
+        } else {
+            
+            int reminderTime = Integer.parseInt(startTime.getTime().replaceAll("\\D+",""));
+            int reminderHour = reminderTime / 100;
+            int reminderMin = reminderTime % 100;
+            
+            if((reminderHour > currentHour) |
+               (reminderHour == currentHour && reminderMin > currentMin))
+                isValidTime = true;         
+        }
+        
+        int currentDay = currentDate.getDay();
+        int currentMonth = currentDate.getMonth();
+        int currentYear = currentDate.getYear();
+        
+        int reminderDay = startDate.getDay();
+        int reminderMonth = startDate.getMonth();
+        int reminderYear = startDate.getYear();
+        
+        if((reminderYear > currentYear) |
+           (reminderYear == currentYear && reminderMonth > currentMonth) |
+           (reminderYear == currentYear && reminderMonth == currentMonth && reminderDay >= currentDay))
+            isValidDate = true;
+        
+        if(isValidDate && isValidTime) {
+            return true;
+        } else {
+            return false;
+        }
+    }
     private Task createToEditWithTask(String[] editArguments, UniqueTagList tags, UniqueReminderList reminders) throws IllegalValueException {
         Task toEditWith = new Task (
                 new Name(editArguments[0]),
@@ -111,7 +163,10 @@ public class RemindCommand extends Command {
     public CommandResult execute() {
 
         UnmodifiableObservableList<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
-
+        
+        if(!isValidDateAndTime(startDate, startTime)) {
+            return new CommandResult(MESSAGE_REMINDER_CONSTRAINTS);
+        }
         if (lastShownList.size() < targetIndex) {
             indicateAttemptToExecuteIncorrectCommand();
             return new CommandResult(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);

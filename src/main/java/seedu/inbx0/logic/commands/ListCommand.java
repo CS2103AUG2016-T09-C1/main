@@ -52,7 +52,7 @@ public class ListCommand extends Command {
             this.preposition = "overdue";
         }
         else {
-            Date checkDate = new Date (arguments);
+            Date checkDate = new Date (arguments.trim());
             this.checkDate = checkDate.value;
             this.preposition = "";
         }

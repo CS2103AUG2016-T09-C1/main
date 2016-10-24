@@ -26,7 +26,7 @@ public class TypicalTestTasks {
             george = new TaskBuilder().withName("George Best").withStartDate("4th November").withStartTime("0930").withEndDate("5th November").withEndTime("3pm").withImportance("R").build();
 
             //Manually added
-            hoon = new TaskBuilder().withName("Hoon Meier").withStartDate("next week").withStartTime("1000").withEndDate("next week").withEndTime("1300").withImportance("G").build();
+            hoon = new TaskBuilder().withName("Hoon Meier").withStartDate("next week").withStartTime("1000").withEndDate("next week").withEndTime("1300").withImportance("G").withTags("lunch").build();
             ida = new TaskBuilder().withName("Ida Mueller").withStartDate("tmr").withStartTime("1000").withEndDate("next week").withEndTime("12pm").withImportance("Yellow").build();
             //@@author A0139481Y
             noImportance = new TaskBuilder().withName("No importance").withStartDate("next wed").withStartTime("1000").withEndDate("next thurs").withEndTime("12pm").withTags("tagged").build();
