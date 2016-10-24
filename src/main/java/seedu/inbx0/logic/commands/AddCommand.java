@@ -19,17 +19,17 @@ public class AddCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to the tasklist. \n"
             + "1. Event Task \n"
-            + "Parameters: NAME s/STARTDATE st/STARTTIME e/ENDDATE et/ENDTIME [i/IMPORTANCE] [t/TAG]...\n"
+            + "Parameters: NAME s=STARTDATE st=STARTTIME e=ENDDATE et=ENDTIME [i=IMPORTANCE] [t=TAG]...\n"
             + "Example: " + COMMAND_WORD
-            + " homework s/tomorrow st/9a e/next week et/9a i/r t/CS2103 t/project \n \n"
+            + " homework s=tomorrow st=9a e=next week et=9a i=r t=CS2103 t=project \n \n"
             + "2. Floating Task \n"
-            + "Parameters: NAME [i/IMPORTANCE] [t/TAG]...\n"
+            + "Parameters: NAME [i=IMPORTANCE] [t=TAG]...\n"
             + "Example: " + COMMAND_WORD
-            + " read shakespeare i/r t/Hamlet t/Romeo and Juliet \n \n"
+            + " read shakespeare i=r t=Hamlet t=Romeo \n \n"
             + "3. Deadline Task \n"
-            + "Parameters: NAME e/ENDDATE et/ENDTIME [i/IMPORTANCE] [t/TAG]...\n"
+            + "Parameters: NAME e=ENDDATE et=ENDTIME [i=IMPORTANCE] [t=TAG]...\n"
             + "Example: " + COMMAND_WORD
-            + " complete project e/next month et/10a i/r t/Hamlet t/Romeo and Juliet \n";
+            + " complete project e=next month et=10a i=r t=Hamlet t=Romeo \n";
 
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the tasklist";

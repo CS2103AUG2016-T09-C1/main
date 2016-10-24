@@ -31,7 +31,7 @@ public class RemindCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Adds a reminder for the task identified by the index number used in the last task listing.\n"
-            + "Parameters: INDEX s/[START DATE] [START TIME] ( Index must be a positive integer)\n"
+            + "Parameters: INDEX s=[START DATE] [START TIME] ( Index must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1 s=5 minutes from now";
 
     public static final String MESSAGE_REMINDER_TASK_SUCCESS = "Added Reminder for Task: %1$s";

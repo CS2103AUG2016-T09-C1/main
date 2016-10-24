@@ -17,11 +17,11 @@ public class FindCommand extends Command {
             + "allow short cut that use in add command like i/G (importance: green)\n"
             + "1. Normal search (displays task as long as it contains any of the keywords)\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " meeting i/g Red \n"
+            + "Example: " + COMMAND_WORD + " meeting i=g Red \n"
             + "2. Logic serach (displays task only when it fits the logic expression)\n" 
             + "LOGIC OPERATOR: | means OR, & means AND, () are for grouping logic operation\n" 
             + "Parameters: [LOGIC_OPERATOR] KEYWORD [MORE_KEYWORDS] [MORE_LOGIC_OPERATOR]...\n"
-            + "Example: " + COMMAND_WORD + " (homework | assignment) & s/tmr & i/r";
+            + "Example: " + COMMAND_WORD + " (homework | assignment) & s=tmr & i=r";
 
     public static final String MESSAGE_BRACKET_USAGE = "Bracket must be closed properly";
 
