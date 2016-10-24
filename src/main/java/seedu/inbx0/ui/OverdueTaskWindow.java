@@ -53,19 +53,6 @@ public class OverdueTaskWindow extends UiPart {
         Stage dialogStage = new Stage();
         dialogStage.initModality(Modality.APPLICATION_MODAL);
         this.dialogStage = dialogStage;
-/*        dialogStage.initModality(Modality.APPLICATION_MODAL);
-        dialogStage.setTitle(TITLE);
-        dialogStage.setMinWidth(250);
-        this.dialogStage = dialogStage;
-        Label label = new Label();
-        label.setText("Overdue Tasks");
-        
-        VBox layout = new VBox(10);
-        layout.getChildren().add(label);
-        layout.setAlignment(Pos.CENTER);
-        Scene scene = new Scene(layout);     
-        dialogStage.setScene(layout);
-        dialogStage.showAndWait(); */
         
         setTitle(TITLE);
         setIcon(dialogStage, ICON);
