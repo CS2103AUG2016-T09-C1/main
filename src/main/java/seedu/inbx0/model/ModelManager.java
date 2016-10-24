@@ -7,6 +7,7 @@ import seedu.inbx0.commons.core.UnmodifiableObservableList;
 import seedu.inbx0.commons.events.model.TaskListChangedEvent;
 import seedu.inbx0.commons.exceptions.IllegalValueException;
 import seedu.inbx0.model.history.HistoryList;
+import seedu.inbx0.model.history.HistoryList.EmptyHistoryException;
 import seedu.inbx0.model.task.Task;
 import seedu.inbx0.model.task.Date;
 import seedu.inbx0.model.task.ReadOnlyTask;
@@ -115,23 +116,25 @@ public class ModelManager extends ComponentManager implements Model {
     }
     
     @Override
-    public void undoTaskListHistory(int numToUndo) {
-        assert numToUndo > 0;
+    public int undoTaskListHistory(int stepsBack) {
+        assert stepsBack > 0;
         
         int numUndone = 0;
         TaskList historyList = null;
         try {
-            for (int i = 0; i < numToUndo; i++) {
+            for (int i = 0; i < stepsBack; i++) {
                 historyList = taskListHistory.popState();
                 numUndone++;
             }
-        } catch (OutOfHistoryException e) {
+        } catch (EmptyHistoryException e) {
             logger.fine(e.getMessage());
         }
         
         if (historyList != null) {
             resetData(historyList);
         }
+        
+        return numUndone;
     }
 
     /** Raises an event to indicate the model has changed */

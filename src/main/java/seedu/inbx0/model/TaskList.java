@@ -1,6 +1,7 @@
 package seedu.inbx0.model;
 
 import javafx.collections.ObservableList;
+import seedu.inbx0.model.history.HistoryState;
 import seedu.inbx0.model.task.Task;
 import seedu.inbx0.model.task.Date;
 import seedu.inbx0.model.task.ReadOnlyTask;
@@ -20,7 +21,7 @@ import java.util.stream.Collectors;
  * Wraps all data at the task manager level
  * Duplicates are not allowed (by .equals comparison)
  */
-public class TaskList implements ReadOnlyTaskList, HistoryTask<Tasklist> {
+public class TaskList implements ReadOnlyTaskList, HistoryState<Tasklist> {
 
     private final UniqueTaskList tasks;
     private final UniqueTagList tags;
@@ -50,6 +51,11 @@ public class TaskList implements ReadOnlyTaskList, HistoryTask<Tasklist> {
 
     public static ReadOnlyTaskList getEmptyTaskList() {
         return new TaskList();
+    }
+    
+    @Override
+    public TaskList copyCurrentState() {
+        return new TaskList(this);
     }
 
 //// list overwrite operations
@@ -224,10 +230,5 @@ public class TaskList implements ReadOnlyTaskList, HistoryTask<Tasklist> {
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
         return Objects.hash(tasks, tags, reminders);
-    }
-
-    @Override
-    public TaskList copyCurrentList() {
-        return new TaskList(this);
     }
 }

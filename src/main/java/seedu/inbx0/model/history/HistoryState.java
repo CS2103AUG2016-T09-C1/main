@@ -5,7 +5,6 @@ package seedu.inbx0.model.history;
  * 
  * @param <T> The class of the item
  */
-public interface HistoryTask<T> {
-    T copyCurrentList();
+public interface HistoryState<T> {
+    T copyCurrentState();
 }
-

@@ -26,7 +26,9 @@ public class UndoCommand extends Command {
     public CommandResult execute() {
         assert model != null;
         
-        if (stepsBack == 0){
+        int commandsUndone = model.undoTaskListHistory(stepsBack);
+        
+        if (commandsUndone == 0){
             return new CommandResult(MESSAGE_NOTHING_TO_UNDO);
         }
         
