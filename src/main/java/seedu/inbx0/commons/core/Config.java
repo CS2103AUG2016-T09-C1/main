@@ -10,11 +10,13 @@ public class Config {
 
     public static final String DEFAULT_CONFIG_FILE = "config.json";
 
+	public static final String DEFAULT_XML_FILE_PATH = "data/tasklist.xml";
+
     // Config values customizable through config file
     private String appTitle = "Inbx_0";
     private Level logLevel = Level.INFO;
     private String userPrefsFilePath = "preferences.json";
-    private String taskListFilePath = "data/tasklist.xml";
+    private String taskListFilePath = DEFAULT_XML_FILE_PATH;
     private String taskListName = "MyTaskList";
 
 

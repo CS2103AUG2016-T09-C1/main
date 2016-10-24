@@ -6,6 +6,7 @@ import seedu.inbx0.commons.core.ComponentManager;
 import seedu.inbx0.commons.core.LogsCenter;
 import seedu.inbx0.commons.events.model.TaskListChangedEvent;
 import seedu.inbx0.commons.events.storage.DataSavingExceptionEvent;
+import seedu.inbx0.commons.events.storage.StoragePathChangedEvent;
 import seedu.inbx0.commons.exceptions.DataConversionException;
 import seedu.inbx0.model.ReadOnlyTaskList;
 import seedu.inbx0.model.UserPrefs;
@@ -86,6 +87,19 @@ public class StorageManager extends ComponentManager implements Storage {
         } catch (IOException e) {
             raise(new DataSavingExceptionEvent(e));
         }
+    }
+    
+    @Subscribe
+    public void handleStoragePathChangedEvent(StoragePathChangedEvent spce) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(spce, "Storage file path changed"));
+        try {
+            // copying previous data from old save file to new save file
+            ReadOnlyTaskList oldTaskList = readTaskList(spce.oldPath).orElse(new TaskList());
+            ((XmlTaskListStorage) taskListStorage).setTaskListFilePath(spce.newPath);
+            saveTaskList(oldTaskList);
+        } catch (IOException  | DataConversionException e) {
+            raise(new DataSavingExceptionEvent(e));
+        } 
     }
 
 }
