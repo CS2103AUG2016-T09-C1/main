@@ -151,9 +151,9 @@ public class LogicManagerTest {
 	public final void execute_add_invalidArgsFormat() throws Exception {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
         assertCommandBehavior(
-                "add Valid Name e=invalid time t=valid", expectedMessage);
+                "add Valid Name e=tmr s=next week t=valid", expectedMessage);
         assertCommandBehavior(
-                "add Valid Name i=red s=invalid st=9am ", expectedMessage);
+                "add Valid Name i=red s=9th Oct st=9am ", expectedMessage);
         assertCommandBehavior(
                 "add Valid Name t=valid s=tomorrow st=9am i=green", expectedMessage);
     }
