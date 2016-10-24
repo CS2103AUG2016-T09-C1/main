@@ -19,4 +19,9 @@ public class ClearCommand extends Command {
         indicateShowNormalTaskListEvent();
         return new CommandResult(MESSAGE_SUCCESS);
     }
+    
+    @Override
+    public boolean canUndo() {
+        return true;
+    }
 }

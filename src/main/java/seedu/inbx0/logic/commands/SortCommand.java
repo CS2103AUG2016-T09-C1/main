@@ -29,4 +29,9 @@ public class SortCommand extends Command {
         return new CommandResult(MESSAGE_SORT_TASK_SUCCESS);
     }
 
+    @Override
+    public boolean canUndo() {
+        return false;
+    }
+
 }

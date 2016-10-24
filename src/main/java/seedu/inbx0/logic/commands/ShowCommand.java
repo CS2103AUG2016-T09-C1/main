@@ -27,4 +27,9 @@ public class ShowCommand extends Command {
         EventsCenter.getInstance().post(new ShowFilteredListRequestEvent(filterCondition));
         return new CommandResult(SHOWING_FILTERED_LIST_MESSAGE + " with keyword " + filterCondition);
     }
+
+    @Override
+    public boolean canUndo() {
+        return false;
+    }
 }

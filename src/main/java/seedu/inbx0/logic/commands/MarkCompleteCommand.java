@@ -90,4 +90,10 @@ public class MarkCompleteCommand extends Command {
         return new CommandResult(getMessageForTasksCompletedSummary(indexNum.size()));       
     }
 
+
+    @Override
+    public boolean canUndo() {
+        return true;
+    }
+
 }

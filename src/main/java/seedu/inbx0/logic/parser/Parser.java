@@ -263,6 +263,9 @@ public class Parser {
 
         case SortCommand.COMMAND_WORD:
             return prepareSort(arguments);
+        
+        case UndoCommand.COMMAND_WORD:
+            return prepareUndo(arguments);
 
         case AddTagCommand.COMMAND_WORD:
             return prepareAddTag(arguments);
@@ -305,8 +308,7 @@ public class Parser {
     /**
      * Parses arguments in the context of the add task command.
      *
-     * @param args
-     *            full command args string
+     * @param args full command args string
      * @return the prepared command
      */
     private Command prepareAdd(final String args) {
@@ -497,8 +499,7 @@ public class Parser {
     /**
      * Parses arguments in the context of the edit task command.
      *
-     * @param args
-     *            full command args string
+     * @param args full command args string
      * @return the prepared command
      */
     // @@author A0139579J
@@ -676,8 +677,7 @@ public class Parser {
     /**
      * Parses arguments in the context of the add tag command.
      *
-     * @param args
-     *            full command args string
+     * @param args full command args string
      * @return the prepared command
      */
     // @@author A0139481Y
@@ -701,8 +701,7 @@ public class Parser {
     /**
      * Parses arguments in the context of the delete tag command.
      *
-     * @param args
-     *            full command args string
+     * @param args full command args string
      * @return the prepared command
      */
     // @@author A0139481Y
@@ -726,8 +725,7 @@ public class Parser {
     /**
      * Parses arguments in the context of the Mark Complete task command.
      * 
-     * @param args
-     *            full command args string
+     * @param args full command args string
      * @return the prepared command
      */
     // @@author A0139579J
@@ -778,8 +776,7 @@ public class Parser {
     /**
      * Parses arguments in the context of the Remind command.
      * 
-     * @param args
-     *            full command args string
+     * @param args full command args string
      * @return the prepared command
      */
     // @@author A0139579J
@@ -802,8 +799,7 @@ public class Parser {
     /**
      * Parses arguments in the context of the sort task command.
      * 
-     * @param args
-     *            full command args string
+     * @param args full command args string
      * @return the prepared command
      * @author A0148044J
      */
@@ -841,12 +837,28 @@ public class Parser {
         }
         return new SortCommand(type, defaultOrder);
     }
+    
+    /**
+     * Parses arguments in the context of the undo command.
+     * 
+     * @param args full command args string
+     * @return the prepared command
+     */
+    //@@author A0139481Y
+    private Command prepareUndo(String args) {
+        
+        Optional<Integer> index = parseIndex(args);
+        if(!index.isPresent()){
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, UndoCommand.MESSAGE_USAGE));
+        }
+
+        return new UndoCommand(index.get());
+    }
 
     /**
      * Parses arguments in the context of the delete task command.
-     *
-     * @param args
-     *            full command args string
+     * 
+     * @param args full command args string
      * @return the prepared command
      */
     // @@author generated
@@ -862,9 +874,8 @@ public class Parser {
 
     /**
      * Parses arguments in the context of the select task command.
-     *
-     * @param args
-     *            full command args string
+     * 
+     * @param args full command args string
      * @return the prepared command
      */
     // @@author generated
@@ -898,9 +909,8 @@ public class Parser {
 
     /**
      * Parses arguments in the context of the find task command.
-     *
-     * @param args
-     *            full command args string
+     * 
+     * @param args full command args string
      * @return the prepared command
      */
     private Command prepareFind(final String args) {
@@ -1106,9 +1116,8 @@ public class Parser {
 
     /**
      * Parses arguments in the context of the list task command.
-     *
-     * @param args
-     *            full command args string
+     * 
+     * @param args full command args string
      * @return the prepared command
      */
     // @@author generated

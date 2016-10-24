@@ -141,4 +141,9 @@ public class RemindCommand extends Command {
         return new CommandResult(String.format(MESSAGE_REMINDER_TASK_SUCCESS, newReminder));
     }
 
+    @Override
+    public boolean canUndo() {
+        return false;
+    }
+
 }
