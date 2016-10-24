@@ -168,6 +168,8 @@ public class CommandBox extends UiPart {
             commandTextField.setText("show");
         } else if(currentText.matches("^so$|^sor$")) {
             commandTextField.setText("sort");
+        } else if(currentText.matches("^u$|^un$|^und$")) {
+            commandTextField.setText("undo");
         }
         commandTextField.positionCaret(commandTextField.getText().length());
     }
