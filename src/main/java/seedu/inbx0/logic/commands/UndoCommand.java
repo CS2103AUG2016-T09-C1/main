@@ -10,13 +10,17 @@ public class UndoCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Undo the last command(s)\n"
-            + "Parameters: STEPS_BACK\n"
+            + "Parameters: [STEPS_BACK]\n"
             + "Example: " + COMMAND_WORD + " 2";
 
     public static final String MESSAGE_UNDO_TASK_SUCCESS = "Last Command undone successfully.";
     public static final String MESSAGE_NOTHING_TO_UNDO = "There is no past command to undo.";
     
     private final int stepsBack;
+    
+    public UndoCommand() {
+        stepsBack = 1;
+    }
     
     public UndoCommand(int stepsBack) {
         this.stepsBack = stepsBack;

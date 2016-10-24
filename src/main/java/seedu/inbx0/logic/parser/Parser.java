@@ -846,6 +846,9 @@ public class Parser {
      */
     //@@author A0139481Y
     private Command prepareUndo(String args) {
+        if(args.trim().length() == 0) {
+            return new UndoCommand();
+        }
         
         Optional<Integer> index = parseIndex(args);
         if(!index.isPresent()){
