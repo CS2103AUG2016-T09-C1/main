@@ -26,7 +26,6 @@ public class MarkCompleteCommand extends Command {
             + "Parameters: INDEX (must be a positive integer and can be more than one input given)\n"
             + "Example: " + COMMAND_WORD + " 1 2 3";
 
-    public static final String MESSAGE_COMPLETE_TASK_SUCCESS = "Completed Task: %1$s";
     public static final String MESSAGE_TASK_ALREADY_COMPLETED = "One or more tasks are already completed";
     public static final String MESSAGE_INVALID_ARGUMENTS = "The arguments provided are invalid.";
 

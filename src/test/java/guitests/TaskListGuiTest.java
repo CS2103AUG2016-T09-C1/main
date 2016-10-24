@@ -101,6 +101,15 @@ public abstract class TaskListGuiTest {
     public void cleanup() throws TimeoutException {
         FxToolkit.cleanupStages();
     }
+    
+    //@@author A0139481Y
+    /**
+     * Asserts the task shown is marked as done by verifying that it has a tick ASCII.
+     */
+    public void assertDone(TaskCardHandle card) {
+        assertEquals("\u2713", card.getStyleName());
+    }
+    //@@author
 
     /**
      * Asserts the task shown in the card is same as the given task

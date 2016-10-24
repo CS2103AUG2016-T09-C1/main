@@ -14,6 +14,7 @@ public class TaskCardHandle extends GuiHandle {
     private static final String STARTTIME_FIELD_ID = "#startTime";
     private static final String ENDDATE_FIELD_ID = "#endDate";
     private static final String ENDTIME_FIELD_ID = "#endTime";
+    private static final String COMPLETED_FIELD_ID = "#isCompleted";
     //private static final String IMPORTANCE_FIELD_ID = "#level";
 
     private Node node;
@@ -25,6 +26,10 @@ public class TaskCardHandle extends GuiHandle {
 
     protected String getTextFromLabel(String fieldId) {
         return getTextFromLabel(fieldId, node);
+    }
+    
+    public String getStyleName() {
+        return getTextFromLabel(COMPLETED_FIELD_ID);
     }
 
     public String getFullName() {
