@@ -34,6 +34,7 @@
                         <HBox alignment="CENTER_LEFT" spacing="5.0">
                             <children>
                               <Label fx:id="isCompleted" styleClass="cell_small_label" text="\$isCompleted" />
+                              <Label fx:id="hasReminders" styleClass="cell_small_label" text="\$hasReminders" />
                                  <Label fx:id="id" styleClass="cell_big_label" text="\$id" />
                                  <Label fx:id="name" styleClass="cell_big_label" text="\$first" />
                             </children>

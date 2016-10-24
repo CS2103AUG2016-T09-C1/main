@@ -1,9 +1,13 @@
 package seedu.inbx0.ui;
 
+import java.util.Iterator;
+
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
+import seedu.inbx0.model.reminder.ReminderTask;
+import seedu.inbx0.model.reminder.UniqueReminderList;
 import seedu.inbx0.model.task.ReadOnlyTask;
 
 public class TaskCard extends UiPart{
@@ -28,6 +32,8 @@ public class TaskCard extends UiPart{
     private Label tags;
     @FXML
     private Label isCompleted;
+    @FXML
+    private Label hasReminders;
     //@FXML
     //private Label isExpired;
 
@@ -96,7 +102,15 @@ public class TaskCard extends UiPart{
             endDate.setStyle("-fx-text-fill: white;");
             endTime.setStyle("-fx-text-fill: white;");
             tags.setStyle("-fx-text-fill: white;");       */    
-             
+        hasReminders.setText("");
+        UniqueReminderList reminders = task.getReminders();
+        Iterator<ReminderTask> check = reminders.iterator();
+        while(check.hasNext()) {
+            if(check.next().getIsAlive() == true) {
+               hasReminders.setText("\uD83D\uDD14");
+               break;
+            }
+        }
     }
 
     public HBox getLayout() {
