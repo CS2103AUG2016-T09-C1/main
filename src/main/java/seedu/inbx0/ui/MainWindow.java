@@ -196,7 +196,7 @@ public class MainWindow extends UiPart {
 
     @FXML
     public void handleHelp() {
-        HelpWindow helpWindow = HelpWindow.load(primaryStage);
+        HelpWindow1 helpWindow = HelpWindow1.load(primaryStage);
         helpWindow.show();
     }
     
@@ -443,8 +443,6 @@ public class MainWindow extends UiPart {
     }
 
     public void displayReminderInfoPanel(ReadOnlyTask newSelection) {
-        bottomReminderListPanel = InformationPanel.load(primaryStage, getReminderListPlaceholder(), newSelection);
-                //newSelection);
-        
+        bottomReminderListPanel = InformationPanel.load(primaryStage, getReminderListPlaceholder(), newSelection);        
     }
 }
