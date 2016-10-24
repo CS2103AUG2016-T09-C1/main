@@ -5,7 +5,6 @@ import org.junit.Test;
 
 import seedu.inbx0.commons.core.Messages;
 import seedu.inbx0.commons.exceptions.IllegalValueException;
-import seedu.inbx0.logic.commands.CommandResult;
 import seedu.inbx0.logic.commands.EditCommand;
 import seedu.inbx0.model.tag.Tag;
 import seedu.inbx0.model.task.ReadOnlyTask;
