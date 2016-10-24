@@ -53,10 +53,12 @@ public class TaskList implements ReadOnlyTaskList, HistoryState<TaskList> {
         return new TaskList();
     }
     
+    //@@author A0139481Y
     @Override
     public TaskList copyCurrentState() {
         return new TaskList(this);
     }
+    //@@author
 
 //// list overwrite operations
 
