@@ -23,6 +23,7 @@ import seedu.inbx0.model.task.UniqueTaskList.TaskNotFoundException;
 /**
  * Adds a reminder for the task identified using it's last displayed index from the address book.
  */
+//@@author A0139579J
 public class RemindCommand extends Command {
 
     public static final String COMMAND_WORD = "rem";

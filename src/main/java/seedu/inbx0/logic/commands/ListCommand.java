@@ -8,7 +8,10 @@ import seedu.inbx0.model.task.Date;
 
 /**
  * Lists all tasks in the tasks to the user.
+ * or tasks that are overdue
+ * or tasks associated with the date
  */
+//@@author A0139579J
 public class ListCommand extends Command {
 
     public static final String COMMAND_WORD = "list";

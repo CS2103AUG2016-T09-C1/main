@@ -10,6 +10,7 @@ import com.joestelmach.natty.Parser;
  * Represents Time of a Task Event in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidTime(String)}
  */
+//@@author A0139579J
 public class Time {
 
     public static final String MESSAGE_TIME_CONSTRAINTS = "Time can either be a numeric string, alphanumeric string, or alphabet string \n"

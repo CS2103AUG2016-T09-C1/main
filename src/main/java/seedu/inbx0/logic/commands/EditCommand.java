@@ -23,6 +23,7 @@ import seedu.inbx0.model.task.UniqueTaskList.TaskNotFoundException;
 /**
  * Edits a task identified using it's last displayed index from the tasklist.
  */
+//@@author A0139579J
 public class EditCommand extends Command {
     
     public static final String COMMAND_WORD = "edit";

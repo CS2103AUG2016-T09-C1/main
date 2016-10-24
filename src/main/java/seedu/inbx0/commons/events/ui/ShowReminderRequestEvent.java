@@ -6,6 +6,7 @@ import seedu.inbx0.model.task.ReadOnlyTask;
 /**
  * An event requesting to display the reminder.
  */
+//@@author A0139579J
 public class ShowReminderRequestEvent extends BaseEvent {
     
     public final ReadOnlyTask task;
