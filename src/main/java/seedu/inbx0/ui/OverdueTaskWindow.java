@@ -12,8 +12,9 @@ import javafx.stage.Modality;
 import java.util.logging.Logger;
 
 /**
- * Controller for a help page
+ * Controller for a overdue task page
  */
+//@@author A0139579J
 public class OverdueTaskWindow extends UiPart {
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);

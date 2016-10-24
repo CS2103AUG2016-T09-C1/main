@@ -16,13 +16,14 @@ import seedu.inbx0.model.tag.UniqueTagList;
 import seedu.inbx0.model.tag.UniqueTagList.DuplicateTagException;
 import seedu.inbx0.model.task.UniqueTaskList.DuplicateTaskException;
 /**
- * A list of reminders that enforces no nulls and uniqueness between its elements.
+ * A list of reminders that enforces no nulls.
  *
  * Supports minimal set of list operations for the app's features.
  *
  * @see ReminderTask#equals(Object)
  * @see CollectionUtil#elementsAreUnique(Collection)
  */
+//@@author A0139579J
 public class UniqueReminderList implements Iterable<ReminderTask> {
 
     /**

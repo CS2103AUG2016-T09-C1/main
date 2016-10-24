@@ -116,12 +116,14 @@ public class UiManager extends ComponentManager implements Ui {
         mainWindow.handleHelp();
     }
    
+    //@@author A0139579J
     @Subscribe
     private void handleShowReminderEvent(ShowReminderRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         mainWindow.handleReminder(event.task);
     }
-
+    
+    //@@author
     @Subscribe
     private void handleJumpToListRequestEvent(JumpToListRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
