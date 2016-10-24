@@ -403,7 +403,15 @@ public class Parser {
             return new IncorrectCommand(ive.getMessage());
         }
     }
-
+    
+    /**
+     * Checks whether the string contains a time
+     *
+     * @param the string that the user inputs in s= or e= which
+     *        may contain date and time together
+     * @return the time
+     */
+    // @@author A0139579J
     private String timeParse(final String dateTimeString) {
         Matcher matcher1 = DATE_TIME_FORMAT.matcher(dateTimeString.trim());
         Matcher matcher2 = DATE_TIME_FORMAT_2.matcher(dateTimeString.trim());
@@ -438,7 +446,15 @@ public class Parser {
 
         return dateTimeString;
     }
-
+    
+    /**
+     * Checks whether the string contains a date
+     *
+     * @param the string that the user inputs in s= or e= which
+     *        may contain date and time together
+     * @return the date
+     */
+    // @@author A0139579J
     private String dateParse(final String dateTimeString) {
         Matcher matcher1 = DATE_TIME_FORMAT.matcher(dateTimeString.trim());
         Matcher matcher2 = DATE_TIME_FORMAT_2.matcher(dateTimeString.trim());
@@ -485,6 +501,7 @@ public class Parser {
      *            full command args string
      * @return the prepared command
      */
+    // @@author A0139579J
     private Command prepareEdit(final String args) {
         final Matcher matcher = TASK_EDIT_DATA_ARGS_FORMAT.matcher(args.trim());
         if (!matcher.matches()) {
@@ -610,7 +627,15 @@ public class Parser {
             return new IncorrectCommand(ive.getMessage());
         }
     }
-
+    
+    /**
+     * Builds the regex pattern based on the user's input of parameters
+     *
+     * @param full command args string
+     *            
+     * @return the regex pattern
+     */
+    // @@author A0139579J
     private Pattern scanArgumentsAndBuildRegex(final String arguments) {
         String regex = "";
 
@@ -705,6 +730,7 @@ public class Parser {
      *            full command args string
      * @return the prepared command
      */
+    // @@author A0139579J
     private Command prepareMarkComplete(final String args) {
         final Matcher matcher = INDEX_NUMBER_ARGS_FORMAT.matcher(args.trim());
         final Matcher matcher2 = INDEX_NUM_TO_INDEX_NUM_ARGS_FORMAT.matcher(args.trim());
@@ -756,6 +782,7 @@ public class Parser {
      *            full command args string
      * @return the prepared command
      */
+    // @@author A0139579J
     private Command prepareRemind(String arguments) {
         final Matcher matcher = TASK_REMINDER_ARGS_FORMAT.matcher(arguments.trim());
         if (!matcher.matches()) {

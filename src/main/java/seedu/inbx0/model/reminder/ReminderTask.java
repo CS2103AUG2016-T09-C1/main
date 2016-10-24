@@ -8,16 +8,16 @@ import java.util.TimerTask;
 import javafx.application.Platform;
 
 import seedu.inbx0.commons.core.EventsCenter;
-import seedu.inbx0.commons.events.ui.ShowHelpRequestEvent;
 import seedu.inbx0.commons.events.ui.ShowReminderRequestEvent;
 import seedu.inbx0.commons.exceptions.IllegalValueException;
-import seedu.inbx0.logic.commands.Command;
-import seedu.inbx0.logic.commands.RemindCommand;
-import seedu.inbx0.model.tag.Tag;
 import seedu.inbx0.model.task.Date;
 import seedu.inbx0.model.task.ReadOnlyTask;
 import seedu.inbx0.model.task.Time;
 
+/**
+ * Represents a Reminder for the task 
+ */
+//@@author A0139579J
 public class ReminderTask {
     
     Toolkit toolkit;
@@ -68,7 +68,6 @@ public class ReminderTask {
      * Copy constructor.
      * @throws IllegalValueException if not valid
      */
-
     public ReminderTask(final ReminderTask source) throws IllegalValueException {
         this(source.getStartDate(), source.getStartTime(),source.getReadableOnlyTask(), source.getIsAlive());
     }
@@ -93,6 +92,9 @@ public class ReminderTask {
        this.task = task;
     }
     
+    /**
+     * Format state as text for viewing.
+     */
     public final String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append("Reminder")
@@ -122,17 +124,13 @@ public class ReminderTask {
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
             Platform.runLater(() -> {
             EventsCenter.getInstance().post(new ShowReminderRequestEvent(task));
             });
             isAlive = false;
-            timer.cancel();
-            
-         
-            
+            timer.cancel();            
         }
     }
 }

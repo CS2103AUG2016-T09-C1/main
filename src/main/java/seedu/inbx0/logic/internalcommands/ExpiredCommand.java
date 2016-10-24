@@ -10,6 +10,10 @@ import seedu.inbx0.logic.commands.Command;
 import seedu.inbx0.logic.commands.CommandResult;
 import seedu.inbx0.model.task.Date;
 
+/**
+ * Checks tasks in the tasklist and determines whether the task has expired
+ */
+//@@author A0139579J
 public class ExpiredCommand extends Command {
     
     private static final String MESSAGE_SUCCESS = "Successfully checked for expired tasks";

@@ -116,18 +116,21 @@ public class ModelManager extends ComponentManager implements Model {
         indicateTaskListChanged();
     }
     
+    //@@author A0139579J
     @Override
     public synchronized void editTask(ReadOnlyTask target, Task task) throws TaskNotFoundException, DuplicateTaskException {
         taskList.editTask(target, task);
         indicateTaskListChanged();
     }
     
+    //@@author A0139579J
     @Override
     public synchronized void markTaskComplete(ReadOnlyTask target, Task task) throws TaskNotFoundException {
         taskList.markTaskComplete(target, task);
         indicateTaskListChanged();
     }
     
+    //@@author
     @Override
     public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
         taskList.addTask(task);
@@ -135,12 +138,14 @@ public class ModelManager extends ComponentManager implements Model {
         indicateTaskListChanged();
     }
     
+    //@@author A0139579J
     @Override
     public synchronized void checkExpiry(Date currentDate, String currentTime) {
         if(taskList.checkExpiry(currentDate, currentTime))
             indicateTaskListChanged();
     }
     
+    //@@author A0139579J
     @Override
     public synchronized void checkReminders() {
         if(taskList.checkReminders())
@@ -240,6 +245,10 @@ public class ModelManager extends ComponentManager implements Model {
         }
     }
     
+    /*
+     * Updates the list according to list command parameters
+     */
+    //@@author A0139579J
     @Override
     public void updateFilteredTaskList(String date, String preposition){
         if(preposition.equals(""))
@@ -249,7 +258,8 @@ public class ModelManager extends ComponentManager implements Model {
         else
             updateFilteredTaskList(new PredicateExpression(new EndUntilDateQualifier(date)));
     }
-
+    
+    //@@author
     @Override
     public void updateFilteredNormalTaskList() {
         updateFilteredNormalTaskList(new PredicateExpression(new NormalTaskQualifier()));
@@ -548,6 +558,7 @@ public class ModelManager extends ComponentManager implements Model {
         }
     }
     
+    //@@author A0139579J
     private class OverdueTaskQualifier implements Qualifier {
         
         OverdueTaskQualifier() {
@@ -569,6 +580,7 @@ public class ModelManager extends ComponentManager implements Model {
         }
     }
     
+    //@@author
     private class ToDoTaskQualifier implements Qualifier {
         
         ToDoTaskQualifier() {
@@ -642,7 +654,8 @@ public class ModelManager extends ComponentManager implements Model {
             return "Importance: " + this.importance;
         }
     }
-
+    
+    //@@author A0139579J
     private class StartOnAndEndOnDateQualifier implements Qualifier {
         private String date;
         
@@ -705,6 +718,7 @@ public class ModelManager extends ComponentManager implements Model {
                    
         }
         
+        //@@author
         @Override
         public String toString() {
             return "date= " + date;
