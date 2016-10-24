@@ -10,7 +10,6 @@ import seedu.inbx0.MainApp;
 import seedu.inbx0.commons.core.ComponentManager;
 import seedu.inbx0.commons.core.Config;
 import seedu.inbx0.commons.core.LogsCenter;
-import seedu.inbx0.commons.events.model.ShowNormalTaskListEvent;
 import seedu.inbx0.commons.events.storage.DataSavingExceptionEvent;
 import seedu.inbx0.commons.events.ui.JumpToListRequestEvent;
 import seedu.inbx0.commons.events.ui.ShowFilteredListRequestEvent;
@@ -141,11 +140,4 @@ public class UiManager extends ComponentManager implements Ui {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         mainWindow.handleShowFilteredListRequestByShowCommand(event.filterCondition);
     }
-    
-    @Subscribe
-    private void handleShowNormalTaskListEvent(ShowNormalTaskListEvent event){
-        logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        mainWindow.handleShowNormalTaskListEvent();
-    }
-
 }

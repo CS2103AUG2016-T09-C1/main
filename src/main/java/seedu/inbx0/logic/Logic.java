@@ -30,7 +30,7 @@ public interface Logic {
     CommandResult removeReminders();
     
     /** Returns the backing list of tasks */
-    ObservableList<ReadOnlyTask> getBackingTaskList();
+   // ObservableList<ReadOnlyTask> getBackingTaskList();
     
     /** Returns the filtered list of tasks */
     ObservableList<ReadOnlyTask> getFilteredTaskList();

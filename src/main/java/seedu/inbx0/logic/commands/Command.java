@@ -2,7 +2,6 @@ package seedu.inbx0.logic.commands;
 
 import seedu.inbx0.commons.core.EventsCenter;
 import seedu.inbx0.commons.core.Messages;
-import seedu.inbx0.commons.events.model.ShowNormalTaskListEvent;
 import seedu.inbx0.commons.events.ui.IncorrectCommandAttemptedEvent;
 import seedu.inbx0.model.Model;
 
@@ -53,12 +52,5 @@ public abstract class Command {
      */
     protected void indicateAttemptToExecuteIncorrectCommand() {
         EventsCenter.getInstance().post(new IncorrectCommandAttemptedEvent(this));
-    }
-    
-    /**
-     * Raises an event to indicate task list need to update
-     */
-    protected void indicateShowNormalTaskListEvent() {
-        EventsCenter.getInstance().post(new ShowNormalTaskListEvent());
     }
 }

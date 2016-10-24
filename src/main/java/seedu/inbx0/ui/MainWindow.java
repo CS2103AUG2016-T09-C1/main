@@ -134,7 +134,6 @@ public class MainWindow extends UiPart {
     }
 
     void fillInnerParts() {
-        // browserPanel = BrowserPanel.load(browserPlaceholder);
         upperTaskListPanel = TaskListPanel.load(primaryStage, getUpperTaskListPlaceholder(),
                 logic.getFilteredTaskList());
         bottomTaskListPanel = TaskListPanel.load(primaryStage, getBottomTaskListPlaceholder(), null);
@@ -170,14 +169,6 @@ public class MainWindow extends UiPart {
     private AnchorPane getSelectTaskListPlaceholder() {
         return selectTaskListPanelPlaceholder;
     }
-
-    // public AnchorPane getTaskListPlaceholder() {
-    // return taskListPanelPlaceholder;
-    // }
-
-    // public AnchorPane getFloatTaskListPlaceholder() {
-    // return floatTaskListPanelPlaceholder;
-    // }
 
     public void hide() {
         primaryStage.hide();
@@ -450,12 +441,5 @@ public class MainWindow extends UiPart {
     public void handleReminder(ReadOnlyTask task) {
         ReminderWindow reminderWindow = ReminderWindow.load(primaryStage, task);
         reminderWindow.show();
-    }
-
-    public void handleShowNormalTaskListEvent() {
-        UpperTitledPane.setExpanded(false);
-        LowerTitledPane.setExpanded(true);
-        upperTaskListPanel = TaskListPanel.load(primaryStage, getUpperTaskListPlaceholder(),
-                logic.getBackingTaskList());
     }
 }
