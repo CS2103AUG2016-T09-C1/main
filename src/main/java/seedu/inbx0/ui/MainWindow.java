@@ -34,7 +34,7 @@ public class MainWindow extends UiPart {
     // private TaskListPanel floatTaskListPanel;
     // private TaskListPanel taskListPanel;
     private TaskListPanel upperTaskListPanel;
-    private TaskListPanel bottomTaskListPanel;
+    private InformationPanel bottomInfoPanel;
     private TaskListPanel selectTaskListPanel;
     private ResultDisplay resultDisplay;
     private StatusBarFooter statusBarFooter;
@@ -85,7 +85,7 @@ public class MainWindow extends UiPart {
     private AnchorPane upperTaskListPanelPlaceholder;
 
     @FXML
-    private AnchorPane bottomTaskListPanelPlaceholder;
+    private AnchorPane bottomInfoPanelPlaceholder;
 
     @FXML
     private AnchorPane resultDisplayPlaceholder;
@@ -137,7 +137,7 @@ public class MainWindow extends UiPart {
         // browserPanel = BrowserPanel.load(browserPlaceholder);
         upperTaskListPanel = TaskListPanel.load(primaryStage, getUpperTaskListPlaceholder(),
                 logic.getFilteredTaskList());
-        bottomTaskListPanel = TaskListPanel.load(primaryStage, getBottomTaskListPlaceholder(), null);
+        bottomInfoPanel = InformationPanel.load(primaryStage, getBottomInfoPanelPlaceholder(), null);
         selectTaskListPanel = TaskListPanel.load(primaryStage, getSelectTaskListPlaceholder(),
                 logic.getFilteredDayTaskList("today"));
         resultDisplay = ResultDisplay.load(primaryStage, getResultDisplayPlaceholder());
@@ -163,8 +163,8 @@ public class MainWindow extends UiPart {
         return upperTaskListPanelPlaceholder;
     }
 
-    private AnchorPane getBottomTaskListPlaceholder() {
-        return bottomTaskListPanelPlaceholder;
+    private AnchorPane getBottomInfoPanelPlaceholder() {
+        return bottomInfoPanelPlaceholder;
     }
 
     private AnchorPane getSelectTaskListPlaceholder() {
@@ -238,8 +238,8 @@ public class MainWindow extends UiPart {
         raise(new ExitAppRequestEvent());
     }
 
-    public TaskListPanel getBottomTaskListPanel() {
-        return this.bottomTaskListPanel;
+    public InformationPanel getBottomInfoPanel() {
+        return this.bottomInfoPanel;
     }
 
     public TaskListPanel getUpperTaskListPanel() {
@@ -459,5 +459,9 @@ public class MainWindow extends UiPart {
         LowerTitledPane.setExpanded(true);
         upperTaskListPanel = TaskListPanel.load(primaryStage, getUpperTaskListPlaceholder(),
                 logic.getBackingTaskList());
+    }
+
+    public void handleTaskDetails(ReadOnlyTask task) {
+        bottomInfoPanel = InformationPanel.load(primaryStage, getBottomInfoPanelPlaceholder(), task);       
     }
 }

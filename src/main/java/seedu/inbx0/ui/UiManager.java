@@ -20,6 +20,7 @@ import seedu.inbx0.commons.events.ui.ShowReminderRequestEvent;
 import seedu.inbx0.commons.util.StringUtil;
 import seedu.inbx0.logic.Logic;
 import seedu.inbx0.model.UserPrefs;
+import seedu.inbx0.model.task.ReadOnlyTask;
 
 import java.util.logging.Logger;
 
@@ -129,7 +130,8 @@ public class UiManager extends ComponentManager implements Ui {
     private void handleJumpToListRequestEvent(JumpToListRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         mainWindow.getUpperTaskListPanel().scrollTo(event.targetIndex);
-        mainWindow.getBottomTaskListPanel().scrollTo(event.targetIndex);
+        ReadOnlyTask task = logic.getFilteredTaskList().get(event.targetIndex);
+        mainWindow.handleTaskDetails(task);
     }
 
     @Subscribe
