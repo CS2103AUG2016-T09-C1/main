@@ -6,6 +6,7 @@ import seedu.inbx0.commons.core.LogsCenter;
 import seedu.inbx0.commons.core.UnmodifiableObservableList;
 import seedu.inbx0.commons.events.model.TaskListChangedEvent;
 import seedu.inbx0.commons.exceptions.IllegalValueException;
+import seedu.inbx0.model.history.HistoryList;
 import seedu.inbx0.model.task.Task;
 import seedu.inbx0.model.task.Date;
 import seedu.inbx0.model.task.ReadOnlyTask;
@@ -30,6 +31,7 @@ public class ModelManager extends ComponentManager implements Model {
     private final TaskList taskList;
     private final FilteredList<Task> backingTaskList;
     private final FilteredList<Task> filteredTasks;
+    private HistoryList<TaskList> taskListHistory;
     //private final FilteredList<Task> filteredNormalTasks;
     //private final FilteredList<Task> filteredFloatTasks;
     //private final FilteredList<Task> filteredEventTasks;
@@ -55,6 +57,7 @@ public class ModelManager extends ComponentManager implements Model {
         taskList = new TaskList(src);
         filteredTasks = new FilteredList<>(taskList.getTasks());
         backingTaskList = new FilteredList<>(taskList.getTasks());
+        taskListHistory = new HistoryList<Tasklist>();
         //filteredNormalTasks = new FilteredList<>(taskList.getTasks());
         //filteredFloatTasks = new FilteredList<>(taskList.getTasks());
         //filteredEventTasks = new FilteredList<>(taskList.getTasks());
@@ -75,6 +78,7 @@ public class ModelManager extends ComponentManager implements Model {
         taskList = new TaskList(initialData);
         filteredTasks = new FilteredList<>(taskList.getTasks());
         backingTaskList = new FilteredList<>(taskList.getTasks());
+        taskListHistory = new HistoryList<Tasklist>();
         //filteredNormalTasks = new FilteredList<>(taskList.getTasks());
         //filteredFloatTasks = new FilteredList<>(taskList.getTasks());
         //filteredEventTasks = new FilteredList<>(taskList.getTasks());
@@ -103,6 +107,31 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public ReadOnlyTaskList getTaskList() {
         return taskList;
+    }
+    
+    @Override
+    public void saveTaskListHistory() {
+        taskListHistory.pushState(taskList);
+    }
+    
+    @Override
+    public void undoTaskListHistory(int numToUndo) {
+        assert numToUndo > 0;
+        
+        int numUndone = 0;
+        TaskList historyList = null;
+        try {
+            for (int i = 0; i < numToUndo; i++) {
+                historyList = taskListHistory.popState();
+                numUndone++;
+            }
+        } catch (OutOfHistoryException e) {
+            logger.fine(e.getMessage());
+        }
+        
+        if (historyList != null) {
+            resetData(historyList);
+        }
     }
 
     /** Raises an event to indicate the model has changed */
@@ -808,8 +837,4 @@ public class ModelManager extends ComponentManager implements Model {
             return "tag=" + String.join(", ", tagKeyWords);
         }
     }*/
-
-    
-
-
 }

@@ -18,6 +18,9 @@ public interface Model {
 
     /** Returns the TaskList */
     ReadOnlyTaskList getTaskList();
+    
+    //** Saves the current state of the TaskList into a temporary history list **/
+    void saveTaskListHistory();
 
     /** Deletes the given task. */
     void deleteTask(ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException;

@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
  * Wraps all data at the task manager level
  * Duplicates are not allowed (by .equals comparison)
  */
-public class TaskList implements ReadOnlyTaskList {
+public class TaskList implements ReadOnlyTaskList, HistoryTask<Tasklist> {
 
     private final UniqueTaskList tasks;
     private final UniqueTagList tags;
@@ -226,8 +226,8 @@ public class TaskList implements ReadOnlyTaskList {
         return Objects.hash(tasks, tags, reminders);
     }
 
-
-    
-
-    
+    @Override
+    public TaskList copyCurrentList() {
+        return new TaskList(this);
+    }
 }
