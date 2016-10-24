@@ -36,7 +36,7 @@ public class ModelManager extends ComponentManager implements Model {
     //private final FilteredList<Task> filteredDeadlineTasks;
     //private final FilteredList<Task> filteredDoneTasks;
     //private final FilteredList<Task> filteredToDoTasks;
-    //private final FilteredList<Task> filteredOverdueTasks;
+    private final FilteredList<Task> filteredOverdueTasks;
     //private final FilteredList<Task> filteredBeforedueTasks;
     //private final FilteredList<Task> filteredDayTasks;
     //private final FilteredList<Task> filteredImportanceTasks;
@@ -61,7 +61,7 @@ public class ModelManager extends ComponentManager implements Model {
         //filteredDeadlineTasks = new FilteredList<>(taskList.getTasks());
         //filteredToDoTasks = new FilteredList<>(taskList.getTasks());
         //filteredDoneTasks = new FilteredList<>(taskList.getTasks());
-        //filteredOverdueTasks = new FilteredList<>(taskList.getTasks());
+        filteredOverdueTasks = new FilteredList<>(taskList.getTasks());
         //filteredBeforedueTasks = new FilteredList<>(taskList.getTasks());
         //filteredDayTasks = new FilteredList<>(taskList.getTasks());
         //filteredImportanceTasks = new FilteredList<>(taskList.getTasks());
@@ -81,7 +81,7 @@ public class ModelManager extends ComponentManager implements Model {
         //filteredDeadlineTasks = new FilteredList<>(taskList.getTasks());
         //filteredToDoTasks = new FilteredList<>(taskList.getTasks());
         //filteredDoneTasks = new FilteredList<>(taskList.getTasks());
-        //filteredOverdueTasks = new FilteredList<>(taskList.getTasks());
+        filteredOverdueTasks = new FilteredList<>(taskList.getTasks());
         //filteredBeforedueTasks = new FilteredList<>(taskList.getTasks());
         //filteredDayTasks = new FilteredList<>(taskList.getTasks());
         //filteredImportanceTasks = new FilteredList<>(taskList.getTasks());
@@ -190,7 +190,7 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public UnmodifiableObservableList<ReadOnlyTask> getFilteredOverdueTaskList() {    
         updateFilteredOverdueTaskList();
-        return new UnmodifiableObservableList<>(filteredTasks);
+        return new UnmodifiableObservableList<>(filteredOverdueTasks);
     }
     
     @Override
@@ -335,7 +335,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
     
     private void updateFilteredOverdueTaskList(Expression expression) {
-        filteredTasks.setPredicate(expression::satisfies);
+        filteredOverdueTasks.setPredicate(expression::satisfies);
     }
     
     private void updateFilteredBeforedueTaskList(Expression expression) {
