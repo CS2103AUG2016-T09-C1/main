@@ -71,4 +71,9 @@ public class ListCommand extends Command {
                 return new CommandResult(getMessageForTaskListShownSummary(model.getFilteredTaskList().size()));
         }       
     }
+
+    @Override
+    public boolean canUndo() {
+        return false;
+    }
 }

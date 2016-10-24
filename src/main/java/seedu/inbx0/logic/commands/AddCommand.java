@@ -160,5 +160,10 @@ public class AddCommand extends Command {
         }
 
     }
-
+    
+    //@@author A0139481Y
+    @Override
+    public boolean canUndo() {  
+        return true;
+    }
 }

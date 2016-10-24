@@ -171,5 +171,11 @@ public class EditCommand extends Command {
     }
 
 
+    @Override
+    public boolean canUndo() {
+        return true;
+    }
+
+
 
 }
