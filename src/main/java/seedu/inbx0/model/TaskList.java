@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
  * Wraps all data at the task manager level
  * Duplicates are not allowed (by .equals comparison)
  */
-public class TaskList implements ReadOnlyTaskList, HistoryState<Tasklist> {
+public class TaskList implements ReadOnlyTaskList, HistoryState<TaskList> {
 
     private final UniqueTaskList tasks;
     private final UniqueTagList tags;

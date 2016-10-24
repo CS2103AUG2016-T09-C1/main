@@ -58,7 +58,7 @@ public class ModelManager extends ComponentManager implements Model {
         taskList = new TaskList(src);
         filteredTasks = new FilteredList<>(taskList.getTasks());
         backingTaskList = new FilteredList<>(taskList.getTasks());
-        taskListHistory = new HistoryList<Tasklist>();
+        taskListHistory = new HistoryList<TaskList>();
         //filteredNormalTasks = new FilteredList<>(taskList.getTasks());
         //filteredFloatTasks = new FilteredList<>(taskList.getTasks());
         //filteredEventTasks = new FilteredList<>(taskList.getTasks());
@@ -79,7 +79,7 @@ public class ModelManager extends ComponentManager implements Model {
         taskList = new TaskList(initialData);
         filteredTasks = new FilteredList<>(taskList.getTasks());
         backingTaskList = new FilteredList<>(taskList.getTasks());
-        taskListHistory = new HistoryList<Tasklist>();
+        taskListHistory = new HistoryList<TaskList>();
         //filteredNormalTasks = new FilteredList<>(taskList.getTasks());
         //filteredFloatTasks = new FilteredList<>(taskList.getTasks());
         //filteredEventTasks = new FilteredList<>(taskList.getTasks());
@@ -110,6 +110,7 @@ public class ModelManager extends ComponentManager implements Model {
         return taskList;
     }
     
+    //@@author A0139481Y
     @Override
     public void saveTaskListHistory() {
         taskListHistory.pushState(taskList);
@@ -136,6 +137,7 @@ public class ModelManager extends ComponentManager implements Model {
         
         return numUndone;
     }
+    //@@author
 
     /** Raises an event to indicate the model has changed */
     private void indicateTaskListChanged() {

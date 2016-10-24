@@ -5,6 +5,7 @@ package seedu.inbx0.model.history;
  * 
  * @param <T> The class of the item
  */
+//@@author A0139481Y
 public interface HistoryState<T> {
     T copyCurrentState();
 }

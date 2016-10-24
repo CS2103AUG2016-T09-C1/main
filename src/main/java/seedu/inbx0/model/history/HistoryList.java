@@ -2,6 +2,7 @@ package seedu.inbx0.model.history;
 
 import java.util.LinkedList;
 
+//@@author A0139481Y
 public class HistoryList<T extends HistoryState<T>> {
     
     private static final int MAX_NUM_HISTORY_STORED = 10;
