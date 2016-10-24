@@ -46,6 +46,13 @@ public abstract class Command {
     public void setData(Model model) {
         this.model = model;
     }
+    
+    /**
+     * 
+     * @return true if this command can be undone.
+     */
+    //@@author A0139481Y
+    public abstract boolean canUndo();
 
     /**
      * Raises an event to indicate an attempt to execute an incorrect command

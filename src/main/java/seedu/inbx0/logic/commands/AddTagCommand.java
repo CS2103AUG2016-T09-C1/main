@@ -105,4 +105,9 @@ public class AddTagCommand extends Command {
         
         return new CommandResult(MESSAGE_SUCCESS);
     }
+
+    @Override
+    public boolean canUndo() {
+        return true;
+    }
 }

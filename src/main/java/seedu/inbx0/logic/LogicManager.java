@@ -61,6 +61,8 @@ public class LogicManager extends ComponentManager implements Logic {
         System.out.println(commandText);
         previousCommandText.push(commandText);
         command.setData(model);
+        if(command.canUndo())
+            model.saveTaskListHistory();
         return command.execute();
     }
     

@@ -6,6 +6,8 @@ import seedu.inbx0.commons.core.LogsCenter;
 import seedu.inbx0.commons.core.UnmodifiableObservableList;
 import seedu.inbx0.commons.events.model.TaskListChangedEvent;
 import seedu.inbx0.commons.exceptions.IllegalValueException;
+import seedu.inbx0.model.history.HistoryList;
+import seedu.inbx0.model.history.HistoryList.EmptyHistoryException;
 import seedu.inbx0.model.task.Task;
 import seedu.inbx0.model.task.Date;
 import seedu.inbx0.model.task.ReadOnlyTask;
@@ -39,6 +41,7 @@ public class ModelManager extends ComponentManager implements Model {
     private final FilteredList<Task> filteredBeforedueTasks;
     private final FilteredList<Task> filteredDayTasks;
     private final FilteredList<Task> filteredImportanceTasks;
+    private HistoryList<TaskList> taskListHistory;
 
     /**
      * Initializes a ModelManager with the given TaskList
@@ -63,6 +66,7 @@ public class ModelManager extends ComponentManager implements Model {
         filteredBeforedueTasks = new FilteredList<>(taskList.getTasks());
         filteredDayTasks = new FilteredList<>(taskList.getTasks());
         filteredImportanceTasks = new FilteredList<>(taskList.getTasks());
+        taskListHistory = new HistoryList<TaskList>();
     }
 
     public ModelManager() {
@@ -82,6 +86,7 @@ public class ModelManager extends ComponentManager implements Model {
         filteredBeforedueTasks = new FilteredList<>(taskList.getTasks());
         filteredDayTasks = new FilteredList<>(taskList.getTasks());
         filteredImportanceTasks = new FilteredList<>(taskList.getTasks());
+        taskListHistory = new HistoryList<TaskList>();
     }
 
     @Override
@@ -100,6 +105,35 @@ public class ModelManager extends ComponentManager implements Model {
     public ReadOnlyTaskList getTaskList() {
         return taskList;
     }
+    
+    //@@author A0139481Y
+    @Override
+    public void saveTaskListHistory() {
+        taskListHistory.pushState(taskList);
+    }
+    
+    @Override
+    public int undoTaskListHistory(int stepsBack) {
+        assert stepsBack > 0;
+        
+        int numUndone = 0;
+        TaskList historyList = null;
+        try {
+            for (int i = 0; i < stepsBack; i++) {
+                historyList = taskListHistory.popState();
+                numUndone++;
+            }
+        } catch (EmptyHistoryException e) {
+            logger.fine(e.getMessage());
+        }
+        
+        if (historyList != null) {
+            resetData(historyList);
+        }
+        
+        return numUndone;
+    }
+    //@@author
 
     /** Raises an event to indicate the model has changed */
     private void indicateTaskListChanged() {
@@ -794,8 +828,4 @@ public class ModelManager extends ComponentManager implements Model {
             return "tag=" + String.join(", ", tagKeyWords);
         }
     }*/
-
-    
-
-
 }

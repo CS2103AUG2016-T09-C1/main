@@ -19,4 +19,9 @@ public class RemoveReminder extends Command {
         return new CommandResult(MESSAGE_SUCCESS);
 
     }
+
+    @Override
+    public boolean canUndo() {
+        return false;
+    }
 }
