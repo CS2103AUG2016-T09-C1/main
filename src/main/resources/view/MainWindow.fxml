@@ -358,7 +358,7 @@
                                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                        </padding>
                                     </AnchorPane>
-                                    <AnchorPane fx:id="bottomTaskListPanelPlaceholder" prefHeight="101.0" prefWidth="1150.0" stylesheets="@DarkTheme.css">
+                                    <AnchorPane fx:id="bottomReminderListPanelPlaceholder" prefHeight="101.0" prefWidth="1150.0" stylesheets="@DarkTheme.css">
                                        <padding>
                                           <Insets left="5.0" right="5.0" />
                                        </padding></AnchorPane>

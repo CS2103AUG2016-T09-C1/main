@@ -34,7 +34,7 @@ public class MainWindow extends UiPart {
     // private TaskListPanel floatTaskListPanel;
     // private TaskListPanel taskListPanel;
     private TaskListPanel upperTaskListPanel;
-    private TaskListPanel bottomTaskListPanel;
+    private InformationPanel bottomReminderListPanel;
     private ResultDisplay resultDisplay;
     private StatusBarFooter statusBarFooter;
     private CommandBox commandBox;
@@ -75,7 +75,7 @@ public class MainWindow extends UiPart {
     private AnchorPane upperTaskListPanelPlaceholder;
 
     @FXML
-    private AnchorPane bottomTaskListPanelPlaceholder;
+    private AnchorPane bottomReminderListPanelPlaceholder;
 
     @FXML
     private AnchorPane resultDisplayPlaceholder;
@@ -126,7 +126,7 @@ public class MainWindow extends UiPart {
     void fillInnerParts() {
         upperTaskListPanel = TaskListPanel.load(primaryStage, getUpperTaskListPlaceholder(),
                 logic.getFilteredTaskList());
-        bottomTaskListPanel = TaskListPanel.load(primaryStage, getBottomTaskListPlaceholder(), null);
+        bottomReminderListPanel = InformationPanel.load(primaryStage, getReminderListPlaceholder(), null);
         resultDisplay = ResultDisplay.load(primaryStage, getResultDisplayPlaceholder());
         statusBarFooter = StatusBarFooter.load(primaryStage, getStatusbarPlaceholder(), config.getTaskListFilePath());
         commandBox = CommandBox.load(primaryStage, getCommandBoxPlaceholder(), resultDisplay, logic);
@@ -148,8 +148,8 @@ public class MainWindow extends UiPart {
         return upperTaskListPanelPlaceholder;
     }
 
-    private AnchorPane getBottomTaskListPlaceholder() {
-        return bottomTaskListPanelPlaceholder;
+    private AnchorPane getReminderListPlaceholder() {
+        return bottomReminderListPanelPlaceholder;
     }
 
     public void hide() {
@@ -210,8 +210,8 @@ public class MainWindow extends UiPart {
         raise(new ExitAppRequestEvent());
     }
 
-    public TaskListPanel getBottomTaskListPanel() {
-        return this.bottomTaskListPanel;
+    public InformationPanel getBottomReminderListPanel() {
+        return this.bottomReminderListPanel;
     }
 
     public TaskListPanel getUpperTaskListPanel() {
@@ -429,5 +429,11 @@ public class MainWindow extends UiPart {
         ImportanceTitledPane.setExpanded(false);
         CompletenessTitledPane.setExpanded(false);
         ExpireTitledPane.setExpanded(false);
+    }
+
+    public void displayReminderInfoPanel(ReadOnlyTask newSelection) {
+        bottomReminderListPanel = InformationPanel.load(primaryStage, getReminderListPlaceholder(), newSelection);
+                //newSelection);
+        
     }
 }
