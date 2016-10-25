@@ -70,7 +70,7 @@ public class MainWindow extends UiPart {
     private TitledPane CompletenessTitledPane;
 
     @FXML
-    private TitledPane ExpireTitledPane;
+    private TitledPane ExpiredTitledPane;
 
     @FXML
     private AnchorPane upperTaskListPanelPlaceholder;
@@ -413,10 +413,10 @@ public class MainWindow extends UiPart {
             CompletenessTitledPane.setExpanded(true);
             handleListIncomplete();
         } else if (filterCondition.equals("Expire")) {
-            ExpireTitledPane.setExpanded(true);
+            ExpiredTitledPane.setExpanded(true);
             handleListExpire();
         } else if (filterCondition.equals("Valid")) {
-            ExpireTitledPane.setExpanded(true);
+            ExpiredTitledPane.setExpanded(true);
             handleListValid();
         }
     }
@@ -439,7 +439,7 @@ public class MainWindow extends UiPart {
         CategoryTitledPane.setExpanded(false);
         ImportanceTitledPane.setExpanded(false);
         CompletenessTitledPane.setExpanded(false);
-        ExpireTitledPane.setExpanded(false);
+        ExpiredTitledPane.setExpanded(false);
     }
 
     public void displayReminderInfoPanel(ReadOnlyTask newSelection) {
