@@ -5,8 +5,11 @@ import java.util.List;
 
 import com.joestelmach.natty.Parser;
 
+import seedu.inbx0.commons.core.EventsCenter;
 import seedu.inbx0.commons.core.Messages;
 import seedu.inbx0.commons.core.UnmodifiableObservableList;
+import seedu.inbx0.commons.events.ui.IncorrectCommandAttemptedEvent;
+import seedu.inbx0.commons.events.ui.TaskPanelSelectionChangedEvent;
 import seedu.inbx0.commons.exceptions.IllegalValueException;
 import seedu.inbx0.model.reminder.ReminderTask;
 import seedu.inbx0.model.reminder.UniqueReminderList;
@@ -182,7 +185,8 @@ public class RemindCommand extends Command {
         
         Task withReminder = null;
         try {
-           withReminder = createToEditWithTask(editArguments, tags, reminders);
+            withReminder = createToEditWithTask(editArguments, tags, reminders);
+            EventsCenter.getInstance().post(new TaskPanelSelectionChangedEvent(withReminder));
         } catch (IllegalValueException e1) {
             return new CommandResult(MESSAGE_USAGE);
         }

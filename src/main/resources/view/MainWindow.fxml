@@ -242,7 +242,7 @@
                                     </AnchorPane>
                                 </content>
                               </TitledPane>
-                              <TitledPane fx:id="ExpireTitledPane" animated="false" text="Expire">
+                              <TitledPane fx:id="ExpiredTitledPane" animated="false" text="Expired">
                                 <content>
                                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                        <children>
