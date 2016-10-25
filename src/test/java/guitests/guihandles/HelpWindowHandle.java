@@ -9,7 +9,7 @@ import javafx.stage.Stage;
 public class HelpWindowHandle extends GuiHandle {
 
     private static final String HELP_WINDOW_TITLE = "Help";
-    private static final String HELP_WINDOW_ROOT_FIELD_ID = "#helpWindowRoot";
+    private static final String HELP_WINDOW_ROOT_FIELD_ID = "#helpWindow1Root";
 
     public HelpWindowHandle(GuiRobot guiRobot, Stage primaryStage) {
         super(guiRobot, primaryStage, HELP_WINDOW_TITLE);

@@ -196,7 +196,7 @@ public class MainWindow extends UiPart {
 
     @FXML
     public void handleHelp() {
-        HelpWindow1 helpWindow = HelpWindow1.load(primaryStage);
+        HelpWindow helpWindow = HelpWindow.load(primaryStage);
         helpWindow.show();
     }
     

@@ -1,62 +1,72 @@
 package seedu.inbx0.ui;
 
+import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyCombination;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.web.WebView;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import seedu.inbx0.model.task.ReadOnlyTask;
+import java.util.logging.Logger;
 import seedu.inbx0.commons.core.LogsCenter;
 import seedu.inbx0.commons.util.FxViewUtil;
+import seedu.inbx0.logic.Logic;
 
-import java.util.logging.Logger;
-
-/**
- * Controller for a help page
- */
 public class HelpWindow extends UiPart {
-
+    
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
-    private static final String ICON = "/images/help_icon.png";
     private static final String FXML = "HelpWindow.fxml";
+    private static final String ICON = "/images/help_icon.png";
     private static final String TITLE = "Help";
-    private static final String USERGUIDE_URL =
-            "https://github.com/se-edu/addressbook-level4/blob/master/docs/UserGuide.md";
-
-    private AnchorPane mainPane;
-
-    private Stage dialogStage;
-
-    public static HelpWindow load(Stage primaryStage) {
-        logger.fine("Showing help page about the application.");
+    
+    private Stage helpStage;
+    private VBox mainPane;
+    
+    public static HelpWindow load(Stage primaryStage){
+        logger.fine("Showing help window");
         HelpWindow helpWindow = UiPartLoader.loadUiPart(primaryStage, new HelpWindow());
         helpWindow.configure();
         return helpWindow;
     }
-
+    
+    private void configure(){     
+        Scene scene = new Scene(mainPane);
+        //Null passed as the parent stage to make it non-modal.
+        helpStage = createDialogStage(TITLE, null, scene);
+        setIcon(helpStage, ICON);
+    }
+    
     @Override
     public void setNode(Node node) {
-        mainPane = (AnchorPane) node;
+        mainPane = (VBox) node;
     }
-
+    
     @Override
     public String getFxmlPath() {
         return FXML;
     }
-
-    private void configure(){
-        Scene scene = new Scene(mainPane);
-        //Null passed as the parent stage to make it non-modal.
-        dialogStage = createDialogStage(TITLE, null, scene);
-        dialogStage.setMaximized(true); //TODO: set a more appropriate initial size
-        setIcon(dialogStage, ICON);
-
-        WebView browser = new WebView();
-        browser.getEngine().load(USERGUIDE_URL);
-        FxViewUtil.applyAnchorBoundaryParameters(browser, 0.0, 0.0, 0.0, 0.0);
-        mainPane.getChildren().add(browser);
-    }
-
+    
     public void show() {
-        dialogStage.showAndWait();
+        helpStage.showAndWait();
+    }
+    
+    @FXML
+    public void handleCloseHelpWindow() {
+        helpStage.close();
+    }
+    
+    @FXML
+    public void keyPressed(KeyEvent evt) {
+        if(evt.getCode().equals(KeyCode.ENTER)) {
+            handleCloseHelpWindow();
+        }
+        
     }
 }
