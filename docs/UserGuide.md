@@ -1,8 +1,23 @@
 # User Guide
-
+##**Table Of Contents**
 * [About](#about)
 * [Quick Start](#quick-start)
 * [Features](#features)
+	* [Getting help: `help`](#help)
+	* [Adding a task: `add`](#add)
+	* [Listing tasks: `list`](#list)
+	* [Finding specific tasks: `find`](#find)
+	* [Sort the tasks by specific sorting criteria: `sort`](#sort)
+	* [Editing a task: `edit`](#edit)
+	* [Modifying the taglist: `addtag` / `deltag`](#tag)
+	* [Deleting a task: `del`](#del)
+	* [Select a task : `sel`](#sel)
+	* [Undo previous action: `undo`](#undo)
+	* [Clearing all tasks : `clr`](#clr)
+	* [Marking a task as completed : `done`](#done)
+	* [Setting a reminder for your task : `rem`](#reminder)
+	* [Displaying expired and overdue tasks](#overdue)
+	* [Exiting the program : `exit`](#exit)
 * [Command Summary](#command-summary)
 * [FAQ](#faq)
 
@@ -76,6 +91,7 @@ This will open up a help window that will give you a quick glance of the command
 #### <a id="add"></a>2. Adding a task: `add`
 Let's get started by adding tasks to the tasklist! You may use any of the below formats to get started.
 
+<!--- @@author A0139579J -->
 1) Adds a floating task.<br>
 Format: `add TASK [i=IMPORTANCE] [t=TAGS]...` 
 
@@ -143,10 +159,11 @@ Examples:
 3) Listing tasks that are overdue <br>
 Format: `list overdue`
 
-You will be able to view all of the tasks that had expired by typing the following: `list overdue`
+You will be able to view all of the deadline tasks are overdue by typing the following: `list overdue`
 
 <br><br>
 
+<!--- @@author A0148044J-->
 #### <a id="find"></a>4. Finding specific tasks: `find`
 Want to search for important things that you need to do? Or know when is your next coming exam? If you need to find certain tasks by keywords, you can use the `find` command.
 
@@ -216,6 +233,7 @@ Sort the lists such that the name of the tasks is in the reverse of natural alph
 
 <br><br>  
 
+<!--- @@author A0139579J -->
 #### <a id="edit"></a>6. Editing a task: `edit`
 1) Editing any parameter of a task <br>
 Format: `edit INDEX [n=NAME] [s=START_DATE] [st=START_TIME] [e=END_DATE] [et=END_TIME] [i=IMPORTANCE]`
@@ -327,8 +345,8 @@ Format: `clr`
 Tasks can easily become obsolete and checking off tasks individually can be quite a hassle. The clear command will help you to remove all tasks and can be accessed by typing the following: `clr`
 
 <br><br>
-
-#### <a id="done"></a>12. Mark a task as `done`
+<!--- @@author A0139579J -->
+#### <a id="done"></a>12. Marking a task as completed : `done`
 1) Mark selected tasks as done
 Format: `done INDEX [INDEX]...`
 
@@ -356,7 +374,49 @@ Example:
   
 <br><br>
 
-#### <a id="exit"></a>13. Exiting the program : 
+#### <a id="reminder"></a>13. Setting a reminder for your task : `rem`
+Format: `rem INDEX s=START_DATE/START_TIME/START_DATE and START_TIME`
+
+You can add a reminder to a task by typing the following: `rem INDEX s=START_DATE/START_TIME/START_DATE and START_TIME` <br>
+
+Upon addition of a reminder, a small bell icon will appear beside the task name which signifies that the task has a reminder set.
+At the stipulated time of the reminder, it will display a popup which will display all of the task details.
+You can view the details of the reminder by using the Select Command: `sel INDEX`
+
+If Inbx_0 is closed during the time the reminder is supposed to be shown, the reminder popup will appear upon the next startup of Inbx_0.
+
+> A task can have multiple reminders
+
+Example: 
+* `rem 1 s=8a` <br>
+ Sets a reminder for the 1st task on the list which will display a reminder at the current date at 8am.
+ 
+* `rem 3 s=tmr` <br>
+ Sets a reminder for the 3rd task on the list which will display a reminder tomorrow.
+ 
+* `rem 2 s=next week 10a` <br>
+ Sets a reminder for the 2nd task on the list which will display a reminder next week at 10am.
+ 
+<br><br>
+
+#### <a id="overdue"></a>14. Displaying expired and overdue tasks
+1) Overdue Deadline Tasks
+
+If the deadline task has not been marked as completed and is end date is before the current date, Inbx_0 will mark the task as overdue.
+
+Upon startup, a popup will appear which will display all overdue tasks in a list.
+After viewing your overdue tasks, you can close the popup and decide on your next action for the overdue tasks.
+You can easily filter the main task list by typing: `list overdue`
+
+2) Expired Events
+
+For events that had expired, the task will take a lighter shade to show that the event had already passed.
+
+<br><br>
+
+<!--- @@author -->
+
+#### <a id="exit"></a>15. Exiting the program : `exit` 
 Format: `exit`
 
 After using Inbx_0, you can easily exit the program by typing the following in the command line: `exit`
@@ -388,11 +448,12 @@ Command | Format
 [Edit](#edit) | `edit INDEX [n=NAME] [s=START_DATE] [st=START_TIME] [e=END_DATE] [et=END_TIME] [i=IMPORTANCE]`
 [Addtag / Deltag](#tag) | `tag INDEX t=TAGS [t=MORE_TAGS]`
 [Delete](#del) | `del INDEX`
-[Select](#sel) | `sel INDEX`
+[Select](#sel) `sel INDEX`
 [Undo](#undo) | `undo`
 [Clear](#clr) | `clr`
 [Done](#done) | `done INDEX [INDEX]...`
 &nbsp; | `done FIRST_INDEX to LAST_INDEX`
+[Remind] (#remind) | `rem INDEX s=START_DATE/START_TIME/START_DATE and START_TIME`
 [Exit](#exit) | `exit`
 
 ## **FAQ**

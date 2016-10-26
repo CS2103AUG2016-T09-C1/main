@@ -19,6 +19,7 @@ import java.util.logging.Logger;
 import seedu.inbx0.commons.core.LogsCenter;
 import seedu.inbx0.commons.events.ui.TaskPanelSelectionChangedEvent;
 
+//@@author A0139579J
 public class InformationPanel extends UiPart {
     private static final Logger logger = LogsCenter.getLogger(InformationPanel.class);
     private static final String FXML = "InformationPanel.fxml";

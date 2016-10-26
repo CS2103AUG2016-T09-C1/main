@@ -7,6 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import seedu.inbx0.model.reminder.ReminderTask;
 
+//@@author A0139579J
 public class ReminderListCard extends UiPart{
 
     private static final String FXML = "ReminderListCard.fxml";

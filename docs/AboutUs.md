@@ -8,9 +8,7 @@ We are a team of students based in the [School of Computing, National University
 <img src="images/DhruvJain.png" width="150"><br>
 **Role**: Team Lead, Documentation, Deliverables<br>
 
-Responsibilities: Model
-
-* Components in charge of: [Storage](https://github.com/se-edu/addressbook-level4/blob/master/docs/DeveloperGuide.md#storage-component)
+* Components in charge of: [Model](https://github.com/CS2103AUG2016-T09-C1/main/blob/master/docs/DeveloperGuide.md#model-component)
 * Aspects/tools in charge of: Testing, Git
 * Features implemented:
    * [List persons](https://github.com/se-edu/addressbook-level4/blob/master/docs/UserGuide.md#listing-all-persons--list)
@@ -42,16 +40,13 @@ Responsibilities: Model
 <img src="images/ChenSidai.jpeg" width="150"><br>
 **Role**: Code Quality <br>
 
-Responsibilities: UI
-* Components in charge of: [Storage](https://github.com/se-edu/addressbook-level4/blob/master/docs/DeveloperGuide.md#storage-component)
-* Aspects/tools in charge of: Testing, Git
+* Components in charge of: [UI](https://github.com/CS2103AUG2016-T09-C1/main/blob/master/docs/DeveloperGuide.md#ui-component)
 * Features implemented:
-   * [List persons](https://github.com/se-edu/addressbook-level4/blob/master/docs/UserGuide.md#listing-all-persons--list)
-   * [Delete person](https://github.com/se-edu/addressbook-level4/blob/master/docs/UserGuide.md#deleting-a-person--delete)
-* Code written: [[functional code](A123456.md)][[test code](A123456.md)][[docs](A123456.md)]
+   * [Find Command](https://github.com/CS2103AUG2016-T09-C1/main/blob/master/docs/UserGuide.md#4-finding-specific-tasks-find)
+   * [Sort Command](https://github.com/CS2103AUG2016-T09-C1/main/blob/master/docs/UserGuide.md#5-sort-the-tasks-by-specific-sorting-criteria-sort)
+* Code written: [[functional code](A0148044J.md)][[test code](A0148044J.md)][[docs](A0148044J.md)]
 * Other major contributions:
-  * Did the initial refactoring from AddressBook to ToDoList [[#133](https://github.com/se-edu/addressbook-level4/pull/152) ]
-  * Set up Travis and Coveralls
+  * Did the UI which included the sidepanel for filtering tasks into categories, the info panel and the popup for reminder
 
 -----
 
@@ -59,17 +54,19 @@ Responsibilities: UI
 <img src="images/ZacharyFoo.png" width="150"><br>
 **Role**: Testing, Integration <br>  
 
-Responsibilities: Storage
-* Components in charge of: [Storage](https://github.com/se-edu/addressbook-level4/blob/master/docs/DeveloperGuide.md#storage-component)
-* Aspects/tools in charge of: Testing, Git
+* Components in charge of: [Storage](https://github.com/CS2103AUG2016-T09-C1/main/blob/master/docs/DeveloperGuide.md#storage-component)
 * Features implemented:
-   * [List persons](https://github.com/se-edu/addressbook-level4/blob/master/docs/UserGuide.md#listing-all-persons--list)
-   * [Delete person](https://github.com/se-edu/addressbook-level4/blob/master/docs/UserGuide.md#deleting-a-person--delete)
-* Code written: [[functional code](A123456.md)][[test code](A123456.md)][[docs](A123456.md)]
+   * [Add Command] (https://github.com/CS2103AUG2016-T09-C1/main/blob/master/docs/UserGuide.md#2-adding-a-task-add)
+   * [List by date, List overdue, List due date](https://github.com/CS2103AUG2016-T09-C1/main/blob/master/docs/UserGuide.md#3-listing-tasks-list)
+   * [Edit Command](https://github.com/CS2103AUG2016-T09-C1/main/blob/master/docs/UserGuide.md#6-editing-a-task-edit)
+   * [Done Command](https://github.com/CS2103AUG2016-T09-C1/main/blob/master/docs/UserGuide.md#12-marking-a-task-as-completed-done)
+   * [Overdue Tasks](https://github.com/CS2103AUG2016-T09-C1/main/blob/master/docs/UserGuide.md#14-displaying-expired-and-overdue-tasks)
+   * [Reminder Command](https://github.com/CS2103AUG2016-T09-C1/main/blob/master/docs/UserGuide.md#13-setting-a-reminder-for-your-task-rem)
+   
+* Code written: [[functional code](A0139579J.md)][[test code](A0139579J.md)][[docs](A0139579J.md)]
 * Other major contributions:
-  * Did the initial refactoring from AddressBook to ToDoList [[#133](https://github.com/se-edu/addressbook-level4/pull/152) ]
-  * Set up Travis and Coveralls
-
+	* Set up the initial task object which takes in additional objects such as time, date, importance and reminders
+	
 -----
 ## Project Mentor
 #### Nirandika Wanigasekara

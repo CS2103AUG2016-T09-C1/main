@@ -19,6 +19,7 @@ import seedu.inbx0.commons.core.LogsCenter;
 import seedu.inbx0.commons.util.FxViewUtil;
 import seedu.inbx0.logic.Logic;
 
+//@@author A0139579J
 public class ReminderWindow extends UiPart {
     
     private static final Logger logger = LogsCenter.getLogger(ReminderWindow.class);
