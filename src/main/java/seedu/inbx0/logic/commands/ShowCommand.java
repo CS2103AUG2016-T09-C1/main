@@ -7,6 +7,7 @@ import seedu.inbx0.commons.events.ui.ShowFilteredListRequestEvent;
 /**
  * Format full help instructions for every command for display.
  */
+//@@author A0148044J
 public class ShowCommand extends Command {
 
     public static final String COMMAND_WORD = "show";

@@ -184,13 +184,15 @@ public class ModelManager extends ComponentManager implements Model {
         if(taskList.checkReminders())
             indicateTaskListChanged();
     }
+    //@@author
     //=========== Filtered Task List Accessors ===============================================================
-
+    
     @Override
     public UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList() {
         return new UnmodifiableObservableList<>(filteredTasks);
     }
-
+    
+    //@@author A0148044J
     @Override
     public UnmodifiableObservableList<ReadOnlyTask> getFilteredNormalTaskList() {
         updateFilteredNormalTaskList();
@@ -214,13 +216,13 @@ public class ModelManager extends ComponentManager implements Model {
         updateFilteredFloatTaskList();
         return new UnmodifiableObservableList<>(filteredFloatTasks);
     }
-    
+    //@@author A0139579J
     @Override
     public UnmodifiableObservableList<ReadOnlyTask> getFilteredOverdueTaskList() {    
         updateFilteredOverdueTaskList();
         return new UnmodifiableObservableList<>(filteredOverdueTasks);
     }
-    
+    //@@author A0148044J
     @Override
     public UnmodifiableObservableList<ReadOnlyTask> getFilteredEventTaskList() {
         updateFilteredEventTaskList();
@@ -250,12 +252,12 @@ public class ModelManager extends ComponentManager implements Model {
         updateFilteredImportanceTaskList(importance);
         return new UnmodifiableObservableList<>(filteredImportanceTasks);
     }
-
+    //@@author
     @Override
     public void updateFilteredListToShowAll() {
         filteredTasks.setPredicate(null);
     }
-    
+    //@@author A0148044J
     @Override
     public void updateFilteredTaskList(boolean logicRelation, List<String> keywords){
         if(logicRelation) {
@@ -280,7 +282,7 @@ public class ModelManager extends ComponentManager implements Model {
             updateFilteredTaskList(new PredicateExpression(new EndUntilDateQualifier(date)));
     }
     
-    //@@author
+    //@@author A0148044J
     @Override
     public void updateFilteredNormalTaskList() {
         updateFilteredNormalTaskList(new PredicateExpression(new NormalTaskQualifier()));
@@ -300,12 +302,12 @@ public class ModelManager extends ComponentManager implements Model {
     public void updateFilteredToDoTaskList() {
         updateFilteredToDoTaskList(new PredicateExpression(new ToDoTaskQualifier()));
     }    
-    
+    //@@author A0139579J
     @Override
     public void updateFilteredOverdueTaskList() {
         updateFilteredOverdueTaskList(new PredicateExpression(new OverdueTaskQualifier()));
     }
-    
+    //@@author A0148044J
     @Override
     public void updateFilteredBeforedueTaskList() {
         updateFilteredBeforedueTaskList(new PredicateExpression(new BeforedueTaskQualifier()));
@@ -334,11 +336,11 @@ public class ModelManager extends ComponentManager implements Model {
         updateFilteredImportanceTaskList(new PredicateExpression(new ImportanceTaskQualifier(importance)));
         
     }
-
+    //@@author
     private void updateFilteredTaskList(Expression expression) {
         filteredTasks.setPredicate(expression::satisfies);
     }
-    
+    //@@author A0148044J
     private void updateFilteredNormalTaskList(Expression expression) {
         filteredNormalTasks.setPredicate(expression::satisfies);
     }
@@ -378,7 +380,7 @@ public class ModelManager extends ComponentManager implements Model {
     private void updateFilteredImportanceTaskList(Expression expression) {
         filteredImportanceTasks.setPredicate(expression::satisfies);
     }
-
+    //@@author 
     //========== Inner classes/interfaces used for filtering ==================================================
 
     interface Expression {
@@ -428,7 +430,7 @@ public class ModelManager extends ComponentManager implements Model {
             return "AndSearchKeyword =" + String.join(", ", andKeywords);
         }
     }*/
-    
+    //@@author A0148044J
     private class OrQualifier implements Qualifier {
         private List<String> orKeywords;
 
@@ -601,7 +603,7 @@ public class ModelManager extends ComponentManager implements Model {
         }
     }
     
-    //@@author
+    //@@author A0148044J
     private class ToDoTaskQualifier implements Qualifier {
         
         ToDoTaskQualifier() {
