@@ -9,14 +9,11 @@ We are a team of students based in the [School of Computing, National University
 **Role**: Team Lead, Documentation, Deliverables<br>
 
 * Components in charge of: [Model](https://github.com/CS2103AUG2016-T09-C1/main/blob/master/docs/DeveloperGuide.md#model-component)
-* Aspects/tools in charge of: Testing, Git
 * Features implemented:
-   * [List persons](https://github.com/se-edu/addressbook-level4/blob/master/docs/UserGuide.md#listing-all-persons--list)
-   * [Delete person](https://github.com/se-edu/addressbook-level4/blob/master/docs/UserGuide.md#deleting-a-person--delete)
-* Code written: [[functional code](A123456.md)][[test code](A123456.md)][[docs](A123456.md)]
+   * [Set Directory Command](https://github.com/CS2103AUG2016-T09-C1/main/blob/master/docs/UserGuide.md#16-saving-your-tasklist-to-a-specific-directory-saveas)
+* Code written: [[functional code](A0135797M.md)][[test code](A0135797M.md)][[docs](A0135797M.md)]
 * Other major contributions:
-  * Did the initial refactoring from AddressBook to ToDoList [[#133](https://github.com/se-edu/addressbook-level4/pull/152) ]
-  * Set up Travis and Coveralls
+  * Updated the documentation for User Guide and Developer Guide
 
 -----
 

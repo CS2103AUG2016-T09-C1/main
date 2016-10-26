@@ -2,6 +2,7 @@ package seedu.inbx0.commons.events.storage;
 
 import seedu.inbx0.commons.events.BaseEvent;
 
+//@@author A0135797M
 public class StoragePathChangedEvent extends BaseEvent {
     
     public final String oldPath;

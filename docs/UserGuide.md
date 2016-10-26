@@ -21,6 +21,7 @@
 	* [Marking a task as completed : `done`](#done)
 	* [Setting a reminder for your task : `rem`](#reminder)
 	* [Displaying expired and overdue tasks](#overdue)
+	* [Saving your tasklist to a specific directory : `saveas`](#setdir)
 	* [Exiting the program : `exit`](#exit)
 * [Command Summary](#command-summary)
 * [FAQ](#faq)
@@ -458,9 +459,24 @@ For events that had expired, the task will take a lighter shade to show that the
 
 <br><br>
 
+<!--- @@author A0135797M-->
+
+#### <a id="setdir"></a>16. Saving your tasklist to a specific directory : `saveas`
+Format: `saveas FILE_DIRECTORY`
+
+You can specify a directory for saving your tasklist by typing the following: `saveas FILE_DIRECTORY` <br>
+
+The filepath will be verified and you will be able to save your tasklist in a new directory.
+
+Example: 
+* `saveas  C:/Users/Jim/Desktop/taklist.xml` <br>
+Saves the tasklist on the desktop of Jim's computer.
+ 
+ <br><br> 
+ 
 <!--- @@author -->
 
-#### <a id="exit"></a>16. Exiting the program : `exit` 
+#### <a id="exit"></a>17. Exiting the program : `exit` 
 Format: `exit`
 
 After using Inbx_0, you can easily exit the program by typing the following in the command line: `exit`
@@ -499,6 +515,7 @@ Command | Format
 [Done](#done) | `done INDEX [INDEX]...`
 &nbsp; | `done FIRST_INDEX to LAST_INDEX`
 [Remind] (#remind) | `rem INDEX s=START_DATE/START_TIME/START_DATE and START_TIME`
+[Set Directory] (#setdir) | `saveas FILE_DIRECTORY`
 [Exit](#exit) | `exit`
 
 ## **FAQ**

@@ -74,6 +74,7 @@ public abstract class Command {
     }
 
     /** Raises an event to indicate the storage has changed - reused from T09-C2*/
+    //@@author A0135797M
     protected void indicateStoragePathChanged(String oldPath, String newPath) {
         EventsCenter.getInstance().post(new StoragePathChangedEvent(oldPath, newPath));
 

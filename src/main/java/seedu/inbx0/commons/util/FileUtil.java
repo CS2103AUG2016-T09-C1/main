@@ -79,6 +79,7 @@ public class FileUtil {
      * Checks if a given string {@code path} is a valid file path
      * @author A0135797M - reused from T09-C2 cheec
      */
+    //@@author A0135797M
     public static boolean isValidPath(String path) {
         try {
             Paths.get(path);
@@ -88,7 +89,8 @@ public class FileUtil {
 
         return true;
     }
-
+    //@@author
+    
     /**
      * Converts a string to a platform-specific file path
      * @param pathWithForwardSlash A String representing a file path but using '/' as the separator
