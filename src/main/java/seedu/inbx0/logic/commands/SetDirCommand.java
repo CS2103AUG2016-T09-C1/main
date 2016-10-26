@@ -22,7 +22,7 @@ public class SetDirCommand extends Command{
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Allows the user to specify the directory to save the tasklist.xml file.\n"
-            + "Example: " + COMMAND_WORD + " C:/Users/Jim/Desktop/taklist.xml" + " [ASC|ascending|ascend|DESC|descending|descend]";
+            + "Example: " + COMMAND_WORD + " C:/Users/Jim/Desktop/taklist.xml";
 
     public static final String MESSAGE_SAVE_TASK_SUCCESS = "Tasklist saved successfully in %1$s";
     public static final String MESSAGE_FILE_PATH_ERROR = "Error: Directory does not exist.";
@@ -67,11 +67,6 @@ public class SetDirCommand extends Command{
         } catch (IOException e) {
             return new CommandResult(e.getMessage());
         }
-    }
-
-    @Override
-    public boolean isValidCommandWord(String commandWord) {
-        return commandWord.equals(COMMAND_WORD);
     }
 
 }

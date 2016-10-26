@@ -18,10 +18,5 @@ public class IncorrectCommand extends Command {
         return new CommandResult(feedbackToUser);
     }
     
-    @Override
-    public boolean isValidCommandWord(String commandWord) {
-        return false;
-    }
-
 }
 

@@ -45,7 +45,6 @@ public abstract class Command {
      * access to the dependencies.
      */
     
-    public abstract boolean isValidCommandWord(String commandWord);
     
     public void setData(Model model) {
         this.model = model;
