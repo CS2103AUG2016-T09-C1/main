@@ -21,7 +21,7 @@ Unlike all the other task managers out there, Inbx\_0 is a simple program that r
 2. Copy the file to the folder you want to use as the home folder for your Task Manager
 3. Double-click the Task Manager
 4. Double-click the  Task Manager.jar file to start the app. The GUI should appear in a few seconds. 
-   > <img src="images/GUI.png" width="600">
+ > <img src="images/GUI.png" width="600">
 
 5. Type a command in the command box and press <kbd>Enter</kbd> to execute it. <br>
    e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window. 
@@ -64,12 +64,10 @@ The rest of the guide will be using the general command format to describe what 
 #### <a id="help"></a>1. Getting help: `help`
 Format: `help`
 
-Looking for help? If you ever need a reminder on how to input certain commands or have some troubleshooting issues, you can easily access the ‘help’ command which will guide you to the right direction.
+Looking for help? If you ever need a reminder on how to input certain commands or have some troubleshooting issues, just type `help` and we will guide you in the right direction.
 
-To access the help command, type the following into the command line:
-> help
-
-This will open up a help window that will direct you back to this User Guide if you need a refresher.
+This will open up a help window that will give you a quick glance of the commands that are available.
+> <img src="images/HelpWindow.png" width="600">
 
 <br><br>
  
@@ -77,46 +75,47 @@ This will open up a help window that will direct you back to this User Guide if 
 Let's get started by adding tasks to the tasklist! You may use any of the below formats to get started.
 
 1) Adds a floating task.<br>
-Format: `add TASK [i/IMPORTANCE] [t/TAGS]...` 
+Format: `add TASK [i=IMPORTANCE] [t=TAGS]...` 
 
 > Floating tasks are tasks without without any start dates or end dates. You can use this to keep track of tasks which may not be follow
 a time schedule.
 
 Examples: 
 * `add Buy Groceries` <br>
-* `add Wash dishes i/green` <br>
+* `add Wash dishes i=green` <br>
+* `add Buy bunny i=green t=cute` <br>
 <br>
 
 2) Adds a task with deadlines.<br>
-Format: `add TASK e/[END_DATE] [END_TIME] [i/IMPORTANCE] [t/TAGS]...` 
+Format: `add TASK e=[END_DATE] [END_TIME] [i=IMPORTANCE] [t=TAGS]...` 
 
 Examples: 
-* `add Do CS2103 Homework e/tomorrow i/red`
-* `add Finish Project Paper e/1 March 12am i/green t/For GEH1027` <br>
+* `add Do CS2103 Homework e=tomorrow i=red`
+* `add Finish Project Paper e=1 March 12am i=green t=GEH1027` <br>
 <br>
 
-> * Under the e/ parameter, it requires either the END_DATE or END_TIME. By providing only END_DATE, the END_TIME would not be specified.
+> * Under the e= parameter, it requires either the END_DATE or END_TIME. By providing only END_DATE, the END_TIME would not be specified.
 > *	If the END_DATE is not provided, the end date will be automatically assigned as the current date.
 
 3) Adds a task with starting point only.<br>
-Format: `add TASK s/[START_DATE] [START_TIME][i/IMPORTANCE] [t/TAGS]...`
+Format: `add TASK s=[START_DATE] [START_TIME][i=IMPORTANCE] [t=TAGS]...`
 
 Examples: 
-* `add Started Gym Training s/10012016 i/red`
-* `add On Diet s/18/10/2016 i/red t/health` <br>
+* `add Started Gym Training s=10012016 10am i=red`
+* `add On Diet s=18/10/2016 i=red t=health` <br>
 <br>
 
-> * Under the s/ parameter, it requires either the START_DATE or START_TIME. By providing only START_DATE, the START_TIME would not be specified.
+> * Under the s= parameter, it requires either the START_DATE or START_TIME. By providing only START_DATE, the START_TIME would not be specified.
 > *	If the START_DATE is not provided, the start date will be automatically assigned as the current date.
 
 4) Adds an event.<br>
-Format: `add TASK s/[START_DATE] [START_TIME] e/[END_DATE] [END_TIME] [i/IMPORTANCE] [t/TAGS]...`
+Format: `add TASK s=[START_DATE] [START_TIME] e=[END_DATE] [END_TIME] [i=IMPORTANCE] [t=TAGS]...`
 
 > Events are tasks with a starting and ending point.
 
 Examples:
-* `add Doctor's appointment s/2 July 2016 5pm e/2 July 2016 7:30pm i/green t/painful`
-* `add SO’s Birthday s/29 Feb 12am e/1 March 12am i/green t/flowers t/chocolates`
+* `add Doctor's appointment s=2 July 2016 5pm e=2 July 2016 7:30pm i=green t=painful`
+* `add SO’s Birthday s=29 Feb 12am e=1 March 12am i=green t=flowers t=chocolates`
 
 <br><br>
 
@@ -133,9 +132,7 @@ If you input a date, it will show all the tasks associated with that date.
 2) Listing tasks due before a specific date. <br>
 Format: `list due DATE`
 
-You will be able to view all of today’s tasks and  tasks that are due before a specific date. By keying in the following, it will display a list of all the tasks due before the input date in the task manager.
-
-> list due DATE
+You will be able to view all of today’s tasks and tasks that are due before a specific date. By keying in `list due DATE`, it will display a list of all the tasks due before the input date in the task manager.
 
 Examples:
 * `list due tomorrow` shows every task from now to the end of tomorrow <br>
@@ -146,20 +143,18 @@ Format: `list overdue`
 
 You will be able to view all of the tasks that had expired which can be keyed in the command with the following:
 
-> list overdue
-
+`list overdue`
 
 <br><br>
 
-Want to find out what important things that you need to do? Or when is you next coming exam? If you need to find certain tasks by keywords, you can execute `find` command. 
-
 #### <a id="find"></a>4. Finding specific tasks: `find`
+Want to search for important things that you need to do? Or know when is your next coming exam? If you need to find certain tasks by keywords, you can use the `find` command.
+
 1. Normal search
- 
->Format: `find KEYWORD [MORE_KEYWORDS]...`
+Format: `find KEYWORD [MORE_KEYWORDS]...`
 
 > * Normal search will display a task that matches at least one keyword (i.e. `OR` search).
-> * You can use `INDICATOR/KEYWORD` to specify the keyword belong to a specific attributes, available INDICATOR: n/, s/, st/, e/, et/, i/
+> * You can use `INDICATOR/KEYWORD` to specify the keyword belong to a specific attributes, available INDICATOR: n=, s=, st=, e=, et=, i=
 > * You can use `'` to replace the whitespace if one search keyword contains whitespace, or inbx_0 treat it as multiple keywords
  eg: `do'CS2103'homework` will match `do CS2103 homework' 
 > * Tasks matching at least one keyword will be returned (i.e. `OR` search).
@@ -170,18 +165,18 @@ Want to find out what important things that you need to do? Or when is you next 
 Example: 
 `find meeting CS2103quiz`
 
- Return `MEETING` or `CS2103Quiz` but not `meeting with CS2103 tutor` or `quiz` 
+Return `MEETING` or `CS2103Quiz` but not `meeting with CS2103 tutor` or `quiz` 
 
 2. Logic operation search
 
 > Format:  `[LOGIC_OPERATOR] KEYWORD [MORE_KEYWORDS] [MORE_LOGIC_OPERATOR]...`
 
 > * Logic operation search will display a task only when it fits the logic expression
-> * LOGIC_OPERATOR: `|` means OR, `&` means AND, `(` and `)` use for group the logic operation
-> * You can use `INDICATOR/KEYWORD` to specify the keyword belong to a specific attributes, available INDICATOR: n/, s/, st/, e/, et/, i/
+> * LOGIC_OPERATOR: `|` means OR, `&` means AND, `(` and `)` used to group the logic operations
+> * You can use `INDICATOR/KEYWORD` to specify the keyword belong to a specific attributes, available INDICATOR: n=, s=, st=, e=, et=, i=
 > * You can use any valid logic operation format
 > * valid logic operation format: 
->  1. Bracket must be closed properly
+>  1. Brackets must be closed properly
 >  2.  Keywords must not contains whitespace and any keywords cannot followed by another keyword without `LOGIC_OPERATOR` in between
 >  3.  `|` `&` `(` cannot followed by '|' '&' )' without `keywords` in between
 
@@ -190,17 +185,19 @@ Examples:
 `find homework | assignment`: 
 Return  `homework` or `assignment`
 
-`find homework & e/tmr`:
-Return `homework` that ends` tomorrow`
+`find homework & e=tmr`:
+Return `homework` that ends `tomorrow`
 
-`find (homework | assignment) & s/tmr & i/r`:
+`find (homework | assignment) & s=tmr & i=r`:
 Return `homework` or `meeting` that start on `tomorrow` with high importance `Red`
 
 
 <br><br>
 
-#### <a id="sort"></a>4. Sort the tasks by specific sorting criteria: `sort`
-> Format: sort `[Name]`/`[Start Time]`/`[End Time]`/`[Importance]` `[ASCENDING]`/`[]DESCENDING]`
+#### <a id="sort"></a>5. Sort the tasks by specific sorting criteria: `sort`
+Format: sort `[Name]`/`[Start Time]`/`[End Time]`/`[Importance]` `[ASCENDING]`/`[]DESCENDING]`
+
+The Sort Command
 
 > * Sort the tasks according to name, start time, end time or importance in descending or ascending order
 > * acceptable input for 
@@ -217,7 +214,7 @@ Sort the lists such that the importance of the tasks decrease
 `sort n DESC`:
 Sort the lists such that the name of the tasks is in the reverse of natural alphabet order 
 
-#### <a id="edit"></a>5. Editing a task: `edit`
+#### <a id="edit"></a>6. Editing a task: `edit`
 1) Editing any parameter of a task <br>
 Format: `edit INDEX [n/NAME] [s/START_DATE] [st/START_TIME] [e/END_DATE] [et/END_TIME] [i/IMPORTANCE]`
 
@@ -253,26 +250,23 @@ Examples:
 
 <br><br>
 
-#### <a id="tag"></a>6. Tagging a task: `tag`
-Format: `tag INDEX t/TAGS [t/MORE_TAGS]`
+#### <a id="tag"></a>7. Modifying the taglist: `addtag` / `deltag`
+Format: `addtag INDEX t=TAGS [t=MORE_TAGS]`
 
 If you wish to add additional tags to any existing tasks, you can do it by typing the following: <br>
 
-> tag INDEX t/TAGS [t/MORE_TAGS]
+> addtag INDEX t=TAGS [t=MORE_TAGS]
 
-Note that adding tags and editing tags are totally different. Edit tags will remove all tags and add in the editted tag. This tag command will just append the new tag behind any existing tag names.
-
-> The index refers to the index number shown in the most recent listing.<br>
-  The index **must be a positive integer** 1, 2, 3, ...
+Note that adding tags and editing tags are different commands. Edit tags will remove all tags and add in the editted tag. This addtag command will just append the new tag behind any existing tag names.
 
 Examples: 
 * `list today`<br>
-  `tag 2 t/tonight`<br>
+  `addtag 2 t/tonight`<br>
   Adds the "tonight" tag to the 2nd task in the list.
 
 <br><br>
 
-#### <a id="del"></a>7. Deleting a task: `del`
+#### <a id="del"></a>8. Deleting a task: `del`
 Format: `del INDEX`
 
 If you have wish to remove a particular task from the list, you can do it by typing the following: <br>
@@ -280,10 +274,6 @@ If you have wish to remove a particular task from the list, you can do it by typ
 > del INDEX
 
 This will remove the task from task list.
-
-> Deletes the task at the specified `INDEX`. 
-  The index refers to the index number shown in the most recent listing.<br>
-  The index **must be a positive integer** 1, 2, 3, ...
 
 Examples: 
 * `list today`<br>
@@ -296,7 +286,7 @@ Examples:
 
 <br><br>
 
-#### <a id="sel"></a>8. Select a task : `sel`
+#### <a id="sel"></a>9. Select a task : `sel`
 Format: `sel INDEX`
 
 In order to view more details on a task that you have created, you can select the task identified by the index number in the last listing. The Select Command can be performed by typing:
@@ -304,10 +294,6 @@ In order to view more details on a task that you have created, you can select th
 > sel INDEX
 
 This will automatically display the selected task and you will be able to see whether you have placed any reminders on the task. You will also be able to view tags that are associated with the task.
-
-> Selects the task and loads the task at the specified `INDEX`. 
-  The index refers to the index number shown in the most recent listing.<br>
-  The index **must be a positive integer** 1, 2, 3, ...
 
 Examples: 
 * `list`<br>
@@ -320,7 +306,7 @@ Examples:
 
 <br><br>
 
-#### <a id="undo"></a>9. Undo previous action: `undo`
+#### <a id="undo"></a>10. Undo previous action: `undo`
 Format: `undo`
 
 Undos the previous action done in the task manager if you've made a mistake. <br>
@@ -329,7 +315,7 @@ Undos the previous action done in the task manager if you've made a mistake. <br
 
 <br><br>
 
-#### <a id="clr"></a>10. Clearing all tasks : `clr`
+#### <a id="clr"></a>11. Clearing all tasks : `clr`
 Format: `clr`
 
 Tasks can easily become obsolete and checking off tasks individually can be quite a hassle. The Clear command will help you to remove all tasks and can be accessed by typing the following: `clr`
@@ -338,7 +324,7 @@ Tasks can easily become obsolete and checking off tasks individually can be quit
 
 <br><br>
 
-#### <a id="done"></a>11. Mark a task as `done`
+#### <a id="done"></a>12. Mark a task as `done`
 1) Mark selected tasks as done
 Format: `done INDEX [INDEX]...`
 
@@ -349,9 +335,7 @@ If you have finished a certain task and wish to mark it as finished you can give
 This will label a task as `done`, when task is shown, you will be reminded that you have finished the specified task. If there are more than one tasks that need to be
 marked, you can enter more index numbers with all of them separated with a whitespace. The tasks will be marked complete accordingly
 
-> The index refers to the index number shown in the most recent listing.<br>
-  The index **must be a positive integer** 1, 2, 3, ...
-  If the task is already marked completed for one of the index numbers given, it will remind you that one of the tasks is already completed
+> If the task is already marked completed for one of the index numbers given, it will remind you that one of the tasks is already completed
 
 Example: 
 * `find today` <br>
@@ -379,7 +363,7 @@ Example:
   
 <br><br>
 
-#### <a id="exit"></a>12. Exiting the program : 
+#### <a id="exit"></a>13. Exiting the program : 
 Format: `exit`
 
 After using Inbx_0, you can easily exit the program by typing the following in the command line:
@@ -410,7 +394,7 @@ Command | Format
 &nbsp; | Logic operation search: `find KEYWORD [LOGIC_OPERATOR] [MORE_KEYWORDS] [MORE_LOGIC_OPERATOR]...`
 [Sort](#sort) | `sort [n|s|e|i] [ASC\DESC]`
 [Edit](#edit) | `edit INDEX [n/NAME] [s/START_DATE] [st/START_TIME] [e/END_DATE] [et/END_TIME] [i/IMPORTANCE]`
-[Tag](#tag) | `tag INDEX t/TAGS [t/MORE_TAGS]`
+[Addtag / Deltag](#tag) | `tag INDEX t/TAGS [t/MORE_TAGS]`
 [Delete](#del) | `del INDEX`
 [Select](#sel) | `sel INDEX`
 [Undo](#undo) | `undo`
