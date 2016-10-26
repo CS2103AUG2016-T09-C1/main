@@ -8,6 +8,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.IntStream;
 
+import seedu.inbx0.commons.core.Config;
 import seedu.inbx0.commons.exceptions.IllegalValueException;
 import seedu.inbx0.commons.util.StringUtil;
 import seedu.inbx0.logic.commands.*;
@@ -225,7 +226,13 @@ public class Parser {
 
     private static final Pattern TASK_REMINDER_ARGS_FORMAT = Pattern
             .compile("(?<targetIndex>[0-9]+)" + " s=(?<startDate>[^=]+)");
+    
+    private static final Pattern SAVE_DIRECTORY_ARGS_FORMAT = Pattern.compile("(?<filePath>.+).xml");
+    
+    private static final Pattern SAVE_RESET_DIRECTORY_ARGS_FORMAT = Pattern.compile(SetDirCommand.COMMAND_WORD_RESET);
 
+    private static final String XML_FILE_EXTENSION = ".xml";
+    
     private static final Pattern TASK_EDIT_DATA_ARGS_FORMAT = Pattern.compile("(?<targetIndex>\\S+)(?<arguments>.*)");
     private static final CharSequence NAME = "n=";
     private static final CharSequence START_DATE = "s=";
@@ -299,6 +306,8 @@ public class Parser {
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
+        case SetDirCommand.COMMAND_WORD:
+        	return prepareSetDir(arguments);
 
         default:
             return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);
@@ -1133,6 +1142,26 @@ public class Parser {
                 return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE));
             }
         }
+    }
+    /**
+     * Parses arguments in the context of the save as command.
+     * 
+     * @param full command args string
+     * @return the prepared command
+     */
+    private Command prepareSetDir(String args) {
+        final Matcher resetMatcher = SAVE_RESET_DIRECTORY_ARGS_FORMAT.matcher(args.trim());
+        if (resetMatcher.matches()) {
+            return new SetDirCommand(Config.DEFAULT_XML_FILE_PATH);
+        }
+        
+        final Matcher matcher = SAVE_DIRECTORY_ARGS_FORMAT.matcher(args.trim());
+        if (!matcher.matches()) {
+            return new IncorrectCommand(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, SetDirCommand.MESSAGE_USAGE));
+        }
+        
+        return new SetDirCommand(matcher.group("filePath") + XML_FILE_EXTENSION);
     }
 
 }

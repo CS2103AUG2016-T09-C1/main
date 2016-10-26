@@ -3,6 +3,7 @@ package seedu.inbx0.logic.commands;
 import seedu.inbx0.commons.core.EventsCenter;
 import seedu.inbx0.commons.core.Messages;
 import seedu.inbx0.commons.events.model.ShowNormalTaskListEvent;
+import seedu.inbx0.commons.events.storage.StoragePathChangedEvent;
 import seedu.inbx0.commons.events.ui.IncorrectCommandAttemptedEvent;
 import seedu.inbx0.model.Model;
 
@@ -44,6 +45,8 @@ public abstract class Command {
      * Commands making use of any of these should override this method to gain
      * access to the dependencies.
      */
+    
+    
     public void setData(Model model) {
         this.model = model;
     }
@@ -68,5 +71,11 @@ public abstract class Command {
      */
     protected void indicateShowNormalTaskListEventCommand() {
         EventsCenter.getInstance().post(new ShowNormalTaskListEvent());
+    }
+
+    /** Raises an event to indicate the storage has changed - reused from T09-C2*/
+    protected void indicateStoragePathChanged(String oldPath, String newPath) {
+        EventsCenter.getInstance().post(new StoragePathChangedEvent(oldPath, newPath));
+
     }
 }

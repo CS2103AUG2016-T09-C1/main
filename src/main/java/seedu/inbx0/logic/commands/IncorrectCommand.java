@@ -22,6 +22,6 @@ public class IncorrectCommand extends Command {
     public boolean canUndo() {
         return false;
     }
-
 }
+
 
