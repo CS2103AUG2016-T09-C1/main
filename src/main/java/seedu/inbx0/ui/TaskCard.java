@@ -49,13 +49,13 @@ public class TaskCard extends UiPart{
 
     @FXML
     public void initialize() {
-     /*   name.setWrapText(true);
+        name.setWrapText(true);
         id.setWrapText(true);
         startDate.setWrapText(true);
         startTime.setWrapText(true);
         endDate.setWrapText(true);
         endTime.setWrapText(true);
-        tags.setWrapText(true);*/
+        tags.setWrapText(true);
         name.setText(task.getName().fullName);
         id.setText(displayedIndex + ". ");
         startDate.setText(task.getStartDate().getTotalDate());
@@ -90,18 +90,7 @@ public class TaskCard extends UiPart{
         }else {
             isCompleted.setText("\u2717");
             isCompleted.setStyle("-fx-font-size: 24;");
-        }   /* if(task.getIsExpired() == true && task.getIsEvent() == true) {
-                cardPane.setStyle("-fx-background-color: grey;");
-            } else {
-                cardPane.setStyle("-fx-background-color: black;");
-            }
-            name.setStyle("-fx-text-fill: white;");
-            id.setStyle("-fx-text-fill: white;");
-            startDate.setStyle("-fx-text-fill: white;");
-            startTime.setStyle("-fx-text-fill: white;");
-            endDate.setStyle("-fx-text-fill: white;");
-            endTime.setStyle("-fx-text-fill: white;");
-            tags.setStyle("-fx-text-fill: white;");       */    
+        }  
         hasReminders.setText("");
         UniqueReminderList reminders = task.getReminders();
         Iterator<ReminderTask> check = reminders.iterator();

@@ -1,60 +1,29 @@
 package seedu.inbx0.ui;
 
+import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.Scene;
-import javafx.scene.control.MenuItem;
-import javafx.scene.input.KeyCombination;
+import javafx.scene.control.SplitPane;
+import javafx.scene.control.TitledPane;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import seedu.inbx0.commons.core.Config;
-import seedu.inbx0.commons.core.GuiSettings;
-import seedu.inbx0.commons.events.ui.ExitAppRequestEvent;
+import seedu.inbx0.commons.core.LogsCenter;
+import seedu.inbx0.commons.util.FxViewUtil;
 import seedu.inbx0.logic.Logic;
-import seedu.inbx0.model.UserPrefs;
+import seedu.inbx0.model.task.ReadOnlyTask;
 
-/**
- * The Main Window. Provides the basic application layout containing a menu bar
- * and space where other JavaFX elements can be placed.
- */
-public class MainWindow extends UiPart {
-
-    private static final String ICON = "/images/inbx0.png";
-    private static final String FXML = "MainWindow2.fxml";
-    public static final int MIN_HEIGHT = 600;
-    public static final int MIN_WIDTH = 800;
-
+public class MainDisplayPanel extends UiPart {
+    private static final Logger logger = LogsCenter.getLogger(InformationPanel.class);
+    private static final String FXML = "MainDisplay.fxml";
+    private AnchorPane placeHolderPane;
+    private HBox mainPane;
+    private TaskListPanel upperTaskListPanel;
+    private InformationPanel bottomReminderListPanel;
     private Logic logic;
-
-    // Independent Ui parts residing in this Ui container
-    // private BrowserPanel browserPanel;
-    // private TaskListPanel floatTaskListPanel;
-    // private TaskListPanel taskListPanel;
-    //private TaskListPanel upperTaskListPanel;
-    //private InformationPanel bottomReminderListPanel;
-    private MainDisplayPanel mainDisplayPanel;
-    private ResultDisplay resultDisplay;
-    private StatusBarFooter statusBarFooter;
-    private CommandBox commandBox;
-    private Config config;
-    private UserPrefs userPrefs;
-
-    // Handles to elements of this Ui container
-    private VBox rootLayout;
-    private Scene scene;
-
-    private String taskManagerName;
-
-    // @FXML
-    // private AnchorPane browserPlaceholder;
-
-    @FXML
-    private AnchorPane commandBoxPlaceholder;
-
-    @FXML
-    private MenuItem helpMenuItem;
-/*
+       
     @FXML
     private TitledPane DayTitledPane;
 
@@ -75,22 +44,20 @@ public class MainWindow extends UiPart {
 
     @FXML
     private AnchorPane bottomReminderListPanelPlaceholder;
-
-    @FXML
-    private AnchorPane listDisplayPlaceholder;
-*/
-    @FXML
-    private AnchorPane resultDisplayPlaceholder;
     
     @FXML
-    private AnchorPane mainDisplayPlaceholder;
-
+    private AnchorPane listDisplayPlaceholder;    
+    
     @FXML
-    private AnchorPane statusbarPlaceholder;
+    private GridPane taskListAttribute;
+    
+    public MainDisplayPanel() {
+        super();
+    }
 
     @Override
     public void setNode(Node node) {
-        rootLayout = (VBox) node;
+        mainPane = (HBox) node;
     }
 
     @Override
@@ -98,138 +65,52 @@ public class MainWindow extends UiPart {
         return FXML;
     }
 
-    public static MainWindow load(Stage primaryStage, Config config, UserPrefs prefs, Logic logic) {
-
-        MainWindow mainWindow = UiPartLoader.loadUiPart(primaryStage, new MainWindow());
-        mainWindow.configure(config.getAppTitle(), config.getTaskListName(), config, prefs, logic);
-        return mainWindow;
-    }
-
-    private void configure(String appTitle, String taskManagerName, Config config, UserPrefs prefs, Logic logic) {
-
-        // Set dependencies
-        this.logic = logic;
-        this.taskManagerName = taskManagerName;
-        this.config = config;
-        this.userPrefs = prefs;
-
-        // Configure the UI
-        setTitle(appTitle);
-        setIcon(ICON);
-        setWindowMinSize();
-        setWindowDefaultSize(prefs);
-        scene = new Scene(rootLayout);
-        primaryStage.setScene(scene);
-        
-        setAccelerators();
-    }
-
-    private void setAccelerators() {
-        helpMenuItem.setAccelerator(KeyCombination.valueOf("F1"));
-    }
-
-    void fillInnerParts() {
-       // upperTaskListPanel = TaskListPanel.load(primaryStage, getUpperTaskListPlaceholder(),
-         //       logic.getFilteredTaskList());
-        //bottomReminderListPanel = InformationPanel.load(primaryStage, getReminderListPlaceholder(), null);
-        mainDisplayPanel = MainDisplayPanel.load(primaryStage, getMainDisplayPlaceholder(), logic);
-        resultDisplay = ResultDisplay.load(primaryStage, getResultDisplayPlaceholder());
-        statusBarFooter = StatusBarFooter.load(primaryStage, getStatusbarPlaceholder(), config.getTaskListFilePath());
-        commandBox = CommandBox.load(primaryStage, getCommandBoxPlaceholder(), resultDisplay, logic);
-    }
-
-    private AnchorPane getCommandBoxPlaceholder() {
-        return commandBoxPlaceholder;
-    }
-
-    private AnchorPane getStatusbarPlaceholder() {
-        return statusbarPlaceholder;
-    }
-
-    private AnchorPane getResultDisplayPlaceholder() {
-        return resultDisplayPlaceholder;
+    @Override
+    public void setPlaceholder(AnchorPane pane) {
+        this.placeHolderPane = pane;
     }
     
-    private AnchorPane getMainDisplayPlaceholder() {
-        return mainDisplayPlaceholder;
-    }
-    
-    public MainDisplayPanel getMainDisplayPanel() {
+    public static MainDisplayPanel load(Stage primaryStage, AnchorPane mainDisplayPanelPlaceholder, Logic logic){
+        MainDisplayPanel mainDisplayPanel = UiPartLoader.loadUiPart(primaryStage, mainDisplayPanelPlaceholder, new MainDisplayPanel()); 
+        mainDisplayPanel.configure(logic);
+        mainDisplayPanel.addToPlaceholder();
         return mainDisplayPanel;
     }
-/*
+    
+    private void configure(Logic logic){
+        this.logic = logic;
+        fillInnerPart();
+    }
+    
+    private void fillInnerPart() {
+        upperTaskListPanel = TaskListPanel.load(primaryStage, getUpperTaskListPlaceholder(),
+                logic.getFilteredTaskList());
+        bottomReminderListPanel = InformationPanel.load(primaryStage, getReminderListPlaceholder(), null);
+    }
+    
     private AnchorPane getUpperTaskListPlaceholder() {
         return upperTaskListPanelPlaceholder;
     }
 
     private AnchorPane getReminderListPlaceholder() {
         return bottomReminderListPanelPlaceholder;
-    }
-*/
-    public void hide() {
-        primaryStage.hide();
-    }
-
-    private void setTitle(String appTitle) {
-        primaryStage.setTitle(appTitle);
-    }
-
-    /**
-     * Sets the default size based on user preferences.
-     */
-    protected void setWindowDefaultSize(UserPrefs prefs) {
-        primaryStage.setHeight(prefs.getGuiSettings().getWindowHeight());
-        primaryStage.setWidth(prefs.getGuiSettings().getWindowWidth());
-        if (prefs.getGuiSettings().getWindowCoordinates() != null) {
-            primaryStage.setX(prefs.getGuiSettings().getWindowCoordinates().getX());
-            primaryStage.setY(prefs.getGuiSettings().getWindowCoordinates().getY());
-        }
-    }
-
-    private void setWindowMinSize() {
-        primaryStage.setMinHeight(MIN_HEIGHT);
-        primaryStage.setMinWidth(MIN_WIDTH);
-    }
-
-    /**
-     * Returns the current size and the position of the main Window.
-     */
-    public GuiSettings getCurrentGuiSetting() {
-        return new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(), (int) primaryStage.getX(),
-                (int) primaryStage.getY());
-    }
-
-    @FXML
-    public void handleHelp() {
-        HelpWindow helpWindow = HelpWindow.load(primaryStage);
-        helpWindow.show();
-    }
+    }    
     
-    //@@author A0139579J
-    @FXML
-    public void handleOverdueTasks() {
-        OverdueTaskWindow overdueTaskWindow = OverdueTaskWindow.load(primaryStage, logic);
-        overdueTaskWindow.show();
-    }
-    
-    public void show() {
-        primaryStage.show();
-    }
-
-    /**
-     * Closes the application.
-     */
-    @FXML
-    private void handleExit() {
-        raise(new ExitAppRequestEvent());
-    }
-/*
     public InformationPanel getBottomReminderListPanel() {
         return this.bottomReminderListPanel;
     }
 
     public TaskListPanel getUpperTaskListPanel() {
         return this.upperTaskListPanel;
+    }
+
+    private void addToPlaceholder() {
+        SplitPane.setResizableWithParent(placeHolderPane, false);
+        SplitPane.setResizableWithParent(listDisplayPlaceholder, false);
+        SplitPane.setResizableWithParent(taskListAttribute, false);
+        FxViewUtil.applyAnchorBoundaryParameters(listDisplayPlaceholder, 0.0, 0.0, 0.0, 0.0);
+        FxViewUtil.applyAnchorBoundaryParameters(mainPane, 0.0, 0.0, 0.0, 0.0);
+        placeHolderPane.getChildren().add(mainPane);
     }
 
     @FXML
@@ -364,7 +245,7 @@ public class MainWindow extends UiPart {
         upperTaskListPanel = TaskListPanel.load(primaryStage, getUpperTaskListPlaceholder(),
                 logic.getFilteredBeforedueTaskList());
     }
-    
+
     public void handleShowFilteredListRequestByShowCommand(String filterCondition) {
         if (filterCondition.equals("today")) {
             closeAllTitledPane();
@@ -450,5 +331,4 @@ public class MainWindow extends UiPart {
     public void displayReminderInfoPanel(ReadOnlyTask newSelection) {
         bottomReminderListPanel = InformationPanel.load(primaryStage, getReminderListPlaceholder(), newSelection);        
     }
-*/
 }
