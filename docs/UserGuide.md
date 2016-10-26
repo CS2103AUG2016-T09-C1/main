@@ -20,9 +20,10 @@
 	* [Clearing all tasks : `clr`](#clr)
 	* [Marking a task as completed : `done`](#done)
 	* [Setting a reminder for your task : `rem`](#reminder)
-	* [Displaying expired and overdue tasks](#overdue)
 	* [Saving your tasklist to a specific directory : `saveas`](#setdir)
 	* [Exiting the program : `exit`](#exit)
+	* [Autocompleting with command history](#autocomplete)
+	* [Displaying expired and overdue tasks](#overdue)
 * [Command Summary](#command-summary)
 * [FAQ](#faq)
 
@@ -444,24 +445,9 @@ Example:
   
 <br><br>
 
-#### <a id="overdue"></a>15. Displaying expired and overdue tasks
-1) Overdue Deadline Tasks
-
-If the deadline task has not been marked as completed and is end date is before the current date, Inbx_0 will mark the task as overdue.
-
-Upon startup, a popup will appear which will display all overdue tasks in a list.
-After viewing your overdue tasks, you can close the popup and decide on your next action for the overdue tasks.
-You can easily filter the main task list by typing: `list overdue`
-
-2) Expired Events
-
-For events that had expired, the task will take a lighter shade to show that the event had already passed.
-
-<br><br>
-
 <!--- @@author A0135797M-->
 
-#### <a id="setdir"></a>16. Saving your tasklist to a specific directory : `saveas`
+#### <a id="setdir"></a>15. Saving your tasklist to a specific directory : `saveas`
 Format: `saveas FILE_DIRECTORY`
 
 You can specify a directory for saving your tasklist by typing the following: `saveas FILE_DIRECTORY` <br>
@@ -474,14 +460,41 @@ Saves the tasklist on the desktop of Jim's computer.
  
  <br><br> 
  
-<!--- @@author -->
+ 
+<!--- @@author-->
 
-#### <a id="exit"></a>17. Exiting the program : `exit` 
+#### <a id="exit"></a>16. Exiting the program : `exit` 
 Format: `exit`
 
 After using Inbx_0, you can easily exit the program by typing the following in the command line: `exit`
 
 This will initiate a final save and after which, the program will close automatically.  
+
+<br><br>
+
+<!--- @@author A0148044J-->
+
+#### <a id="autocomplete"></a>17. Autocompleting with command history
+
+You can access autocompletion by using the arrow keys Up and Down to browse through command history <br>
+
+This will allow you to type your commands much more easily and at a increased speed.
+
+ <br><br>
+
+<!--- @@author A0139579J -->
+#### <a id="overdue"></a>18. Displaying expired and overdue tasks
+1) Overdue Deadline Tasks
+
+If the deadline task has not been marked as completed and is end date is before the current date, Inbx_0 will mark the task as overdue.
+
+Upon startup, a popup will appear which will display all overdue tasks in a list.
+After viewing your overdue tasks, you can close the popup and decide on your next action for the overdue tasks.
+You can easily filter the main task list by typing: `list overdue`
+
+2) Expired Events
+
+For events that had expired, the task will take a lighter shade to show that the event had already passed.
 
 <br><br>
 

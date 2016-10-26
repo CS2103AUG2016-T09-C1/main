@@ -10,7 +10,7 @@ We are a team of students based in the [School of Computing, National University
 
 * Components in charge of: [Model](https://github.com/CS2103AUG2016-T09-C1/main/blob/master/docs/DeveloperGuide.md#model-component)
 * Features implemented:
-   * [Set Directory Command](https://github.com/CS2103AUG2016-T09-C1/main/blob/master/docs/UserGuide.md#16-saving-your-tasklist-to-a-specific-directory-saveas)
+   * [Set Directory Command](https://github.com/CS2103AUG2016-T09-C1/main/blob/master/docs/UserGuide.md#15-saving-your-tasklist-to-a-specific-directory-saveas)
 * Code written: [[functional code](A0135797M.md)][[test code](A0135797M.md)][[docs](A0135797M.md)]
 * Other major contributions:
   * Updated the documentation for User Guide and Developer Guide
@@ -42,6 +42,8 @@ We are a team of students based in the [School of Computing, National University
    * [Find Command](https://github.com/CS2103AUG2016-T09-C1/main/blob/master/docs/UserGuide.md#4-finding-specific-tasks-find)
    * [Sort Command](https://github.com/CS2103AUG2016-T09-C1/main/blob/master/docs/UserGuide.md#5-sorting-the-tasks-by-using-a-specific-criteria-sort)
    * [Show Command](https://github.com/CS2103AUG2016-T09-C1/main/blob/master/docs/UserGuide.md#6-showing-the-various-filtered-lists-show)
+   * [Autocomplete with Command History](https://github.com/CS2103AUG2016-T09-C1/main/blob/master/docs/UserGuide.md#17-autocompleting-with-command-history)
+   
 * Code written: [[functional code](A0148044J.md)][[test code](A0148044J.md)][[docs](A0148044J.md)]
 * Other major contributions:
   * Did the UI which included the sidepanel for filtering tasks into categories, the info panel and the popup for reminder
@@ -57,9 +59,9 @@ We are a team of students based in the [School of Computing, National University
    * [Add Command] (https://github.com/CS2103AUG2016-T09-C1/main/blob/master/docs/UserGuide.md#2-adding-a-task-add)
    * [List by date, List overdue, List due date](https://github.com/CS2103AUG2016-T09-C1/main/blob/master/docs/UserGuide.md#3-listing-tasks-list)
    * [Edit Command](https://github.com/CS2103AUG2016-T09-C1/main/blob/master/docs/UserGuide.md#7-editing-a-task-edit)
-   * [Done Command](https://github.com/CS2103AUG2016-T09-C1/main/blob/master/docs/UserGuide.md#13-marking-a-task-as-completed-done)
-   * [Overdue/Expired Tasks](https://github.com/CS2103AUG2016-T09-C1/main/blob/master/docs/UserGuide.md#15-displaying-expired-and-overdue-tasks)
+   * [Done Command](https://github.com/CS2103AUG2016-T09-C1/main/blob/master/docs/UserGuide.md#13-marking-a-task-as-completed-done)   
    * [Reminder Command](https://github.com/CS2103AUG2016-T09-C1/main/blob/master/docs/UserGuide.md#14-setting-a-reminder-for-your-task-rem)
+   * [Overdue/Expired Tasks](https://github.com/CS2103AUG2016-T09-C1/main/blob/master/docs/UserGuide.md#18-displaying-expired-and-overdue-tasks)
    
 * Code written: [[functional code](A0139579J.md)][[test code](A0139579J.md)][[docs](A0139579J.md)]
 * Other major contributions:
