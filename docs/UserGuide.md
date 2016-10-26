@@ -1,4 +1,7 @@
 # User Guide
+
+ > <img src="images/inbx0.png" width="200">
+ 
 ##**Table Of Contents**
 * [About](#about)
 * [Quick Start](#quick-start)
@@ -7,12 +10,13 @@
 	* [Adding a task: `add`](#add)
 	* [Listing tasks: `list`](#list)
 	* [Finding specific tasks: `find`](#find)
-	* [Sort the tasks by specific sorting criteria: `sort`](#sort)
+	* [Sorting the tasks by using a specific criteria: `sort`](#sort)
+	* [Showing the various filtered lists: `show`](#show)
 	* [Editing a task: `edit`](#edit)
 	* [Modifying the taglist: `addtag` / `deltag`](#tag)
 	* [Deleting a task: `del`](#del)
-	* [Select a task : `sel`](#sel)
-	* [Undo previous action: `undo`](#undo)
+	* [Selecting a task : `sel`](#sel)
+	* [Undoing previous action: `undo`](#undo)
 	* [Clearing all tasks : `clr`](#clr)
 	* [Marking a task as completed : `done`](#done)
 	* [Setting a reminder for your task : `rem`](#reminder)
@@ -24,7 +28,7 @@
 ##**About**
 Inbx_0 (pronounced as Inbox Zero) is a personal task managing assistant that helps to keep your tasks in order. It will help you manage your email inbox easily so as to keep your inbox uncluttered. 
 
-Unlike all the other task managers out there, Inbx\_0 is a simple program that runs on single-line commands. Inbx_0 will execute your commands based on what you type immediately. No more looking for buttons and menus to get the program to do what you want. So let's get started!
+Unlike all the other task managers out there, Inbx_0 is a simple program that runs on single-line commands. Inbx_0 will execute your commands based on what you type immediately. No more looking for buttons and menus to get the program to do what you want. So let's get started!
 
 ## **Quick Start**
 
@@ -53,7 +57,7 @@ Unlike all the other task managers out there, Inbx\_0 is a simple program that r
 
 All the features in Inbx_0 are performed by typing in commands in the command line. There is a certain command format for each command and the general format can be described as such: 
 
-**Command Format**
+**Command Format** <br>
 1.  Words in `UPPER_CASE` are the parameters that are compulsory and will be taken in by the app (e.g. NAME, DATE). 
 <br>
 2. Items in `SQUARE_BRACKETS` are optional and will not be required in order to perform the command (e.g. [tags], [date]).
@@ -135,6 +139,8 @@ Examples:
 * `add Doctor's appointment s=2 July 2016 5pm e=2 July 2016 7:30pm i=green t=painful`
 * `add SO’s Birthday s=29 Feb 12am e=1 March 12am i=green t=flowers t=chocolates`
 
+ > <img src="images/AddCommand.png" width="600">
+
 <br><br>
 
 #### <a id="list"></a>3. Listing tasks: `list`
@@ -160,6 +166,8 @@ Examples:
 Format: `list overdue`
 
 You will be able to view all of the deadline tasks are overdue by typing the following: `list overdue`
+
+ > <img src="images/ListCommand.png" width="600">
 
 <br><br>
 
@@ -208,11 +216,12 @@ Return `homework` that ends `tomorrow`
 `find (homework | assignment) & s=tmr & i=r`:
 Return `homework` or `meeting` that start on `tomorrow` with high importance `Red`
 
+ > <img src="images/FindCommand.png" width="600">
 
 <br><br>
 
-#### <a id="sort"></a>5. Sort the tasks by specific sorting criteria: `sort`
-Format: sort `[Name]`/`[Start Time]`/`[End Time]`/`[Importance]` `[ASCENDING]`/`[]DESCENDING]`
+#### <a id="sort"></a>5. Sorting the tasks by using a specific criteria: `sort`
+Format: sort `[NAME]`/`[START_TIME]`/`[END_TIME]`/`[IMPORTANCE]` `[ASCENDING]`/`[DESCENDING]`
 
 The Sort Command
 
@@ -231,10 +240,35 @@ Sort the lists such that the importance of the tasks decrease
 `sort n DESC`:
 Sort the lists such that the name of the tasks is in the reverse of natural alphabet order 
 
+ > <img src="images/SortCommand.png" width="600">
+ 
+<br><br>  
+
+#### <a id="show"></a>6. Showing the various filtered lists: `show`
+Format: show `[DAY]`/`[CATEGORY]`/`[IMPORTANCE]`/`[COMPLETENESS]` /`[EXPIRED]`
+
+The Show Command
+
+> * Navigates the various filtered lists according to day, category, importance, completeness and whether the task has expired
+> * acceptable input for 
+> * `DAY`: mon, monday, `CATEGORY`: dea, deadline, `IMPORTANCE`: gre, green, `COMPLETENESS`: com, 
+> *  `EXPIRED`: exp,  
+> * All show keywords are non-case sensitive, ie, `WED` is `wed` 
+
+Examples:
+
+`show green`:
+Navigates to the filtered list which contains those tasks that are green in importance
+
+`show tuesday`:
+Navigates to the filtered list which contains those tasks that are on tuesday
+
+ > <img src="images/ShowCommand.png" width="600">
+ 
 <br><br>  
 
 <!--- @@author A0139579J -->
-#### <a id="edit"></a>6. Editing a task: `edit`
+#### <a id="edit"></a>7. Editing a task: `edit`
 1) Editing any parameter of a task <br>
 Format: `edit INDEX [n=NAME] [s=START_DATE] [st=START_TIME] [e=END_DATE] [et=END_TIME] [i=IMPORTANCE]`
 
@@ -266,10 +300,12 @@ This can be done by typing the following: `edit INDEX float` <br>
 Example:
 * `edit 2 float` will convert the 2nd task in the list into a floating task.
 
+ > <img src="images/EditCommand.png" width="600">
+ 
 <br><br>
 
 <!--- @@author A0139481Y -->
-#### <a id="tag"></a>7. Modifying the taglist: `addtag` / `deltag`
+#### <a id="tag"></a>8. Modifying the taglist: `addtag` / `deltag`
 1) Adding more tags
 Format: `addtag INDEX t=TAGS [t=MORE_TAGS]`
 
@@ -287,11 +323,12 @@ Format: `deltag INDEX t=TAGS [t=MORE_TAGS]`
 
 Is you wish to remove specific tags from the list of tags, simply type in `deltag INDEX t=TAGS [t=MORE_TAGS]` to remove it/them.
 
+ > <img src="images/AddOrDeleteTag.png" width="600">
 <!--- @@author  -->
 
 <br><br>
 
-#### <a id="del"></a>8. Deleting a task: `del`
+#### <a id="del"></a>9. Deleting a task: `del`
 Format: `del INDEX`
 
 If you have wish to remove a particular task from the list, you can do it by typing the following: `del INDEX` <br> 
@@ -305,9 +342,10 @@ Examples:
   `del 1`<br>
   Deletes the 1st task in the results of the `find` command for ‘meeting’.
 
+ > <img src="images/DeleteCommand.png" width="600">  
 <br><br>
 
-#### <a id="sel"></a>9. Select a task : `sel`
+#### <a id="sel"></a>10. Selecting a task : `sel`
 Format: `sel INDEX`
 
 In order to view more details on a task that you have created, you can select the task identified by the index number in the last listing. The Select Command can be performed by typing:
@@ -328,31 +366,33 @@ Examples:
 <br><br>
 
 <!--- @@author A0139481Y -->
-#### <a id="undo"></a>10. Undo previous action: `undo`
+#### <a id="undo"></a>11. Undoing previous action: `undo`
 Format: `undo`
 
 Made a mistake? Not to worry! You can use the `undo` command to rectify your mistake or to undo any undesirable changes. You may also type `done X-STEPS` to undo the past X number of commands, up to a maximum of 10.
 
 > note that some commands cannot be undone, such as `find`, `sort`, `select`, `show`.
 
+ > <img src="images/UndoCommand.png" width="600">
 <!--- @@author -->
 
 <br><br>
 
-#### <a id="clr"></a>11. Clearing all tasks : `clr`
+#### <a id="clr"></a>12. Clearing all tasks : `clr`
 Format: `clr`
 
 Tasks can easily become obsolete and checking off tasks individually can be quite a hassle. The clear command will help you to remove all tasks and can be accessed by typing the following: `clr`
 
+ > <img src="images/ClearCommand.png" width="600">
 <br><br>
 <!--- @@author A0139579J -->
-#### <a id="done"></a>12. Marking a task as completed : `done`
+#### <a id="done"></a>13. Marking a task as completed : `done`
 1) Mark selected tasks as done
 Format: `done INDEX [INDEX]...`
 
-If you have finished a certain task and wish to mark it as finished you can give a `done` label to the specified task in the task list by typing the following: `done INDEX [INDEX]`<br>
+If you have finished a certain task and wish to mark it as finished you can give a complete a specified task in the task list by typing the following: `done INDEX [INDEX]`<br>
 
-This will label a task as `done`, when task is shown, you will be reminded that you have finished the specified task. If there are more than one tasks that need to be
+This will turn the cross beside the name of the task into a checkmark, signifying that the task had been completed. If there are more than one tasks that need to be
 marked, you can enter more index numbers with all of them separated with a whitespace. The tasks will be marked complete accordingly
 
 > If the task is already marked completed for one of the index numbers given, it will remind you that one of the tasks is already completed
@@ -371,10 +411,12 @@ Example:
 * `list next week` <br>
   `done 1 to 5` <br>
  Marks the 1st to 5th tasks as completed in next week’s list
+ 
+  > <img src="images/DoneCommand.png" width="600">
   
 <br><br>
 
-#### <a id="reminder"></a>13. Setting a reminder for your task : `rem`
+#### <a id="reminder"></a>14. Setting a reminder for your task : `rem`
 Format: `rem INDEX s=START_DATE/START_TIME/START_DATE and START_TIME`
 
 You can add a reminder to a task by typing the following: `rem INDEX s=START_DATE/START_TIME/START_DATE and START_TIME` <br>
@@ -397,9 +439,11 @@ Example:
 * `rem 2 s=next week 10a` <br>
  Sets a reminder for the 2nd task on the list which will display a reminder next week at 10am.
  
+  > <img src="images/RemindCommand.png" width="600"> 
+  
 <br><br>
 
-#### <a id="overdue"></a>14. Displaying expired and overdue tasks
+#### <a id="overdue"></a>15. Displaying expired and overdue tasks
 1) Overdue Deadline Tasks
 
 If the deadline task has not been marked as completed and is end date is before the current date, Inbx_0 will mark the task as overdue.
@@ -416,7 +460,7 @@ For events that had expired, the task will take a lighter shade to show that the
 
 <!--- @@author -->
 
-#### <a id="exit"></a>15. Exiting the program : `exit` 
+#### <a id="exit"></a>16. Exiting the program : `exit` 
 Format: `exit`
 
 After using Inbx_0, you can easily exit the program by typing the following in the command line: `exit`
@@ -445,10 +489,11 @@ Command | Format
 [Find](#find) | Normal search: `find KEYWORD [MORE_KEYWORDS]...`
 &nbsp; | Logic operation search: `find KEYWORD [LOGIC_OPERATOR] [MORE_KEYWORDS] [MORE_LOGIC_OPERATOR]...`
 [Sort](#sort) | `sort [n|s|e|i] [ASC\DESC]`
+[Show](#show) | `show [DAY]|[CATEGORY]|[IMPORTANCE]|[COMPLETENESS]|[EXPIRED]`
 [Edit](#edit) | `edit INDEX [n=NAME] [s=START_DATE] [st=START_TIME] [e=END_DATE] [et=END_TIME] [i=IMPORTANCE]`
 [Addtag / Deltag](#tag) | `tag INDEX t=TAGS [t=MORE_TAGS]`
 [Delete](#del) | `del INDEX`
-[Select](#sel) `sel INDEX`
+[Select](#sel) | `sel INDEX`
 [Undo](#undo) | `undo`
 [Clear](#clr) | `clr`
 [Done](#done) | `done INDEX [INDEX]...`

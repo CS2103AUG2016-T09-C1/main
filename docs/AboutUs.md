@@ -43,7 +43,8 @@ We are a team of students based in the [School of Computing, National University
 * Components in charge of: [UI](https://github.com/CS2103AUG2016-T09-C1/main/blob/master/docs/DeveloperGuide.md#ui-component)
 * Features implemented:
    * [Find Command](https://github.com/CS2103AUG2016-T09-C1/main/blob/master/docs/UserGuide.md#4-finding-specific-tasks-find)
-   * [Sort Command](https://github.com/CS2103AUG2016-T09-C1/main/blob/master/docs/UserGuide.md#5-sort-the-tasks-by-specific-sorting-criteria-sort)
+   * [Sort Command](https://github.com/CS2103AUG2016-T09-C1/main/blob/master/docs/UserGuide.md#5-sorting-the-tasks-by-using-a-specific-criteria-sort)
+   * [Show Command](https://github.com/CS2103AUG2016-T09-C1/main/blob/master/docs/UserGuide.md#6-showing-the-various-filtered-lists-show)
 * Code written: [[functional code](A0148044J.md)][[test code](A0148044J.md)][[docs](A0148044J.md)]
 * Other major contributions:
   * Did the UI which included the sidepanel for filtering tasks into categories, the info panel and the popup for reminder
@@ -58,10 +59,10 @@ We are a team of students based in the [School of Computing, National University
 * Features implemented:
    * [Add Command] (https://github.com/CS2103AUG2016-T09-C1/main/blob/master/docs/UserGuide.md#2-adding-a-task-add)
    * [List by date, List overdue, List due date](https://github.com/CS2103AUG2016-T09-C1/main/blob/master/docs/UserGuide.md#3-listing-tasks-list)
-   * [Edit Command](https://github.com/CS2103AUG2016-T09-C1/main/blob/master/docs/UserGuide.md#6-editing-a-task-edit)
-   * [Done Command](https://github.com/CS2103AUG2016-T09-C1/main/blob/master/docs/UserGuide.md#12-marking-a-task-as-completed-done)
-   * [Overdue Tasks](https://github.com/CS2103AUG2016-T09-C1/main/blob/master/docs/UserGuide.md#14-displaying-expired-and-overdue-tasks)
-   * [Reminder Command](https://github.com/CS2103AUG2016-T09-C1/main/blob/master/docs/UserGuide.md#13-setting-a-reminder-for-your-task-rem)
+   * [Edit Command](https://github.com/CS2103AUG2016-T09-C1/main/blob/master/docs/UserGuide.md#7-editing-a-task-edit)
+   * [Done Command](https://github.com/CS2103AUG2016-T09-C1/main/blob/master/docs/UserGuide.md#13-marking-a-task-as-completed-done)
+   * [Overdue/Expired Tasks](https://github.com/CS2103AUG2016-T09-C1/main/blob/master/docs/UserGuide.md#15-displaying-expired-and-overdue-tasks)
+   * [Reminder Command](https://github.com/CS2103AUG2016-T09-C1/main/blob/master/docs/UserGuide.md#14-setting-a-reminder-for-your-task-rem)
    
 * Code written: [[functional code](A0139579J.md)][[test code](A0139579J.md)][[docs](A0139579J.md)]
 * Other major contributions:

@@ -811,6 +811,7 @@ public class Parser {
      * @return the prepared command
      * @author A0148044J
      */
+    //@@author A0148044J
     private Command prepareSort(final String args) {
         System.out.println(args.trim());
         final Matcher matcher = SORT_TASK_LIST_ARGS_FORMAT.matcher(args.trim());
@@ -924,6 +925,7 @@ public class Parser {
      * @param args full command args string
      * @return the prepared command
      */
+    //@@author A0148044J
     private Command prepareFind(final String args) {
         final Matcher matcher1 = NORMAL_KEYWORDS_ARGS_FORMAT.matcher(args.trim());
         final Matcher matcher2 = LOGIC_KEYWORDS_ARGS_FORMAT.matcher(args.trim());
