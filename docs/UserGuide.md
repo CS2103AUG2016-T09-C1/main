@@ -67,7 +67,7 @@ Format: `help`
 Looking for help? If you ever need a reminder on how to input certain commands or have some troubleshooting issues, just type `help` and we will guide you in the right direction.
 
 This will open up a help window that will give you a quick glance of the commands that are available.
-> <img src="images/HelpWindow.png" width="600">
+> <img src="images/HelpWindow.png" width="800">
 
 <br><br>
  
@@ -102,7 +102,7 @@ Format: `add TASK s=[START_DATE] [START_TIME][i=IMPORTANCE] [t=TAGS]...`
 
 Examples: 
 * `add Started Gym Training s=10012016 10am i=red`
-* `add On Diet s=18/10/2016 i=red t=health` <br>
+* `add On Diet s=18/10/2016 i=y t=health` <br>
 <br>
 
 > * Under the s= parameter, it requires either the START_DATE or START_TIME. By providing only START_DATE, the START_TIME would not be specified.
@@ -141,9 +141,7 @@ Examples:
 3) Listing tasks that are overdue <br>
 Format: `list overdue`
 
-You will be able to view all of the tasks that had expired which can be keyed in the command with the following:
-
-`list overdue`
+You will be able to view all of the tasks that had expired by typing the following: `list overdue`
 
 <br><br>
 
@@ -206,7 +204,7 @@ The Sort Command
 > * All sort keywords are non-case sensitive, ie, `Importance` is `importance` 
 > * Default sorting order is `ASCENDING` for Name, Start Time and End Time but `DESCENDING` for Importance
 
-Example:
+Examples:
 
 `sort i`:
 Sort the lists such that the importance of the tasks decrease
@@ -222,18 +220,18 @@ Made a spelling mistake or your event was postponed? You can use the Edit Comman
 
 This can be done by typing the following:
 
-> edit INDEX [n/NAME] [s/START_DATE] [st/START_TIME] [e/END_DATE] [et/END_TIME] [i/IMPORTANCE] [t/TAG]...
+> edit INDEX [n=NAME] [s=START_DATE] [st=START_TIME] [e=END_DATE] [et=END_TIME] [i=IMPORTANCE] [t=TAG]...
 
 By specifying the parameters of the task and typing the corrected parameters, you will be able to change multiple parameters in that
 single task. Do note that one of the optional parameters is necessary.
 
-Examples
+Examples:
 * `list today`<br>
-  `edit 2 s/tomorrow`<br>
+  `edit 2 s=tomorrow`<br>
   Changes the 2nd task in today’s list to start tomorrow
 
 * `find meeting`<br> 
-  `edit 1 n/Business Lunch st/1pm`<br>
+  `edit 1 n=Business Lunch st=1pm`<br>
   Changes the name of 1st task in the results of the `find` command to ‘Business Lunch at 1 pm’  
 
 2) Converting a task to a floating task. <br>
@@ -241,16 +239,15 @@ Format: `edit INDEX float`
 
 Use the keyword "float" to convert any task into a floating task by removing the starting and ending dates and times.
 
-This can be done by typing the following:
+This can be done by typing the following: `edit INDEX float` <br>
 
-> edit INDEX float
-
-Examples:
+Example:
 * `edit 2 float` will convert the 2nd task in the list into a floating task.
 
 <br><br>
 
 #### <a id="tag"></a>7. Modifying the taglist: `addtag` / `deltag`
+1) Adding more tags
 Format: `addtag INDEX t=TAGS [t=MORE_TAGS]`
 
 If you wish to add additional tags to any existing tasks, you can do it by typing the following: <br>
@@ -261,19 +258,18 @@ Note that adding tags and editing tags are different commands. Edit tags will re
 
 Examples: 
 * `list today`<br>
-  `addtag 2 t/tonight`<br>
+  `addtag 2 t=tonight`<br>
   Adds the "tonight" tag to the 2nd task in the list.
+
+2) Deleting a particular tag
+Format: `deltag INDEX t=TAGS [t=MORE_TAGS]`
 
 <br><br>
 
 #### <a id="del"></a>8. Deleting a task: `del`
 Format: `del INDEX`
 
-If you have wish to remove a particular task from the list, you can do it by typing the following: <br>
-
-> del INDEX
-
-This will remove the task from task list.
+If you have wish to remove a particular task from the list, you can do it by typing the following: `del INDEX` <br> 
 
 Examples: 
 * `list today`<br>
@@ -311,16 +307,12 @@ Format: `undo`
 
 Undos the previous action done in the task manager if you've made a mistake. <br>
 
-> Cannot undo CLEAR commands!
-
 <br><br>
 
 #### <a id="clr"></a>11. Clearing all tasks : `clr`
 Format: `clr`
 
-Tasks can easily become obsolete and checking off tasks individually can be quite a hassle. The Clear command will help you to remove all tasks and can be accessed by typing the following: `clr`
-
-> Please ensure that the tasks are the ones that you want to clear before initiating the Clear Command.
+Tasks can easily become obsolete and checking off tasks individually can be quite a hassle. The clear command will help you to remove all tasks and can be accessed by typing the following: `clr`
 
 <br><br>
 
@@ -328,9 +320,7 @@ Tasks can easily become obsolete and checking off tasks individually can be quit
 1) Mark selected tasks as done
 Format: `done INDEX [INDEX]...`
 
-If you have finished a certain task and wish to mark it as finished you can give a `done` label to the specified task in the task list by typing the following: <br>
-
-> done INDEX [INDEX]...
+If you have finished a certain task and wish to mark it as finished you can give a `done` label to the specified task in the task list by typing the following: `done INDEX [INDEX]`<br>
 
 This will label a task as `done`, when task is shown, you will be reminded that you have finished the specified task. If there are more than one tasks that need to be
 marked, you can enter more index numbers with all of them separated with a whitespace. The tasks will be marked complete accordingly
@@ -345,16 +335,7 @@ Example:
 2) Mark tasks in consecutive index numbers as done
 Format: `done FIRST_INDEX to LAST_INDEX`
 
-If you wish to mark several tasks in a row as completed, you can type the following:
-
-> done FIRST_INDEX to LAST_INDEX
-
 This will allow multiple tasks specified by the first index to the last index to be marked as completed.
-
-> The index refers to the index number shown in the most recent listing.<br>
-  The index **must be a positive integer** 1, 2, 3, ...
-  If the task is already marked completed for one of the index numbers given, it will remind you that one of the tasks is already completed
-  The last index cannot be smaller than the first index and the last index cannot be equal to the first index
   
 Example: 
 * `list next week` <br>
@@ -366,9 +347,7 @@ Example:
 #### <a id="exit"></a>13. Exiting the program : 
 Format: `exit`
 
-After using Inbx_0, you can easily exit the program by typing the following in the command line:
-
-> exit
+After using Inbx_0, you can easily exit the program by typing the following in the command line: `exit`
 
 This will initiate a final save and after which, the program will close automatically.  
 
