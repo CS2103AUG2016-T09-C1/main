@@ -54,6 +54,7 @@ public abstract class Command {
      */
     //@@author A0139481Y
     public abstract boolean canUndo();
+    //@@author
 
     /**
      * Raises an event to indicate an attempt to execute an incorrect command

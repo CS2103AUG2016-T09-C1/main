@@ -212,6 +212,8 @@ Sort the lists such that the importance of the tasks decrease
 `sort n DESC`:
 Sort the lists such that the name of the tasks is in the reverse of natural alphabet order 
 
+<br><br>
+
 #### <a id="edit"></a>6. Editing a task: `edit`
 1) Editing any parameter of a task <br>
 Format: `edit INDEX [n=NAME] [s=START_DATE] [st=START_TIME] [e=END_DATE] [et=END_TIME] [i=IMPORTANCE]`

@@ -110,6 +110,7 @@ public class UniqueTagList implements Iterable<Tag> {
             }
         }
     }
+    //@@author
 
     /**
      * Returns true if the list contains an equivalent Tag as the given argument.
