@@ -22,8 +22,7 @@
     This app will not work with earlier versions of Java 8.
     
 2. **Eclipse** IDE
-3. **e(fx)clipse** plugin for Eclipse (Do the steps 2 onwards given in
-   [this page](http://www.eclipse.org/efxclipse/install.html#for-the-ambitious))
+3. **e(fx)clipse** plugin for Eclipse
 4. **Buildship Gradle Integration** plugin from the Eclipse Marketplace
 
 
@@ -40,7 +39,7 @@
   > * If you are asked whether to 'keep' or 'overwrite' config files, choose to 'keep'.
   > * Depending on your connection speed and server load, it can even take up to 30 minutes for the set up to finish
       (This is because Gradle downloads library files from servers during the project set up process)
-  > * If Eclipse auto-changed any settings files during the import process, you can discard those changes.
+  > * If Eclipse auto-changes any settings files during the import process, you can discard those changes.
   
 #### Troubleshooting project setup
 
@@ -51,7 +50,7 @@
   
 **Problem: Eclipse reports some required libraries missing**
 * Reason: Required libraries may not have been downloaded during the project import. 
-* Solution: [Run tests using Gardle](UsingGradle.md) once (to refresh the libraries).
+* Solution: [Run tests using Gradle](UsingGradle.md) once (to refresh the libraries).
  
 
 ## Design
@@ -62,9 +61,9 @@
 The **_Architecture Diagram_** given above explains the high-level design of the App.
 Given below is a quick overview of each component.
 
-`Main` has only one class called [`MainApp`](../src/main/java/seedu/inbx0/MainApp.java). It is responsible for,
-* At app launch: Initializes the components in the correct sequence, and connect them up with each other.
-* At shut down: Shuts down the components and invoke cleanup method where necessary.
+`Main` has only one class called [`MainApp`](../src/main/java/seedu/inbx0/MainApp.java). MainApp has two functions:
+* At app launch: The MainApp class initializes the components (or classes) in the correct sequence, and connects them up with each other.
+* At shut down: The MainApp class shuts down the components and invokes the cleanup method, where necessary.
 
 [**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
 Two of those classes play important roles at the architecture level.
@@ -73,7 +72,7 @@ Two of those classes play important roles at the architecture level.
 * `LogsCenter` : Used by many classes to write log messages to the App's log file.
 
 The rest of the App consists four components.
-* [**`UI`**](#ui-component) : The UI of tha App.
+* [**`UI`**](#ui-component) : The UI of the App.
 * [**`Logic`**](#logic-component) : The command executor.
 * [**`Model`**](#model-component) : Holds the data of the App in-memory.
 * [**`Storage`**](#storage-component) : Reads data from, and writes data to, the hard disk.
@@ -86,23 +85,23 @@ For example, the `Logic` component (see the class diagram given below) defines i
 interface and exposes its functionality using the `LogicManager.java` class.<br>
 <img src="images/LogicClassDiagram.png" width="800"><br>
 
-The _Sequence Diagram_ below shows how the components interact for the scenario where the user issues the
+The _Sequence Diagram_ below shows how the components interact with each other in the scenario where the user issues the
 command `delete 3`.
 
-<img src="images\SDforDeletePerson.png" width="800">
+<img src="images\SDforDeleteTask.png" width="800">
 
->Note how the `Model` simply raises a `TaskListChangedEvent` when the Task List data are changed,
+>Note how the `Model` simply raises a `TaskListChangedEvent` when the Task List data is changed,
  instead of asking the `Storage` to save the updates to the hard disk.
 
 The diagram below shows how the `EventsCenter` reacts to that event, which eventually results in the updates
 being saved to the hard disk and the status bar of the UI being updated to reflect the 'Last Updated' time. <br>
-<img src="images\SDforDeletePersonEventHandling.png" width="800">
+<img src="images\SDforDeleteTaskEventHandling.png" width="800">
 
 > Note how the event is propagated through the `EventsCenter` to the `Storage` and `UI` without `Model` having
   to be coupled to either of them. This is an example of how this Event Driven approach helps us reduce direct 
   coupling between components.
 
-The sections below give more details of each component.
+The sections below provide more detailed explainations for each component.
 
 ### UI component
 
@@ -110,18 +109,18 @@ The sections below give more details of each component.
 
 **API** : [`Ui.java`](../src/main/java/seedu/inbx0/ui/Ui.java)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `TaskListPanel`,
+The UI consists of a `MainWindow` that is made up of multiple different parts e.g.`CommandBox`, `ResultDisplay`, `TaskListPanel`,
 `StatusBarFooter`, `BrowserPanel` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class
 and they can be loaded using the `UiPartLoader`.
 
-The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files
  that are in the `src/main/resources/view` folder.<br>
  For example, the layout of the [`MainWindow`](../src/main/java/seedu/inbx0/ui/MainWindow.java) is specified in
  [`MainWindow.fxml`](../src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 * Executes user commands using the `Logic` component.
-* Binds itself to some data in the `Model` so that the UI can auto-update when data in the `Model` change.
+* Binds itself to specific data in the `Model` component so that the UI can auto-update when this data in the `Model` component changes.
 * Responds to events raised from various parts of the App and updates the UI accordingly.
 
 ### Logic component
@@ -137,7 +136,7 @@ The `UI` component,
 
 Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete 1")`
  API call.<br>
-<img src="images/DeletePersonSdForLogic.png" width="800"><br>
+<img src="images/DeleteTakSdForLogic.png" width="800"><br>
 
 ### Model component
 
@@ -149,7 +148,7 @@ The `Model`,
 * stores a `UserPref` object that represents the user's preferences.
 * stores the Task List data.
 * exposes a `UnmodifiableObservableList<ReadOnlyTask>` that can be 'observed' e.g. the UI can be bound to this list
-  so that the UI automatically updates when the data in the list change.
+  so that the UI automatically updates when the data in the list changes.
 * does not depend on any of the other three components.
 
 ### Storage component
@@ -159,8 +158,8 @@ The `Model`,
 **API** : [`Storage.java`](../src/main/java/seedu/inbx0/storage/Storage.java)
 
 The `Storage` component,
-* can save `UserPref` objects in json format and read it back.
-* can save the Task List data in xml format and read it back.
+* can save `UserPref` objects in a json format and read it back.
+* can save the Task List data in an xml format and read it back.
 
 ### Common classes
 
@@ -170,7 +169,7 @@ Classes used by multiple components are in the `seedu.inbx0.commons` package.
 
 ### Logging
 
-We are using `java.util.logging` package for logging. The `LogsCenter` class is used to manage the logging levels
+We are using the `java.util.logging` package for logging. The `LogsCenter` class is also being used to manage the logging levels
 and logging destinations.
 
 * The logging level can be controlled using the `logLevel` setting in the configuration file
@@ -201,10 +200,10 @@ Tests can be found in the `./src/test/java` folder.
 * To run all tests, right-click on the `src/test/java` folder and choose
   `Run as` > `JUnit Test`
 * To run a subset of tests, you can right-click on a test package, test class, or a test and choose
-  to run as a JUnit test.
+  to run it as a JUnit test.
 
 **Using Gradle**:
-* See [UsingGradle.md](UsingGradle.md) for how to run tests using Gradle.
+* See [UsingGradle.md](UsingGradle.md) for more information on how to run tests using Gradle.
 
 We have two types of tests:
 
@@ -234,7 +233,7 @@ Thanks to the [TestFX](https://github.com/TestFX/TestFX) library we use,
    This can happen if you are not using a recent Eclipse version (i.e. _Neon_ or later)
  * Solution: Enable assertions in JUnit tests as described 
    [here](http://stackoverflow.com/questions/2522897/eclipse-junit-ea-vm-option). <br>
-   Delete run configurations created when you ran tests earlier.
+   Delete run configurations which may have been created when you ran tests earlier.
   
 ## Dev Ops
 
@@ -287,7 +286,7 @@ Priority | As a ... | I want to ... | So that I can...
 
 ## Appendix B : Use Cases
 
-(For all use cases below, the **System** is the `Inbx_0` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** can be interpreted as the `Inbx_0` application and the **Actor** as the `user`, unless specified otherwise)
 
 #### Use case: Add task
 
@@ -416,7 +415,7 @@ Use case ends.
 
 ## Appendix E : Product Survey
 
-A Product Survey was conducted to study existing products on the market to gather insights and inspiration for our own product. We looked at various Task Managers on the market such as Google Calendar, Wunerlist, Todo.txt, Evernote and Google Keep. We then evaluated their common features and benefits that they offer to the consumers. We will then implement the more useful features while leaving out the more superfluous ones.
+A Product Survey was conducted to study existing products on the market to gather insights and inspiration for our own product. We looked at various Task Managers on the market such as Google Calendar, Wunderlist, Todo.txt, Evernote and Google Keep. We then evaluated their common features and benefits that they offer to the consumers. We will then implement the more useful features while leaving out the more superfluous ones.
 
 For Google Keep, the application has a colorful design and a simple interface to use. It has both a mobile and desktop version, which synchronises with each other whenever a change is made. Users can add Notes, Lists or Reminders. Users can type anything they want into the text fields and even add images to the notes themselves. Notes can be shared with multiple people via email, useful for keeping a shared note such as grocery lists or todo lists. While it is possible to set reminders for individual notes, there is no way to represent the whole list of notes in chronological order as it is up to the user to shift the Notes Cards around the UI as they wish.
 
@@ -432,6 +431,6 @@ recursive task. User can categorize their tasks and add PDF, excel form or even 
 The disadvantage is that it does not give any clear instruction for new user while at the same time, it does not analyze the
  input very clear, so it may misunderstand user input but still accept it without notifying the user.  Besides, although it can 
 delay task by dragging it, the only option is tomorrow, which is no that user friendly. Moreover, when user want to 
-synchronize their data across platform, they have to click 'synchronization'. 
+synchronize their data across platform, they have to click 'synchronization'.
 
-
+Wunderlist has a reactive, clean aesthetic design with web-based platform support (Google Chrome, Firefox and Safari), desktop support (Windows and Mac) and mobile support (Android, iOS, Windows Phone). It adopts a freemium model which gives users essential functionality, (in this case, a limit on the number of task lists you are allowed to have as well as on the file size of uploads), with the option to upgrade to more premium functionalities at a monthly charge. Wunderlist has strong cross-platform integration, in terms of mobile to desktop as well as strong collaborative support for teams looking to assign tasks and sub-tasks. It can also integrate into popular productivity applications such as slack, to make communication and task-allocation in a professional setting more painless. Some of the cons however, are the lack of natural language processing for tasks with recurring deadlines, lack of support for location-based reminders and the steep fees for premium subscription. Overall at a basic level, it has some very strong features for a free app.
