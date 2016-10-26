@@ -1,5 +1,5 @@
 # generated
-###### \src\main\java\seedu\inbx0\logic\parser\Parser.java
+###### \java\seedu\inbx0\logic\parser\Parser.java
 ``` java
     private Command prepareDelete(final String args) {
 
@@ -18,7 +18,7 @@
      * @return the prepared command
      */
 ```
-###### \src\main\java\seedu\inbx0\logic\parser\Parser.java
+###### \java\seedu\inbx0\logic\parser\Parser.java
 ``` java
     private Command prepareSelect(final String args) {
         Optional<Integer> index = parseIndex(args);
@@ -262,7 +262,7 @@
      * @return the prepared command
      */
 ```
-###### \src\main\java\seedu\inbx0\logic\parser\Parser.java
+###### \java\seedu\inbx0\logic\parser\Parser.java
 ``` java
     private Command prepareList(final String arguments) {
         if (arguments.length() == 0) {

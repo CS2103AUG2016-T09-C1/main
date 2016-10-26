@@ -61,6 +61,8 @@ The IMPORTANCE parameter takes in these formats "red, green, yellow, r, g, y, R,
 
 The rest of the guide will be using the general command format to describe what is needed to execute each command.
 
+<br><br>
+
 #### <a id="help"></a>1. Getting help: `help`
 Format: `help`
 
@@ -212,7 +214,7 @@ Sort the lists such that the importance of the tasks decrease
 `sort n DESC`:
 Sort the lists such that the name of the tasks is in the reverse of natural alphabet order 
 
-<br><br>
+<br><br>  
 
 #### <a id="edit"></a>6. Editing a task: `edit`
 1) Editing any parameter of a task <br>
@@ -257,10 +259,10 @@ If you wish to add additional tags to any existing tasks, you can do it by typin
 
 Note that adding tags and editing tags are different commands. Edit tags will remove all tags and add in the editted tag. This addtag command will just append the new tag behind any existing tag names.
 
-Examples: 
+Example: 
 * `list today`<br>
   `addtag 2 t=tonight`<br>
-  Adds the "tonight" tag to the 2nd task in the list.
+   Adds the "tonight" tag to the 2nd task in the list.
 
 2) Deleting a particular tag
 Format: `deltag INDEX t=TAGS [t=MORE_TAGS]`
@@ -311,7 +313,9 @@ Examples:
 #### <a id="undo"></a>10. Undo previous action: `undo`
 Format: `undo`
 
-Undos the previous action done in the task manager if you've made a mistake. <br>
+Made a mistake? Not to worry! You can use the `undo` command to rectify your mistake or to undo any undesirable changes. You may also type `done X-STEPS` to undo the past X number of commands, up to a maximum of 10.
+
+> note that some commands cannot be undone, such as `find`, `sort`, `select`, `show`.
 
 <!--- @@author -->
 
