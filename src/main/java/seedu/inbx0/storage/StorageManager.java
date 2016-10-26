@@ -9,6 +9,7 @@ import seedu.inbx0.commons.events.storage.DataSavingExceptionEvent;
 import seedu.inbx0.commons.events.storage.StoragePathChangedEvent;
 import seedu.inbx0.commons.exceptions.DataConversionException;
 import seedu.inbx0.model.ReadOnlyTaskList;
+import seedu.inbx0.model.TaskList;
 import seedu.inbx0.model.UserPrefs;
 
 import java.io.IOException;
