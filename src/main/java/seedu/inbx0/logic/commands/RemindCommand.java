@@ -38,7 +38,7 @@ public class RemindCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1 s=5 minutes from now";
 
     public static final String MESSAGE_REMINDER_TASK_SUCCESS = "Added Reminder for Task: %1$s";
-    public static final String MESSAGE_REMINDER_CONSTRAINTS = "The reminder date and time cannot be in the past.";
+    public static final String MESSAGE_REMINDER_CONSTRAINTS = "The reminder date or time is invalid.";
     public static final int TOTAL_NUMBER_OF_ARGUMENTS = 6;
     
     public final int targetIndex;
@@ -79,6 +79,9 @@ public class RemindCommand extends Command {
         int currentHour = currentTime / 100;
         int currentMin = currentTime % 100;
         
+        if(startTime == null) {
+            return false;
+        }
         if(("").equals(startTime.value)) {
             isValidTime = true;
         } else {

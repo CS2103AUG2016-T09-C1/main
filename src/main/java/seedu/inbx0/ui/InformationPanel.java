@@ -11,10 +11,13 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import seedu.inbx0.model.reminder.ReminderTask;
+import seedu.inbx0.model.reminder.UniqueReminderList;
 import seedu.inbx0.model.task.ReadOnlyTask;
 
+import java.util.Iterator;
 import java.util.logging.Logger;
 import seedu.inbx0.commons.core.LogsCenter;
+import seedu.inbx0.commons.events.ui.TaskPanelSelectionChangedEvent;
 
 public class InformationPanel extends UiPart {
     private static final Logger logger = LogsCenter.getLogger(InformationPanel.class);
@@ -80,15 +83,24 @@ public class InformationPanel extends UiPart {
     private void configure(ReadOnlyTask task){
         if(task != null) {
             displayInfo(task);
-            ObservableList<ReminderTask> reminderList = task.getReminders().getInternalList();
+            UniqueReminderList uniqueReminderList = new UniqueReminderList(task.getReminders());
+            Iterator<ReminderTask> check = uniqueReminderList.iterator();
+            while(check.hasNext()) {
+                if(check.next().getIsAlive() == false) {
+                    check.remove();
+                }
+            }
+            ObservableList<ReminderTask> reminderList = uniqueReminderList.getInternalList();
             setConnections(reminderList);
             addToPlaceholder();
         }
     }
     
+    
     private void setConnections(ObservableList<ReminderTask> reminderList) {
         reminderListView.setItems(reminderList);
         reminderListView.setCellFactory(listView -> new ReminderListViewCell());
+        
     }
 
     private void addToPlaceholder() {
@@ -96,6 +108,8 @@ public class InformationPanel extends UiPart {
         SplitPane.setResizableWithParent(reminderListView, false);
         placeHolderPane.getChildren().add(mainPane);
     }
+    
+
     
     class ReminderListViewCell extends ListCell<ReminderTask> {
 
@@ -105,8 +119,7 @@ public class InformationPanel extends UiPart {
         @Override
         protected void updateItem(ReminderTask reminder, boolean empty) {
             super.updateItem(reminder, empty);
-
-            if (empty || reminder == null || reminder.getIsAlive() == false) {
+            if (empty || reminder.getIsAlive() == false || reminder == null) {
                 setGraphic(null);
                 setText(null);
             } else {
