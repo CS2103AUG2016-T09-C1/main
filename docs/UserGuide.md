@@ -214,7 +214,7 @@ Sort the lists such that the name of the tasks is in the reverse of natural alph
 
 #### <a id="edit"></a>6. Editing a task: `edit`
 1) Editing any parameter of a task <br>
-Format: `edit INDEX [n/NAME] [s/START_DATE] [st/START_TIME] [e/END_DATE] [et/END_TIME] [i/IMPORTANCE]`
+Format: `edit INDEX [n=NAME] [s=START_DATE] [st=START_TIME] [e=END_DATE] [et=END_TIME] [i=IMPORTANCE]`
 
 Made a spelling mistake or your event was postponed? You can use the Edit Command to swiftly rectify any tasks on the task list.
 
@@ -246,13 +246,12 @@ Example:
 
 <br><br>
 
+<!--- @@author A0139481Y -->
 #### <a id="tag"></a>7. Modifying the taglist: `addtag` / `deltag`
 1) Adding more tags
 Format: `addtag INDEX t=TAGS [t=MORE_TAGS]`
 
-If you wish to add additional tags to any existing tasks, you can do it by typing the following: <br>
-
-> addtag INDEX t=TAGS [t=MORE_TAGS]
+If you wish to add additional tags to any existing tasks, you can do it by typing the following: `addtag INDEX t=TAGS [t=MORE_TAGS]` <br>
 
 Note that adding tags and editing tags are different commands. Edit tags will remove all tags and add in the editted tag. This addtag command will just append the new tag behind any existing tag names.
 
@@ -263,6 +262,10 @@ Examples:
 
 2) Deleting a particular tag
 Format: `deltag INDEX t=TAGS [t=MORE_TAGS]`
+
+Is you wish to remove specific tags from the list of tags, simply type in `deltag INDEX t=TAGS [t=MORE_TAGS]` to remove it/them.
+
+<!--- @@author  -->
 
 <br><br>
 
@@ -302,10 +305,13 @@ Examples:
 
 <br><br>
 
+<!--- @@author A0139481Y -->
 #### <a id="undo"></a>10. Undo previous action: `undo`
 Format: `undo`
 
 Undos the previous action done in the task manager if you've made a mistake. <br>
+
+<!--- @@author -->
 
 <br><br>
 
@@ -357,23 +363,24 @@ This will initiate a final save and after which, the program will close automati
 Task Manager data are saved in the hard disk automatically after any command that changes the data.<br>
 There is no need to save manually.
 
+<!--- @@author A0139481Y -->
 ## **Command Summary**
 
 Command | Format  
 -------- | :-------- 
 [Help](#help) | `help`
-[Add](#add) | `add TASK [i/IMPORTANCE] [t/TAGS]...`
-&nbsp; | `add TASK e/[END_DATE] [END_TIME] [i/IMPORTANCE] [t/TAGS]...`
-&nbsp; | `add TASK s/[START_DATE] [START_TIME][i/IMPORTANCE] [t/TAGS]...`
-&nbsp; | `add TASK s/[START_DATE] [START_TIME] e/[END_DATE] [END_TIME] [i/IMPORTANCE] [t/TAGS]...`
+[Add](#add) | `add TASK [i=IMPORTANCE] [t=TAGS]...`
+&nbsp; | `add TASK e=[END_DATE] [END_TIME] [i=IMPORTANCE] [t=TAGS]...`
+&nbsp; | `add TASK s=[START_DATE] [START_TIME][i=IMPORTANCE] [t=TAGS]...`
+&nbsp; | `add TASK s=[START_DATE] [START_TIME] e=[END_DATE] [END_TIME] [i=IMPORTANCE] [t=TAGS]...`
 [List](#list) | `list [DATE]`
 &nbsp; | `list due DATE`
 &nbsp; | `list overdue`
 [Find](#find) | Normal search: `find KEYWORD [MORE_KEYWORDS]...`
 &nbsp; | Logic operation search: `find KEYWORD [LOGIC_OPERATOR] [MORE_KEYWORDS] [MORE_LOGIC_OPERATOR]...`
 [Sort](#sort) | `sort [n|s|e|i] [ASC\DESC]`
-[Edit](#edit) | `edit INDEX [n/NAME] [s/START_DATE] [st/START_TIME] [e/END_DATE] [et/END_TIME] [i/IMPORTANCE]`
-[Addtag / Deltag](#tag) | `tag INDEX t/TAGS [t/MORE_TAGS]`
+[Edit](#edit) | `edit INDEX [n=NAME] [s=START_DATE] [st=START_TIME] [e=END_DATE] [et=END_TIME] [i=IMPORTANCE]`
+[Addtag / Deltag](#tag) | `tag INDEX t=TAGS [t=MORE_TAGS]`
 [Delete](#del) | `del INDEX`
 [Select](#sel) | `sel INDEX`
 [Undo](#undo) | `undo`
