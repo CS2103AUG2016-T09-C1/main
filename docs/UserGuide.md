@@ -1,6 +1,6 @@
 # User Guide
 
- > <img src="images/inbx_0.png" width="200">
+ > <img src="images/inbx0.png" width="200">
 ##**Table Of Contents**
 * [About](#about)
 * [Quick Start](#quick-start)
