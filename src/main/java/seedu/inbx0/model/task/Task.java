@@ -2,6 +2,7 @@ package seedu.inbx0.model.task;
 
 import java.util.Objects;
 
+import seedu.inbx0.commons.core.Messages;
 import seedu.inbx0.commons.exceptions.IllegalValueException;
 import seedu.inbx0.commons.util.CollectionUtil;
 import seedu.inbx0.model.tag.UniqueTagList;
@@ -35,6 +36,10 @@ public class Task implements ReadOnlyTask {
      */
     public Task(final Name name, final Date startDate, final Time startTime, final Date endDate, final Time endTime, final Importance level, final UniqueTagList tags, final UniqueReminderList reminders) throws IllegalValueException {
         assert !CollectionUtil.isAnyNull(name, startDate, startTime, endDate, endTime, level, tags);
+        
+        if((("").equals(startDate.getDate()) && !("").equals(startTime.getTime()) && ("").equals(endDate.getDate()) && ("").equals(endTime.getTime())) |
+          (("").equals(startDate.getDate()) && ("").equals(startTime.getTime()) && ("").equals(endDate.getDate()) && !("").equals(endTime.getTime())))
+             throw new IllegalValueException(Messages.MESSAGE_INVALID_TASK);
         
         if (startDate.getDate().equals("") && startTime.getTime().equals("") && endDate.getDate().equals("") && endTime.getTime().equals("")) {
             this.isFloatTask = true;
@@ -72,7 +77,11 @@ public class Task implements ReadOnlyTask {
             final UniqueReminderList reminders, final boolean isCompleted, final boolean isExpired, final boolean isFloatTask) throws IllegalValueException {
         assert !CollectionUtil.isAnyNull(name, startDate, startTime, endDate, endTime, level, tags, isCompleted);
         
-        if ((startDate.getDate().equals("") && startTime.getTime().equals("") && endDate.getDate().equals("") && endTime.getTime().equals("")) |
+        if((("").equals(startDate.getDate()) && !("").equals(startTime.getTime()) && ("").equals(endDate.getDate()) && ("").equals(endTime.getTime())) |
+           (("").equals(startDate.getDate()) && ("").equals(startTime.getTime()) && ("").equals(endDate.getDate()) && !("").equals(endTime.getTime())))
+                throw new IllegalValueException(Messages.MESSAGE_INVALID_TASK);
+        
+        if ((startDate.getDate().equals("") && endDate.getDate().equals("") && endTime.getTime().equals("")) |
             (startDate.getDate().equals("")  && startTime.getTime().equals("") && !endDate.getDate().equals(""))|
             (!startDate.getDate().equals("") && !startTime.getTime().equals("") && endDate.getDate().equals("") && endTime.getTime().equals("")) |
             (!startDate.getDate().equals("") && startTime.getTime().equals("") && endDate.getDate().equals("") && endTime.getTime().equals(""))) {
@@ -80,7 +89,7 @@ public class Task implements ReadOnlyTask {
         } else {
             this.isEvent = true;
         }
-
+        
         if (isEvent) {
             if (!isValidEvent(startDate, startTime, endDate, endTime)) {
                 throw new IllegalValueException(MESSAGE_TIME_CONSTRAINTS);
@@ -126,7 +135,7 @@ public class Task implements ReadOnlyTask {
             
             return isValid;            
         }
-        
+
         int numStartTime = Integer.parseInt(startTime.getTime().replaceAll("\\D+",""));
         int numEndTime = Integer.parseInt(endTime.getTime().replaceAll("\\D+",""));
         
