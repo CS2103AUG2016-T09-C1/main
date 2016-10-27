@@ -371,9 +371,9 @@ Examples:
 #### <a id="undo"></a>11. Undoing previous action: `undo`
 Format: `undo`
 
-Made a mistake? Not to worry! You can use the `undo` command to rectify your mistake or to undo any undesirable changes. You may also type `done X-STEPS` to undo the past X number of commands, up to a maximum of 10.
+Made a mistake? Not to worry! You can use the `undo` command to rectify your mistake or to undo any undesirable changes. You may also type `undo X-STEPS` to undo the past X number of commands, up to a maximum of 10.
 
-> note that some commands cannot be undone, such as `find`, `sort`, `select`, `show`.
+> note that some commands cannot be undone, such as `find`, `select`, `show`.
 
  > <img src="images/UndoCommand.png" width="600">
 <!--- @@author -->
@@ -455,7 +455,7 @@ You can specify a directory for saving your tasklist by typing the following: `s
 The filepath will be verified and you will be able to save your tasklist in a new directory.
 
 Example: 
-* `saveas  C:/Users/Jim/Desktop/taklist.xml` <br>
+* `saveas  C:\Users\Jim\Desktop\taklist.xml` <br>
 Saves the tasklist on the desktop of Jim's computer.
  
  <br><br> 

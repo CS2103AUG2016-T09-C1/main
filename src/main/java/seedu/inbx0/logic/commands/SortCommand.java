@@ -32,7 +32,7 @@ public class SortCommand extends Command {
 
     @Override
     public boolean canUndo() {
-        return false;
+        return true;
     }
 
 }
