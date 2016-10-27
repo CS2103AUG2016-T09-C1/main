@@ -527,8 +527,8 @@ Command | Format
 [Clear](#clr) | `clr`
 [Done](#done) | `done INDEX [INDEX]...`
 &nbsp; | `done FIRST_INDEX to LAST_INDEX`
-[Remind] (#remind) | `rem INDEX s=START_DATE/START_TIME/START_DATE and START_TIME`
-[Set Directory] (#setdir) | `saveas FILE_DIRECTORY`
+[Remind](#remind) | `rem INDEX s=START_DATE/START_TIME/START_DATE and START_TIME`
+[Set Directory](#setdir) | `saveas FILE_DIRECTORY`
 [Exit](#exit) | `exit`
 
 ## **FAQ**
