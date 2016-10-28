@@ -306,6 +306,7 @@ public class Parser {
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
+            
         case SetDirCommand.COMMAND_WORD:
         	return prepareSetDir(arguments);
 
