@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.TitledPane;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
@@ -13,6 +14,7 @@ import seedu.inbx0.commons.core.GuiSettings;
 import seedu.inbx0.commons.events.ui.ExitAppRequestEvent;
 import seedu.inbx0.logic.Logic;
 import seedu.inbx0.model.UserPrefs;
+import seedu.inbx0.model.task.ReadOnlyTask;
 
 /**
  * The Main Window. Provides the basic application layout containing a menu bar
@@ -33,8 +35,11 @@ public class MainWindow extends UiPart {
     // private TaskListPanel taskListPanel;
     //private TaskListPanel upperTaskListPanel;
     //private InformationPanel bottomReminderListPanel;
-    private MainDisplayPanel mainDisplayPanel;
+    //private MainDisplayPanel mainDisplayPanel;
     private ResultDisplay resultDisplay;
+    private TitledPaneList titledPaneList;
+    private TaskTableView taskTableView;
+    private ReminderList reminderList;
     private StatusBarFooter statusBarFooter;
     private CommandBox commandBox;
     private Config config;
@@ -46,44 +51,23 @@ public class MainWindow extends UiPart {
 
     private String taskManagerName;
 
-    // @FXML
-    // private AnchorPane browserPlaceholder;
+    @FXML
+    private AnchorPane titledPanePlaceholder;
 
     @FXML
     private AnchorPane commandBoxPlaceholder;
 
     @FXML
     private MenuItem helpMenuItem;
-/*
-    @FXML
-    private TitledPane DayTitledPane;
 
     @FXML
-    private TitledPane CategoryTitledPane;
+    private AnchorPane taskTableViewPlaceholder;
 
-    @FXML
-    private TitledPane ImportanceTitledPane;
-
-    @FXML
-    private TitledPane CompletenessTitledPane;
-
-    @FXML
-    private TitledPane ExpiredTitledPane;
-
-    @FXML
-    private AnchorPane upperTaskListPanelPlaceholder;
-
-    @FXML
-    private AnchorPane bottomReminderListPanelPlaceholder;
-
-    @FXML
-    private AnchorPane listDisplayPlaceholder;
-*/
     @FXML
     private AnchorPane resultDisplayPlaceholder;
     
     @FXML
-    private AnchorPane mainDisplayPlaceholder;
+    private AnchorPane reminderListPlaceholder;
 
     @FXML
     private AnchorPane statusbarPlaceholder;
@@ -132,7 +116,10 @@ public class MainWindow extends UiPart {
        // upperTaskListPanel = TaskListPanel.load(primaryStage, getUpperTaskListPlaceholder(),
          //       logic.getFilteredTaskList());
         //bottomReminderListPanel = InformationPanel.load(primaryStage, getReminderListPlaceholder(), null);
-        mainDisplayPanel = MainDisplayPanel.load(primaryStage, getMainDisplayPlaceholder(), logic);
+        //mainDisplayPanel = MainDisplayPanel.load(primaryStage, getMainDisplayPlaceholder(), logic);
+        reminderList = ReminderList.load(primaryStage, getReminderListPlaceholder(), null);
+        taskTableView = TaskTableView.load(primaryStage, getTaskTableViewPlaceholder(), logic.getFilteredTaskList());
+        titledPaneList = TitledPaneList.load(primaryStage, getTitledPanePlaceholder(), logic, taskTableView, getTaskTableViewPlaceholder());
         resultDisplay = ResultDisplay.load(primaryStage, getResultDisplayPlaceholder());
         statusBarFooter = StatusBarFooter.load(primaryStage, getStatusbarPlaceholder(), config.getTaskListFilePath());
         commandBox = CommandBox.load(primaryStage, getCommandBoxPlaceholder(), resultDisplay, logic);
@@ -150,22 +137,18 @@ public class MainWindow extends UiPart {
         return resultDisplayPlaceholder;
     }
     
-    private AnchorPane getMainDisplayPlaceholder() {
-        return mainDisplayPlaceholder;
+    private AnchorPane getTaskTableViewPlaceholder() {
+        return taskTableViewPlaceholder;
     }
     
-    public MainDisplayPanel getMainDisplayPanel() {
-        return mainDisplayPanel;
+    private AnchorPane getTitledPanePlaceholder() {
+        return titledPanePlaceholder;
     }
-/*
-    private AnchorPane getUpperTaskListPlaceholder() {
-        return upperTaskListPanelPlaceholder;
-    }
-
+    
     private AnchorPane getReminderListPlaceholder() {
-        return bottomReminderListPanelPlaceholder;
+        return reminderListPlaceholder;
     }
-*/
+    
     public void hide() {
         primaryStage.hide();
     }
@@ -223,232 +206,21 @@ public class MainWindow extends UiPart {
     private void handleExit() {
         raise(new ExitAppRequestEvent());
     }
-/*
-    public InformationPanel getBottomReminderListPanel() {
-        return this.bottomReminderListPanel;
-    }
-
-    public TaskListPanel getUpperTaskListPanel() {
-        return this.upperTaskListPanel;
-    }
-
-    @FXML
-    public void handleListToday() {
-        upperTaskListPanel = null;
-        upperTaskListPanel = TaskListPanel.load(primaryStage, getUpperTaskListPlaceholder(),
-                logic.getFilteredDayTaskList("today"));
-    }
-
-    @FXML
-    public void handleListMonday() {
-        upperTaskListPanel = null;
-        upperTaskListPanel = TaskListPanel.load(primaryStage, getUpperTaskListPlaceholder(),
-                logic.getFilteredDayTaskList("Monday"));
-    }
-
-    @FXML
-    public void handleListTuesday() {
-        upperTaskListPanel = null;
-        upperTaskListPanel = TaskListPanel.load(primaryStage, getUpperTaskListPlaceholder(),
-                logic.getFilteredDayTaskList("Tuesday"));
-    }
-
-    @FXML
-    public void handleListWednesday() {
-        upperTaskListPanel = null;
-        upperTaskListPanel = TaskListPanel.load(primaryStage, getUpperTaskListPlaceholder(),
-                logic.getFilteredDayTaskList("Wednesday"));
-    }
-
-    @FXML
-    public void handleListThursday() {
-        upperTaskListPanel = null;
-        upperTaskListPanel = TaskListPanel.load(primaryStage, getUpperTaskListPlaceholder(),
-                logic.getFilteredDayTaskList("Thursday"));
-    }
-
-    @FXML
-    public void handleListFriday() {
-        upperTaskListPanel = null;
-        upperTaskListPanel = TaskListPanel.load(primaryStage, getUpperTaskListPlaceholder(),
-                logic.getFilteredDayTaskList("Friday"));
-    }
-
-    @FXML
-    public void handleListSaturday() {
-        upperTaskListPanel = null;
-        upperTaskListPanel = TaskListPanel.load(primaryStage, getUpperTaskListPlaceholder(),
-                logic.getFilteredDayTaskList("Saturday"));
-    }
-
-    @FXML
-    public void handleListSunday() {
-        upperTaskListPanel = null;
-        upperTaskListPanel = TaskListPanel.load(primaryStage, getUpperTaskListPlaceholder(),
-                logic.getFilteredDayTaskList("Sunday"));
-    }
-
-    @FXML
-    public void handleListEvent() {
-        upperTaskListPanel = null;
-        upperTaskListPanel = TaskListPanel.load(primaryStage, getUpperTaskListPlaceholder(),
-                logic.getFilteredEventTaskList());
-    }
-
-    @FXML
-    public void handleListFloating() {
-        upperTaskListPanel = null;
-        upperTaskListPanel = TaskListPanel.load(primaryStage, getUpperTaskListPlaceholder(),
-                logic.getFilteredFloatTaskList());
-    }
-
-    @FXML
-    public void handleListDeadline() {
-        upperTaskListPanel = null;
-        upperTaskListPanel = TaskListPanel.load(primaryStage, getUpperTaskListPlaceholder(),
-                logic.getFilteredDeadlineTaskList());
-    }
-
-    @FXML
-    public void handleListRed() {
-        upperTaskListPanel = null;
-        upperTaskListPanel = TaskListPanel.load(primaryStage, getUpperTaskListPlaceholder(),
-                logic.getFilteredImportanceTaskList("Red"));
-    }
-
-    @FXML
-    public void handleListYellow() {
-        upperTaskListPanel = null;
-        upperTaskListPanel = TaskListPanel.load(primaryStage, getUpperTaskListPlaceholder(),
-                logic.getFilteredImportanceTaskList("Yellow"));
-    }
-
-    @FXML
-    public void handleListGreen() {
-        upperTaskListPanel = null;
-        upperTaskListPanel = TaskListPanel.load(primaryStage, getUpperTaskListPlaceholder(),
-                logic.getFilteredImportanceTaskList("Green"));
-    }
-
-    @FXML
-    public void handleListNone() {
-        upperTaskListPanel = null;
-        upperTaskListPanel = TaskListPanel.load(primaryStage, getUpperTaskListPlaceholder(),
-                logic.getFilteredImportanceTaskList(""));
-    }
-
-    @FXML
-    public void handleListComplete() {
-        upperTaskListPanel = null;
-        upperTaskListPanel = TaskListPanel.load(primaryStage, getUpperTaskListPlaceholder(),
-                logic.getFilteredDoneTaskList());
-    }
-
-    @FXML
-    public void handleListIncomplete() {
-        upperTaskListPanel = null;
-        upperTaskListPanel = TaskListPanel.load(primaryStage, getUpperTaskListPlaceholder(),
-                logic.getFilteredToDoTaskList());
-    }
-
-    @FXML
-    public void handleListExpire() {
-        upperTaskListPanel = null;
-        upperTaskListPanel = TaskListPanel.load(primaryStage, getUpperTaskListPlaceholder(),
-                logic.getFilteredOverdueTaskList());
-    }
-
-    @FXML
-    public void handleListValid() {
-        upperTaskListPanel = null;
-        upperTaskListPanel = TaskListPanel.load(primaryStage, getUpperTaskListPlaceholder(),
-                logic.getFilteredBeforedueTaskList());
-    }
     
-    public void handleShowFilteredListRequestByShowCommand(String filterCondition) {
-        if (filterCondition.equals("today")) {
-            closeAllTitledPane();
-            handleListToday();
-        } else if (filterCondition.equals("Monday")) {
-            DayTitledPane.setExpanded(true);
-            handleListMonday();
-        } else if (filterCondition.equals("Tuesday")) {
-            DayTitledPane.setExpanded(true);
-            handleListTuesday();
-        } else if (filterCondition.equals("Wednesday")) {
-            DayTitledPane.setExpanded(true);
-            handleListWednesday();
-        } else if (filterCondition.equals("Thursday")) {
-            DayTitledPane.setExpanded(true);
-            handleListThursday();
-        } else if (filterCondition.equals("Friday")) {
-            DayTitledPane.setExpanded(true);
-            handleListFriday();
-        } else if (filterCondition.equals("Saturday")) {
-            DayTitledPane.setExpanded(true);
-            handleListSaturday();
-        } else if (filterCondition.equals("Sunday")) {
-            DayTitledPane.setExpanded(true);
-            handleListSunday();
-        } else if (filterCondition.equals("Event")) {
-            CategoryTitledPane.setExpanded(true);
-            handleListEvent();
-        } else if (filterCondition.equals("Floating")) {
-            CategoryTitledPane.setExpanded(true);
-            handleListFloating();
-        } else if (filterCondition.equals("Deadline")) {
-            CategoryTitledPane.setExpanded(true);
-            handleListDeadline();
-        } else if (filterCondition.equals("Red")) {
-            ImportanceTitledPane.setExpanded(true);
-            handleListRed();
-        } else if (filterCondition.equals("Yellow")) {
-            ImportanceTitledPane.setExpanded(true);
-            handleListYellow();
-        } else if (filterCondition.equals("Green")) {
-            ImportanceTitledPane.setExpanded(true);
-            handleListGreen();
-        } else if (filterCondition.equals("None")) {
-            ImportanceTitledPane.setExpanded(true);
-            handleListNone();
-        } else if (filterCondition.equals("Complete")) {
-            CompletenessTitledPane.setExpanded(true);
-            handleListComplete();
-        } else if (filterCondition.equals("Incomplete")) {
-            CompletenessTitledPane.setExpanded(true);
-            handleListIncomplete();
-        } else if (filterCondition.equals("Expire")) {
-            ExpiredTitledPane.setExpanded(true);
-            handleListExpire();
-        } else if (filterCondition.equals("Valid")) {
-            ExpiredTitledPane.setExpanded(true);
-            handleListValid();
-        }
-    }
-
     public void handleReminder(ReadOnlyTask task) {
         ReminderWindow reminderWindow = ReminderWindow.load(primaryStage, task);
         reminderWindow.show();
-        upperTaskListPanel = TaskListPanel.load(primaryStage, getUpperTaskListPlaceholder(),
-                logic.getFilteredTaskList());
     }
     
-    public void handleShowNormalTaskList() {
-        closeAllTitledPane();
-        upperTaskListPanel = TaskListPanel.load(primaryStage, getUpperTaskListPlaceholder(),
-                logic.getFilteredTaskList());
+    public TaskTableView getTaskTableView() {
+        return taskTableView;
     }
 
-    private void closeAllTitledPane() {
-        DayTitledPane.setExpanded(false);
-        CategoryTitledPane.setExpanded(false);
-        ImportanceTitledPane.setExpanded(false);
-        CompletenessTitledPane.setExpanded(false);
-        ExpiredTitledPane.setExpanded(false);
+    public void displayReminderList(ReadOnlyTask newSelection) {
+        reminderList = ReminderList.load(primaryStage, getReminderListPlaceholder(), newSelection);
     }
 
-    public void displayReminderInfoPanel(ReadOnlyTask newSelection) {
-        bottomReminderListPanel = InformationPanel.load(primaryStage, getReminderListPlaceholder(), newSelection);        
+    public TitledPaneList getTitledPaneList() {
+        return titledPaneList;
     }
-*/
 }

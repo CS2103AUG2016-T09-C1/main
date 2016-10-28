@@ -6,15 +6,13 @@
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<HBox prefHeight="716.0" prefWidth="1300.0" styleClass="background" stylesheets="@DarkTheme.css" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seedu.inbx0.ui.MainDisplayPanel">
+
+<HBox prefHeight="718.0" prefWidth="1404.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seedu.inbx0.ui.MainDisplayPanel">
    <children>
-      <SplitPane dividerPositions="0.1" prefHeight="160.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
+      <SplitPane dividerPositions="0.1056241426611797" prefHeight="160.0" prefWidth="200.0">
         <items>
             <AnchorPane fx:id="titlePanelPlaceholder" maxWidth="200.0" minWidth="150.0" prefWidth="200.0">
                <children>
@@ -246,94 +244,20 @@
             </AnchorPane>
             <AnchorPane fx:id="listDisplayPlaceholder" SplitPane.resizableWithParent="false">
                <children>
-                  <VBox styleClass="container" stylesheets="@DarkTheme.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                     <children>
-                        <GridPane fx:id="taskListAttribute" maxHeight="20.0" minHeight="20.0" styleClass="header-panel" VBox.vgrow="ALWAYS">
-                           <columnConstraints>
-                              <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="500.0" minWidth="500.0" prefWidth="500.0" />
-                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="150.0" minWidth="150.0" prefWidth="150.0" />
-                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="120.0" minWidth="120.0" prefWidth="120.0" />
-                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="150.0" minWidth="150.0" prefWidth="150.0" />
-                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="120.0" minWidth="120.0" prefWidth="120.0" />
-                              <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" minWidth="250.0" prefWidth="250.0" />
-                           </columnConstraints>
-                           <rowConstraints>
-                              <RowConstraints />
-                              <RowConstraints minHeight="10.0" valignment="CENTER" vgrow="SOMETIMES" />
-                           </rowConstraints>
-                           <children>
-                              <Label alignment="CENTER" styleClass="label-bright" text="Name" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="CENTER">
-                                 <GridPane.margin>
-                                    <Insets left="40.0" />
-                                 </GridPane.margin>
-                                 <padding>
-                                    <Insets bottom="20.0" top="5.0" />
-                                 </padding>
-                              </Label>
-                              <Label styleClass="label-bright" text="Start Date" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                                 <GridPane.margin>
-                                    <Insets />
-                                 </GridPane.margin>
-                                 <padding>
-                                    <Insets bottom="20.0" top="5.0" />
-                                 </padding>
-                              </Label>
-                              <Label styleClass="label-bright" text="Start Time" GridPane.columnIndex="2" GridPane.rowIndex="1">
-                                 <GridPane.margin>
-                                    <Insets />
-                                 </GridPane.margin>
-                                 <padding>
-                                    <Insets bottom="20.0" top="5.0" />
-                                 </padding>
-                              </Label>
-                              <Label styleClass="label-bright" text="End Date" GridPane.columnIndex="3" GridPane.rowIndex="1">
-                                 <GridPane.margin>
-                                    <Insets />
-                                 </GridPane.margin>
-                                 <padding>
-                                    <Insets bottom="20.0" top="5.0" />
-                                 </padding>
-                              </Label>
-                              <Label styleClass="label-bright" text="End Time" GridPane.columnIndex="4" GridPane.rowIndex="1">
-                                 <GridPane.margin>
-                                    <Insets />
-                                 </GridPane.margin>
-                                 <padding>
-                                    <Insets bottom="20.0" top="5.0" />
-                                 </padding>
-                              </Label>
-                              <Label styleClass="label-bright" text="Tags" GridPane.columnIndex="5" GridPane.rowIndex="1">
-                                 <GridPane.margin>
-                                    <Insets left="60.0" />
-                                 </GridPane.margin>
-                                 <padding>
-                                    <Insets bottom="20.0" top="5.0" />
-                                 </padding>
-                              </Label>
-                           </children>
-                           <VBox.margin>
-                              <Insets top="10.0" />
-                           </VBox.margin>
+                  <SplitPane fx:id="SplitPane" dividerPositions="0.7684365781710915" orientation="VERTICAL" prefHeight="716.0" prefWidth="1300.0">
+                    <items>
+                        <AnchorPane fx:id="upperTaskListPanelPlaceholder" prefHeight="832.0" prefWidth="1150.0" styleClass="background" stylesheets="@DarkTheme.css" SplitPane.resizableWithParent="false">
                            <padding>
-                              <Insets top="10.0" />
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </padding>
-                        </GridPane>
-                        <SplitPane fx:id="SplitPane" dividerPositions="0.7684365781710915" orientation="VERTICAL" prefHeight="694.0" prefWidth="1300.0" VBox.vgrow="ALWAYS">
-                          <items>
-                              <AnchorPane fx:id="upperTaskListPanelPlaceholder" prefHeight="832.0" prefWidth="1150.0" styleClass="background" stylesheets="@DarkTheme.css" SplitPane.resizableWithParent="false">
-                                 <padding>
-                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                 </padding>
-                              </AnchorPane>
-                              <AnchorPane fx:id="bottomReminderListPanelPlaceholder" prefHeight="350.0" prefWidth="1148.0" styleClass="background" stylesheets="@DarkTheme.css" SplitPane.resizableWithParent="false">
-                                 <padding>
-                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                 </padding>
-                              </AnchorPane>
-                          </items>
-                        </SplitPane>
-                     </children>
-                  </VBox>
+                        </AnchorPane>
+                        <AnchorPane fx:id="bottomReminderListPanelPlaceholder" prefHeight="350.0" prefWidth="1148.0" styleClass="background" stylesheets="@DarkTheme.css" SplitPane.resizableWithParent="false">
+                           <padding>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </padding>
+                        </AnchorPane>
+                    </items>
+                  </SplitPane>
                </children>
             </AnchorPane>
         </items>

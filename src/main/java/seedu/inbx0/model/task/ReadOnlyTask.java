@@ -1,8 +1,10 @@
 package seedu.inbx0.model.task;
 
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 
+import seedu.inbx0.model.reminder.ReminderTask;
 import seedu.inbx0.model.reminder.UniqueReminderList;
 import seedu.inbx0.model.tag.UniqueTagList;
 
@@ -111,6 +113,27 @@ public interface ReadOnlyTask {
         } else {
             return buffer.substring(0, buffer.length() - separator.length());
         }
+    }
+    /**
+     * @return a string representation of the status, completeness, expired and the name of a task
+     */
+    default String getStatusAndName() {
+        String statusAndName = "";
+        if(getIsCompleted()) {
+            statusAndName += "\u2713";
+        }else {
+            statusAndName += "\u2717";
+        }  
+        UniqueReminderList reminders = getReminders();
+        Iterator<ReminderTask> check = reminders.iterator();
+        while(check.hasNext()) {
+            if(check.next().getIsAlive() == true) {
+               statusAndName += "\uD83D\uDD14";
+               break;
+            }
+        }
+        statusAndName += getName().getName();
+        return statusAndName;
     }
     
 

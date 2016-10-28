@@ -35,7 +35,6 @@ public class UiManager extends ComponentManager implements Ui {
     private Config config;
     private UserPrefs prefs;
     private MainWindow mainWindow;
-    private MainDisplayPanel mainDisplayPanel;
 
     public UiManager(Logic logic, Config config, UserPrefs prefs) {
         super();
@@ -56,7 +55,6 @@ public class UiManager extends ComponentManager implements Ui {
             mainWindow = MainWindow.load(primaryStage, config, prefs, logic);
             mainWindow.show(); //This should be called before creating other UI parts
             mainWindow.fillInnerParts();
-            mainDisplayPanel = mainWindow.getMainDisplayPanel();
             if(!logic.getFilteredOverdueTaskList().isEmpty())
                 mainWindow.handleOverdueTasks();
 
@@ -123,31 +121,31 @@ public class UiManager extends ComponentManager implements Ui {
     @Subscribe
     private void handleShowReminderEvent(ShowReminderRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        mainDisplayPanel.handleReminder(event.task);
+        mainWindow.handleReminder(event.task);
     }
     
     //@@author
     @Subscribe
     private void handleJumpToListRequestEvent(JumpToListRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        mainDisplayPanel.getUpperTaskListPanel().scrollTo(event.targetIndex);
+        mainWindow.getTaskTableView().scrollTo(event.targetIndex);
     }
 
     @Subscribe
     private void handleTaskPanelSelectionChangedEvent(TaskPanelSelectionChangedEvent event){
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        mainDisplayPanel.displayReminderInfoPanel(event.getNewSelection());
+        mainWindow.displayReminderList(event.getNewSelection());
     }
     
     @Subscribe
     private void handleShowFilteredListRequestEvent(ShowFilteredListRequestEvent event){
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        mainDisplayPanel.handleShowFilteredListRequestByShowCommand(event.filterCondition);
+        mainWindow.getTitledPaneList().handleShowFilteredListRequestByShowCommand(event.filterCondition);
     }
     
     @Subscribe 
     private void handleShowNormalTaskList(ShowNormalTaskListEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        mainDisplayPanel.handleShowNormalTaskList();
+        mainWindow.getTitledPaneList().handleShowNormalTaskList();
     }
 }

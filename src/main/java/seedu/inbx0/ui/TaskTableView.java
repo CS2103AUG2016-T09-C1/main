@@ -16,7 +16,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import javafx.util.Callback;
 import seedu.inbx0.commons.core.LogsCenter;
 import seedu.inbx0.commons.events.ui.TaskPanelSelectionChangedEvent;
 import seedu.inbx0.commons.util.FxViewUtil;
@@ -27,9 +26,9 @@ import java.util.logging.Logger;
 /**
  * Panel containing the list of tasks.
  */
-public class TaskListPanel extends UiPart {
-    private final Logger logger = LogsCenter.getLogger(TaskListPanel.class);
-    private static final String FXML = "TaskListPanel.fxml";
+public class TaskTableView extends UiPart {
+    private final Logger logger = LogsCenter.getLogger(TaskTableView.class);
+    private static final String FXML = "TaskTableView.fxml";
     private AnchorPane panel;
     private AnchorPane placeHolderPane;
     
@@ -50,7 +49,7 @@ public class TaskListPanel extends UiPart {
     @FXML 
     private TableColumn<ReadOnlyTask, String> endTimeColumn;
     
-    public TaskListPanel() {
+    public TaskTableView() {
         super();
     }
 
@@ -69,10 +68,10 @@ public class TaskListPanel extends UiPart {
         this.placeHolderPane = pane;
     }
 
-    public static TaskListPanel load(Stage primaryStage, AnchorPane taskListPlaceholder,
+    public static TaskTableView load(Stage primaryStage, AnchorPane taskListPlaceholder,
                                        ObservableList<ReadOnlyTask> taskList) {
-        TaskListPanel taskListPanel =
-                UiPartLoader.loadUiPart(primaryStage, taskListPlaceholder, new TaskListPanel());
+        TaskTableView taskListPanel =
+                UiPartLoader.loadUiPart(primaryStage, taskListPlaceholder, new TaskTableView());
         taskListPanel.configure(taskList);
         return taskListPanel;
     }
@@ -115,82 +114,4 @@ public class TaskListPanel extends UiPart {
             taskTableView.getSelectionModel().clearAndSelect(index);
         });
     }
-    
-    
-/*
-    class TaskListViewCell extends TableRow<ReadOnlyTask> {
-
-        public TaskListViewCell() {
-        }
-
-        @Override
-        protected void updateItem(ReadOnlyTask task, boolean empty) {
-            super.updateItem(task, empty);
-
-            if (empty || task == null) {
-                setGraphic(null);
-                setText(null);
-            } else {
-                setGraphic(TaskCard.load(task, getIndex() + 1).getLayout());
-            }
-        }
-    }
-*/
-   
-    
-/*   
-    public static class TaskData {  
-        SimpleStringProperty name, startDate, startTime, endDate, endTime, tags;  
-  
-        public TaskData(ReadOnlyTask task) {  
-            this.name = new SimpleStringProperty(task.getName().getName());  
-            this.startDate = new SimpleStringProperty(task.getStartDate().getDate());  
-            this.startTime = new SimpleStringProperty(task.getStartTime().getTime());  
-            this.endDate = new SimpleStringProperty(task.getEndDate().getDate());
-            this.tags = new SimpleStringProperty(task.tagsString());
-        }  
-  
-        public String getName() {  
-            return name.get();  
-        }  
-  
-        public void setName(String name) {  
-            this.name.set(name);  
-        }  
-  
-        public String getStartDate() {  
-            return startDate.get();  
-        }  
-        
-        public void setStartDate(String startDate) {  
-            this.startDate.set(startDate);  
-        }  
-        
-        public String getStartTime() {  
-            return startTime.get();  
-        }  
-        
-        public void setStartTime(String startTime) {  
-            this.startTime.set(startTime);  
-        } 
-        
-        public String getEndDate() {  
-            return endDate.get();  
-        }
-        
-        public void setEndDate(String endDate) {  
-            this.endDate.set(endDate);  
-        }  
-        
-        public String getTags() {  
-            return tags.get();  
-        }  
-         
-        
-        public void setTags(String tags) {  
-            this.tags.set(tags);  
-        }  
-  
-    }  
-*/
 }

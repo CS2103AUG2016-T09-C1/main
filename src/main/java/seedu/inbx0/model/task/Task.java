@@ -1,7 +1,11 @@
 package seedu.inbx0.model.task;
 
+import java.time.LocalDate;
 import java.util.Objects;
 
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.StringProperty;
 import seedu.inbx0.commons.core.Messages;
 import seedu.inbx0.commons.exceptions.IllegalValueException;
 import seedu.inbx0.commons.util.CollectionUtil;
