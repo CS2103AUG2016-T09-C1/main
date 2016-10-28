@@ -19,6 +19,7 @@ import seedu.inbx0.commons.events.ui.ShowHelpRequestEvent;
 import seedu.inbx0.commons.events.ui.ShowReminderRequestEvent;
 import seedu.inbx0.commons.util.StringUtil;
 import seedu.inbx0.logic.Logic;
+import seedu.inbx0.logic.commands.AddNewTaskIntoTheList;
 import seedu.inbx0.model.UserPrefs;
 
 import java.util.logging.Logger;
@@ -147,5 +148,11 @@ public class UiManager extends ComponentManager implements Ui {
     private void handleShowNormalTaskList(ShowNormalTaskListEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         mainWindow.getTitledPaneList().handleShowNormalTaskList();
+    }
+    
+    @Subscribe
+    private void handleAddNewTaskIntoTheList(AddNewTaskIntoTheList event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        mainWindow.getTaskTableView().scrollTo(event.task);
     }
 }

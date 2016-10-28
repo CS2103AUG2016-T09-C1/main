@@ -41,16 +41,16 @@ public class Task implements ReadOnlyTask {
     public Task(final Name name, final Date startDate, final Time startTime, final Date endDate, final Time endTime, final Importance level, final UniqueTagList tags, final UniqueReminderList reminders) throws IllegalValueException {
         assert !CollectionUtil.isAnyNull(name, startDate, startTime, endDate, endTime, level, tags);
         
-        if((("").equals(startDate.getDate()) && !("").equals(startTime.getTime()) && ("").equals(endDate.getDate()) && ("").equals(endTime.getTime())) |
+        if((("").equals(startDate.getDate()) && !("").equals(startTime.getTime()) && ("").equals(endDate.getDate()) && ("").equals(endTime.getTime())) ||
           (("").equals(startDate.getDate()) && ("").equals(startTime.getTime()) && ("").equals(endDate.getDate()) && !("").equals(endTime.getTime())))
              throw new IllegalValueException(Messages.MESSAGE_INVALID_TASK);
         
-        if (startDate.getDate().equals("") && startTime.getTime().equals("") && endDate.getDate().equals("") && endTime.getTime().equals("")) {
+        if (startDate.getDate().equals("") && startTime.getTime().equals("") && endDate.getDate().equals("") && endTime.getTime().equals("") || 
+                (!startDate.getDate().equals("") && !startTime.getTime().equals("") && endDate.getDate().equals("") && endTime.getTime().equals("")) ||
+                (!startDate.getDate().equals("") && startTime.getTime().equals("") && endDate.getDate().equals("") && endTime.getTime().equals(""))) {
             this.isFloatTask = true;
             this.isEvent = false;
-        } else if ((startDate.getDate().equals("") && startTime.getTime().equals("") && !endDate.getDate().equals(""))|
-            (!startDate.getDate().equals("") && !startTime.getTime().equals("") && endDate.getDate().equals("") && endTime.getTime().equals("")) |
-            (!startDate.getDate().equals("") && startTime.getTime().equals("") && endDate.getDate().equals("") && endTime.getTime().equals(""))) {
+        } else if (startDate.getDate().equals("") && startTime.getTime().equals("") && !endDate.getDate().equals("")) {
             this.isFloatTask = false;
             this.isEvent = false;            
         } else {

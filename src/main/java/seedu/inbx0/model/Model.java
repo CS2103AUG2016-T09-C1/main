@@ -121,5 +121,8 @@ public interface Model {
     
     /** Checks expiry of reminders */
     void checkReminders();
+    
+    /** Gets the last index of the whole task list */
+    int getLastIndex();
 
 }

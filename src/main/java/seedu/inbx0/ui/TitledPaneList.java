@@ -3,24 +3,19 @@ package seedu.inbx0.ui;
 import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.control.Accordion;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.TitledPane;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import seedu.inbx0.commons.core.LogsCenter;
 import seedu.inbx0.commons.util.FxViewUtil;
 import seedu.inbx0.logic.Logic;
-import seedu.inbx0.model.task.ReadOnlyTask;
 
 public class TitledPaneList extends UiPart {
     private static final Logger logger = LogsCenter.getLogger(TitledPaneList.class);
     private static final String FXML = "TitledPaneList.fxml";
     private AnchorPane placeHolderPane;
-    private Accordion mainPane;
+    private AnchorPane mainPane;
     private Logic logic;
     private TaskTableView taskTableView;
     private AnchorPane taskTableViewPlaceholder; 
@@ -46,7 +41,7 @@ public class TitledPaneList extends UiPart {
 
     @Override
     public void setNode(Node node) {
-        mainPane = (Accordion) node;
+        mainPane = (AnchorPane) node;
     }
 
     @Override

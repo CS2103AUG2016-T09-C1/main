@@ -7,9 +7,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane fx:id="titlePanelPlaceholder" maxWidth="314.0" minWidth="150.0" prefHeight="491.0" prefWidth="314.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seedu.inbx0.ui.TitledPaneList">
+<AnchorPane prefHeight="491.0" prefWidth="203.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seedu.inbx0.ui.TitledPaneList">
    <children>
-      <Accordion maxWidth="1.7976931348623157E308" prefHeight="491.0" prefWidth="314.0" styleClass="label-bright" stylesheets="@DarkTheme.css">
+      <Accordion maxWidth="1.7976931348623157E308" prefHeight="491.0" prefWidth="230.0" styleClass="label-bright" stylesheets="@DarkTheme.css">
          <panes>
             <TitledPane animated="false" collapsible="false" expanded="false" maxWidth="20.0" minWidth="20.0" onMouseClicked="#handleListToday" prefHeight="559.0" prefWidth="20.0" text="    Today" />
             <TitledPane fx:id="DayTitledPane" animated="false" maxWidth="20.0" minWidth="20.0" prefHeight="283.0" prefWidth="3099.0" text="Day">
@@ -206,7 +206,7 @@
                      <children>
                         <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
                            <children>
-                              <Label onMouseClicked="#handleListExpire" prefHeight="31.0" prefWidth="109.0" text="Yes">
+                              <Label onMouseClicked="#handleListExpired" prefHeight="31.0" prefWidth="109.0" text="Yes">
                                  <padding>
                                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                  </padding>
@@ -214,7 +214,7 @@
                                     <Insets />
                                  </VBox.margin>
                               </Label>
-                              <Label onMouseClicked="#handleListValid" prefHeight="31.0" prefWidth="113.0" text="No">
+                              <Label onMouseClicked="#handleListUnexpired" prefHeight="31.0" prefWidth="113.0" text="No">
                                  <padding>
                                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                  </padding>

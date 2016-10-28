@@ -107,6 +107,12 @@ public class ModelManager extends ComponentManager implements Model {
         return taskList;
     }
     
+    //@@author A0148044J
+    public int getLastIndex() {
+        return taskList.getTaskList().size() - 1;
+    }
+    //@author
+    
     //@@author A0139481Y
     @Override
     public void saveTaskListHistory() {
@@ -190,7 +196,8 @@ public class ModelManager extends ComponentManager implements Model {
     public UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList() {
         return new UnmodifiableObservableList<>(filteredTasks);
     }
-
+    
+    //@@author A0148044J
     @Override
     public UnmodifiableObservableList<ReadOnlyTask> getFilteredNormalTaskList() {
         updateFilteredNormalTaskList();
@@ -265,6 +272,7 @@ public class ModelManager extends ComponentManager implements Model {
             updateFilteredTaskList(new PredicateExpression(new OrQualifier(keywords)));
         }
     }
+    //@@author
     
     /*
      * Updates the list according to list command parameters
@@ -281,6 +289,8 @@ public class ModelManager extends ComponentManager implements Model {
     }
     
     //@@author
+    
+    //@@author A0148044J
     @Override
     public void updateFilteredNormalTaskList() {
         updateFilteredNormalTaskList(new PredicateExpression(new NormalTaskQualifier()));
@@ -378,7 +388,8 @@ public class ModelManager extends ComponentManager implements Model {
     private void updateFilteredImportanceTaskList(Expression expression) {
         filteredImportanceTasks.setPredicate(expression::satisfies);
     }
-
+    //@@author
+    
     //========== Inner classes/interfaces used for filtering ==================================================
 
     interface Expression {
@@ -409,26 +420,8 @@ public class ModelManager extends ComponentManager implements Model {
         boolean run(ReadOnlyTask task);
         String toString();
     }
-    /*
-    private class AndQualifier implements Qualifier {
-        private Set<String> andKeywords;
-
-        AndQualifier(Set<String> andKeywords) {
-            this.andKeywords = andKeywords;
-        }
-
-        @Override
-        public boolean run(ReadOnlyTask task) {
-            return andKeywords.stream()
-                   .allMatch(keyword -> task.getAsText().contains(keyword));
-        }
-
-        @Override
-        public String toString() {
-            return "AndSearchKeyword =" + String.join(", ", andKeywords);
-        }
-    }*/
     
+    //@@author A0148044J
     private class OrQualifier implements Qualifier {
         private List<String> orKeywords;
 
@@ -667,8 +660,6 @@ public class ModelManager extends ComponentManager implements Model {
         
         @Override
         public boolean run(ReadOnlyTask task) {
-            System.out.println("task: " + task.getLevel().getLevel());
-            System.out.println("importance: " + importance);
             return task.getLevel().getLevel().equals(this.importance);
         }
         
@@ -677,6 +668,7 @@ public class ModelManager extends ComponentManager implements Model {
             return "Importance: " + this.importance;
         }
     }
+    //@@author
     
     //@@author A0139579J
     private class StartOnAndEndOnDateQualifier implements Qualifier {
@@ -747,88 +739,4 @@ public class ModelManager extends ComponentManager implements Model {
             return "date= " + date;
         }
     }
-    /*
-    private class StartDateQualifier implements Qualifier {
-        private Set<String> startDateKeyWords;
-
-        StartDateQualifier(Set<String> startDateKeyWords) {
-            this.startDateKeyWords = startDateKeyWords;
-        }
-
-        @Override
-        public boolean run(ReadOnlyTask task) {
-            return startDateKeyWords.stream()
-                    .filter(keyword -> StringUtil.containsIgnoreCase(task.getStartDate().value, keyword))
-                    .findAny()
-                    .isPresent();
-        }
-
-        @Override
-        public String toString() {
-            return "startDate=" + String.join(", ", startDateKeyWords);
-        }
-    }
-
-    private class EndDateQualifier implements Qualifier {
-        private Set<String> endDateKeyWords;
-
-        EndDateQualifier(Set<String> endDateKeyWords) {
-            this.endDateKeyWords = endDateKeyWords;
-        }
-
-        @Override
-        public boolean run(ReadOnlyTask task) {
-            return endDateKeyWords.stream()
-                    .filter(keyword -> StringUtil.containsIgnoreCase(task.getEndDate().value, keyword))
-                    .findAny()
-                    .isPresent();
-        }
-
-        @Override
-        public String toString() {
-            return "endDate=" + String.join(", ", endDateKeyWords);
-        }
-    }
-    
-    private class LevelQualifier implements Qualifier {
-        private Set<String> levelKeyWords;
-
-        LevelQualifier(Set<String> levelKeyWords) {
-            this.levelKeyWords = levelKeyWords;
-        }
-
-        @Override
-        public boolean run(ReadOnlyTask task) {
-            return levelKeyWords.stream()
-                    .filter(keyword -> StringUtil.containsIgnoreCase(task.getLevel().value, keyword))
-                    .findAny()
-                    .isPresent();
-        }
-
-        @Override
-        public String toString() {
-            return "level=" + String.join(", ", levelKeyWords);
-        }
-    }
-
-    private class TagQualifier implements Qualifier {
-        private Set<String> tagKeyWords;
-
-        TagQualifier(Set<String> tagKeyWords) {
-            this.tagKeyWords = tagKeyWords;
-        }
-
-        @Override
-        public boolean run(ReadOnlyTask task) {
-            return tagKeyWords.stream()
-                    .filter(keyword -> task.tagsString().contains(keyword))
-                    .findAny()
-                    .isPresent();
-        }
-
-        @Override
-        public String toString() {
-            return "tag=" + String.join(", ", tagKeyWords);
-        }
-    }*/
 }

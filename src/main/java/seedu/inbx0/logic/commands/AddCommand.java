@@ -3,6 +3,8 @@ package seedu.inbx0.logic.commands;
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.inbx0.commons.core.EventsCenter;
+import seedu.inbx0.commons.events.ui.JumpToListRequestEvent;
 import seedu.inbx0.commons.exceptions.IllegalValueException;
 import seedu.inbx0.model.task.*;
 import seedu.inbx0.model.reminder.UniqueReminderList;
@@ -154,6 +156,7 @@ public class AddCommand extends Command {
         try {
             model.addTask(toAdd);
             indicateShowNormalTaskListEventCommand();
+            EventsCenter.getInstance().post(new AddNewTaskIntoTheList(toAdd));
             return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
         } catch (UniqueTaskList.DuplicateTaskException e) {
             return new CommandResult(MESSAGE_DUPLICATE_TASK);
