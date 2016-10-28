@@ -2,15 +2,14 @@ package guitests;
 
 import org.junit.Test;
 
-import guitests.guihandles.TaskCardHandle;
 import seedu.inbx0.commons.core.Messages;
 import seedu.inbx0.commons.exceptions.IllegalValueException;
 import seedu.inbx0.logic.commands.ShowCommand;
 import seedu.inbx0.testutil.TestTask;
-import seedu.inbx0.testutil.TestUtil;
 
 import static org.junit.Assert.assertTrue;
 
+//@@author A0139481Y
 public class ShowCommandTest extends TaskListGuiTest {
     
     //invalid command
