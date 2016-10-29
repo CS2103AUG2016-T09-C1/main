@@ -76,7 +76,8 @@ public class ReminderList extends UiPart {
     //}
 
     public void displayInfo(ReadOnlyTask task) {
-        System.out.println(task.getName().getName());
+        name.setWrapText(true);
+        tags.setWrapText(true);
         name.setText(task.getName().getName());
         startDate.setText(task.getStartDate().getTotalDate());
         startTime.setText(task.getStartTime().getTime());
