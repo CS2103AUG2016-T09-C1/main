@@ -121,26 +121,14 @@ public class TaskTableView extends UiPart {
         });
     }
 
- /*   public void scrollTo(int index) {
+    public void scrollTo(int index) {
         Platform.runLater(() -> {
             taskTableView.scrollTo(index);
             taskTableView.getSelectionModel().clearAndSelect(index);
         });
-    }*/
-
-    public void scrollTo(ReadOnlyTask task) {
-        Platform.runLater(() -> {
-            taskTableView.scrollTo(task);
-            taskTableView.getSelectionModel().select(task);;
-        });
     }
-    
-    public void scrollTo(int index) {
-        taskTableView.requestFocus();
-        taskTableView.getSelectionModel().select(index);
-        taskTableView.getFocusModel().focus(index);
 
-    }
-        
-        
+    public TableView<ReadOnlyTask> getTaskTableView() {
+        return taskTableView;
+    }        
 }

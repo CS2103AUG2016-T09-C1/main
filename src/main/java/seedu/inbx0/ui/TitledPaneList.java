@@ -277,6 +277,12 @@ public class TitledPaneList extends UiPart {
         taskTableView = TaskTableView.load(primaryStage, getTaskTableViewPlaceholder(),
                 logic.getFilteredTaskList());
     }
+    
+    public void handleAddNewTaskIntotheList() {
+        handleShowNormalTaskList();
+        int lastIndex = taskTableView.getTaskTableView().getItems().size();
+        taskTableView.scrollTo(lastIndex);        
+    }
 
     private void closeAllTitledPane() {
         DayTitledPane.setExpanded(false);
@@ -285,10 +291,5 @@ public class TitledPaneList extends UiPart {
         CompletenessTitledPane.setExpanded(false);
         ExpiredTitledPane.setExpanded(false);
     }
-/*
-    public void displayReminderInfoPanel(ReadOnlyTask newSelection) {
-        bottomReminderListPanel = InformationPanel.load(primaryStage, getReminderListPlaceholder(), newSelection);        
-    }
-    */
 }
 

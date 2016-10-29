@@ -8,6 +8,7 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SplitPane;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import seedu.inbx0.model.reminder.ReminderTask;
@@ -18,6 +19,7 @@ import java.util.Iterator;
 import java.util.logging.Logger;
 import seedu.inbx0.commons.core.LogsCenter;
 import seedu.inbx0.commons.events.ui.TaskPanelSelectionChangedEvent;
+import seedu.inbx0.commons.util.FxViewUtil;
 
 public class ReminderList extends UiPart {
     private static final Logger logger = LogsCenter.getLogger(ReminderList.class);
@@ -27,6 +29,8 @@ public class ReminderList extends UiPart {
     
     @FXML
     private ListView<ReminderTask> reminderListView;
+    @FXML
+    private GridPane infoGridPane;
     @FXML
     private Label name;
     @FXML
@@ -72,6 +76,7 @@ public class ReminderList extends UiPart {
     //}
 
     public void displayInfo(ReadOnlyTask task) {
+        System.out.println(task.getName().getName());
         name.setText(task.getName().getName());
         startDate.setText(task.getStartDate().getTotalDate());
         startTime.setText(task.getStartTime().getTime());
@@ -99,13 +104,14 @@ public class ReminderList extends UiPart {
     
     private void setConnections(ObservableList<ReminderTask> reminderList) {
         reminderListView.setItems(reminderList);
-        reminderListView.setCellFactory(listView -> new ReminderListViewCell());
-        
+        reminderListView.setCellFactory(listView -> new ReminderListViewCell()); 
     }
 
     private void addToPlaceholder() {
         SplitPane.setResizableWithParent(placeHolderPane, false);
         SplitPane.setResizableWithParent(reminderListView, false);
+        SplitPane.setResizableWithParent(infoGridPane, false);
+        FxViewUtil.applyAnchorBoundaryParameters(mainPane, 0.0, 0.0, 0.0, 0.0);
         placeHolderPane.getChildren().add(mainPane);
     }
     

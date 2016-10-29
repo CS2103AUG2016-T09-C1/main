@@ -1108,10 +1108,10 @@ public class Parser {
             return new ShowCommand("Complete");
         } else if (keyword.equalsIgnoreCase("Incomplete") || keyword.equalsIgnoreCase("Inc")) {
             return new ShowCommand("Incomplete");
-        } else if (keyword.equalsIgnoreCase("Expire") || keyword.equalsIgnoreCase("Exp")) {
-            return new ShowCommand("Expire");
-        } else if (keyword.equalsIgnoreCase("Valid") || keyword.equalsIgnoreCase("Val")) {
-            return new ShowCommand("Valid");
+        } else if (keyword.equalsIgnoreCase("Expired") || keyword.equalsIgnoreCase("Exp")) {
+            return new ShowCommand("Expired");
+        } else if (keyword.equalsIgnoreCase("Unexpired") || keyword.equalsIgnoreCase("Une")) {
+            return new ShowCommand("Unexpired");
         }
         return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ShowCommand.MESSAGE_USAGE));
     }

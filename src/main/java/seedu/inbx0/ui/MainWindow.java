@@ -223,4 +223,9 @@ public class MainWindow extends UiPart {
     public TitledPaneList getTitledPaneList() {
         return titledPaneList;
     }
+
+    public void handleAddNewTaskIntotheList() {
+        // TODO Auto-generated method stub
+        
+    }
 }

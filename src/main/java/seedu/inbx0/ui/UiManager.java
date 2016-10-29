@@ -153,6 +153,6 @@ public class UiManager extends ComponentManager implements Ui {
     @Subscribe
     private void handleAddNewTaskIntoTheList(AddNewTaskIntoTheList event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        mainWindow.getTaskTableView().scrollTo(event.task);
+        mainWindow.getTitledPaneList().handleAddNewTaskIntotheList();
     }
 }

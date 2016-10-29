@@ -41,8 +41,8 @@
          <children>
             <SplitPane dividerPositions="0.2" prefHeight="758.0" prefWidth="1443.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
               <items>
-                <AnchorPane fx:id="titledPanePlaceholder" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" />
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                <AnchorPane fx:id="titledPanePlaceholder" maxWidth="200.0" />
+                <AnchorPane>
                      <children>
                         <SplitPane dividerPositions="0.8" orientation="VERTICAL" prefHeight="756.0" prefWidth="1054.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <items>

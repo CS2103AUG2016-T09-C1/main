@@ -12,7 +12,11 @@ public class ShowCommand extends Command {
     public static final String COMMAND_WORD = "show";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Show a filtered list by the specific filter condition\n"
-            + "Example: " + COMMAND_WORD + " today";
+            + "Parameters: today|Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday|"
+            + "event|dealine|floating|red|yellow|green|none|complete|incomplete|expired|unexpired\n"
+            + "Show command is non-casesensitive and allow use first three letters of the condition keywords as shortcut\n"
+            + "Example: " + COMMAND_WORD + " today\n"
+            + "Example: " + COMMAND_WORD + " sat";
 
     public static final String SHOWING_FILTERED_LIST_MESSAGE = "Show a filtered list";
     

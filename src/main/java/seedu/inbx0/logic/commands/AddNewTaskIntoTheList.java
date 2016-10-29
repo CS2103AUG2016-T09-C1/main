@@ -4,10 +4,8 @@ import seedu.inbx0.commons.events.BaseEvent;
 import seedu.inbx0.model.task.ReadOnlyTask;
 
 public class AddNewTaskIntoTheList extends BaseEvent {
-    
-    public ReadOnlyTask task;
-    public AddNewTaskIntoTheList(ReadOnlyTask task) {
-        this.task = task;
+ 
+    public AddNewTaskIntoTheList() {
     }
     
     @Override

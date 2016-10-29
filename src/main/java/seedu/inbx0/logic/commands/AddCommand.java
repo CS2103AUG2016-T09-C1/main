@@ -155,8 +155,7 @@ public class AddCommand extends Command {
         assert model != null;
         try {
             model.addTask(toAdd);
-            indicateShowNormalTaskListEventCommand();
-            EventsCenter.getInstance().post(new AddNewTaskIntoTheList(toAdd));
+            EventsCenter.getInstance().post(new AddNewTaskIntoTheList());
             return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
         } catch (UniqueTaskList.DuplicateTaskException e) {
             return new CommandResult(MESSAGE_DUPLICATE_TASK);
