@@ -41,6 +41,12 @@ public class EditCommand extends Command {
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the tasklist";
     public static final String MESSAGE_INVALID_ARGUMENTS = "The arguments provided are invalid.";
     public static final int TOTAL_NUMBER_OF_ARGUMENTS = 6;
+    public static final int TASK_NAME = 0;
+    public static final int TASK_START_DATE = 1;
+    public static final int TASK_START_TIME = 2;
+    public static final int TASK_END_DATE = 3;
+    public static final int TASK_END_TIME = 4;
+    public static final int TASK_IMPORTANCE = 5;
     
     public final int targetIndex;
     public String [] editArguments;
@@ -101,14 +107,14 @@ public class EditCommand extends Command {
 
     private String[] obtainArguments(String[] editArguments, ReadOnlyTask taskToEdit) {
        
-        String [] originalArguments = new String[6];
+        String [] originalArguments = new String[TOTAL_NUMBER_OF_ARGUMENTS];
                     
-        originalArguments[0] = taskToEdit.getName().getName();
-        originalArguments[1] = taskToEdit.getStartDate().getDate();
-        originalArguments[2] = taskToEdit.getStartTime().getTime();
-        originalArguments[3] = taskToEdit.getEndDate().getDate();
-        originalArguments[4] = taskToEdit.getEndTime().getTime();
-        originalArguments[5] = taskToEdit.getLevel().getLevel();
+        originalArguments[TASK_NAME] = taskToEdit.getName().getName();
+        originalArguments[TASK_START_DATE] = taskToEdit.getStartDate().getDate();
+        originalArguments[TASK_START_TIME] = taskToEdit.getStartTime().getTime();
+        originalArguments[TASK_END_DATE] = taskToEdit.getEndDate().getDate();
+        originalArguments[TASK_END_TIME] = taskToEdit.getEndTime().getTime();
+        originalArguments[TASK_IMPORTANCE] = taskToEdit.getLevel().getLevel();
             
         for(int i = 0; i < TOTAL_NUMBER_OF_ARGUMENTS; i++) {
             if(editArguments[i] == null)
@@ -120,12 +126,12 @@ public class EditCommand extends Command {
 
     private Task createToEditWithTask(String[] editArguments, UniqueTagList tags, UniqueReminderList reminders) throws IllegalValueException {
         Task toEditWith = new Task (
-                new Name(editArguments[0]),
-                new Date(editArguments[1]),
-                new Time(editArguments[2]),
-                new Date(editArguments[3]),
-                new Time(editArguments[4]),
-                new Importance(editArguments[5]),
+                new Name(editArguments[TASK_NAME]),
+                new Date(editArguments[TASK_START_DATE]),
+                new Time(editArguments[TASK_START_TIME]),
+                new Date(editArguments[TASK_END_DATE]),
+                new Time(editArguments[TASK_END_TIME]),
+                new Importance(editArguments[TASK_IMPORTANCE]),
                 tags,
                 reminders
                 );

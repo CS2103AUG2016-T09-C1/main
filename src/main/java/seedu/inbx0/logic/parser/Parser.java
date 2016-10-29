@@ -241,7 +241,15 @@ public class Parser {
     private static final CharSequence END_TIME = "et=";
     private static final CharSequence IMPORTANCE = "i=";
     private static final CharSequence TAG = "t=";
-
+    
+    private static final int TASK_NAME = 0;
+    private static final int TASK_START_DATE = 1;
+    private static final int TASK_START_TIME = 2;
+    private static final int TASK_END_DATE = 3;
+    private static final int TASK_END_TIME = 4;
+    private static final int TASK_IMPORTANCE = 5;
+    private static final int TOTAL_NUMBER_OF_ARGUMENTS = 6;
+    
     /**
      * Parses user input into command for execution.
      *
@@ -524,7 +532,7 @@ public class Parser {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
         }
 
-        String[] argumentsForEdit = new String[6];
+        String[] argumentsForEdit = new String[TOTAL_NUMBER_OF_ARGUMENTS];
 
         String arguments = matcher.group("arguments");
 
@@ -532,11 +540,11 @@ public class Parser {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
         }
 
-        if (arguments.trim().equals("float")) {
-            argumentsForEdit[1] = "";
-            argumentsForEdit[2] = "";
-            argumentsForEdit[3] = "";
-            argumentsForEdit[4] = "";
+        if (("float").equals(arguments.trim())) {
+            argumentsForEdit[TASK_START_DATE] = "";
+            argumentsForEdit[TASK_START_TIME] = "";
+            argumentsForEdit[TASK_END_DATE] = "";
+            argumentsForEdit[TASK_END_TIME] = "";
 
             try {
                 return new EditCommand(index.get(), argumentsForEdit, null);
@@ -555,79 +563,79 @@ public class Parser {
         Matcher matcher2 = editArguments.matcher(arguments);
         if (matcher2.matches()) {
             if (arguments.contains(NAME)) {
-                argumentsForEdit[0] = matcher2.group("name");
+                argumentsForEdit[TASK_NAME] = matcher2.group("name");
             }
             if (arguments.contains(START_DATE) && !arguments.contains(START_TIME)) {
-                if (matcher2.group("startDate").equals("nil")) {
-                    argumentsForEdit[1] = "";
-                    argumentsForEdit[2] = "";
+                if (("nil").equals(matcher2.group("startDate"))) {
+                    argumentsForEdit[TASK_START_DATE] = "";
+                    argumentsForEdit[TASK_START_TIME] = "";
                 } else {
-                    argumentsForEdit[1] = dateParse(matcher2.group("startDate"));
-                    argumentsForEdit[2] = timeParse(matcher2.group("startDate"));
+                    argumentsForEdit[TASK_START_DATE] = dateParse(matcher2.group("startDate"));
+                    argumentsForEdit[TASK_START_TIME] = timeParse(matcher2.group("startDate"));
 
                     Time getTime = null;
                     try {
-                        getTime = new Time(argumentsForEdit[2]);
+                        getTime = new Time(argumentsForEdit[TASK_START_TIME]);
                     } catch (IllegalValueException e) {
                         e.printStackTrace();
                     }
-                    if (argumentsForEdit[2].equals("") | getTime.getTime().equals(""))
-                        argumentsForEdit[2] = null;
+                    if (("").equals(argumentsForEdit[TASK_START_TIME]) | ("").equals(getTime.getTime()))
+                        argumentsForEdit[TASK_START_TIME] = null;
 
                 }
             } else if (arguments.contains(START_DATE) && arguments.contains(START_TIME)) {
-                if (matcher2.group("startDate").equals("nil") && matcher2.group("startTime").equals("nil")) {
-                    argumentsForEdit[1] = "";
-                    argumentsForEdit[2] = "";
+                if (("nil").equals(matcher2.group("startDate")) && ("nil").equals(matcher2.group("startTime"))) {
+                    argumentsForEdit[TASK_START_DATE] = "";
+                    argumentsForEdit[TASK_START_TIME] = "";
                 } else {
-                    argumentsForEdit[1] = matcher2.group("startDate");
-                    argumentsForEdit[2] = matcher2.group("startTime");
+                    argumentsForEdit[TASK_START_DATE] = matcher2.group("startDate");
+                    argumentsForEdit[TASK_START_TIME] = matcher2.group("startTime");
                 }
             } else if (arguments.contains(START_TIME)) {
-                if (matcher2.group("startTime").equals("nil")) {
-                    argumentsForEdit[2] = "";
+                if (("nil").equals(matcher2.group("startTime"))) {
+                    argumentsForEdit[TASK_START_TIME] = "";
                 } else {
-                    argumentsForEdit[2] = matcher2.group("startTime");
+                    argumentsForEdit[TASK_START_TIME] = matcher2.group("startTime");
                 }
             }
 
             if (arguments.contains(END_DATE) && !arguments.contains(END_TIME)) {
-                if (matcher2.group("endDate").equals("nil")) {
-                    argumentsForEdit[3] = "";
-                    argumentsForEdit[4] = "";
+                if (("nil").equals(matcher2.group("endDate"))) {
+                    argumentsForEdit[TASK_END_DATE] = "";
+                    argumentsForEdit[TASK_END_TIME] = "";
                 } else {
-                    argumentsForEdit[3] = dateParse(matcher2.group("endDate"));
-                    argumentsForEdit[4] = timeParse(matcher2.group("endDate"));
+                    argumentsForEdit[TASK_END_DATE] = dateParse(matcher2.group("endDate"));
+                    argumentsForEdit[TASK_END_TIME] = timeParse(matcher2.group("endDate"));
                     Time getTime = null;
                     try {
-                        getTime = new Time(argumentsForEdit[4]);
+                        getTime = new Time(argumentsForEdit[TASK_END_TIME]);
                     } catch (IllegalValueException e) {
                         e.printStackTrace();
                     }
-                    if (argumentsForEdit[4].equals("") | getTime.getTime().equals(""))
-                        argumentsForEdit[4] = null;
+                    if (("").equals(argumentsForEdit[TASK_END_TIME]) | ("").equals(getTime.getTime()))
+                        argumentsForEdit[TASK_END_TIME] = null;
                 }
             } else if (arguments.contains(END_DATE) && arguments.contains(END_TIME)) {
-                if (matcher2.group("endDate").equals("nil") && matcher2.group("endTime").equals("nil")) {
-                    argumentsForEdit[3] = "";
-                    argumentsForEdit[4] = "";
+                if (("nil").equals(matcher2.group("endDate")) && ("nil").equals(matcher2.group("endTime"))) {
+                    argumentsForEdit[TASK_END_DATE] = "";
+                    argumentsForEdit[TASK_END_TIME] = "";
                 } else {
-                    argumentsForEdit[3] = matcher2.group("endDate");
-                    argumentsForEdit[4] = matcher2.group("endTime");
+                    argumentsForEdit[TASK_END_DATE] = matcher2.group("endDate");
+                    argumentsForEdit[TASK_END_TIME] = matcher2.group("endTime");
                 }
             } else if (arguments.contains(END_TIME)) {
-                if (matcher2.group("endTime").equals("nil")) {
-                    argumentsForEdit[4] = "";
+                if (("nil").equals(matcher2.group("endTime"))) {
+                    argumentsForEdit[TASK_END_TIME] = "";
                 } else {
-                    argumentsForEdit[4] = timeParse(matcher2.group("endTime"));
+                    argumentsForEdit[TASK_END_TIME] = timeParse(matcher2.group("endTime"));
                 }
             }
 
             if (arguments.contains(IMPORTANCE)) {
-                if (matcher2.group("level").equals("nil")) {
-                    argumentsForEdit[5] = "";
+                if (("nil").equals(matcher2.group("level"))) {
+                    argumentsForEdit[TASK_IMPORTANCE] = "";
                 } else {
-                    argumentsForEdit[5] = matcher2.group("level");
+                    argumentsForEdit[TASK_IMPORTANCE] = matcher2.group("level");
                 }
             }
         }
