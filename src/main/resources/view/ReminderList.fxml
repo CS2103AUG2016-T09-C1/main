@@ -11,7 +11,7 @@
 
 <VBox maxHeight="Infinity" maxWidth="Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seedu.inbx0.ui.ReminderList">
 	 <children>
-      <GridPane fx:id="infoGridPane" prefHeight="70.0" prefWidth="1310.0">
+      <GridPane prefHeight="70.0" prefWidth="1310.0" styleClass="background" stylesheets="@DarkTheme.css">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="800.0" minWidth="250.0" prefWidth="266.0" />
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="600.0" minWidth="238.0" prefWidth="253.0" />
@@ -65,7 +65,7 @@
                   <Insets left="25.0" />
                </GridPane.margin>
             </Label>
-            <Label text="Task Name">
+            <Label styleClass="label-bright" text="Task Name">
                <padding>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </padding>
@@ -73,7 +73,7 @@
                   <Insets left="25.0" />
                </GridPane.margin>
             </Label>
-            <Label text="Start Date" GridPane.columnIndex="2">
+            <Label styleClass="label-bright" text="Start Date" GridPane.columnIndex="2">
                <padding>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </padding>
@@ -81,7 +81,7 @@
                   <Insets left="25.0" />
                </GridPane.margin>
             </Label>
-            <Label text="Start Time" GridPane.columnIndex="3">
+            <Label styleClass="label-bright" text="Start Time" GridPane.columnIndex="3">
                <padding>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </padding>
@@ -89,7 +89,7 @@
                   <Insets left="25.0" />
                </GridPane.margin>
             </Label>
-            <Label text="End Date" GridPane.columnIndex="4">
+            <Label styleClass="label-bright" text="End Date" GridPane.columnIndex="4">
                <padding>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </padding>
@@ -97,7 +97,7 @@
                   <Insets left="25.0" />
                </GridPane.margin>
             </Label>
-            <Label text="End Time" GridPane.columnIndex="5">
+            <Label styleClass="label-bright" text="End Time" GridPane.columnIndex="5">
                <padding>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </padding>
@@ -105,11 +105,11 @@
                   <Insets left="25.0" />
                </GridPane.margin>
             </Label>
-            <Label fx:id="tags" text="\$tags" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <Label fx:id="tags" styleClass="label-bright" text="\$tags" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <GridPane.margin>
                   <Insets left="25.0" />
                </GridPane.margin></Label>
-            <Label text="Tags" GridPane.columnIndex="1">
+            <Label styleClass="label-bright" text="Tags" GridPane.columnIndex="1">
                <GridPane.margin>
                   <Insets left="25.0" />
                </GridPane.margin></Label>

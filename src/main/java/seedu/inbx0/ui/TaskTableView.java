@@ -108,7 +108,73 @@ public class TaskTableView extends UiPart {
         endDateColumn.setCellValueFactory(task -> new SimpleStringProperty(task.getValue().getEndDate().getTotalDate()));
         endTimeColumn.setCellValueFactory(task -> new SimpleStringProperty(task.getValue().getEndTime().getTime()));
     }
+    
+    private void setTaskTableViewRowColor() {
+        taskTableView.setRowFactory(new Callback<TableView<ReadOnlyTask>, TableRow<ReadOnlyTask>>() {
+            @Override
+            public TableRow<ReadOnlyTask> call(final TableView<ReadOnlyTask> p) {
+                return new TableRow<ReadOnlyTask>() {
+                    @Override
+                    public void updateItem(ReadOnlyTask task, boolean empty) {
+                        super.updateItem(task, empty);
+                        if (task == null || empty) {
+                            setStyle("");
+                        } else {
+                            if (task.getLevel().getNumberLevel() == 1 && task.getIsExpired() == true
+                                    && task.getIsEvent() == true) {
+                                    setStyle("-fx-background-color: rgba(0, 255, 0, 0.5);");
+                                
+                            } else if (task.getLevel().getNumberLevel() == 1) {
+                                setStyle("-fx-background-color: rgba(0, 255, 0, 0.8);");
+                            } else if (task.getLevel().getNumberLevel() == 2 && task.getIsExpired() == true
+                                    && task.getIsEvent() == true) {
+                                setStyle("-fx-background-color: rgba(255, 255, 0, 0.5);");
+                            } else if (task.getLevel().getNumberLevel() == 2) {
+                                setStyle("-fx-background-color: rgba(255, 255, 0, 0.8);");
+                            } else if (task.getLevel().getNumberLevel() == 3 && task.getIsExpired() == true
+                                    && task.getIsEvent() == true) {
+                                setStyle("-fx-background-color: rgba(255, 0, 0, 0.5);");
+                            } else if (task.getLevel().getNumberLevel() == 3) {
+                                setStyle("-fx-background-color: rgba(255, 0, 0, 0.8);");                                
+                            }
+                        }
+                    }
+                };
+            }
+        });
+    }
+    /*
+    private void setTaskTableViewRowColor() {
+        int index = 0;
+        System.out.println("here");
+        for (Node n : taskTableView.lookupAll("TableRow")) {
+                TableRow row = (TableRow) n;
+                ReadOnlyTask task = taskTableView.getItems().get(index);
+                System.out.println(index + " " +task);
+                if (task.getLevel().getNumberLevel() == 1 && task.getIsExpired() == true && task.getIsEvent() == true) {
+                    row.setStyle("-fx-background-color: rgba(0, 255, 0, 0.5);");
+                } else if (task.getLevel().getNumberLevel() == 1) {
+                    row.setStyle("-fx-background-color: rgba(0, 255, 0, 0.8);");
+                } else if (task.getLevel().getNumberLevel() == 2 && task.getIsExpired() == true
+                        && task.getIsEvent() == true) {
+                    row.setStyle("-fx-background-color: rgba(255, 255, 0, 0.5);");
+                } else if (task.getLevel().getNumberLevel() == 2) {
+                    row.setStyle("-fx-background-color: rgba(255, 255, 0, 0.8);");
+                } else if (task.getLevel().getNumberLevel() == 3 && task.getIsExpired() == true
+                        && task.getIsEvent() == true) {
+                    row.setStyle("-fx-background-color: rgba(255, 0, 0, 0.5);");
+                } else if (task.getLevel().getNumberLevel() == 3) {
+                    row.setStyle("-fx-background-color: rgba(255, 0, 0, 0.8);");
+                }
+                index++;
+                if (index == taskTableView.getItems().size()) {
+                    break;
+                }
+        }
+    }
+    */
 
+/*
     private void setTaskTableViewRowColor() {
         taskTableView.setRowFactory(new Callback<TableView<ReadOnlyTask>, TableRow<ReadOnlyTask>>() {
             @Override
@@ -143,7 +209,7 @@ public class TaskTableView extends UiPart {
             }
         });
     }
-
+*/
     private void addToPlaceholder() {
         SplitPane.setResizableWithParent(placeHolderPane, false);
         FxViewUtil.applyAnchorBoundaryParameters(panel, 0.0, 0.0, 0.0, 0.0);
