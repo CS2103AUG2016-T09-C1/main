@@ -3,6 +3,7 @@ package seedu.inbx0.logic.commands;
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.inbx0.commons.core.EventsCenter;
 import seedu.inbx0.commons.core.Messages;
 import seedu.inbx0.commons.core.UnmodifiableObservableList;
 import seedu.inbx0.commons.exceptions.IllegalValueException;
@@ -97,6 +98,7 @@ public class DelTagCommand extends Command {
         
         try {
             model.editTask(taskToEdit, toEditWith);
+            EventsCenter.getInstance().post(new ScrollToTask(taskToEdit));
         } catch (TaskNotFoundException tnfe) {
             assert false : "The target task cannot be missing";
         } catch (UniqueTaskList.DuplicateTaskException e ) {    

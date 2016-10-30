@@ -37,24 +37,24 @@ public class TaskTableView extends UiPart {
     private static final String FXML = "TaskTableView.fxml";
     private AnchorPane panel;
     private AnchorPane placeHolderPane;
-    
-    @FXML 
+
+    @FXML
     private TableView<ReadOnlyTask> taskTableView;
     @FXML
     private TableColumn<ReadOnlyTask, String> idColumn;
-    @FXML 
-    private TableColumn<ReadOnlyTask, String> nameColumn; 
-    @FXML 
+    @FXML
+    private TableColumn<ReadOnlyTask, String> nameColumn;
+    @FXML
     private TableColumn<ReadOnlyTask, String> tagsColumn;
-    @FXML 
+    @FXML
     private TableColumn<ReadOnlyTask, String> startDateColumn;
-    @FXML 
+    @FXML
     private TableColumn<ReadOnlyTask, String> startTimeColumn;
-    @FXML 
+    @FXML
     private TableColumn<ReadOnlyTask, String> endDateColumn;
-    @FXML 
+    @FXML
     private TableColumn<ReadOnlyTask, String> endTimeColumn;
-    
+
     public TaskTableView() {
         super();
     }
@@ -75,9 +75,8 @@ public class TaskTableView extends UiPart {
     }
 
     public static TaskTableView load(Stage primaryStage, AnchorPane taskListPlaceholder,
-                                       ObservableList<ReadOnlyTask> taskList) {
-        TaskTableView taskListPanel =
-                UiPartLoader.loadUiPart(primaryStage, taskListPlaceholder, new TaskTableView());
+            ObservableList<ReadOnlyTask> taskList) {
+        TaskTableView taskListPanel = UiPartLoader.loadUiPart(primaryStage, taskListPlaceholder, new TaskTableView());
         taskListPanel.configure(taskList);
         return taskListPanel;
     }
@@ -89,19 +88,60 @@ public class TaskTableView extends UiPart {
 
     private void setConnections(ObservableList<ReadOnlyTask> taskList) {
         taskTableView.setItems(taskList);
-        taskTableView.setTableMenuButtonVisible(true);  
-        idColumn.setCellValueFactory(new Callback<CellDataFeatures<ReadOnlyTask, String>, ObservableValue<String>>() {
-            @Override public ObservableValue<String> call(CellDataFeatures<ReadOnlyTask, String> p) {
-              return new ReadOnlyObjectWrapper(taskTableView.getItems().indexOf(p.getValue()) + 1);
-            }
-          });   
-        nameColumn.setCellValueFactory(task-> new SimpleStringProperty(task.getValue().getStatusAndName())); 
-        tagsColumn.setCellValueFactory(task-> new SimpleStringProperty(task.getValue().tagsString()));  
-        startDateColumn.setCellValueFactory(task-> new SimpleStringProperty(task.getValue().getStartDate().getTotalDate()));  
-        startTimeColumn.setCellValueFactory(task-> new SimpleStringProperty(task.getValue().getStartTime().getTime()));  
-        endDateColumn.setCellValueFactory(task-> new SimpleStringProperty(task.getValue().getEndDate().getTotalDate())); 
-        endTimeColumn.setCellValueFactory(task-> new SimpleStringProperty(task.getValue().getEndTime().getTime())); 
+        taskTableView.setTableMenuButtonVisible(true);
+        setTaskTableViewColumnData();
+        setTaskTableViewRowColor();
         setEventHandlerForSelectionChangeEvent();
+    }
+
+    private void setTaskTableViewColumnData() {
+        idColumn.setCellValueFactory(new Callback<CellDataFeatures<ReadOnlyTask, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(CellDataFeatures<ReadOnlyTask, String> p) {
+                return new ReadOnlyObjectWrapper(taskTableView.getItems().indexOf(p.getValue()) + 1);
+            }
+        });
+        nameColumn.setCellValueFactory(task -> new SimpleStringProperty(task.getValue().getStatusAndName()));
+        tagsColumn.setCellValueFactory(task -> new SimpleStringProperty(task.getValue().tagsString()));
+        startDateColumn.setCellValueFactory(task -> new SimpleStringProperty(task.getValue().getStartDate().getTotalDate()));
+        startTimeColumn.setCellValueFactory(task -> new SimpleStringProperty(task.getValue().getStartTime().getTime()));
+        endDateColumn.setCellValueFactory(task -> new SimpleStringProperty(task.getValue().getEndDate().getTotalDate()));
+        endTimeColumn.setCellValueFactory(task -> new SimpleStringProperty(task.getValue().getEndTime().getTime()));
+    }
+
+    private void setTaskTableViewRowColor() {
+        taskTableView.setRowFactory(new Callback<TableView<ReadOnlyTask>, TableRow<ReadOnlyTask>>() {
+            @Override
+            public TableRow<ReadOnlyTask> call(TableView<ReadOnlyTask> task) {
+                return new TableRow<ReadOnlyTask>() {
+                    @Override
+                    protected void updateItem(ReadOnlyTask task, boolean empty) {
+                        if (task == null || empty) {
+                            setStyle("");
+                        } else {
+                            if (task.getLevel().getNumberLevel() == 1 && task.getIsExpired() == true
+                                    && task.getIsEvent() == true) {
+                                    setStyle("-fx-background-color: rgba(0, 255, 0, 0.5);");
+                                
+                            } else if (task.getLevel().getNumberLevel() == 1) {
+                                setStyle("-fx-background-color: rgba(0, 255, 0, 0.8);");
+                            } else if (task.getLevel().getNumberLevel() == 2 && task.getIsExpired() == true
+                                    && task.getIsEvent() == true) {
+                                setStyle("-fx-background-color: rgba(255, 255, 0, 0.5);");
+                            } else if (task.getLevel().getNumberLevel() == 2) {
+                                setStyle("-fx-background-color: rgba(255, 255, 0, 0.8);");
+                            } else if (task.getLevel().getNumberLevel() == 3 && task.getIsExpired() == true
+                                    && task.getIsEvent() == true) {
+                                setStyle("-fx-background-color: rgba(255, 0, 0, 0.5);");
+                            } else if (task.getLevel().getNumberLevel() == 3) {
+                                setStyle("-fx-background-color: rgba(255, 0, 0, 0.8);");                                
+                            }
+                        }
+                    }
+                };
+
+            }
+        });
     }
 
     private void addToPlaceholder() {
@@ -109,8 +149,6 @@ public class TaskTableView extends UiPart {
         FxViewUtil.applyAnchorBoundaryParameters(panel, 0.0, 0.0, 0.0, 0.0);
         placeHolderPane.getChildren().add(panel);
     }
-
-
 
     private void setEventHandlerForSelectionChangeEvent() {
         taskTableView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
@@ -130,5 +168,5 @@ public class TaskTableView extends UiPart {
 
     public TableView<ReadOnlyTask> getTaskTableView() {
         return taskTableView;
-    }        
+    }
 }

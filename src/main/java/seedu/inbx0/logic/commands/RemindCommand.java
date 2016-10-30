@@ -189,7 +189,7 @@ public class RemindCommand extends Command {
         Task withReminder = null;
         try {
             withReminder = createToEditWithTask(editArguments, tags, reminders);
-            EventsCenter.getInstance().post(new TaskPanelSelectionChangedEvent(withReminder));
+            EventsCenter.getInstance().post(new ScrollToTask(withReminder));
         } catch (IllegalValueException e1) {
             return new CommandResult(MESSAGE_USAGE);
         }

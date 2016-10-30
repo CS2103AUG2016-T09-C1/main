@@ -10,6 +10,7 @@ import javafx.stage.Stage;
 import seedu.inbx0.commons.core.LogsCenter;
 import seedu.inbx0.commons.util.FxViewUtil;
 import seedu.inbx0.logic.Logic;
+import seedu.inbx0.model.task.ReadOnlyTask;
 
 public class TitledPaneList extends UiPart {
     private static final Logger logger = LogsCenter.getLogger(TitledPaneList.class);
@@ -278,10 +279,10 @@ public class TitledPaneList extends UiPart {
                 logic.getFilteredTaskList());
     }
     
-    public void handleAddNewTaskIntotheList() {
+    public void handleScrollTo(ReadOnlyTask task) {
         handleShowNormalTaskList();
-        int lastIndex = taskTableView.getTaskTableView().getItems().size();
-        taskTableView.scrollTo(lastIndex);        
+        int taskIndex = taskTableView.getTaskTableView().getItems().indexOf(task);
+        taskTableView.scrollTo(taskIndex);        
     }
 
     private void closeAllTitledPane() {

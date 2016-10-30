@@ -2,6 +2,7 @@ package seedu.inbx0.logic.commands;
 
 import java.util.Set;
 
+import seedu.inbx0.commons.core.EventsCenter;
 import seedu.inbx0.commons.core.Messages;
 import seedu.inbx0.commons.core.UnmodifiableObservableList;
 import seedu.inbx0.commons.exceptions.IllegalValueException;
@@ -82,6 +83,7 @@ public class MarkCompleteCommand extends Command {
             
             try {
                 model.markTaskComplete(toMarkTaskCompleted, completedTask);
+                EventsCenter.getInstance().post(new ScrollToTask(toMarkTaskCompleted));
             } catch (TaskNotFoundException tnfe) {
                 assert false : "The target task cannot be missing";
             }
