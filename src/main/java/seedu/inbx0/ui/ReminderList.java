@@ -30,8 +30,6 @@ public class ReminderList extends UiPart {
     @FXML
     private ListView<ReminderTask> reminderListView;
     @FXML
-    private GridPane infoGridPane;
-    @FXML
     private Label name;
     @FXML
     private Label startDate;
@@ -110,8 +108,6 @@ public class ReminderList extends UiPart {
 
     private void addToPlaceholder() {
         SplitPane.setResizableWithParent(placeHolderPane, false);
-        SplitPane.setResizableWithParent(reminderListView, false);
-        SplitPane.setResizableWithParent(infoGridPane, false);
         FxViewUtil.applyAnchorBoundaryParameters(mainPane, 0.0, 0.0, 0.0, 0.0);
         placeHolderPane.getChildren().add(mainPane);
     }
