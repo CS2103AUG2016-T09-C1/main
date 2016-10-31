@@ -56,8 +56,8 @@ allprojects {
 		compile group: 'org.powermock', name: 'powermock-api-mockito', version: '1.6.5'
 
         compile group: 'com.joestelmach', name: 'natty', version: '0.12'
-		compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.21'
-		compile group: 'org.slf4j', name: 'slf4j-simple', version: '1.7.21'
+		//compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.21'
+		//compile group: 'org.slf4j', name: 'slf4j-simple', version: '1.7.21'
 		
         
 
