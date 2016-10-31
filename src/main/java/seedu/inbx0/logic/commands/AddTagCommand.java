@@ -6,6 +6,7 @@ import java.util.Set;
 import seedu.inbx0.commons.core.EventsCenter;
 import seedu.inbx0.commons.core.Messages;
 import seedu.inbx0.commons.core.UnmodifiableObservableList;
+import seedu.inbx0.commons.events.ui.ScrollToTask;
 import seedu.inbx0.commons.exceptions.IllegalValueException;
 import seedu.inbx0.model.task.*;
 import seedu.inbx0.model.task.UniqueTaskList.TaskNotFoundException;

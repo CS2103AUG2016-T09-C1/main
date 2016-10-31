@@ -4,6 +4,7 @@ import seedu.inbx0.commons.core.EventsCenter;
 import seedu.inbx0.commons.core.Messages;
 import seedu.inbx0.commons.core.UnmodifiableObservableList;
 import seedu.inbx0.commons.events.ui.JumpToListRequestEvent;
+import seedu.inbx0.commons.events.ui.ScrollToTask;
 import seedu.inbx0.model.task.ReadOnlyTask;
 
 /**
@@ -35,8 +36,8 @@ public class SelectCommand extends Command {
             indicateAttemptToExecuteIncorrectCommand();
             return new CommandResult(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
-
-        EventsCenter.getInstance().post(new JumpToListRequestEvent(targetIndex - 1));
+        
+        EventsCenter.getInstance().post(new ScrollToTask(lastShownList.get(targetIndex-1)));
         return new CommandResult(String.format(MESSAGE_SELECT_TASK_SUCCESS, targetIndex));
 
     }

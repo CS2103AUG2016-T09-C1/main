@@ -1,4 +1,4 @@
-package seedu.inbx0.logic.commands;
+package seedu.inbx0.commons.events.ui;
 
 import seedu.inbx0.commons.events.BaseEvent;
 import seedu.inbx0.model.task.ReadOnlyTask;

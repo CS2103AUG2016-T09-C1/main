@@ -13,13 +13,13 @@ import seedu.inbx0.commons.core.LogsCenter;
 import seedu.inbx0.commons.events.model.ShowNormalTaskListEvent;
 import seedu.inbx0.commons.events.storage.DataSavingExceptionEvent;
 import seedu.inbx0.commons.events.ui.JumpToListRequestEvent;
+import seedu.inbx0.commons.events.ui.ScrollToTask;
 import seedu.inbx0.commons.events.ui.ShowFilteredListRequestEvent;
 import seedu.inbx0.commons.events.ui.TaskPanelSelectionChangedEvent;
 import seedu.inbx0.commons.events.ui.ShowHelpRequestEvent;
 import seedu.inbx0.commons.events.ui.ShowReminderRequestEvent;
 import seedu.inbx0.commons.util.StringUtil;
 import seedu.inbx0.logic.Logic;
-import seedu.inbx0.logic.commands.ScrollToTask;
 import seedu.inbx0.model.UserPrefs;
 
 import java.util.logging.Logger;

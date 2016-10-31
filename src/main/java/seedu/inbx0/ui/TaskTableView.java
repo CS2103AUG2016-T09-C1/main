@@ -109,6 +109,7 @@ public class TaskTableView extends UiPart {
         endTimeColumn.setCellValueFactory(task -> new SimpleStringProperty(task.getValue().getEndTime().getTime()));
     }
     
+    /*
     private void setTaskTableViewRowColor() {
         taskTableView.setRowFactory(new Callback<TableView<ReadOnlyTask>, TableRow<ReadOnlyTask>>() {
             @Override
@@ -142,7 +143,7 @@ public class TaskTableView extends UiPart {
                 };
             }
         });
-    }
+    }*/
     /*
     private void setTaskTableViewRowColor() {
         int index = 0;
@@ -174,7 +175,7 @@ public class TaskTableView extends UiPart {
     }
     */
 
-/*
+
     private void setTaskTableViewRowColor() {
         taskTableView.setRowFactory(new Callback<TableView<ReadOnlyTask>, TableRow<ReadOnlyTask>>() {
             @Override
@@ -209,7 +210,7 @@ public class TaskTableView extends UiPart {
             }
         });
     }
-*/
+
     private void addToPlaceholder() {
         SplitPane.setResizableWithParent(placeHolderPane, false);
         FxViewUtil.applyAnchorBoundaryParameters(panel, 0.0, 0.0, 0.0, 0.0);

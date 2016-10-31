@@ -216,6 +216,7 @@ public class TitledPaneList extends UiPart {
         if (filterCondition.equals("today")) {
             closeAllTitledPane();
             handleListToday();
+            
         } else if (filterCondition.equals("Monday")) {
             DayTitledPane.setExpanded(true);
             handleListMonday();

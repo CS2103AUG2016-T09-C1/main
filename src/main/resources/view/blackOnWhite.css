@@ -566,3 +566,23 @@
 .tooltip-text {
     -fx-text-fill: white;
 }
+
+.table-row-cell:selected {
+   -fx-background-color: black; 
+}
+.table-row-cell:selected .text {
+       -fx-fill: white ;
+}
+.text-field {
+    -fx-font-size: 16pt;
+    -fx-font-family: "Segoe UI Semibold";
+}
+.table-view .column-header{
+    -fx-font-size: 17pt;
+    -fx-font-family: "Segoe UI Semibold";
+}
+
+.table-cell {
+    -fx-font-size: 16pt;
+    -fx-font-family: "Segoe UI Semibold";
+}
