@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!-- @@author A0148044J -->
+
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Accordion?>
@@ -48,9 +49,9 @@
        </AnchorPane>
   <AnchorPane fx:id="mainDisplayPlaceholder" prefHeight="758.0" prefWidth="1302.0" styleClass="grid-pane" stylesheets="@DarkTheme.css">
          <children>
-            <HBox prefHeight="716.0" prefWidth="1300.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <HBox layoutX="8.0" layoutY="3.0" prefHeight="754.0" prefWidth="1455.0" AnchorPane.bottomAnchor="2.0" AnchorPane.leftAnchor="-3.0" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="2.0">
                <children>
-                <AnchorPane>
+                <AnchorPane fx:id="titledPanePlaceholder">
                      <children>
                         <Accordion styleClass="label-bright" stylesheets="@DarkTheme.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                           <panes>
@@ -280,7 +281,7 @@
                   </AnchorPane>
                 <AnchorPane fx:id="listDisplayPlaceholder">
                      <children>
-                        <VBox styleClass="container" stylesheets="@DarkTheme.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <VBox fx:id="listDisplayVBox" styleClass="container" stylesheets="@DarkTheme.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
                               <GridPane styleClass="header-panel">
                                  <columnConstraints>
@@ -352,20 +353,16 @@
                                     <Insets top="10.0" />
                                  </padding>
                               </GridPane>
-                              <VBox prefHeight="719.0" prefWidth="1150.0">
-                                 <children>
-                                    <AnchorPane fx:id="upperTaskListPanelPlaceholder" prefHeight="832.0" prefWidth="1150.0" styleClass="background" stylesheets="@DarkTheme.css">
-                                       <padding>
-                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                       </padding>
-                                    </AnchorPane>
-                                    <AnchorPane fx:id="bottomReminderListPanelPlaceholder" prefHeight="350.0" prefWidth="1148.0" styleClass="background" stylesheets="@DarkTheme.css">
-                                       <padding>
-                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                       </padding>
-                                    </AnchorPane>
-                                 </children>
-                              </VBox>
+                              <AnchorPane fx:id="upperTaskListPanelPlaceholder" prefHeight="832.0" prefWidth="1150.0" styleClass="background" stylesheets="@DarkTheme.css">
+                                 <padding>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </padding>
+                              </AnchorPane>
+                              <AnchorPane fx:id="bottomReminderListPanelPlaceholder" prefHeight="350.0" prefWidth="1148.0" styleClass="background" stylesheets="@DarkTheme.css">
+                                 <padding>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </padding>
+                              </AnchorPane>
                            </children>
                         </VBox>
                      </children>

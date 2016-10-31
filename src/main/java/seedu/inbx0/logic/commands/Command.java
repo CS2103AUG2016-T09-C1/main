@@ -5,6 +5,7 @@ import seedu.inbx0.commons.core.Messages;
 import seedu.inbx0.commons.events.model.ShowNormalTaskListEvent;
 import seedu.inbx0.commons.events.storage.StoragePathChangedEvent;
 import seedu.inbx0.commons.events.ui.IncorrectCommandAttemptedEvent;
+import seedu.inbx0.commons.events.ui.JumpToListRequestEvent;
 import seedu.inbx0.model.Model;
 
 /**
@@ -77,6 +78,12 @@ public abstract class Command {
     //@@author A0135797M
     protected void indicateStoragePathChanged(String oldPath, String newPath) {
         EventsCenter.getInstance().post(new StoragePathChangedEvent(oldPath, newPath));
-
+    }
+    
+    /**
+     * Raises an event to indicate to jump to task at the specific index
+     */
+    protected void indicateJumpToListRequestEvent(int index) {
+        EventsCenter.getInstance().post(new JumpToListRequestEvent(index));
     }
 }

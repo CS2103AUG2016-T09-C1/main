@@ -163,6 +163,8 @@ public class CommandBox extends UiPart {
             commandTextField.setText("list");
         } else if(currentText.matches("^r$|^re$")) {
             commandTextField.setText("rem");
+        } else if(currentText.matches("^sa$|^sav$|^save$|^savea$")) {
+            commandTextField.setText("saveas");
         } else if(currentText.matches("^se$")) {
             commandTextField.setText("sel");
         } else if(currentText.matches("^sh$|^sho$")) {
@@ -171,7 +173,7 @@ public class CommandBox extends UiPart {
             commandTextField.setText("sort");
         } else if(currentText.matches("^u$|^un$|^und$")) {
             commandTextField.setText("undo");
-        }
+        } 
         commandTextField.positionCaret(commandTextField.getText().length());
     }
     

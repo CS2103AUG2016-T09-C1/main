@@ -13,6 +13,7 @@ import javafx.stage.Stage;
 import seedu.inbx0.commons.core.Config;
 import seedu.inbx0.commons.core.GuiSettings;
 import seedu.inbx0.commons.events.ui.ExitAppRequestEvent;
+import seedu.inbx0.commons.util.FxViewUtil;
 import seedu.inbx0.logic.Logic;
 import seedu.inbx0.model.UserPrefs;
 import seedu.inbx0.model.task.ReadOnlyTask;
@@ -53,6 +54,12 @@ public class MainWindow extends UiPart {
 
     @FXML
     private AnchorPane commandBoxPlaceholder;
+    
+    @FXML
+    private VBox listDisplayVBox;
+    
+    @FXML
+    private AnchorPane titledPanePlaceholder;
 
     @FXML
     private MenuItem helpMenuItem;
@@ -123,8 +130,17 @@ public class MainWindow extends UiPart {
         scene = new Scene(rootLayout);
         primaryStage.setScene(scene);
         SplitPane.setResizableWithParent(mainDisplayPlaceholder, false);
+        FxViewUtil.applyAnchorBoundaryParameters(mainDisplayPlaceholder, 0.0, 0.0, 0.0, 0.0);
         SplitPane.setResizableWithParent(listDisplayPlaceholder, false);
-        
+        FxViewUtil.applyAnchorBoundaryParameters(listDisplayPlaceholder, 0.0, 0.0, 0.0, 0.0);
+        SplitPane.setResizableWithParent(upperTaskListPanelPlaceholder, false);
+        FxViewUtil.applyAnchorBoundaryParameters(upperTaskListPanelPlaceholder, 0.0, 0.0, 0.0, 0.0);
+        SplitPane.setResizableWithParent(bottomReminderListPanelPlaceholder, false);
+        FxViewUtil.applyAnchorBoundaryParameters(bottomReminderListPanelPlaceholder, 0.0, 0.0, 0.0, 0.0);
+        SplitPane.setResizableWithParent(titledPanePlaceholder, false);
+        FxViewUtil.applyAnchorBoundaryParameters(titledPanePlaceholder, 0.0, 0.0, 0.0, 0.0);
+        SplitPane.setResizableWithParent(listDisplayVBox, false);
+        FxViewUtil.applyAnchorBoundaryParameters(listDisplayVBox, 0.0, 0.0, 0.0, 0.0);
         setAccelerators();
     }
 

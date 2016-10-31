@@ -247,8 +247,8 @@ public class UniqueTaskList implements Iterable<Task>{
     class NameComparator implements Comparator<Task> {
         @Override
         public int compare(Task task, Task taskToCompare) {
-            String name = task.getName().getName();
-            String nameToCompare = taskToCompare.getName().getName();
+            String name = task.getName().getName().toLowerCase();
+            String nameToCompare = taskToCompare.getName().getName().toLowerCase();
             return name.compareTo(nameToCompare);
         }
     }
