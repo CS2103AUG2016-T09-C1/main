@@ -130,11 +130,11 @@ public class TaskListPanelHandle extends GuiHandle {
         return getTaskCardHandle(task);
     }
     
+    //@@author A0139481Y
     /**
      * Navigates the listview to display and select the task by index.
      * @throws IllegalValueException 
-     */
-    //@@author A0139481Y
+     */ 
     public TaskCardHandle navigateToTask(int index) throws IllegalValueException {
            guiRobot.interact(() -> {
             getListView().scrollTo(index);

@@ -51,11 +51,11 @@ public abstract class Command {
         this.model = model;
     }
     
+    //@@author A0139481Y
     /**
      * 
      * @return true if this command can be undone.
      */
-    //@@author A0139481Y
     public abstract boolean canUndo();
     //@@author
 

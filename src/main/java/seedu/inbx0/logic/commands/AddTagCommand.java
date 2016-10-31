@@ -13,6 +13,9 @@ import seedu.inbx0.model.tag.Tag;
 import seedu.inbx0.model.tag.UniqueTagList;
 
 //@@author A0139481Y
+/**
+ * Appends a tag to an existing task.
+ */
 public class AddTagCommand extends Command {
 	
 	public static final String COMMAND_WORD = "addtag";
@@ -29,7 +32,6 @@ public class AddTagCommand extends Command {
 	public final int targetIndex;
     public UniqueTagList tags;
 	
-    //@@author A0139481Y
     public AddTagCommand(int targetIndex,  Set<String> tags) throws IllegalValueException {
     	
     	this.targetIndex = targetIndex;
@@ -58,15 +60,13 @@ public class AddTagCommand extends Command {
     
     private Task createToEditWithTask(ReadOnlyTask taskToEdit, UniqueTagList tags) throws IllegalValueException{
     	
-    	
     	Task toEditWith = new Task (
                 new Name(taskToEdit.getName().getName()),
                 new Date(taskToEdit.getStartDate().getDate()),
                 new Time(taskToEdit.getStartTime().getTime()),
                 new Date(taskToEdit.getEndDate().getDate()),
                 new Time(taskToEdit.getEndTime().getTime()),
-                new Importance(taskToEdit.getLevel().getLevel()),
-                tags,
+                new Importance(taskToEdit.getLevel().getLevel()), tags,
                 new UniqueReminderList(taskToEdit.getReminders())
                 );
         return toEditWith;

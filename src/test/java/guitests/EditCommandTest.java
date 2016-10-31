@@ -59,6 +59,13 @@ public class EditCommandTest extends TaskListGuiTest {
         assertResultMessage(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
     }
     
+    /**
+     * 
+     * Runs the Edit command to edit a task at the specified index and confirms the result is correct 
+     * @param targetIndex e.g. to mark the first task in the list as done, 1 should be given as the target index.
+     * @param editedTask The Task that has been edited.
+     * @param currentList A copy of the current list of tasks (before being marked as done).     
+     */
     private void assertEditSuccess(int targetIndex, TestTask editedTask, TestTask... currentList) throws IllegalArgumentException, IllegalValueException {
         commandBox.runCommand(editedTask.getAddCommand().replace("add", "edit " + targetIndex + " n="));
 

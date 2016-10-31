@@ -690,14 +690,14 @@ public class Parser {
             return null;
         }
     }
-
+    
+    //@@author A0139481Y
     /**
      * Parses arguments in the context of the add tag command.
      *
      * @param args full command args string
      * @return the prepared command
      */
-    // @@author A0139481Y
     private Command prepareAddTag(final String args) {
         final Matcher matcher = ADD_TAGS_ARGS_FORMAT.matcher(args.trim());
         if (!matcher.matches()) {
@@ -714,14 +714,14 @@ public class Parser {
             return new IncorrectCommand(ive.getMessage());
         }
     }
-
+    
+    //@@author A0139481Y
     /**
      * Parses arguments in the context of the delete tag command.
      *
      * @param args full command args string
      * @return the prepared command
      */
-    // @@author A0139481Y
     private Command prepareDelTag(final String args) {
         final Matcher matcher = ADD_TAGS_ARGS_FORMAT.matcher(args.trim());
         if (!matcher.matches()) {
@@ -856,13 +856,13 @@ public class Parser {
         return new SortCommand(type, defaultOrder);
     }
     
+    //@@author A0139481Y
     /**
      * Parses arguments in the context of the undo command.
      * 
      * @param args full command args string
      * @return the prepared command
      */
-    //@@author A0139481Y
     private Command prepareUndo(String args) {
         if(args.trim().length() == 0) {
             return new UndoCommand();
@@ -875,6 +875,7 @@ public class Parser {
 
         return new UndoCommand(index.get());
     }
+    //@@author
 
     /**
      * Parses arguments in the context of the delete task command.

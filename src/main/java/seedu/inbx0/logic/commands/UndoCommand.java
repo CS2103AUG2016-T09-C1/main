@@ -1,9 +1,9 @@
 package seedu.inbx0.logic.commands;
 
+//@@author A0139481Y
 /**
  * Undo the past n-number of commands.
  */
-//@@author A0139481Y
 public class UndoCommand extends Command {
     
     public static final String COMMAND_WORD = "undo";

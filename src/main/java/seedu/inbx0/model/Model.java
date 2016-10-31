@@ -23,9 +23,7 @@ public interface Model {
     //** Saves the current state of the TaskList into a temporary history list **/
     void saveTaskListHistory();
     
-    /**
-     * @return number of history states undone
-     */
+    /** Undoes the task lists to a previous state. */
     int undoTaskListHistory(int stepsBack);
     //@@author
 

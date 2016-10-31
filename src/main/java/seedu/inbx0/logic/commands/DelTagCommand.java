@@ -13,6 +13,9 @@ import seedu.inbx0.model.tag.Tag;
 import seedu.inbx0.model.tag.UniqueTagList;
 
 //@@author A0139481Y
+/**
+* Removes a specific tag belonging to an existing task.
+*/
 public class DelTagCommand extends Command {
     
     public static final String COMMAND_WORD = "deltag";
@@ -28,8 +31,7 @@ public class DelTagCommand extends Command {
     
     public final int targetIndex;
     public UniqueTagList tags;
-    
-    //@@author A0139481Y
+
     public DelTagCommand(int targetIndex,  Set<String> tags) throws IllegalValueException {
         
         this.targetIndex = targetIndex;
@@ -51,9 +53,9 @@ public class DelTagCommand extends Command {
     
     private UniqueTagList obtainUniqueTagList(ReadOnlyTask taskToEdit) {
         
-        UniqueTagList original = taskToEdit.getTags();
+        UniqueTagList originalTags = taskToEdit.getTags();
               
-        return original;
+        return originalTags;
     }
     
     private Task createToEditWithTask(ReadOnlyTask taskToEdit, UniqueTagList tags) throws IllegalValueException{

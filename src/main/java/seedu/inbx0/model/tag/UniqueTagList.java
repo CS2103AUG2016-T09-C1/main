@@ -98,10 +98,10 @@ public class UniqueTagList implements Iterable<Tag> {
         }
     }
     
-    /**
-     * Adds every tag from the argument list that does not yet exist in this list.
-     */
     //@@author A0139481Y
+    /**
+     * Removes every tag from the argument list that exists in this list.
+     */
     public void removeFrom(UniqueTagList tags) {
         final Set<Tag> alreadyInside = this.toSet();
         for (Tag tag : tags) {

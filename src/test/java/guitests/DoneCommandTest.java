@@ -38,7 +38,6 @@ public class DoneCommandTest extends TaskListGuiTest {
      * 
      * Runs the Mark Complete command to mark the task at the specified index as done and confirms the result is correct 
      * @param targetIndexOneIndexed e.g. to mark the first task in the list as done, 1 should be given as the target index.
-     * @param category the category in which to mark as done from.
      * @param currentList A copy of the current list of tasks (before being marked as done).     
      */
     private void assertMarkAsDoneSuccess(int targetIndex, final TestTask[] currentList) throws IllegalArgumentException, IllegalValueException {

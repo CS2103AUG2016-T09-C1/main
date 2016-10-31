@@ -25,6 +25,13 @@ public class ShowCommandTest extends TaskListGuiTest {
                 td.daniel, td.elle, td.fiona, td.george);
     }
     
+    /**
+     * 
+     * Runs the Show command to show all tasks that pertain to a specified condition and confirms the result is correct 
+     * @param command Show.
+     * @param filterCondition The condition to sort the TaskList with.
+     * @param expectedList Epected ListView.     
+     */
     private void assertShowResult(String command, String filterCondition, TestTask... expectedList) 
             throws IllegalArgumentException, IllegalValueException {
         commandBox.runCommand(command + " " + filterCondition);
