@@ -128,24 +128,24 @@ public class UiManager extends ComponentManager implements Ui {
     @Subscribe
     private void handleJumpToListRequestEvent(JumpToListRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        mainWindow.getUpperTaskListPanel().scrollTo(event.targetIndex);
+        mainWindow.getTaskListPanel().scrollTo(event.targetIndex);
     }
 
     @Subscribe
     private void handleTaskPanelSelectionChangedEvent(TaskPanelSelectionChangedEvent event){
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        mainWindow.displayReminderInfoPanel(event.getNewSelection());
+        mainWindow.displayReminderList(event.getNewSelection());
     }
     
     @Subscribe
     private void handleShowFilteredListRequestEvent(ShowFilteredListRequestEvent event){
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        mainWindow.handleShowFilteredListRequestByShowCommand(event.filterCondition);
+        mainWindow.getTitledPaneList().handleShowFilteredListRequestByShowCommand(event.filterCondition);
     }
     
     @Subscribe 
     private void handleShowNormalTaskList(ShowNormalTaskListEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        mainWindow.handleShowNormalTaskList();
+        mainWindow.getTitledPaneList().handleShowNormalTaskList();
     }
 }
