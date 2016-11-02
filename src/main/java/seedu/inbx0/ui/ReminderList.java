@@ -75,8 +75,6 @@ public class ReminderList extends UiPart {
     }
 
     public void displayInfo(ReadOnlyTask task) {
-        name.setWrapText(true);
-        tags.setWrapText(true);
         name.setText(task.getName().getName());
         startDate.setText(task.getStartDate().getTotalDate());
         startTime.setText(task.getStartTime().getTime());
@@ -86,23 +84,27 @@ public class ReminderList extends UiPart {
     }
     
     private void configure(ReadOnlyTask task){
+        addToPlaceholder();
         if(task != null) {
             displayInfo(task);
-            UniqueReminderList uniqueReminderList = new UniqueReminderList(task.getReminders());
-            Iterator<ReminderTask> check = uniqueReminderList.iterator();
-            while(check.hasNext()) {
-                if(check.next().getIsAlive() == false) {
-                    check.remove();
-                }
-            }
-            ObservableList<ReminderTask> reminderList = uniqueReminderList.getInternalList();
-            setConnections(reminderList);
-            addToPlaceholder();
+            displayReminder(task);
         }
     }
     
     
-    private void setConnections(ObservableList<ReminderTask> reminderList) {
+    private void displayReminder(ReadOnlyTask task) {
+        UniqueReminderList uniqueReminderList = new UniqueReminderList(task.getReminders());
+        Iterator<ReminderTask> check = uniqueReminderList.iterator();
+        while(check.hasNext()) {
+            if(check.next().getIsAlive() == false) {
+                check.remove();
+            }
+        }
+        ObservableList<ReminderTask> reminderList = uniqueReminderList.getInternalList();
+        setConnections(reminderList);	
+	}
+
+	private void setConnections(ObservableList<ReminderTask> reminderList) {
         reminderListView.setItems(reminderList);
         reminderListView.setCellFactory(listView -> new ReminderListViewCell()); 
     }
@@ -133,6 +135,7 @@ public class ReminderList extends UiPart {
     }
 
 	public void updateReminderList(ReadOnlyTask newTask) {
-		this.configure(newTask);
+        this.displayInfo(newTask);
+        this.displayReminder(newTask);
 	}
 }
