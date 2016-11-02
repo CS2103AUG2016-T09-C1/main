@@ -39,9 +39,9 @@ Unlike all the other task managers out there, Inbx_0 is a simple program that ru
    This app will not work with earlier versions of Java 8.
    
 1. Download the latest `inbx_0.jar` from the [releases](../../../releases) tab.
-2. Copy the file to the folder you want to use as the home folder for your Task Manager
-3. Double-click the Task Manager
-4. Double-click the  Task Manager.jar file to start the app. The GUI should appear in a few seconds. 
+2. Copy the file to the folder you want to use as the home folder for inbx_0
+3. Double-click the inbx_0 icon
+4. Double-click the Task Manager.jar file to start the app. The GUI should appear in a few seconds. 
  > <img src="images/GUI.png" width="600">
 
 5. Type a command in the command box and press <kbd>Enter</kbd> to execute it. <br>
@@ -57,10 +57,10 @@ Unlike all the other task managers out there, Inbx_0 is a simple program that ru
 
 ## **Features**
 
-All the features in Inbx_0 are performed by typing in commands in the command line. There is a certain command format for each command and the general format can be described as such: 
+Inbx_0 can perform multiple different functions based on various commands that you type into the command line. There is a certain command format for each command and the general format can be described as such: 
 
 **Command Format** <br>
-1.  Words in `UPPER_CASE` are the parameters that are compulsory and will be taken in by the app (e.g. NAME, DATE). 
+1.  Words in `UPPER_CASE` are  parameters that are compulsory and will be taken in by the app (e.g. NAME, DATE). 
 <br>
 2. Items in `SQUARE_BRACKETS` are optional and will not be required in order to perform the command (e.g. [tags], [date]).
 <br>
@@ -457,6 +457,8 @@ The filepath will be verified and you will be able to save your tasklist in a ne
 Example: 
 * `saveas  C:\Users\Jim\Desktop\taklist.xml` <br>
 Saves the tasklist on the desktop of Jim's computer.
+
+>To reset the save directory for inbx_0, simple type: `saveas reset`. This will reset the save file to /data/tasklist.xml 
  
  <br><br> 
  
@@ -529,6 +531,7 @@ Command | Format
 &nbsp; | `done FIRST_INDEX to LAST_INDEX`
 [Remind](#remind) | `rem INDEX s=START_DATE/START_TIME/START_DATE and START_TIME`
 [Set Directory](#setdir) | `saveas FILE_DIRECTORY`
+&nbsp; | `saveas reset`
 [Exit](#exit) | `exit`
 
 ## **FAQ**
