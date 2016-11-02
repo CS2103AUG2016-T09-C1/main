@@ -25,7 +25,7 @@
 
 /*******************************************************************************
  *                                                                             *
- * "Black on White" contrast theme.                                            *
+ * "Blue on White" contrast theme.                                            *
  *                                                                             *
  ******************************************************************************/
 
@@ -555,34 +555,12 @@
     -fx-background-color: red;
 }
 
-
-.tag-selector {
-    -fx-border-width: 1;
-    -fx-border-color: white;
-    -fx-border-radius: 3;
-    -fx-background-radius: 3;
-}
-
-.tooltip-text {
+.list-cell:filled:selected:focused, .list-cell:filled:selected {
+    -fx-background-color: linear-gradient(#328BDB 0%, #207BCF 25%, #1973C9 75%, #0A65BF 100%);;
     -fx-text-fill: white;
 }
 
-.table-row-cell:selected {
-   -fx-background-color: black; 
-}
-.table-row-cell:selected .text {
-       -fx-fill: white ;
-}
-.text-field {
-    -fx-font-size: 16pt;
-    -fx-font-family: "Segoe UI Semibold";
-}
-.table-view .column-header{
-    -fx-font-size: 14pt;
-    -fx-font-family: "Segoe UI Semibold";
-}
-
-.table-cell {
-    -fx-font-size: 14pt;
-    -fx-font-family: "Segoe UI Semibold";
+.list-cell:filled:hover {
+    -fx-cell-hover-color: #0093ff;
+    -fx-text-fill: white;
 }

@@ -174,7 +174,6 @@ public class CommandBox extends UiPart {
         } else if(currentText.matches("^u$|^un$|^und$")) {
             commandTextField.setText("undo");
         } 
-        commandTextField.positionCaret(commandTextField.getText().length());
     }
     
     /**
@@ -194,6 +193,7 @@ public class CommandBox extends UiPart {
         else if(evt.getCode().equals(KeyCode.RIGHT)) {
             autoFillInCommandText();
         }
+        commandTextField.positionCaret(commandTextField.getText().length());
     }
 
 

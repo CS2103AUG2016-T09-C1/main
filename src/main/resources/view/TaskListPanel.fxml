@@ -25,7 +25,7 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <Label minWidth="125.0" text="Name" GridPane.rowIndex="1">
+            <Label minWidth="125.0" text="Name" styleClass="label-bright" GridPane.rowIndex="1">
                <GridPane.margin>
                   <Insets left="25.0" />
                </GridPane.margin>
@@ -33,7 +33,7 @@
                   <Insets bottom="20.0" top="5.0" />
                </padding>
             </Label>
-            <Label text="Start Date" GridPane.columnIndex="2" GridPane.rowIndex="1">
+            <Label text="Start Date" styleClass="label-bright" GridPane.columnIndex="2" GridPane.rowIndex="1">
                <GridPane.margin>
                   <Insets />
                </GridPane.margin>
@@ -41,7 +41,7 @@
                   <Insets bottom="20.0" top="5.0" />
                </padding>
             </Label>
-            <Label minWidth="50.0" text="Start Time" GridPane.columnIndex="3" GridPane.rowIndex="1">
+            <Label minWidth="50.0" text="Start Time" styleClass="label-bright" GridPane.columnIndex="3" GridPane.rowIndex="1">
                <GridPane.margin>
                   <Insets />
                </GridPane.margin>
@@ -49,7 +49,7 @@
                   <Insets bottom="20.0" top="5.0" />
                </padding>
             </Label>
-            <Label minWidth="50.0" text="End Date" GridPane.columnIndex="4" GridPane.rowIndex="1">
+            <Label minWidth="50.0" text="End Date" styleClass="label-bright" GridPane.columnIndex="4" GridPane.rowIndex="1">
                <GridPane.margin>
                   <Insets />
                </GridPane.margin>
@@ -57,7 +57,7 @@
                   <Insets bottom="20.0" top="5.0" />
                </padding>
             </Label>
-            <Label minWidth="50.0" text="End Time" GridPane.columnIndex="5" GridPane.rowIndex="1">
+            <Label minWidth="50.0" text="End Time" styleClass="label-bright" GridPane.columnIndex="5" GridPane.rowIndex="1">
                <GridPane.margin>
                   <Insets />
                </GridPane.margin>
@@ -65,7 +65,7 @@
                   <Insets bottom="20.0" top="5.0" />
                </padding>
             </Label>
-            <Label minWidth="75.0" prefHeight="21.0" prefWidth="56.0" text="Tags" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <Label minWidth="75.0" prefHeight="21.0" prefWidth="56.0" text="Tags" styleClass="label-bright" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <GridPane.margin>
                   <Insets left="25.0" />
                </GridPane.margin>

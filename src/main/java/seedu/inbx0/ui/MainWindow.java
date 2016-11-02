@@ -20,7 +20,7 @@ import seedu.inbx0.model.task.ReadOnlyTask;
  * and space where other JavaFX elements can be placed.
  */
 public class MainWindow extends UiPart {
-
+	private final static String FXML_FILE_FOLDER = "/view/";
     private static final String ICON = "/images/inbx0.png";
     private static final String FXML = "MainWindow2.fxml";
     public static final int MIN_HEIGHT = 600;
@@ -103,6 +103,8 @@ public class MainWindow extends UiPart {
         setWindowDefaultSize(prefs);
         scene = new Scene(rootLayout);
         primaryStage.setScene(scene);
+        
+        scene.getStylesheets().add(FXML_FILE_FOLDER + "blackOnWhite.css");
         
         setAccelerators();
     }
