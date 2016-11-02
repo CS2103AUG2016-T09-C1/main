@@ -211,8 +211,8 @@ public class MainWindow extends UiPart {
         return taskListPanel;
     }
 
-    public void displayReminderList(ReadOnlyTask newSelection) {
-        reminderList = ReminderList.load(primaryStage, getReminderListPlaceholder(), newSelection);
+    public ReminderList getReminderList() {
+    	return reminderList;
     }
 
     public TitledPaneList getTitledPaneList() {

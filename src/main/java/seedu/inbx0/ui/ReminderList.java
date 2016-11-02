@@ -18,7 +18,6 @@ import seedu.inbx0.model.task.ReadOnlyTask;
 import java.util.Iterator;
 import java.util.logging.Logger;
 import seedu.inbx0.commons.core.LogsCenter;
-import seedu.inbx0.commons.events.ui.TaskPanelSelectionChangedEvent;
 import seedu.inbx0.commons.util.FxViewUtil;
 
 public class ReminderList extends UiPart {
@@ -41,6 +40,12 @@ public class ReminderList extends UiPart {
     private Label endTime;
     @FXML
     private Label tags;
+    /*private Label NAME = new Label("Task Name");
+    private Label STARTDATE = new Label("Start Date");
+    private Label STARTTIME = new Label("Start Time");
+    private Label ENDDATE = new Label("End Date");
+    private Label ENDTIME = new Label("End Time");
+    private Label TAGS = new Label("Tags");*/
     
     
     public ReminderList() {
@@ -68,10 +73,6 @@ public class ReminderList extends UiPart {
         infoPanel.configure(task);
         return infoPanel;
     }
-    
-    //void fillInnerParts() {
-        //ReminderListPanelHolder = ReminderListPanel.load(primaryStage, reminderListPlaceholder, task);        
-    //}
 
     public void displayInfo(ReadOnlyTask task) {
         name.setWrapText(true);
@@ -130,4 +131,8 @@ public class ReminderList extends UiPart {
             }
         }
     }
+
+	public void updateReminderList(ReadOnlyTask newTask) {
+		this.configure(newTask);
+	}
 }
