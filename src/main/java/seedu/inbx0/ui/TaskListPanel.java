@@ -57,6 +57,7 @@ public class TaskListPanel extends UiPart {
 
     private void configure(ObservableList<ReadOnlyTask> taskList) {
         setConnections(taskList);
+        taskListView.getStyleClass().add("pane");
         addToPlaceholder();
     }
 

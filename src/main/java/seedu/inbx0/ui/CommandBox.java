@@ -186,14 +186,16 @@ public class CommandBox extends UiPart {
     public void keyPressed(KeyEvent evt) {
         if(evt.getCode().equals(KeyCode.UP)) {
             goToPreviousCommandText();
+            commandTextField.positionCaret(commandTextField.getText().length());
         }
         else if(evt.getCode().equals(KeyCode.DOWN)) {
             goToNextCommandText();
+            commandTextField.positionCaret(commandTextField.getText().length());
         }
         else if(evt.getCode().equals(KeyCode.RIGHT)) {
             autoFillInCommandText();
+            commandTextField.positionCaret(commandTextField.getText().length());
         }
-        commandTextField.positionCaret(commandTextField.getText().length());
     }
 
 

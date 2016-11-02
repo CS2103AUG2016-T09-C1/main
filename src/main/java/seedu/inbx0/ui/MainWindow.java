@@ -104,7 +104,14 @@ public class MainWindow extends UiPart {
         scene = new Scene(rootLayout);
         primaryStage.setScene(scene);
         
-        scene.getStylesheets().add(FXML_FILE_FOLDER + "blackOnWhite.css");
+        scene.getStylesheets().clear();
+        scene.getStylesheets().add(FXML_FILE_FOLDER + "PinkTheme.css");
+        titledPanePlaceholder.getStyleClass().add("pane");
+        commandBoxPlaceholder.getStyleClass().add("pane");
+        resultDisplayPlaceholder.getStyleClass().add("pane");
+        taskListPanelPlaceholder.getStyleClass().add("pane");
+        reminderListPlaceholder.getStyleClass().add("pane");
+        statusbarPlaceholder.getStyleClass().add("pane");
         
         setAccelerators();
     }

@@ -85,6 +85,7 @@ public class ReminderList extends UiPart {
     
     private void configure(ReadOnlyTask task){
         addToPlaceholder();
+        reminderListView.getStyleClass().add("pane");
         if(task != null) {
             displayInfo(task);
             displayReminder(task);

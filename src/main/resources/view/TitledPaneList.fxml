@@ -9,7 +9,7 @@
 
 <AnchorPane xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seedu.inbx0.ui.TitledPaneList">
    <children>
-      <Accordion styleClass="label-bright" stylesheets="@DarkTheme.css">
+      <Accordion styleClass="label-bright">
          <panes>
             <TitledPane animated="false" collapsible="false" expanded="false" onMouseClicked="#handleListToday" text="    Today" />
             <TitledPane fx:id="DayTitledPane" animated="false" text="Day">
