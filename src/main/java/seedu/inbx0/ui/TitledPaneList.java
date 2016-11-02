@@ -18,8 +18,8 @@ public class TitledPaneList extends UiPart {
     private AnchorPane placeHolderPane;
     private AnchorPane mainPane;
     private Logic logic;
-    private TaskTableView taskTableView;
-    private AnchorPane taskTableViewPlaceholder; 
+    private TaskListPanel taskListPanel;
+    private AnchorPane taskListPanelPlaceholder; 
        
     @FXML
     private TitledPane DayTitledPane;
@@ -56,21 +56,21 @@ public class TitledPaneList extends UiPart {
     }
     
     public static TitledPaneList load(Stage primaryStage, AnchorPane titledPaneListPlaceholder, Logic logic, 
-             TaskTableView taskTableView, AnchorPane taskTableViewPlaceholder){
+             TaskListPanel taskListPanel, AnchorPane taskListPanelPlaceholder){
         TitledPaneList titlePaneList = UiPartLoader.loadUiPart(primaryStage, titledPaneListPlaceholder, new TitledPaneList()); 
-        titlePaneList.configure(logic, taskTableView, taskTableViewPlaceholder);
+        titlePaneList.configure(logic, taskListPanel, taskListPanelPlaceholder);
         titlePaneList.addToPlaceholder();
         return titlePaneList;
     }
     
-    private void configure(Logic logic, TaskTableView taskTableView, AnchorPane taskTableViewPlaceholder){
+    private void configure(Logic logic, TaskListPanel taskListPanel, AnchorPane taskListPanelPlaceholder){
         this.logic = logic;
-        this.taskTableView = taskTableView;
-        this.taskTableViewPlaceholder = taskTableViewPlaceholder;
+        this.taskListPanel = taskListPanel;
+        this.taskListPanelPlaceholder = taskListPanelPlaceholder;
     }
     
-    private AnchorPane getTaskTableViewPlaceholder() {
-        return taskTableViewPlaceholder;
+    private AnchorPane getTaskListPanelPlaceholder() {
+        return taskListPanelPlaceholder;
     }
     
     private void addToPlaceholder() {
@@ -81,134 +81,134 @@ public class TitledPaneList extends UiPart {
 
     @FXML
     public void handleListToday() {
-        taskTableView = null;
-        taskTableView = TaskTableView.load(primaryStage, getTaskTableViewPlaceholder(),
+        taskListPanel = null;
+        taskListPanel = TaskListPanel.load(primaryStage, getTaskListPanelPlaceholder(),
                 logic.getFilteredDayTaskList("today"));
     }
 
     @FXML
     public void handleListMonday() {
-        taskTableView = null;
-        taskTableView = TaskTableView.load(primaryStage, getTaskTableViewPlaceholder(),
+        taskListPanel = null;
+        taskListPanel = TaskListPanel.load(primaryStage, getTaskListPanelPlaceholder(),
                 logic.getFilteredDayTaskList("Monday"));
     }
 
     @FXML
     public void handleListTuesday() {
-        taskTableView = null;
-        taskTableView = TaskTableView.load(primaryStage, getTaskTableViewPlaceholder(),
+        taskListPanel = null;
+        taskListPanel = TaskListPanel.load(primaryStage, getTaskListPanelPlaceholder(),
                 logic.getFilteredDayTaskList("Tuesday"));
     }
 
     @FXML
     public void handleListWednesday() {
-        taskTableView = null;
-        taskTableView = TaskTableView.load(primaryStage, getTaskTableViewPlaceholder(),
+        taskListPanel = null;
+        taskListPanel = TaskListPanel.load(primaryStage, getTaskListPanelPlaceholder(),
                 logic.getFilteredDayTaskList("Wednesday"));
     }
 
     @FXML
     public void handleListThursday() {
-        taskTableView = null;
-        taskTableView = TaskTableView.load(primaryStage, getTaskTableViewPlaceholder(),
+        taskListPanel = null;
+        taskListPanel = TaskListPanel.load(primaryStage, getTaskListPanelPlaceholder(),
                 logic.getFilteredDayTaskList("Thursday"));
     }
 
     @FXML
     public void handleListFriday() {
-        taskTableView = null;
-        taskTableView = TaskTableView.load(primaryStage, getTaskTableViewPlaceholder(),
+        taskListPanel = null;
+        taskListPanel = TaskListPanel.load(primaryStage, getTaskListPanelPlaceholder(),
                 logic.getFilteredDayTaskList("Friday"));
     }
 
     @FXML
     public void handleListSaturday() {
-        taskTableView = null;
-        taskTableView = TaskTableView.load(primaryStage, getTaskTableViewPlaceholder(),
+        taskListPanel = null;
+        taskListPanel = TaskListPanel.load(primaryStage, getTaskListPanelPlaceholder(),
                 logic.getFilteredDayTaskList("Saturday"));
     }
 
     @FXML
     public void handleListSunday() {
-        taskTableView = null;
-        taskTableView = TaskTableView.load(primaryStage, getTaskTableViewPlaceholder(),
+        taskListPanel = null;
+        taskListPanel = TaskListPanel.load(primaryStage, getTaskListPanelPlaceholder(),
                 logic.getFilteredDayTaskList("Sunday"));
     }
 
     @FXML
     public void handleListEvent() {
-        taskTableView = null;
-        taskTableView = TaskTableView.load(primaryStage, getTaskTableViewPlaceholder(),
+        taskListPanel = null;
+        taskListPanel = TaskListPanel.load(primaryStage, getTaskListPanelPlaceholder(),
                 logic.getFilteredEventTaskList());
     }
 
     @FXML
     public void handleListFloating() {
-        taskTableView = null;
-        taskTableView = TaskTableView.load(primaryStage, getTaskTableViewPlaceholder(),
+        taskListPanel = null;
+        taskListPanel = TaskListPanel.load(primaryStage, getTaskListPanelPlaceholder(),
                 logic.getFilteredFloatTaskList());
     }
 
     @FXML
     public void handleListDeadline() {
-        taskTableView = null;
-        taskTableView = TaskTableView.load(primaryStage, getTaskTableViewPlaceholder(),
+        taskListPanel = null;
+        taskListPanel = TaskListPanel.load(primaryStage, getTaskListPanelPlaceholder(),
                 logic.getFilteredDeadlineTaskList());
     }
 
     @FXML
     public void handleListRed() {
-        taskTableView = null;
-        taskTableView = TaskTableView.load(primaryStage, getTaskTableViewPlaceholder(),
+        taskListPanel = null;
+        taskListPanel = TaskListPanel.load(primaryStage, getTaskListPanelPlaceholder(),
                 logic.getFilteredImportanceTaskList("Red"));
     }
 
     @FXML
     public void handleListYellow() {
-        taskTableView = null;
-        taskTableView = TaskTableView.load(primaryStage, getTaskTableViewPlaceholder(),
+        taskListPanel = null;
+        taskListPanel = TaskListPanel.load(primaryStage, getTaskListPanelPlaceholder(),
                 logic.getFilteredImportanceTaskList("Yellow"));
     }
 
     @FXML
     public void handleListGreen() {
-        taskTableView = null;
-        taskTableView = TaskTableView.load(primaryStage, getTaskTableViewPlaceholder(),
+        taskListPanel = null;
+        taskListPanel = TaskListPanel.load(primaryStage, getTaskListPanelPlaceholder(),
                 logic.getFilteredImportanceTaskList("Green"));
     }
 
     @FXML
     public void handleListNone() {
-        taskTableView = null;
-        taskTableView = TaskTableView.load(primaryStage, getTaskTableViewPlaceholder(),
+        taskListPanel = null;
+        taskListPanel = TaskListPanel.load(primaryStage, getTaskListPanelPlaceholder(),
                 logic.getFilteredImportanceTaskList(""));
     }
 
     @FXML
     public void handleListComplete() {
-        taskTableView = null;
-        taskTableView = TaskTableView.load(primaryStage, getTaskTableViewPlaceholder(),
+        taskListPanel = null;
+        taskListPanel = TaskListPanel.load(primaryStage, getTaskListPanelPlaceholder(),
                 logic.getFilteredDoneTaskList());
     }
 
     @FXML
     public void handleListIncomplete() {
-        taskTableView = null;
-        taskTableView = TaskTableView.load(primaryStage, getTaskTableViewPlaceholder(),
+        taskListPanel = null;
+        taskListPanel = TaskListPanel.load(primaryStage, getTaskListPanelPlaceholder(),
                 logic.getFilteredToDoTaskList());
     }
 
     @FXML
     public void handleListExpired() {
-        taskTableView = null;
-        taskTableView = TaskTableView.load(primaryStage, getTaskTableViewPlaceholder(),
+        taskListPanel = null;
+        taskListPanel = TaskListPanel.load(primaryStage, getTaskListPanelPlaceholder(),
                 logic.getFilteredOverdueTaskList());
     }
 
     @FXML
     public void handleListUnexpired() {
-        taskTableView = null;
-        taskTableView = TaskTableView.load(primaryStage, getTaskTableViewPlaceholder(),
+        taskListPanel = null;
+        taskListPanel = TaskListPanel.load(primaryStage, getTaskListPanelPlaceholder(),
                 logic.getFilteredBeforedueTaskList());
     }
 
@@ -276,14 +276,14 @@ public class TitledPaneList extends UiPart {
     
     public void handleShowNormalTaskList() {
         closeAllTitledPane();
-        taskTableView = TaskTableView.load(primaryStage, getTaskTableViewPlaceholder(),
+        taskListPanel = TaskListPanel.load(primaryStage, getTaskListPanelPlaceholder(),
                 logic.getFilteredTaskList());
     }
     
     public void handleScrollTo(ReadOnlyTask task) {
         handleShowNormalTaskList();
-        int taskIndex = taskTableView.getTaskTableView().getItems().indexOf(task);
-        taskTableView.scrollTo(taskIndex);        
+        int taskIndex = taskListPanel.getTaskListView().getItems().indexOf(task);
+        taskListPanel.scrollTo(taskIndex);        
     }
 
     private void closeAllTitledPane() {

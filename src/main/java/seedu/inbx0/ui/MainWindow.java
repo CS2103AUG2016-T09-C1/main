@@ -38,7 +38,7 @@ public class MainWindow extends UiPart {
     //private MainDisplayPanel mainDisplayPanel;
     private ResultDisplay resultDisplay;
     private TitledPaneList titledPaneList;
-    private TaskTableView taskTableView;
+    private TaskListPanel taskListPanel;
     private ReminderList reminderList;
     private StatusBarFooter statusBarFooter;
     private CommandBox commandBox;
@@ -61,7 +61,7 @@ public class MainWindow extends UiPart {
     private MenuItem helpMenuItem;
 
     @FXML
-    private AnchorPane taskTableViewPlaceholder;
+    private AnchorPane taskListPanelPlaceholder;
 
     @FXML
     private AnchorPane resultDisplayPlaceholder;
@@ -118,8 +118,8 @@ public class MainWindow extends UiPart {
         //bottomReminderListPanel = InformationPanel.load(primaryStage, getReminderListPlaceholder(), null);
         //mainDisplayPanel = MainDisplayPanel.load(primaryStage, getMainDisplayPlaceholder(), logic);
         reminderList = ReminderList.load(primaryStage, getReminderListPlaceholder(), null);
-        taskTableView = TaskTableView.load(primaryStage, getTaskTableViewPlaceholder(), logic.getFilteredTaskList());
-        titledPaneList = TitledPaneList.load(primaryStage, getTitledPanePlaceholder(), logic, taskTableView, getTaskTableViewPlaceholder());
+        taskListPanel = TaskListPanel.load(primaryStage, getTaskListPanelPlaceholder(), logic.getFilteredTaskList());
+        titledPaneList = TitledPaneList.load(primaryStage, getTitledPanePlaceholder(), logic, taskListPanel, getTaskListPanelPlaceholder());
         resultDisplay = ResultDisplay.load(primaryStage, getResultDisplayPlaceholder());
         statusBarFooter = StatusBarFooter.load(primaryStage, getStatusbarPlaceholder(), config.getTaskListFilePath());
         commandBox = CommandBox.load(primaryStage, getCommandBoxPlaceholder(), resultDisplay, logic);
@@ -137,8 +137,8 @@ public class MainWindow extends UiPart {
         return resultDisplayPlaceholder;
     }
     
-    private AnchorPane getTaskTableViewPlaceholder() {
-        return taskTableViewPlaceholder;
+    private AnchorPane getTaskListPanelPlaceholder() {
+        return taskListPanelPlaceholder;
     }
     
     private AnchorPane getTitledPanePlaceholder() {
@@ -212,8 +212,8 @@ public class MainWindow extends UiPart {
         reminderWindow.show();
     }
     
-    public TaskTableView getTaskTableView() {
-        return taskTableView;
+    public TaskListPanel getTaskTableView() {
+        return taskListPanel;
     }
 
     public void displayReminderList(ReadOnlyTask newSelection) {
