@@ -281,6 +281,9 @@ public class Parser {
         
         case UndoCommand.COMMAND_WORD:
             return prepareUndo(arguments);
+            
+        case RedoCommand.COMMAND_WORD:
+            return prepareRedo(arguments);
 
         case AddTagCommand.COMMAND_WORD:
             return prepareAddTag(arguments);
@@ -875,6 +878,27 @@ public class Parser {
 
         return new UndoCommand(index.get());
     }
+    
+    //@@author A0135797M
+    /**
+     * Parses arguments in the context of the redo command.
+     * 
+     * @param args full command args string
+     * @return the prepared command
+     */
+    private Command prepareRedo(String args) {
+        if(args.trim().length() == 0) {
+            return new RedoCommand();
+        }
+        
+        Optional<Integer> index = parseIndex(args);
+        if(index.isPresent()){
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, RedoCommand.MESSAGE_USAGE));
+        }
+
+        return new RedoCommand();
+    }
+    
     //@@author
 
     /**

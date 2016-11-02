@@ -119,8 +119,10 @@ public class ModelManager extends ComponentManager implements Model {
         
         int numUndone = 0;
         TaskList historyList = null;
+        TaskList redoList = null;
         try {
             for (int i = 0; i < stepsBack; i++) {
+            	redoList = taskListHistory.getLast();
                 historyList = taskListHistory.popState();
                 numUndone++;
             }
