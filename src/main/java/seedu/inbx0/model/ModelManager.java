@@ -30,7 +30,7 @@ public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private final TaskList taskList;
-    private final FilteredList<Task> filteredTasks;
+    private FilteredList<Task> filteredTasks;
     private final FilteredList<Task> filteredNormalTasks;
     private final FilteredList<Task> filteredFloatTasks;
     private final FilteredList<Task> filteredEventTasks;
@@ -195,60 +195,70 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public UnmodifiableObservableList<ReadOnlyTask> getFilteredNormalTaskList() {
         updateFilteredNormalTaskList();
+        filteredTasks = filteredNormalTasks;
         return new UnmodifiableObservableList<>(filteredNormalTasks);
     }
 
     @Override
     public UnmodifiableObservableList<ReadOnlyTask> getFilteredDoneTaskList() {
         updateFilteredDoneTaskList();
+        filteredTasks = filteredDoneTasks;
         return new UnmodifiableObservableList<>(filteredDoneTasks);
     }
     
     @Override
     public UnmodifiableObservableList<ReadOnlyTask> getFilteredToDoTaskList() {
         updateFilteredToDoTaskList();
+        filteredTasks = filteredToDoTasks;
         return new UnmodifiableObservableList<>(filteredToDoTasks);
     }
     
     @Override
     public UnmodifiableObservableList<ReadOnlyTask> getFilteredFloatTaskList() {
         updateFilteredFloatTaskList();
+        filteredTasks = filteredFloatTasks;
         return new UnmodifiableObservableList<>(filteredFloatTasks);
     }
     //@@author A0139579J
     @Override
     public UnmodifiableObservableList<ReadOnlyTask> getFilteredOverdueTaskList() {    
         updateFilteredOverdueTaskList();
+        filteredTasks = filteredOverdueTasks;
         return new UnmodifiableObservableList<>(filteredOverdueTasks);
     }
     //@@author A0148044J
     @Override
     public UnmodifiableObservableList<ReadOnlyTask> getFilteredEventTaskList() {
         updateFilteredEventTaskList();
+        filteredTasks = filteredEventTasks;
         return new UnmodifiableObservableList<>(filteredEventTasks);
     }
 
     @Override
     public UnmodifiableObservableList<ReadOnlyTask> getFilteredDeadlineTaskList() {
         updateFilteredDeadlineTaskList();
+        filteredTasks = filteredDeadlineTasks;
         return new UnmodifiableObservableList<>(filteredDeadlineTasks);
     }
 
     @Override
     public UnmodifiableObservableList<ReadOnlyTask> getFilteredBeforedueTaskList() {
         updateFilteredBeforedueTaskList();
+        filteredTasks = filteredBeforedueTasks;
         return new UnmodifiableObservableList<>(filteredBeforedueTasks);
     }
 
     @Override
     public UnmodifiableObservableList<ReadOnlyTask> getFilteredDayTaskList(String day) {
         updateFilteredDayTaskList(day);
+        filteredTasks = filteredDayTasks;
         return new UnmodifiableObservableList<>(filteredDayTasks);
     }
 
     @Override
     public UnmodifiableObservableList<ReadOnlyTask> getFilteredImportanceTaskList(String importance) {
         updateFilteredImportanceTaskList(importance);
+        filteredTasks = filteredImportanceTasks;
         return new UnmodifiableObservableList<>(filteredImportanceTasks);
     }
     //@@author

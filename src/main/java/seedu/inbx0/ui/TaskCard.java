@@ -72,15 +72,15 @@ public class TaskCard extends UiPart{
             isExpired.setText("");
         */
         if(task.getLevel().getNumberLevel() == 1 && task.getIsExpired() == true && task.getIsEvent() == true) 
-            cardPane.setStyle("-fx-background-color: rgba(0, 255, 0, 0.5);");
+            cardPane.setStyle("-fx-background-color: rgba(0, 245, 0, 0.1);");
         else if(task.getLevel().getNumberLevel() == 1)
             cardPane.setStyle("-fx-background-color: rgba(0, 255, 0, 0.8);");
         else if(task.getLevel().getNumberLevel() == 2 && task.getIsExpired() == true && task.getIsEvent() == true)
-            cardPane.setStyle("-fx-background-color: rgba(255, 255, 0, 0.5);");
+            cardPane.setStyle("-fx-background-color: rgba(245, 245, 0, 0.1);");
         else if(task.getLevel().getNumberLevel() == 2)
             cardPane.setStyle("-fx-background-color: rgba(255, 255, 0, 0.8);");
         else if(task.getLevel().getNumberLevel() == 3 && task.getIsExpired() == true && task.getIsEvent() == true)
-            cardPane.setStyle("-fx-background-color: rgba(255, 0, 0, 0.5);");
+            cardPane.setStyle("-fx-background-color: rgba(245, 0, 0, 0.1);");
         else if(task.getLevel().getNumberLevel() == 3)
             cardPane.setStyle("-fx-background-color: rgba(255, 0, 0, 0.8);");
         

@@ -22,7 +22,7 @@ import seedu.inbx0.model.task.ReadOnlyTask;
 public class MainWindow extends UiPart {
 	private final static String FXML_FILE_FOLDER = "/view/";
     private static final String ICON = "/images/inbx0.png";
-    private static final String FXML = "MainWindow2.fxml";
+    private static final String FXML = "MainWindow1.fxml";
     public static final int MIN_HEIGHT = 600;
     public static final int MIN_WIDTH = 800;
 
@@ -58,7 +58,31 @@ public class MainWindow extends UiPart {
 
     @FXML
     private MenuItem helpMenuItem;
+    
+    @FXML
+    private MenuItem antiqueWhiteMenuItem;
+    
+    @FXML
+    private MenuItem darkOrchidMenuItem;
+    
+    @FXML
+    private MenuItem blueMenuItem;
+    
+    @FXML
+    private MenuItem greenMenuItem;
+    
+    @FXML
+    private MenuItem mediumVioletRedMenuItem;
+    
+    @FXML
+    private MenuItem oriangeMenuItem;
+    
+    @FXML
+    private MenuItem pinkMenuItem;
 
+    @FXML
+    private MenuItem resetMenuItem;
+    
     @FXML
     private AnchorPane taskListPanelPlaceholder;
 
@@ -104,8 +128,6 @@ public class MainWindow extends UiPart {
         scene = new Scene(rootLayout);
         primaryStage.setScene(scene);
         
-        scene.getStylesheets().clear();
-        scene.getStylesheets().add(FXML_FILE_FOLDER + "PinkTheme.css");
         titledPanePlaceholder.getStyleClass().add("pane");
         commandBoxPlaceholder.getStyleClass().add("pane");
         resultDisplayPlaceholder.getStyleClass().add("pane");
@@ -117,12 +139,20 @@ public class MainWindow extends UiPart {
     }
 
     private void setAccelerators() {
-        helpMenuItem.setAccelerator(KeyCombination.valueOf("F1"));
+        helpMenuItem.setAccelerator(KeyCombination.valueOf("Ctrl+F1"));
+        antiqueWhiteMenuItem.setAccelerator(KeyCombination.valueOf("Ctrl+1"));
+        darkOrchidMenuItem.setAccelerator(KeyCombination.valueOf("Ctrl+2"));
+        blueMenuItem.setAccelerator(KeyCombination.valueOf("Ctrl+3"));
+        greenMenuItem.setAccelerator(KeyCombination.valueOf("Ctrl+4"));
+        mediumVioletRedMenuItem.setAccelerator(KeyCombination.valueOf("Ctrl+5"));
+        oriangeMenuItem.setAccelerator(KeyCombination.valueOf("Ctrl+6"));
+        pinkMenuItem.setAccelerator(KeyCombination.valueOf("Ctrl+7"));
+        resetMenuItem.setAccelerator(KeyCombination.valueOf("Ctrl+8"));
     }
 
     void fillInnerParts() {
         reminderList = ReminderList.load(primaryStage, getReminderListPlaceholder(), null);
-        taskListPanel = TaskListPanel.load(primaryStage, getTaskListPanelPlaceholder(), logic.getFilteredTaskList());
+        taskListPanel = TaskListPanel.load(primaryStage, getTaskListPanelPlaceholder(), logic.getFilteredToDoTaskList());
         titledPaneList = TitledPaneList.load(primaryStage, getTitledPanePlaceholder(), logic, taskListPanel, getTaskListPanelPlaceholder());
         resultDisplay = ResultDisplay.load(primaryStage, getResultDisplayPlaceholder());
         statusBarFooter = StatusBarFooter.load(primaryStage, getStatusbarPlaceholder(), config.getTaskListFilePath());
@@ -226,5 +256,52 @@ public class MainWindow extends UiPart {
 
     public TitledPaneList getTitledPaneList() {
         return titledPaneList;
+    }
+    
+    @FXML 
+    private void handleAntiqueWhite() {
+    	scene.getStylesheets().clear();
+    	scene.getStylesheets().add(FXML_FILE_FOLDER + "AntiqueWhiteTheme.css");
+    }
+    
+    @FXML 
+    private void handleDarkOrchid () {
+    	scene.getStylesheets().clear();
+    	scene.getStylesheets().add(FXML_FILE_FOLDER + "DarkOrchid.css");
+    }
+    
+    @FXML 
+    private void handleBlue() {
+    	scene.getStylesheets().clear();
+    	scene.getStylesheets().add(FXML_FILE_FOLDER + "Blue.css");
+    }
+    
+    @FXML 
+    private void handleGreen() {
+    	scene.getStylesheets().clear();
+    	scene.getStylesheets().add(FXML_FILE_FOLDER + "Green.css");
+    }
+    
+    @FXML 
+    private void handleMediumVioletRed() {
+    	scene.getStylesheets().clear();
+    	scene.getStylesheets().add(FXML_FILE_FOLDER + "MediumVioletRed.css");
+    }
+    
+    @FXML 
+    private void handleOriange() {
+    	scene.getStylesheets().clear();
+    	scene.getStylesheets().add(FXML_FILE_FOLDER + "Oriange.css");
+    }
+    
+    @FXML 
+    private void handlePink() {
+    	scene.getStylesheets().clear();
+    	scene.getStylesheets().add(FXML_FILE_FOLDER + "PinkTheme.css");
+    }
+    
+    @FXML 
+    private void handleReset() {
+    	scene.getStylesheets().clear();
     }
 }

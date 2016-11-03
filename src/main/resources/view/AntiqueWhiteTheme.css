@@ -89,9 +89,6 @@
 
 .list-cell {
 	-fx-background-color: transparent, derive(#cdc0b0, 10%);
-    -fx-label-padding: 0 0 0 0;
-    -fx-graphic-text-gap : 0;
-    -fx-padding: 0 0 0 0;
 }
 
 .list-cell .label {
@@ -318,3 +315,13 @@
  .error {
  	-fx-background-color: red;
  }
+ 
+ .list-cell:filled:selected:focused, .list-cell:filled:selected {
+    -fx-background-color: linear-gradient(#328BDB 0%, #207BCF 25%, #1973C9 75%, #0A65BF 100%);
+    -fx-text-fill: white;
+}
+
+.list-cell:filled:hover {
+    -fx-cell-hover-color: #0093ff;
+    -fx-text-fill: white;
+}

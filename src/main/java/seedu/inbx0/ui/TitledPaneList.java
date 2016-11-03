@@ -277,7 +277,7 @@ public class TitledPaneList extends UiPart {
     public void handleShowNormalTaskList() {
         closeAllTitledPane();
         taskListPanel = TaskListPanel.load(primaryStage, getTaskListPanelPlaceholder(),
-                logic.getFilteredTaskList());
+                logic.getFilteredToDoTaskList());
     }
 
     private void closeAllTitledPane() {
