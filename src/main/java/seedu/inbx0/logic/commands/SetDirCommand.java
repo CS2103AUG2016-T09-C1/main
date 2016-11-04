@@ -74,4 +74,9 @@ public class SetDirCommand extends Command{
         return false;
     }
 
+    //@@author A0135797M
+    @Override
+    public boolean canRedo() {  
+        return true;
+    }
 }

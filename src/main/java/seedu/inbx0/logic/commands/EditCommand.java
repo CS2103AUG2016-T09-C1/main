@@ -183,6 +183,10 @@ public class EditCommand extends Command {
         return true;
     }
 
-
+    //@@author A0135797M
+    @Override
+    public boolean canRedo() {  
+        return true;
+    }
 
 }

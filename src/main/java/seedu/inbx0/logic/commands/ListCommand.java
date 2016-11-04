@@ -67,7 +67,7 @@ public class ListCommand extends Command {
         }
         else {
                 model.updateFilteredTaskList(checkDate, preposition);
-                indicateShowNormalTaskListEventCommand();
+                //indicateShowNormalTaskListEventCommand();
                 return new CommandResult(getMessageForTaskListShownSummary(model.getFilteredTaskList().size()));
         }       
     }
