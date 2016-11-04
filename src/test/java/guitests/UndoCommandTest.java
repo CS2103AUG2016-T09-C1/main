@@ -13,26 +13,26 @@ import seedu.inbx0.testutil.TestUtil;
 public class UndoCommandTest extends TaskListGuiTest {
     
     @Test
-    public void undoZeroCommand() throws IllegalArgumentException, IllegalValueException {
+    public void undo_ZeroCommand() throws IllegalArgumentException, IllegalValueException {
         TestTask[] currentList = td.getTypicalTasks();
         assertUndoResult("undo", UndoCommand.MESSAGE_NOTHING_TO_UNDO, currentList);
     }
     
     @Test
-    public void undoZeroCommand_withArgs() throws IllegalArgumentException, IllegalValueException {
+    public void undo_ZeroCommandWithArgs() throws IllegalArgumentException, IllegalValueException {
         TestTask[] currentList = td.getTypicalTasks();
         assertUndoResult("undo 3", UndoCommand.MESSAGE_NOTHING_TO_UNDO, currentList);
     }
     
     @Test
-    public void undoOneDelCommand() throws IllegalArgumentException, IllegalValueException {
+    public void undo_OneCommand() throws IllegalArgumentException, IllegalValueException {
         TestTask[] currentList = td.getTypicalTasks();
         commandBox.runCommand("del 1");
         assertUndoResult("undo", UndoCommand.MESSAGE_UNDO_TASK_SUCCESS, currentList);
     }
     
     @Test
-    public void undoTwoDelCommands() throws IllegalArgumentException, IllegalValueException {
+    public void undo_TwoCommands() throws IllegalArgumentException, IllegalValueException {
         TestTask[] currentList = td.getTypicalTasks();
         commandBox.runCommand("del 1");
         commandBox.runCommand("del 1");
@@ -40,7 +40,7 @@ public class UndoCommandTest extends TaskListGuiTest {
     }
     
     @Test
-    public void undoOneDelCommandsFromTwo() throws IllegalArgumentException, IllegalValueException {
+    public void undo_OneDelCommandsFromTwo() throws IllegalArgumentException, IllegalValueException {
         TestTask[] currentList = td.getTypicalTasks();
         commandBox.runCommand("del 1");
         commandBox.runCommand("del 1");
@@ -49,7 +49,7 @@ public class UndoCommandTest extends TaskListGuiTest {
     }
     
     @Test
-    public void undoInvalidInput() throws IllegalArgumentException, IllegalValueException {
+    public void undo_InvalidArgs() throws IllegalArgumentException, IllegalValueException {
         TestTask[] currentList = td.getTypicalTasks();
         commandBox.runCommand("del 1");
         TestTask[] expectedRemainder = TestUtil.removeTaskFromList(currentList, 1);
@@ -60,7 +60,7 @@ public class UndoCommandTest extends TaskListGuiTest {
     }
     
     @Test
-    public void undoAllCommands() throws IllegalArgumentException, IllegalValueException {
+    public void undo_AllCommands() throws IllegalArgumentException, IllegalValueException {
         TestTask[] currentList = td.getTypicalTasks();
         commandBox.runCommand("del 1");
         TestTask[] remainder = TestUtil.removeTaskFromList(currentList, 1);

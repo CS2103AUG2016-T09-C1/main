@@ -27,7 +27,7 @@ public class AddTagCommand extends Command {
 	
 	public static final String MESSAGE_SUCCESS = "Tag successfully added!";
 	public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the tasklist";
-	public static final String TAGS_INVALID_ARGUMENTS = "You must input at least 1 tag!";
+	public static final String MESSAGE_INVALID_TAGS_ARGUMENTS = "You must input at least 1 tag!";
 	
 	public final int targetIndex;
     public UniqueTagList tags;
@@ -61,14 +61,15 @@ public class AddTagCommand extends Command {
     private Task createToEditWithTask(ReadOnlyTask taskToEdit, UniqueTagList tags) throws IllegalValueException{
     	
     	Task toEditWith = new Task (
-                new Name(taskToEdit.getName().getName()),
-                new Date(taskToEdit.getStartDate().getDate()),
-                new Time(taskToEdit.getStartTime().getTime()),
-                new Date(taskToEdit.getEndDate().getDate()),
-                new Time(taskToEdit.getEndTime().getTime()),
-                new Importance(taskToEdit.getLevel().getLevel()), tags,
-                new UniqueReminderList(taskToEdit.getReminders())
-                );
+            new Name(taskToEdit.getName().getName()),
+            new Date(taskToEdit.getStartDate().getDate()),
+            new Time(taskToEdit.getStartTime().getTime()),
+            new Date(taskToEdit.getEndDate().getDate()),
+            new Time(taskToEdit.getEndTime().getTime()),
+            new Importance(taskToEdit.getLevel().getLevel()), 
+            tags,
+            new UniqueReminderList(taskToEdit.getReminders())
+        );
         return toEditWith;
     }
     
@@ -92,7 +93,7 @@ public class AddTagCommand extends Command {
         try {
             toEditWith = createToEditWithTask(taskToEdit, originalTags);
         } catch (IllegalValueException e1) {
-            return new CommandResult(TAGS_INVALID_ARGUMENTS);
+            return new CommandResult(MESSAGE_INVALID_TAGS_ARGUMENTS);
         }
         
         try {

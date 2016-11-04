@@ -14,10 +14,10 @@ public class TypicalTestTasks {
     public TypicalTestTasks() {
         try {
             alice =  new TaskBuilder().withName("Alice Pauline").withStartDate("4th Nov")
-                    .withStartTime("3pm").withEndDate("6th Nov").withEndTime("4pm").withImportance("green")
+                    .withStartTime("1500").withEndDate("06/11/2016").withEndTime("4pm").withImportance("green")
                     .withTags("lunch").build();
             benson = new TaskBuilder().withName("Benson Meier").withStartDate("6th September")
-                    .withStartTime("noon").withEndDate("7th September").withEndTime("9pm").withImportance("y")
+                    .withStartTime("noon").withEndDate("7-9-2016").withEndTime("2100").withImportance("y")
                     .withTags("owesMoney", "friends").build();
             carl = new TaskBuilder().withName("Carl Kurz").withStartDate("tomorrow").withStartTime("3pm").withEndDate("tomorrow").withEndTime("9pm").withImportance("r").build();
             daniel = new TaskBuilder().withName("Daniel Meier").withStartDate("next week").withStartTime("12pm").withEndDate("next week").withEndTime("9pm").withImportance("red").build();
@@ -29,10 +29,10 @@ public class TypicalTestTasks {
             hoon = new TaskBuilder().withName("Hoon Meier").withStartDate("next week").withStartTime("1000").withEndDate("next week").withEndTime("1300").withImportance("G").withTags("lunch").build();
             ida = new TaskBuilder().withName("Ida Mueller").withStartDate("tmr").withStartTime("1000").withEndDate("next week").withEndTime("12pm").withImportance("Yellow").build();
             //@@author A0139481Y
-            noImportance = new TaskBuilder().withName("No importance").withStartDate("next wed").withStartTime("1000").withEndDate("next thurs").withEndTime("12pm").withTags("tagged").build();
+            noImportance = new TaskBuilder().withName("No importance").withStartDate("next wed").withStartTime("1000").withEndDate("next month").withEndTime("12pm").withTags("tagged").build();
             floatingNoImportance = new TaskBuilder().withName("Float no importance").withTags("tag123").build();
             floating = new TaskBuilder().withName("Floating Task").withImportance("G").withTags("tag1515").build();
-            deadline = new TaskBuilder().withName("Deadline").withEndDate("next week").withEndTime("12pm").withImportance("Red").withTags("tagged").build();
+            deadline = new TaskBuilder().withName("Deadline").withEndDate("next week").withEndTime("3am").withImportance("Red").withTags("tagged").build();
             deadlineNoImportance = new TaskBuilder().withName("Deadline no importance").withEndDate("next week").withEndTime("12pm").withTags("tagged").build();
             //@@author
         } catch (IllegalValueException e) {
