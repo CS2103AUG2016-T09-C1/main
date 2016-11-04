@@ -19,17 +19,26 @@ public class TypicalTestTasks {
             benson = new TaskBuilder().withName("Benson Meier").withStartDate("6th September")
                     .withStartTime("noon").withEndDate("7-9-2016").withEndTime("2100").withImportance("y")
                     .withTags("owesMoney", "friends").build();
-            carl = new TaskBuilder().withName("Carl Kurz").withStartDate("tomorrow").withStartTime("3pm").withEndDate("tomorrow").withEndTime("9pm").withImportance("r").build();
-            daniel = new TaskBuilder().withName("Daniel Meier").withStartDate("next week").withStartTime("12pm").withEndDate("next week").withEndTime("9pm").withImportance("red").build();
-            elle = new TaskBuilder().withName("Elle Meyer").withStartDate("next wednesday").withStartTime("12pm").withEndDate("next friday").withEndTime("3pm").withImportance("yellow").build();
-            fiona = new TaskBuilder().withName("Fiona Kunz").withStartDate("next month").withStartTime("12pm").withEndDate("next month").withEndTime("5pm").withImportance("g").build();
-            george = new TaskBuilder().withName("George Best").withStartDate("4th November").withStartTime("0930").withEndDate("5th November").withEndTime("3pm").withImportance("R").build();
+            carl = new TaskBuilder().withName("Carl Kurz").withStartDate("tomorrow")
+                    .withStartTime("3pm").withEndDate("tomorrow").withEndTime("9pm").withImportance("r").build();
+            daniel = new TaskBuilder().withName("Daniel Meier").withStartDate("next week")
+                    .withStartTime("12pm").withEndDate("next week").withEndTime("9pm").withImportance("red").build();
+            elle = new TaskBuilder().withName("Elle Meyer").withStartDate("next wednesday")
+                    .withStartTime("12pm").withEndDate("next friday").withEndTime("3pm").withImportance("yellow").build();
+            fiona = new TaskBuilder().withName("Fiona Kunz").withStartDate("next month")
+                    .withStartTime("12pm").withEndDate("next month").withEndTime("5pm").withImportance("g").build();
+            george = new TaskBuilder().withName("George Best").withStartDate("4th November")
+                    .withStartTime("0930").withEndDate("5th November").withEndTime("3pm").withImportance("R").build();
 
             //Manually added
-            hoon = new TaskBuilder().withName("Hoon Meier").withStartDate("next week").withStartTime("1000").withEndDate("next week").withEndTime("1300").withImportance("G").withTags("lunch").build();
-            ida = new TaskBuilder().withName("Ida Mueller").withStartDate("tmr").withStartTime("1000").withEndDate("next week").withEndTime("12pm").withImportance("Yellow").build();
+            hoon = new TaskBuilder().withName("Hoon Meier").withStartDate("next week")
+                    .withStartTime("1000").withEndDate("next week").withEndTime("1300").withImportance("G")
+                    .withTags("lunch").build();
+            ida = new TaskBuilder().withName("Ida Mueller").withStartDate("tmr")
+                    .withStartTime("1000").withEndDate("next week").withEndTime("12pm").withImportance("Yellow").build();
             //@@author A0139481Y
-            noImportance = new TaskBuilder().withName("No importance").withStartDate("next wed").withStartTime("1000").withEndDate("next month").withEndTime("12pm").withTags("tagged").build();
+            noImportance = new TaskBuilder().withName("No importance").withStartDate("next wed")
+                    .withStartTime("1000").withEndDate("next month").withEndTime("12pm").withTags("tagged").build();
             floatingNoImportance = new TaskBuilder().withName("Float no importance").withTags("tag123").build();
             floating = new TaskBuilder().withName("Floating Task").withImportance("G").withTags("tag1515").build();
             deadline = new TaskBuilder().withName("Deadline").withEndDate("next week").withEndTime("3am").withImportance("Red").withTags("tagged").build();

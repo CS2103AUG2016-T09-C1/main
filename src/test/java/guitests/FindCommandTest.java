@@ -31,6 +31,23 @@ public class FindCommandTest extends TaskListGuiTest {
         commandBox.runCommand("findgeorge");
         assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
     }
+    
+    //@@author A0139481Y
+    @Test
+    public void find_byTags() throws IllegalArgumentException, IllegalValueException {
+        assertFindResult("find t=friends", td.benson);
+    }
+    
+    @Test
+    public void find_multipleKeywords() throws IllegalArgumentException, IllegalValueException {
+        assertFindResult("find Alice Benson", td.alice, td.benson);
+    }
+    
+    @Test
+    public void find_byNameAndImportance() throws IllegalArgumentException, IllegalValueException {
+        assertFindResult("find Meier & i=red", td.daniel);
+    }
+    //@@author
 
     private void assertFindResult(String command, TestTask... expectedHits ) throws IllegalArgumentException, IllegalValueException {
         commandBox.runCommand(command);
