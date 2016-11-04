@@ -67,7 +67,7 @@ public interface Model {
     UnmodifiableObservableList<ReadOnlyTask> getFilteredBeforedueTaskList();
     
     /** Returns the filtered task list according to day as an {@code UnmodifiableObservableList<ReadOnlyTask>} */
-    UnmodifiableObservableList<ReadOnlyTask> getFilteredDayTaskList(String day);
+    UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskListByDay(String day);
     
     /** Returns the filtered task list according to importance as an {@code UnmodifiableObservableList<ReadOnlyTask>} */
     UnmodifiableObservableList<ReadOnlyTask> getFilteredImportanceTaskList(String importance);
@@ -100,7 +100,7 @@ public interface Model {
     void updateFilteredToDoTaskList();
     
     /** Updates the filter of the filtered task list according to day */
-    void updateFilteredDayTaskList(String day);
+    void updateFilteredTaskListByDay(String day);
     
     /** Updates the filter of the filtered task list according to importance */
     void updateFilteredImportanceTaskList(String importance);

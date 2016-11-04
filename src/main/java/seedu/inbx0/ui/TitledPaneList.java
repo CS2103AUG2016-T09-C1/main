@@ -83,56 +83,56 @@ public class TitledPaneList extends UiPart {
     public void handleListToday() {
         taskListPanel = null;
         taskListPanel = TaskListPanel.load(primaryStage, getTaskListPanelPlaceholder(),
-                logic.getFilteredDayTaskList("today"));
+                logic.getFilteredTaskListByDay("today"));
     }
 
     @FXML
     public void handleListMonday() {
         taskListPanel = null;
         taskListPanel = TaskListPanel.load(primaryStage, getTaskListPanelPlaceholder(),
-                logic.getFilteredDayTaskList("Monday"));
+                logic.getFilteredTaskListByDay("Monday"));
     }
 
     @FXML
     public void handleListTuesday() {
         taskListPanel = null;
         taskListPanel = TaskListPanel.load(primaryStage, getTaskListPanelPlaceholder(),
-                logic.getFilteredDayTaskList("Tuesday"));
+                logic.getFilteredTaskListByDay("Tuesday"));
     }
 
     @FXML
     public void handleListWednesday() {
         taskListPanel = null;
         taskListPanel = TaskListPanel.load(primaryStage, getTaskListPanelPlaceholder(),
-                logic.getFilteredDayTaskList("Wednesday"));
+                logic.getFilteredTaskListByDay("Wednesday"));
     }
 
     @FXML
     public void handleListThursday() {
         taskListPanel = null;
         taskListPanel = TaskListPanel.load(primaryStage, getTaskListPanelPlaceholder(),
-                logic.getFilteredDayTaskList("Thursday"));
+                logic.getFilteredTaskListByDay("Thursday"));
     }
 
     @FXML
     public void handleListFriday() {
         taskListPanel = null;
         taskListPanel = TaskListPanel.load(primaryStage, getTaskListPanelPlaceholder(),
-                logic.getFilteredDayTaskList("Friday"));
+                logic.getFilteredTaskListByDay("Friday"));
     }
 
     @FXML
     public void handleListSaturday() {
         taskListPanel = null;
         taskListPanel = TaskListPanel.load(primaryStage, getTaskListPanelPlaceholder(),
-                logic.getFilteredDayTaskList("Saturday"));
+                logic.getFilteredTaskListByDay("Saturday"));
     }
 
     @FXML
     public void handleListSunday() {
         taskListPanel = null;
         taskListPanel = TaskListPanel.load(primaryStage, getTaskListPanelPlaceholder(),
-                logic.getFilteredDayTaskList("Sunday"));
+                logic.getFilteredTaskListByDay("Sunday"));
     }
 
     @FXML

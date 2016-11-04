@@ -60,7 +60,7 @@ public interface Logic {
     ObservableList<ReadOnlyTask> getFilteredToDoTaskList();
     
     /** Returns the filtered list of tasks according to a specific date */
-    ObservableList<ReadOnlyTask> getFilteredDayTaskList(String day);
+    ObservableList<ReadOnlyTask> getFilteredTaskListByDay(String day);
     
     /** Returns the filtered list of tasks according to importance */
     ObservableList<ReadOnlyTask> getFilteredImportanceTaskList(String importance);
