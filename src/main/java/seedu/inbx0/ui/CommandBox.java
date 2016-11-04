@@ -120,7 +120,7 @@ public class CommandBox extends UiPart {
      * Fill in the command box text with the next command test
      */
     private void goToNextCommandText() {
-        if(!logic.getNextCommandText().empty()) {;
+        if(!logic.getNextCommandText().empty()) {
             String nextCommand = logic.popNextCommandText();
             logic.setPreviousCommandText(nextCommand);
             commandTextField.setText(nextCommand);

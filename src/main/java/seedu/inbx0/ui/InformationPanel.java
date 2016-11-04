@@ -17,7 +17,6 @@ import seedu.inbx0.model.task.ReadOnlyTask;
 import java.util.Iterator;
 import java.util.logging.Logger;
 import seedu.inbx0.commons.core.LogsCenter;
-import seedu.inbx0.commons.events.ui.TaskPanelSelectionChangedEvent;
 
 //@@author A0139579J
 public class InformationPanel extends UiPart {

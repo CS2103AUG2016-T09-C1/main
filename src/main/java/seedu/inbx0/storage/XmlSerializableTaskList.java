@@ -7,7 +7,6 @@ import seedu.inbx0.commons.exceptions.IllegalValueException;
 import seedu.inbx0.model.ReadOnlyTaskList;
 import seedu.inbx0.model.reminder.ReminderTask;
 import seedu.inbx0.model.reminder.UniqueReminderList;
-import seedu.inbx0.model.reminder.UniqueReminderList.DuplicateReminderException;
 import seedu.inbx0.model.tag.Tag;
 import seedu.inbx0.model.tag.UniqueTagList;
 import seedu.inbx0.model.task.ReadOnlyTask;
