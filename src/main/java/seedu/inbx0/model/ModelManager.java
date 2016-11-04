@@ -647,7 +647,7 @@ public class ModelManager extends ComponentManager implements Model {
     
     private class DayTaskQualifier implements Qualifier {
         
-        Date day;
+        private Date day;
         
         DayTaskQualifier(String day)  {
             try {

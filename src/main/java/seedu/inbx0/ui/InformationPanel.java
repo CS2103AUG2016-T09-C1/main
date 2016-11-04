@@ -119,7 +119,7 @@ public class InformationPanel extends UiPart {
         @Override
         protected void updateItem(ReminderTask reminder, boolean empty) {
             super.updateItem(reminder, empty);
-            if (empty || reminder.getIsAlive() == false || reminder == null) {
+            if (empty || !reminder.getIsAlive() || reminder == null) {
                 setGraphic(null);
                 setText(null);
             } else {

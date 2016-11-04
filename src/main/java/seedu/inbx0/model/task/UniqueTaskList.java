@@ -181,7 +181,7 @@ public class UniqueTaskList implements Iterable<Task>{
                        ((t.getEndDate().getYear() == currentDate.getYear()) && (t.getEndDate().getMonth() < currentDate.getMonth())) |
                        ((t.getEndDate().getYear() == currentDate.getYear()) && (t.getEndDate().getMonth() == currentDate.getMonth())
                        && (t.getEndDate().getDay() < currentDate.getDay()))) {
-                        if(t.getIsExpired() == false) {
+                        if(!t.getIsExpired()) {
                             t.setExpired(true);
                             changed = true;
                         }             
@@ -207,7 +207,7 @@ public class UniqueTaskList implements Iterable<Task>{
             UniqueReminderList reminders = t.getReminders();
             Iterator<ReminderTask> check = reminders.iterator();
             while(check.hasNext()) {
-                if(check.next().getIsAlive() == false) {
+                if(!check.next().getIsAlive()) {
                     check.remove();
                     changed = true;
                 }

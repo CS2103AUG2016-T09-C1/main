@@ -96,7 +96,7 @@ public class ReminderList extends UiPart {
         UniqueReminderList uniqueReminderList = new UniqueReminderList(task.getReminders());
         Iterator<ReminderTask> check = uniqueReminderList.iterator();
         while (check.hasNext()) {
-            if (check.next().getIsAlive() == false) {
+            if (!check.next().getIsAlive()) {
                 check.remove();
             }
         }

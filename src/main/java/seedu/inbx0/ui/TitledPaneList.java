@@ -212,7 +212,7 @@ public class TitledPaneList extends UiPart {
     }
 
     public void handleShowFilteredListRequestByShowCommand(String filterCondition) {
-        if (filterCondition.equals("today")) {
+        if ("today".equals(filterCondition)) {
             closeAllTitledPane();
             handleListToday();
             
