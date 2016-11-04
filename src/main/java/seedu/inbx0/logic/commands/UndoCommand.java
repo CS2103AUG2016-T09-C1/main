@@ -36,6 +36,7 @@ public class UndoCommand extends Command {
             return new CommandResult(MESSAGE_NOTHING_TO_UNDO);
         }
         
+        indicateCloseReminderListEvent();
         return new CommandResult(MESSAGE_UNDO_TASK_SUCCESS);
     }
     

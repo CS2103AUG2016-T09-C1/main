@@ -1,18 +1,18 @@
 package seedu.inbx0.ui;
 
-import java.util.logging.Logger;
+
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.TitledPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import seedu.inbx0.commons.core.LogsCenter;
 import seedu.inbx0.commons.util.FxViewUtil;
 import seedu.inbx0.logic.Logic;
 
+//@@author A0148044J
 public class TitledPaneList extends UiPart {
-    private static final Logger logger = LogsCenter.getLogger(TitledPaneList.class);
     private static final String FXML = "TitledPaneList.fxml";
     private AnchorPane placeHolderPane;
     private AnchorPane mainPane;
@@ -138,82 +138,82 @@ public class TitledPaneList extends UiPart {
     public void handleListEvent() {
         taskListPanel = null;
         taskListPanel = TaskListPanel.load(primaryStage, getTaskListPanelPlaceholder(),
-                logic.getFilteredEventTaskList());
+                logic.getFilteredTaskListByCategory("Event"));
     }
 
     @FXML
     public void handleListFloating() {
         taskListPanel = null;
         taskListPanel = TaskListPanel.load(primaryStage, getTaskListPanelPlaceholder(),
-                logic.getFilteredFloatTaskList());
+                logic.getFilteredTaskListByCategory("Floating"));
     }
 
     @FXML
     public void handleListDeadline() {
         taskListPanel = null;
         taskListPanel = TaskListPanel.load(primaryStage, getTaskListPanelPlaceholder(),
-                logic.getFilteredDeadlineTaskList());
+                logic.getFilteredTaskListByCategory("Deadline"));
     }
 
     @FXML
     public void handleListRed() {
         taskListPanel = null;
         taskListPanel = TaskListPanel.load(primaryStage, getTaskListPanelPlaceholder(),
-                logic.getFilteredImportanceTaskList("Red"));
+                logic.getFilteredTaskListByImportance("Red"));
     }
 
     @FXML
     public void handleListYellow() {
         taskListPanel = null;
         taskListPanel = TaskListPanel.load(primaryStage, getTaskListPanelPlaceholder(),
-                logic.getFilteredImportanceTaskList("Yellow"));
+                logic.getFilteredTaskListByImportance("Yellow"));
     }
 
     @FXML
     public void handleListGreen() {
         taskListPanel = null;
         taskListPanel = TaskListPanel.load(primaryStage, getTaskListPanelPlaceholder(),
-                logic.getFilteredImportanceTaskList("Green"));
+                logic.getFilteredTaskListByImportance("Green"));
     }
 
     @FXML
     public void handleListNone() {
         taskListPanel = null;
         taskListPanel = TaskListPanel.load(primaryStage, getTaskListPanelPlaceholder(),
-                logic.getFilteredImportanceTaskList(""));
+                logic.getFilteredTaskListByImportance("None"));
     }
 
     @FXML
     public void handleListComplete() {
         taskListPanel = null;
         taskListPanel = TaskListPanel.load(primaryStage, getTaskListPanelPlaceholder(),
-                logic.getFilteredDoneTaskList());
+                logic.getFilteredTaskListByCompleteness(true));
     }
 
     @FXML
     public void handleListIncomplete() {
         taskListPanel = null;
         taskListPanel = TaskListPanel.load(primaryStage, getTaskListPanelPlaceholder(),
-                logic.getFilteredToDoTaskList());
+                logic.getFilteredTaskListByCompleteness(false));
     }
 
     @FXML
     public void handleListExpired() {
         taskListPanel = null;
         taskListPanel = TaskListPanel.load(primaryStage, getTaskListPanelPlaceholder(),
-                logic.getFilteredOverdueTaskList());
+                logic.getFilteredTaskListByExpiry(true));
     }
 
     @FXML
     public void handleListUnexpired() {
         taskListPanel = null;
         taskListPanel = TaskListPanel.load(primaryStage, getTaskListPanelPlaceholder(),
-                logic.getFilteredBeforedueTaskList());
+                logic.getFilteredTaskListByExpiry(false));
     }
 
     public void handleShowFilteredListRequestByShowCommand(String filterCondition) {
         if ("today".equals(filterCondition)) {
-            closeAllTitledPane();
+            closeAllTitledPanes();
             handleListToday();
             
         } else if ("Monday".equals(filterCondition)) {
@@ -272,19 +272,19 @@ public class TitledPaneList extends UiPart {
             handleListUnexpired();
         }
     }
-    
-    public void handleShowNormalTaskList() {
-        closeAllTitledPane();
-        taskListPanel = TaskListPanel.load(primaryStage, getTaskListPanelPlaceholder(),
-                logic.getFilteredToDoTaskList());
-    }
 
-    private void closeAllTitledPane() {
+    public void closeAllTitledPanes() {
         DayTitledPane.setExpanded(false);
         CategoryTitledPane.setExpanded(false);
         ImportanceTitledPane.setExpanded(false);
         CompletenessTitledPane.setExpanded(false);
         ExpiredTitledPane.setExpanded(false);
     }
+    
+    public void scrollTo(int index) {
+        taskListPanel.scrollTo(index);
+    }
+
 }
+//@@author
 

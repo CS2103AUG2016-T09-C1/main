@@ -16,7 +16,7 @@ public class ClearCommand extends Command {
     public CommandResult execute() {
         assert model != null;
         model.resetData(TaskList.getEmptyTaskList());
-        indicateShowNormalTaskListEventCommand();
+//        indicateShowNormalTaskListEventCommand();
         return new CommandResult(MESSAGE_SUCCESS);
     }
     

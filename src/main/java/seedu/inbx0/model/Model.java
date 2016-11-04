@@ -40,36 +40,26 @@ public interface Model {
 
     /** Returns the filtered task list as an {@code UnmodifiableObservableList<ReadOnlyTask>} */
     UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList();
-
-    /** Returns the filtered task list of events or deadlines as an {@code UnmodifiableObservableList<ReadOnlyTask>} */
-    UnmodifiableObservableList<ReadOnlyTask> getFilteredNormalTaskList();
     
-    /** Returns the filtered float task list as an {@code UnmodifiableObservableList<ReadOnlyTask>} */
-    UnmodifiableObservableList<ReadOnlyTask> getFilteredFloatTaskList();
+    //@@author A0148044J
+    /** Returns the filtered task list according to category as an {@code UnmodifiableObservableList<ReadOnlyTask>} */
+    UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskListByCategory(String category);
     
-    /** Returns the filtered event task list as an {@code UnmodifiableObservableList<ReadOnlyTask>} */
-    UnmodifiableObservableList<ReadOnlyTask> getFilteredEventTaskList();
+    /** Returns the filtered task list according to expiry as an {@code UnmodifiableObservableList<ReadOnlyTask>} */
+    UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskListByExpiry(boolean isExpired);
     
-    /** Returns the filtered deadline task list as an {@code UnmodifiableObservableList<ReadOnlyTask>} */
-    UnmodifiableObservableList<ReadOnlyTask> getFilteredDeadlineTaskList();
-    
-    /** Returns the filtered done task list as an {@code UnmodifiableObservableList<ReadOnlyTask>} */
-    UnmodifiableObservableList<ReadOnlyTask> getFilteredDoneTaskList();
-    
-    /** Returns the filtered to do task list as an {@code UnmodifiableObservableList<ReadOnlyTask>} */
-    UnmodifiableObservableList<ReadOnlyTask> getFilteredToDoTaskList();
-    
-    /** Returns the filtered overdue task list as an {@code UnmodifiableObservableList<ReadOnlyTask>} */
-    UnmodifiableObservableList<ReadOnlyTask> getFilteredOverdueTaskList();
-    
-    /** Returns the filtered before due task list as an {@code UnmodifiableObservableList<ReadOnlyTask>} */
-    UnmodifiableObservableList<ReadOnlyTask> getFilteredBeforedueTaskList();
+    /** Returns the filtered task list according to completeness as an {@code UnmodifiableObservableList<ReadOnlyTask>} */
+    UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskListByCompleteness(boolean isCompleted);
     
     /** Returns the filtered task list according to day as an {@code UnmodifiableObservableList<ReadOnlyTask>} */
     UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskListByDay(String day);
     
     /** Returns the filtered task list according to importance as an {@code UnmodifiableObservableList<ReadOnlyTask>} */
-    UnmodifiableObservableList<ReadOnlyTask> getFilteredImportanceTaskList(String importance);
+    UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskListByImportance(String importance);
+    //@@author
+    
+    /** Returns the filtered overdue task list as an {@code UnmodifiableObservableList<ReadOnlyTask>} */
+    UnmodifiableObservableList<ReadOnlyTask> getFilteredOverdueTaskList();
 
     /** Updates the filter of the filtered task list to show all tasks */
     void updateFilteredListToShowAll();
@@ -77,46 +67,36 @@ public interface Model {
     /** Updates the filter of the filtered task list to filter overdue tasks */
     void updateFilteredOverdueTaskList();
     
-    /** Updates the filter of the filtered task list to filter Beforedue tasks */
-    void updateFilteredBeforedueTaskList();  
+    //@@author A0148044J
+    /** Updates the filter of the filtered task list to filter tasks according to expiry*/
+    void updateFilteredTaskListByExpiry(boolean isExpired);  
     
-    /** Updates the filter of the filtered task list to filter events and deadline */
-    void updateFilteredNormalTaskList();
-
-    /** Updates the filter of the filtered task list to filter float tasks*/
-    void updateFilteredFloatTaskList();
+    /** Updates the filter of the filtered task list to filter tasks according to category */
+    void updateFilteredTaskListByCategory(String category);
     
-    /** Updates the filter of the filtered event list to filter float tasks*/
-    void updateFilteredEventTaskList();
-    
-    /** Updates the filter of the filtered deadline list to filter float tasks*/
-    void updateFilteredDeadlineTaskList();
-    
-    /** Updates the filter of the filtered task list to filter done tasks*/
-    void updateFilteredDoneTaskList();
-    
-    /** Updates the filter of the filtered task list to filter to do tasks */
-    void updateFilteredToDoTaskList();
+    /** Updates the filter of the filtered task list to filter tasks according to completeness*/
+    void updateFilteredTaskListByCompleteness(boolean isComplete);
     
     /** Updates the filter of the filtered task list according to day */
     void updateFilteredTaskListByDay(String day);
     
     /** Updates the filter of the filtered task list according to importance */
-    void updateFilteredImportanceTaskList(String importance);
-       
-    /** Updates the filter of the filtered task list to filter by the given date and based on preposition*/
-    void updateFilteredTaskList(String date, String preposition);
+    void updateFilteredTaskListByImportance(String importance);
     
     /** Updates the filter of the filtered task list to filter by the given keywords*/
     void updateFilteredTaskList(boolean logicRelation, List<String> keywords);
     
     /** Sorts the task list by the given type in the given order*/
     void sortTaskList(String type, boolean defaultOrder);
+  //@@author
+    
+    /** Updates the filter of the filtered task list to filter by the given date and based on preposition*/
+    void updateFilteredTaskList(String date, String preposition);
     
     /** Checks expiry of tasks */
     void checkExpiry(Date currentDate, String currentTime);
     
     /** Checks expiry of reminders */
     void checkReminders();
-
+    
 }

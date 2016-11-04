@@ -2,8 +2,9 @@ package seedu.inbx0.logic.commands;
 
 import seedu.inbx0.commons.core.EventsCenter;
 import seedu.inbx0.commons.core.Messages;
-import seedu.inbx0.commons.events.model.ShowNormalTaskListEvent;
+import seedu.inbx0.commons.events.model.CloseAllTitledPanesEvent;
 import seedu.inbx0.commons.events.storage.StoragePathChangedEvent;
+import seedu.inbx0.commons.events.ui.CloseReminderListEvent;
 import seedu.inbx0.commons.events.ui.IncorrectCommandAttemptedEvent;
 import seedu.inbx0.commons.events.ui.JumpToListRequestEvent;
 import seedu.inbx0.model.Model;
@@ -68,10 +69,10 @@ public abstract class Command {
     }
     
     /**
-     * Raises an event to indicate show normal task list
+     * Raises an event to programmably close all titlepanes
      */
-    protected void indicateShowNormalTaskListEventCommand() {
-        EventsCenter.getInstance().post(new ShowNormalTaskListEvent());
+    protected void indicateCloseAllTitledpanesEvent() {
+        EventsCenter.getInstance().post(new CloseAllTitledPanesEvent());
     }
 
     /** Raises an event to indicate the storage has changed - reused from T09-C2*/
@@ -85,5 +86,12 @@ public abstract class Command {
      */
     protected void indicateJumpToListRequestEvent(int index) {
         EventsCenter.getInstance().post(new JumpToListRequestEvent(index));
+    }
+    
+    /**
+     * Raises an event to close the reminder list
+     */
+    protected void indicateCloseReminderListEvent() {
+        EventsCenter.getInstance().post(new CloseReminderListEvent());
     }
 }

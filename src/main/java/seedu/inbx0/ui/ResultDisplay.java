@@ -32,13 +32,11 @@ public class ResultDisplay extends UiPart {
     public void configure() {
         resultDisplayArea = new TextArea();
         resultDisplayArea.setEditable(false);
-//        resultDisplayArea.setId(RESULT_DISPLAY_ID);
-//        resultDisplayArea.getStyleClass().removeAll();
-//        resultDisplayArea.getStyleClass().add(STATUS_BAR_STYLE_SHEET);
+        resultDisplayArea.setId(RESULT_DISPLAY_ID);
+        resultDisplayArea.getStyleClass().removeAll();
+        resultDisplayArea.getStyleClass().add(STATUS_BAR_STYLE_SHEET);
         resultDisplayArea.setText("");
         resultDisplayArea.textProperty().bind(displayed);
-        resultDisplayArea.getStyleClass().add("pane");
-        mainPane.getStyleClass().add("pane");
         FxViewUtil.applyAnchorBoundaryParameters(resultDisplayArea, 0.0, 0.0, 0.0, 0.0);
         mainPane.getChildren().add(resultDisplayArea);
         FxViewUtil.applyAnchorBoundaryParameters(mainPane, 0.0, 0.0, 0.0, 0.0);

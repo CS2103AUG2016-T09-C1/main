@@ -30,6 +30,7 @@ public class LogicManager extends ComponentManager implements Logic {
         this.parser = new Parser();
     }
     
+    //@@author A0148044J
     public Stack<String> getPreviousCommandText() {
         return previousCommandText;
     }
@@ -53,6 +54,7 @@ public class LogicManager extends ComponentManager implements Logic {
     public void setNextCommandText(String commandText) {
         nextCommandText.push(commandText);
     }
+  //@@author
     
     @Override
     public CommandResult execute(String commandText) {
@@ -78,55 +80,26 @@ public class LogicManager extends ComponentManager implements Logic {
         command.setData(model);
         return command.execute();
     }
-
-/*    @Override
-    public ObservableList<ReadOnlyTask> getBackingTaskList() {
-        return model.getBackingTaskList();
-    }*/
     
     @Override
     public ObservableList<ReadOnlyTask> getFilteredTaskList() {
         return model.getFilteredTaskList();
     }
     
+    //@@author A0148044J
     @Override
-    public ObservableList<ReadOnlyTask> getFilteredNormalTaskList() {
-        return model.getFilteredNormalTaskList();
+    public ObservableList<ReadOnlyTask> getFilteredTaskListByCategory(String category) {
+        return model.getFilteredTaskListByCategory(category);
     }
     
     @Override
-    public ObservableList<ReadOnlyTask> getFilteredFloatTaskList() {
-        return model.getFilteredFloatTaskList();
-    }
-    
-    @Override
-    public ObservableList<ReadOnlyTask> getFilteredDoneTaskList() {
-        return model.getFilteredDoneTaskList();
-    }
-    
-    @Override
-    public ObservableList<ReadOnlyTask> getFilteredToDoTaskList() {
-        return model.getFilteredToDoTaskList();
-    }
-    
-    @Override
-    public ObservableList<ReadOnlyTask> getFilteredOverdueTaskList() {
-        return model.getFilteredOverdueTaskList();
+    public ObservableList<ReadOnlyTask> getFilteredTaskListByCompleteness(boolean isComplete) {
+        return model.getFilteredTaskListByCompleteness(isComplete);
     }
 
     @Override
-    public ObservableList<ReadOnlyTask> getFilteredBeforedueTaskList() {
-        return model.getFilteredBeforedueTaskList();
-    }
-
-    @Override
-    public ObservableList<ReadOnlyTask> getFilteredEventTaskList() {
-        return model.getFilteredEventTaskList();
-    }
-
-    @Override
-    public ObservableList<ReadOnlyTask> getFilteredDeadlineTaskList() {
-        return model.getFilteredDeadlineTaskList();
+    public ObservableList<ReadOnlyTask> getFilteredTaskListByExpiry(boolean isExpired) {
+        return model.getFilteredTaskListByExpiry(isExpired);
     }
 
     @Override
@@ -135,7 +108,13 @@ public class LogicManager extends ComponentManager implements Logic {
     }
 
     @Override
-    public ObservableList<ReadOnlyTask> getFilteredImportanceTaskList(String importance) {
-        return model.getFilteredImportanceTaskList(importance);
+    public ObservableList<ReadOnlyTask> getFilteredTaskListByImportance(String importance) {
+        return model.getFilteredTaskListByImportance(importance);
+    }
+    //@@author
+    
+    @Override
+    public ObservableList<ReadOnlyTask> getFilteredOverdueTaskList() {
+        return model.getFilteredOverdueTaskList();
     }
 }

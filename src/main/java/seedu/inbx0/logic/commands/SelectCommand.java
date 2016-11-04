@@ -36,7 +36,7 @@ public class SelectCommand extends Command {
             return new CommandResult(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
 
-        EventsCenter.getInstance().post(new JumpToListRequestEvent(targetIndex - 1));
+        indicateJumpToListRequestEvent(targetIndex - 1);
         return new CommandResult(String.format(MESSAGE_SELECT_TASK_SUCCESS, targetIndex));
 
     }

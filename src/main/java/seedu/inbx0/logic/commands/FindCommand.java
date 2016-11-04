@@ -41,6 +41,8 @@ public class FindCommand extends Command {
 	@Override  
 	public CommandResult execute() {
 	    model.updateFilteredTaskList(logicRelation, keywordSet);
+	    indicateCloseAllTitledpanesEvent();
+	    indicateCloseReminderListEvent();
 	    return new CommandResult(getMessageForTaskListShownSummary(model.getFilteredTaskList().size()));
     }
 
@@ -48,5 +50,5 @@ public class FindCommand extends Command {
     public boolean canUndo() {
         return false;
     }
-
 }
+//@@author

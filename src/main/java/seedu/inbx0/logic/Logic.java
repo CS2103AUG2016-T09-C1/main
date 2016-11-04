@@ -29,41 +29,24 @@ public interface Logic {
      */
     CommandResult removeReminders();
     
-    /** Returns the backing list of tasks */
-   // ObservableList<ReadOnlyTask> getBackingTaskList();
-    
     /** Returns the filtered list of tasks */
     ObservableList<ReadOnlyTask> getFilteredTaskList();
     
-    /** Returns the filtered list of overdue tasks */
-    ObservableList<ReadOnlyTask> getFilteredOverdueTaskList();
+    //@@author A0148044J
+    /** Returns the filtered list of tasks according to category */
+    ObservableList<ReadOnlyTask> getFilteredTaskListByCategory(String category);
         
-    /** Returns the filtered list of overdue tasks */
-    ObservableList<ReadOnlyTask> getFilteredBeforedueTaskList();
+    /** Returns the filtered list of tasks according to expiry*/
+    ObservableList<ReadOnlyTask> getFilteredTaskListByExpiry(boolean isExpired);
     
-    /** Returns the filtered list of float tasks */
-    ObservableList<ReadOnlyTask> getFilteredFloatTaskList();
-    
-    /** Returns the filtered list of event or deadline */
-    ObservableList<ReadOnlyTask> getFilteredNormalTaskList();
-    
-    /** Returns the filtered list of event or deadline */
-    ObservableList<ReadOnlyTask> getFilteredEventTaskList();
-    
-    /** Returns the filtered list of deadline */
-    ObservableList<ReadOnlyTask> getFilteredDeadlineTaskList();
-    
-    /** Returns the filtered list of done tasks */
-    ObservableList<ReadOnlyTask> getFilteredDoneTaskList();
-    
-    /** Returns the filtered list of uncompleted tasks */
-    ObservableList<ReadOnlyTask> getFilteredToDoTaskList();
+    /** Returns the filtered list of tasks according to completeness*/
+    ObservableList<ReadOnlyTask> getFilteredTaskListByCompleteness(boolean isComplete);
     
     /** Returns the filtered list of tasks according to a specific date */
     ObservableList<ReadOnlyTask> getFilteredTaskListByDay(String day);
     
     /** Returns the filtered list of tasks according to importance */
-    ObservableList<ReadOnlyTask> getFilteredImportanceTaskList(String importance);
+    ObservableList<ReadOnlyTask> getFilteredTaskListByImportance(String importance);
     
     /** Returns the command text of the previous command */
     Stack<String> getPreviousCommandText();
@@ -82,4 +65,8 @@ public interface Logic {
     
     /** Push the command text to the nextCommand stack*/
     void setNextCommandText(String commandText);
+    //@@author
+    
+    /** Returns the filtered list of overdue tasks */
+	ObservableList<ReadOnlyTask> getFilteredOverdueTaskList();
 }

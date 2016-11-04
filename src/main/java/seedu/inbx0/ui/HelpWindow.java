@@ -57,7 +57,6 @@ public class HelpWindow extends UiPart {
     public void keyPressed(KeyEvent evt) {
         if(evt.getCode().equals(KeyCode.ENTER)) {
             handleCloseHelpWindow();
-        }
-        
+        }     
     }
 }

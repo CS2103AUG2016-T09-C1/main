@@ -65,14 +65,14 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void resetData(ReadOnlyTaskList newData) {
         taskList.resetData(newData);
-        updateFilteredListToShowAll();
+//        updateFilteredListToShowAll();
         indicateTaskListChanged();
     }
     
     @Override
     public synchronized void sortTaskList(String type, boolean defaultOrder) {
         taskList.getUniqueTaskList().sortUniqueTaskList(type, defaultOrder);
-        updateFilteredListToShowAll();
+//        updateFilteredListToShowAll();
         indicateTaskListChanged();
     }
     @Override
@@ -117,7 +117,6 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
         taskList.removeTask(target);
-        updateFilteredListToShowAll();
         indicateTaskListChanged();
     }
     
@@ -125,11 +124,9 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public synchronized void editTask(ReadOnlyTask target, Task task) throws TaskNotFoundException, DuplicateTaskException {
         taskList.editTask(target, task);
-        updateFilteredListToShowAll();
         indicateTaskListChanged();
     }
     
-    //@@author A0139579J
     @Override
     public synchronized void markTaskComplete(ReadOnlyTask target, Task task) throws TaskNotFoundException {
         taskList.markTaskComplete(target, task);
@@ -150,8 +147,7 @@ public class ModelManager extends ComponentManager implements Model {
         if(taskList.checkExpiry(currentDate, currentTime))
             indicateTaskListChanged();
     }
-    
-    //@@author A0139579J
+
     @Override
     public synchronized void checkReminders() {
         if(taskList.checkReminders())
@@ -164,52 +160,24 @@ public class ModelManager extends ComponentManager implements Model {
         return new UnmodifiableObservableList<>(filteredTasks);
     }
     
-    //@@author A0148044J
-    @Override
-    public UnmodifiableObservableList<ReadOnlyTask> getFilteredNormalTaskList() {
-        updateFilteredNormalTaskList();
-        return getFilteredTaskList();
-    }
-
-    @Override
-    public UnmodifiableObservableList<ReadOnlyTask> getFilteredDoneTaskList() {
-        updateFilteredDoneTaskList();
-        return getFilteredTaskList();
-    }
-    
-    @Override
-    public UnmodifiableObservableList<ReadOnlyTask> getFilteredToDoTaskList() {
-        updateFilteredToDoTaskList();
-        return getFilteredTaskList();
-    }
-    
-    @Override
-    public UnmodifiableObservableList<ReadOnlyTask> getFilteredFloatTaskList() {
-        updateFilteredFloatTaskList();
-        return getFilteredTaskList();
-    }
     //@@author A0139579J
     @Override
     public UnmodifiableObservableList<ReadOnlyTask> getFilteredOverdueTaskList() {    
         updateFilteredOverdueTaskList();
-        return getFilteredTaskList();
+        return new UnmodifiableObservableList<>(filteredOverdueTasks);
     }
+    //@@author
+    
     //@@author A0148044J
     @Override
-    public UnmodifiableObservableList<ReadOnlyTask> getFilteredEventTaskList() {
-        updateFilteredEventTaskList();
+    public UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskListByCategory(String category) {
+        updateFilteredTaskListByCategory(category);
         return getFilteredTaskList();
     }
 
     @Override
-    public UnmodifiableObservableList<ReadOnlyTask> getFilteredDeadlineTaskList() {
-        updateFilteredDeadlineTaskList();
-        return getFilteredTaskList();
-    }
-
-    @Override
-    public UnmodifiableObservableList<ReadOnlyTask> getFilteredBeforedueTaskList() {
-        updateFilteredBeforedueTaskList();
+    public UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskListByExpiry(boolean isExpired) {
+        updateFilteredTaskListByExpiry(isExpired);
         return getFilteredTaskList();
     }
 
@@ -220,26 +188,21 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public UnmodifiableObservableList<ReadOnlyTask> getFilteredImportanceTaskList(String importance) {
-        updateFilteredImportanceTaskList(importance);
+    public UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskListByImportance(String importance) {
+        updateFilteredTaskListByImportance(importance);
         return getFilteredTaskList();
     }
     
+    @Override
+    public UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskListByCompleteness(boolean isComplete) {
+        updateFilteredTaskListByCompleteness(isComplete);
+        return getFilteredTaskList();
+    }
     //@@author
+    
     @Override
     public void updateFilteredListToShowAll() {
         filteredTasks.setPredicate(null);
-    }
-    
-    //@@author A0148044J
-    @Override
-    public void updateFilteredTaskList(boolean logicRelation, List<String> keywords){
-        if(logicRelation) {
-            updateFilteredTaskList(new PredicateExpression(new LogicQualifier(keywords)));
-        }
-        else {
-            updateFilteredTaskList(new PredicateExpression(new OrQualifier(keywords)));
-        }
     }
     
     /*
@@ -255,105 +218,76 @@ public class ModelManager extends ComponentManager implements Model {
         else
             updateFilteredTaskList(new PredicateExpression(new EndUntilDateQualifier(date)));
     }
-    
-    //@@author A0148044J
-    @Override
-    public void updateFilteredNormalTaskList() {
-        updateFilteredNormalTaskList(new PredicateExpression(new NormalTaskQualifier()));
-    }
-    
-    @Override
-    public void updateFilteredFloatTaskList() {
-        updateFilteredFloatTaskList(new PredicateExpression(new FloatTaskQualifier()));
-    }
-    
-    @Override
-    public void updateFilteredDoneTaskList() {
-        updateFilteredDoneTaskList(new PredicateExpression(new DoneTaskQualifier()));
-    }
-    
-    @Override
-    public void updateFilteredToDoTaskList() {
-        updateFilteredToDoTaskList(new PredicateExpression(new ToDoTaskQualifier()));
-    }    
+        
     //@@author A0139579J
     @Override
     public void updateFilteredOverdueTaskList() {
         updateFilteredOverdueTaskList(new PredicateExpression(new OverdueTaskQualifier()));
     }
-    //@@author A0148044J
+
+	//@@author A0148044J
+    /*
+     * Updates the list according to show command with parameters under category titledpane
+     */
     @Override
-    public void updateFilteredBeforedueTaskList() {
-        updateFilteredBeforedueTaskList(new PredicateExpression(new BeforedueTaskQualifier()));
+    public void updateFilteredTaskListByCategory(String category) {
+        updateFilteredTaskList(new PredicateExpression(new CategoryTaskQualifier(category)));
     }
     
+    /*
+     * Updates the list according to show command with parameters under completeness titledpane
+     */
     @Override
-    public void updateFilteredEventTaskList() {
-        updateFilteredEventTaskList(new PredicateExpression(new EventTaskQualifier()));
-        
+    public void updateFilteredTaskListByCompleteness(boolean isCompleted) {
+        updateFilteredTaskList(new PredicateExpression(new CompletenessTaskQualifier(isCompleted)));
     }
-
+    
+    /*
+     * Updates the list according to show command with parameters under expiry titledpane
+     */
     @Override
-    public void updateFilteredDeadlineTaskList() {
-        updateFilteredDeadlineTaskList(new PredicateExpression(new DeadlineTaskQualifier()));
-        
+    public void updateFilteredTaskListByExpiry(boolean isExpired) {
+        updateFilteredTaskList(new PredicateExpression(new ExpiryTaskQualifier(isExpired)));
     }
-
+    
+    /*
+     * Updates the list according to show command with parameters under day titledpane
+     */
     @Override
     public void updateFilteredTaskListByDay(String day) {
-        updateFilteredTaskListByDay(new PredicateExpression(new DayTaskQualifier(day)));        
+        updateFilteredTaskList(new PredicateExpression(new DayTaskQualifier(day)));        
     }
-
+    
+    /*
+     * Updates the list according to show command with parameters under importance titledpane
+     */
     @Override
-    public void updateFilteredImportanceTaskList(String importance) {
-        updateFilteredImportanceTaskList(new PredicateExpression(new ImportanceTaskQualifier(importance)));
-        
+    public void updateFilteredTaskListByImportance(String importance) {
+        updateFilteredTaskList(new PredicateExpression(new ImportanceTaskQualifier(importance)));       
+    }
+    
+    /*
+     * Updates the list according to find command with keywords
+     */
+    @Override
+    public void updateFilteredTaskList(boolean logicRelation, List<String> keywords){
+        if(logicRelation) {
+            updateFilteredTaskList(new PredicateExpression(new LogicQualifier(keywords)));
+        }
+        else {
+            updateFilteredTaskList(new PredicateExpression(new OrQualifier(keywords)));
+        }
     }
     //@@author
+ 
     private void updateFilteredTaskList(Expression expression) {
         filteredTasks.setPredicate(expression::satisfies);
     }
-    //@@author A0148044J
-    private void updateFilteredNormalTaskList(Expression expression) {
-    	filteredTasks.setPredicate(expression::satisfies);
-    }
-
-    private void updateFilteredFloatTaskList(Expression expression) {
-    	filteredTasks.setPredicate(expression::satisfies);
-    }
-    
-    private void updateFilteredDoneTaskList(Expression expression) {
-    	filteredTasks.setPredicate(expression::satisfies);
-    }
-    
-    private void updateFilteredToDoTaskList(Expression expression) {
-    	filteredTasks.setPredicate(expression::satisfies);
-    }
     
     private void updateFilteredOverdueTaskList(Expression expression) {
-        filteredOverdueTasks.setPredicate(expression::satisfies);
-        filteredTasks.setPredicate(expression::satisfies);
-    }
+    	filteredOverdueTasks.setPredicate(expression::satisfies);
+	}
     
-    private void updateFilteredBeforedueTaskList(Expression expression) {
-    	filteredTasks.setPredicate(expression::satisfies);
-    }
-    
-    private void updateFilteredEventTaskList(Expression expression) {
-    	filteredTasks.setPredicate(expression::satisfies);
-    }
-    
-    private void updateFilteredDeadlineTaskList(Expression expression) {
-    	filteredTasks.setPredicate(expression::satisfies);
-    }
-    
-    private void updateFilteredTaskListByDay(Expression expression) {
-    	filteredTasks.setPredicate(expression::satisfies);
-    }
-    
-    private void updateFilteredImportanceTaskList(Expression expression) {
-    	filteredTasks.setPredicate(expression::satisfies);
-    }
     //@@author 
     //========== Inner classes/interfaces used for filtering ==================================================
 
@@ -457,137 +391,67 @@ public class ModelManager extends ComponentManager implements Model {
         }
     }
     
-    private class NormalTaskQualifier implements Qualifier {
-        NormalTaskQualifier() {
+    private class CategoryTaskQualifier implements Qualifier {
+    	private String category;
+    	CategoryTaskQualifier(String category) {
+    		this.category = category;
         }
 
         @Override
         public boolean run(ReadOnlyTask task) {
-            return !task.getIsFloatTask();
+        	if ("Floating".equals(category)) {
+        		return task.getIsFloatTask();
+        	} else if ("Event".equals(category)) {
+        		return task.getIsEvent();
+        	} else if ("Deadline".equals(category)) {
+        		return !task.getIsEvent() && !task.getIsEvent();
+        	}
+        	return false;
         }
 
         @Override
         public String toString() {
-            return "isNotFloatTask";
+            return "Category=" + category;
         }
     }
     
-    private class FloatTaskQualifier implements Qualifier {
-        
-        FloatTaskQualifier() {
+    private class ExpiryTaskQualifier implements Qualifier {
+        boolean isExpired;
+        ExpiryTaskQualifier(boolean isExpired) {
+        	this.isExpired = isExpired;
         }
         
         @Override
         public boolean run(ReadOnlyTask task) {
-            return task.getIsFloatTask();
+        	if (isExpired) {
+        		return task.getIsExpired();
+        	}
+        	return !task.getIsExpired();
         }
         
         @Override
         public String toString() {
-            return "isFloatTask";
+            return "Expiry of the task: " + isExpired;
         }
     }
     
-    private class EventTaskQualifier implements Qualifier {
-        
-        EventTaskQualifier() {
+    private class CompletenessTaskQualifier implements Qualifier {
+        private boolean isComplete;
+        CompletenessTaskQualifier(boolean isComplete) {
+        	this.isComplete = isComplete;
         }
         
         @Override
         public boolean run(ReadOnlyTask task) {
-            return task.getIsEvent();
-        }
-        
-        @Override
-        public String toString() {
-            return "isEvent";
-        }
-    }    
-    
-    private class DeadlineTaskQualifier implements Qualifier {
-        
-        DeadlineTaskQualifier() {
-        }
-        
-        @Override
-        public boolean run(ReadOnlyTask task) {
-            return !(task.getIsEvent() || task.getIsFloatTask());
-        }
-        
-        @Override
-        public String toString() {
-            return "isDeadline";
-        }
-    }
-    
-    private class BeforedueTaskQualifier implements Qualifier {
-        
-        BeforedueTaskQualifier() {
-        }
-        
-        @Override
-        public boolean run(ReadOnlyTask task) {
-            return !task.getIsExpired();
-        }
-        
-        @Override
-        public String toString() {
-            return "isBeforedue";
-        }
-    }
-    
-    //@@author A0139579J
-    private class OverdueTaskQualifier implements Qualifier {
-        
-        OverdueTaskQualifier() {
-        }
-        
-        @Override
-        public boolean run(ReadOnlyTask task) {
-            return (task.getIsExpired() && !task.getIsCompleted() &&
-                    task.getStartDate().value.equals("") && task.getStartTime().value.equals("") &&
-                    !task.getEndDate().equals("") && !task.getEndDate().equals("")) | 
-                    (task.getIsExpired() && !task.getIsCompleted() &&
-                     task.getStartDate().value.equals("") && task.getStartTime().value.equals("") &&
-                     !task.getEndDate().equals("") && task.getEndDate().equals(""));
-        }
-        
-        @Override
-        public String toString() {
-            return "isExpired";
-        }
-    }
-    
-    //@@author A0148044J
-    private class ToDoTaskQualifier implements Qualifier {
-        
-        ToDoTaskQualifier() {
-        }
-        
-        @Override
-        public boolean run(ReadOnlyTask task) {
+        	if(isComplete) {
+        		return task.getIsCompleted();
+        	}
             return !task.getIsCompleted();
         }
         
         @Override
         public String toString() {
-            return "isNotCompleted";
-        }
-    }
-    
-    private class DoneTaskQualifier implements Qualifier {
-        
-        DoneTaskQualifier() {
-        }
-        
-        @Override
-        public boolean run(ReadOnlyTask task) {
-            return task.getIsCompleted();
-        }
-        
-        @Override
-        public String toString() {
-            return "isCompleted";
+            return "Completeness of the task: " + isComplete;
         }
     }
     
@@ -634,6 +498,29 @@ public class ModelManager extends ComponentManager implements Model {
             return "Importance: " + this.importance;
         }
     }
+    //@@author
+    
+    //@@author A0139579J
+    private class OverdueTaskQualifier implements Qualifier {
+        
+        OverdueTaskQualifier() {
+        }
+        
+        @Override
+        public boolean run(ReadOnlyTask task) {
+            return (task.getIsExpired() && !task.getIsCompleted() &&
+                    task.getStartDate().value.equals("") && task.getStartTime().value.equals("") &&
+                    !task.getEndDate().equals("") && !task.getEndDate().equals("")) | 
+                    (task.getIsExpired() && !task.getIsCompleted() &&
+                     task.getStartDate().value.equals("") && task.getStartTime().value.equals("") &&
+                     !task.getEndDate().equals("") && task.getEndDate().equals(""));
+        }
+        
+        @Override
+        public String toString() {
+            return "isExpired";
+        }
+    }
     
     //@@author A0139579J
     private class StartOnAndEndOnDateQualifier implements Qualifier {
@@ -645,7 +532,7 @@ public class ModelManager extends ComponentManager implements Model {
         
         @Override
         public boolean run(ReadOnlyTask task) {
-            return (date.equals(task.getStartDate().value) | date.equals(task.getEndDate().value));
+            return (date.equals(task.getStartDate().value) | date.equals(task.getEndDate().value)) && !task.getIsCompleted();
         }
         
         @Override
@@ -694,7 +581,7 @@ public class ModelManager extends ComponentManager implements Model {
             if (taskIsAfterCurrentDate && taskIsBeforeDueDate)
                 isBeforeOrOnDueButAfterOrOnCurrent = true;
            
-            return isBeforeOrOnDueButAfterOrOnCurrent;
+            return isBeforeOrOnDueButAfterOrOnCurrent && !task.getIsCompleted();
                    
         }
         

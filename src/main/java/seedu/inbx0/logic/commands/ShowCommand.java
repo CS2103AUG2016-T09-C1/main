@@ -26,6 +26,7 @@ public class ShowCommand extends Command {
     @Override
     public CommandResult execute() {
         EventsCenter.getInstance().post(new ShowFilteredListRequestEvent(filterCondition));
+        indicateCloseReminderListEvent();
         return new CommandResult(SHOWING_FILTERED_LIST_MESSAGE + " with keyword " + filterCondition);
     }
 

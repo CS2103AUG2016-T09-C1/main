@@ -10,8 +10,9 @@ import seedu.inbx0.MainApp;
 import seedu.inbx0.commons.core.ComponentManager;
 import seedu.inbx0.commons.core.Config;
 import seedu.inbx0.commons.core.LogsCenter;
-import seedu.inbx0.commons.events.model.ShowNormalTaskListEvent;
+import seedu.inbx0.commons.events.model.CloseAllTitledPanesEvent;
 import seedu.inbx0.commons.events.storage.DataSavingExceptionEvent;
+import seedu.inbx0.commons.events.ui.CloseReminderListEvent;
 import seedu.inbx0.commons.events.ui.JumpToListRequestEvent;
 import seedu.inbx0.commons.events.ui.ShowFilteredListRequestEvent;
 import seedu.inbx0.commons.events.ui.TaskPanelSelectionChangedEvent;
@@ -128,13 +129,19 @@ public class UiManager extends ComponentManager implements Ui {
     @Subscribe
     private void handleJumpToListRequestEvent(JumpToListRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        mainWindow.getTaskListPanel().scrollTo(event.targetIndex);
+        mainWindow.getTitledPaneList().scrollTo(event.targetIndex);
     }
 
     @Subscribe
     private void handleTaskPanelSelectionChangedEvent(TaskPanelSelectionChangedEvent event){
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        mainWindow.getReminderList().updateReminderList(event.getNewSelection());
+        mainWindow.updateReminderList(event.getNewSelection());
+    }
+    
+    @Subscribe 
+    private void handleCloseReminderListEvent(CloseReminderListEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        mainWindow.closeReminderList();
     }
     
     @Subscribe
@@ -144,8 +151,8 @@ public class UiManager extends ComponentManager implements Ui {
     }
     
     @Subscribe 
-    private void handleShowNormalTaskList(ShowNormalTaskListEvent event) {
+    private void handleCloseAllTitledpanesEvent(CloseAllTitledPanesEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        mainWindow.getTitledPaneList().handleShowNormalTaskList();
+        mainWindow.getTitledPaneList().closeAllTitledPanes();
     }
 }

@@ -39,12 +39,6 @@ public class ReminderList extends UiPart {
     private Label endTime;
     @FXML
     private Label tags;
-    /*private Label NAME = new Label("Task Name");
-    private Label STARTDATE = new Label("Start Date");
-    private Label STARTTIME = new Label("Start Time");
-    private Label ENDDATE = new Label("End Date");
-    private Label ENDTIME = new Label("End Time");
-    private Label TAGS = new Label("Tags");*/
     
     
     public ReminderList() {
@@ -74,34 +68,46 @@ public class ReminderList extends UiPart {
     }
 
     public void displayInfo(ReadOnlyTask task) {
-        name.setText(task.getName().getName());
-        startDate.setText(task.getStartDate().getTotalDate());
-        startTime.setText(task.getStartTime().getTime());
-        endDate.setText(task.getEndDate().getTotalDate());
-        endTime.setText(task.getEndTime().getTime());
-        tags.setText(task.tagsString());
+    	if(task == null) {
+    		name.setText(null);
+            startDate.setText(null);
+            startTime.setText(null);
+            endDate.setText(null);
+            endTime.setText(null);
+            tags.setText(null);
+    	} else {
+		    name.setText(task.getName().getName());
+		    startDate.setText(task.getStartDate().getTotalDate());
+		    startTime.setText(task.getStartTime().getTime());
+		    endDate.setText(task.getEndDate().getTotalDate());
+		    endTime.setText(task.getEndTime().getTime());
+		    tags.setText(task.tagsString());
+    	}
     }
     
     private void configure(ReadOnlyTask task){
         addToPlaceholder();
-        reminderListView.getStyleClass().add("pane");
-        if (task != null) {
-            displayInfo(task);
-            displayReminder(task);
-        }
+        reminderListView.getStyleClass().add("pane");        
+        displayInfo(task);
+        displayReminder(task);
+        
     }
     
     
     private void displayReminder(ReadOnlyTask task) {
-        UniqueReminderList uniqueReminderList = new UniqueReminderList(task.getReminders());
-        Iterator<ReminderTask> check = uniqueReminderList.iterator();
-        while (check.hasNext()) {
-            if (!check.next().getIsAlive()) {
-                check.remove();
-            }
-        }
-        ObservableList<ReminderTask> reminderList = uniqueReminderList.getInternalList();
-        setConnections(reminderList);	
+    	if(task == null) {
+    		reminderListView = null;
+    	} else {
+		    UniqueReminderList uniqueReminderList = new UniqueReminderList(task.getReminders());
+		    Iterator<ReminderTask> check = uniqueReminderList.iterator();
+		    while (check.hasNext()) {
+		        if (!check.next().getIsAlive()) {
+		            check.remove();
+		        }
+		    }
+		    ObservableList<ReminderTask> reminderList = uniqueReminderList.getInternalList();
+		    setConnections(reminderList);	
+    	}
 	}
 
 	private void setConnections(ObservableList<ReminderTask> reminderList) {

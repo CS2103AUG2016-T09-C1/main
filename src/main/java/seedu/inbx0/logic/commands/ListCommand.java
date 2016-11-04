@@ -61,13 +61,13 @@ public class ListCommand extends Command {
     @Override
     public CommandResult execute() {
         if(checkDate.equals("") && preposition.equals("")) {
-            model.updateFilteredListToShowAll();
-            indicateShowNormalTaskListEventCommand();
+            model.updateFilteredTaskListByCompleteness(false);
+            indicateCloseAllTitledpanesEvent();
             return new CommandResult(MESSAGE_SUCCESS);
         }
         else {
                 model.updateFilteredTaskList(checkDate, preposition);
-                indicateShowNormalTaskListEventCommand();
+                indicateCloseAllTitledpanesEvent();
                 return new CommandResult(getMessageForTaskListShownSummary(model.getFilteredTaskList().size()));
         }       
     }

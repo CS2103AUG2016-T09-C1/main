@@ -28,13 +28,6 @@ public class MainWindow extends UiPart {
 
     private Logic logic;
 
-    // Independent Ui parts residing in this Ui container
-    // private BrowserPanel browserPanel;
-    // private TaskListPanel floatTaskListPanel;
-    // private TaskListPanel taskListPanel;
-    //private TaskListPanel upperTaskListPanel;
-    //private InformationPanel bottomReminderListPanel;
-    //private MainDisplayPanel mainDisplayPanel;
     private ResultDisplay resultDisplay;
     private TitledPaneList titledPaneList;
     private TaskListPanel taskListPanel;
@@ -106,7 +99,6 @@ public class MainWindow extends UiPart {
     }
 
     public static MainWindow load(Stage primaryStage, Config config, UserPrefs prefs, Logic logic) {
-
         MainWindow mainWindow = UiPartLoader.loadUiPart(primaryStage, new MainWindow());
         mainWindow.configure(config.getAppTitle(), config.getTaskListName(), config, prefs, logic);
         return mainWindow;
@@ -137,7 +129,8 @@ public class MainWindow extends UiPart {
         
         setAccelerators();
     }
-
+    
+    //@@author A0148044J
     private void setAccelerators() {
         helpMenuItem.setAccelerator(KeyCombination.valueOf("Ctrl+F1"));
         antiqueWhiteMenuItem.setAccelerator(KeyCombination.valueOf("Ctrl+1"));
@@ -149,10 +142,11 @@ public class MainWindow extends UiPart {
         pinkMenuItem.setAccelerator(KeyCombination.valueOf("Ctrl+7"));
         resetMenuItem.setAccelerator(KeyCombination.valueOf("Ctrl+8"));
     }
-
+    //@@author
+    
     void fillInnerParts() {
         reminderList = ReminderList.load(primaryStage, getReminderListPlaceholder(), null);
-        taskListPanel = TaskListPanel.load(primaryStage, getTaskListPanelPlaceholder(), logic.getFilteredToDoTaskList());
+        taskListPanel = TaskListPanel.load(primaryStage, getTaskListPanelPlaceholder(), logic.getFilteredTaskListByCompleteness(false));
         titledPaneList = TitledPaneList.load(primaryStage, getTitledPanePlaceholder(), logic, taskListPanel, getTaskListPanelPlaceholder());
         resultDisplay = ResultDisplay.load(primaryStage, getResultDisplayPlaceholder());
         statusBarFooter = StatusBarFooter.load(primaryStage, getStatusbarPlaceholder(), config.getTaskListFilePath());
@@ -228,6 +222,7 @@ public class MainWindow extends UiPart {
         OverdueTaskWindow overdueTaskWindow = OverdueTaskWindow.load(primaryStage, logic);
         overdueTaskWindow.show();
     }
+  //@@author 
     
     public void show() {
         primaryStage.show();
@@ -246,12 +241,9 @@ public class MainWindow extends UiPart {
         reminderWindow.show();
     }
     
+    //@@author A0148044J
     public TaskListPanel getTaskListPanel() {
         return taskListPanel;
-    }
-
-    public ReminderList getReminderList() {
-    	return reminderList;
     }
 
     public TitledPaneList getTitledPaneList() {
@@ -304,4 +296,13 @@ public class MainWindow extends UiPart {
     private void handleReset() {
     	scene.getStylesheets().clear();
     }
+    
+    public void updateReminderList(ReadOnlyTask newSelection) {
+    	reminderList.updateReminderList(newSelection);
+    }
+    
+    public void closeReminderList() {
+    	reminderList.updateReminderList(null);
+    }
 }
+//@@author

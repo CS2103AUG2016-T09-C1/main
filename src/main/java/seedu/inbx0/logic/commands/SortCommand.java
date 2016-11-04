@@ -26,7 +26,7 @@ public class SortCommand extends Command {
     @Override
     public CommandResult execute() {
         model.sortTaskList(type, defaultOrder);
-        indicateShowNormalTaskListEventCommand();
+        indicateCloseReminderListEvent();
         return new CommandResult(MESSAGE_SORT_TASK_SUCCESS);
     }
 
@@ -34,5 +34,5 @@ public class SortCommand extends Command {
     public boolean canUndo() {
         return true;
     }
-
 }
+//@@author
