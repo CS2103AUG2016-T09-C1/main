@@ -1,10 +1,10 @@
 [![Build Status](https://travis-ci.org/CS2103AUG2016-T09-C1/main.svg?branch=master)](https://travis-ci.org/CS2103AUG2016-T09-C1/main)
 [![Coverage Status](https://coveralls.io/repos/github/CS2103AUG2016-T09-C1/main/badge.svg?branch=master)](https://coveralls.io/github/CS2103AUG2016-T09-C1/main?branch=master)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/b7ce457af55147bb8affd74be4e18443)](https://www.codacy.com/app/ashley_2461994/main?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=CS2103AUG2016-T09-C1/main&amp;utm_campaign=Badge_Grade)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/9f47ec570dd14298b5be4eccb9efa273)](https://www.codacy.com/app/ashley_2461994/main?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=CS2103AUG2016-T09-C1/main&amp;utm_campaign=Badge_Grade)
 
 # Inbx_0
 
-<img src="docs/images/Ui.png" width="600"><br>
+<img src="docs/images/GUI.png" width="600"><br>
 
 * This is a desktop Task Manager application. It has a GUI but most of the user interactions happen using 
   a CLI (Command Line Interface).

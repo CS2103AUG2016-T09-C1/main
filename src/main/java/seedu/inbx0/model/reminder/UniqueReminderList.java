@@ -21,7 +21,9 @@ import seedu.inbx0.commons.util.CollectionUtil;
  */
 //@@author A0139579J
 public class UniqueReminderList implements Iterable<ReminderTask> {
-
+    
+    private final ObservableList<ReminderTask> internalList = FXCollections.observableArrayList();
+    
     /**
      * Signals that an operation would have violated the 'no duplicates' property of the list.
      */
@@ -38,9 +40,7 @@ public class UniqueReminderList implements Iterable<ReminderTask> {
      */
     @SuppressWarnings("serial")
     public static class ReminderNotFoundException extends Exception {}
-    
-    private final ObservableList<ReminderTask> internalList = FXCollections.observableArrayList();
-    
+
     /**
      * Constructs empty ReminderList.
      */

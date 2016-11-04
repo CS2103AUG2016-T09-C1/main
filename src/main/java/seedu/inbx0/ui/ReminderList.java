@@ -8,7 +8,6 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SplitPane;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import seedu.inbx0.model.reminder.ReminderTask;
@@ -86,7 +85,7 @@ public class ReminderList extends UiPart {
     private void configure(ReadOnlyTask task){
         addToPlaceholder();
         reminderListView.getStyleClass().add("pane");
-        if(task != null) {
+        if (task != null) {
             displayInfo(task);
             displayReminder(task);
         }
@@ -96,8 +95,8 @@ public class ReminderList extends UiPart {
     private void displayReminder(ReadOnlyTask task) {
         UniqueReminderList uniqueReminderList = new UniqueReminderList(task.getReminders());
         Iterator<ReminderTask> check = uniqueReminderList.iterator();
-        while(check.hasNext()) {
-            if(check.next().getIsAlive() == false) {
+        while (check.hasNext()) {
+            if (!check.next().getIsAlive()) {
                 check.remove();
             }
         }
@@ -126,7 +125,7 @@ public class ReminderList extends UiPart {
         @Override
         protected void updateItem(ReminderTask reminder, boolean empty) {
             super.updateItem(reminder, empty);
-            if (empty || reminder.getIsAlive() == false || reminder == null) {
+            if (empty || !reminder.getIsAlive() || reminder == null) {
                 setGraphic(null);
                 setText(null);
             } else {

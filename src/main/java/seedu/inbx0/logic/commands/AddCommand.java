@@ -3,7 +3,6 @@ package seedu.inbx0.logic.commands;
 import java.util.HashSet;
 import java.util.Set;
 
-import seedu.inbx0.commons.events.ui.TaskPanelSelectionChangedEvent;
 import seedu.inbx0.commons.exceptions.IllegalValueException;
 import seedu.inbx0.model.task.*;
 import seedu.inbx0.model.reminder.UniqueReminderList;

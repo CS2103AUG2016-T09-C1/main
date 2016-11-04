@@ -11,13 +11,10 @@ public class RemoveReminder extends Command {
     
     private static final String MESSAGE_SUCCESS = "Successfully checked for activated reminders";
     
-    public RemoveReminder() {}
-    
     public CommandResult execute() {
         assert model != null;
         model.checkReminders();
         return new CommandResult(MESSAGE_SUCCESS);
-
     }
 
     @Override

@@ -2,7 +2,6 @@ package seedu.inbx0.model;
 
 import java.util.List;
 
-import javafx.collections.ObservableList;
 import seedu.inbx0.commons.core.UnmodifiableObservableList;
 import seedu.inbx0.model.task.Task;
 import seedu.inbx0.model.task.Date;

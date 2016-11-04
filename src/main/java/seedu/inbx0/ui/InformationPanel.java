@@ -17,7 +17,6 @@ import seedu.inbx0.model.task.ReadOnlyTask;
 import java.util.Iterator;
 import java.util.logging.Logger;
 import seedu.inbx0.commons.core.LogsCenter;
-import seedu.inbx0.commons.events.ui.TaskPanelSelectionChangedEvent;
 
 //@@author A0139579J
 public class InformationPanel extends UiPart {
@@ -114,13 +113,10 @@ public class InformationPanel extends UiPart {
     
     class ReminderListViewCell extends ListCell<ReminderTask> {
 
-        public ReminderListViewCell() {
-        }
-
         @Override
         protected void updateItem(ReminderTask reminder, boolean empty) {
             super.updateItem(reminder, empty);
-            if (empty || reminder.getIsAlive() == false || reminder == null) {
+            if (empty || !reminder.getIsAlive() || reminder == null) {
                 setGraphic(null);
                 setText(null);
             } else {

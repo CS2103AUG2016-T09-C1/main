@@ -3,21 +3,12 @@ package seedu.inbx0.ui;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.web.WebView;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
-import seedu.inbx0.model.task.ReadOnlyTask;
 import java.util.logging.Logger;
 import seedu.inbx0.commons.core.LogsCenter;
-import seedu.inbx0.commons.util.FxViewUtil;
-import seedu.inbx0.logic.Logic;
 
 public class HelpWindow extends UiPart {
     

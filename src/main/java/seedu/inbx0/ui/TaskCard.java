@@ -71,23 +71,23 @@ public class TaskCard extends UiPart{
         else
             isExpired.setText("");
         */
-        if(task.getLevel().getNumberLevel() == 1 && task.getIsExpired() == true && task.getIsEvent() == true) 
+        if (task.getLevel().getNumberLevel() == 1 && task.getIsExpired() && task.getIsEvent()) 
             cardPane.setStyle("-fx-background-color: rgba(0, 245, 0, 0.1);");
-        else if(task.getLevel().getNumberLevel() == 1)
+        else if (task.getLevel().getNumberLevel() == 1)
             cardPane.setStyle("-fx-background-color: rgba(0, 255, 0, 0.8);");
-        else if(task.getLevel().getNumberLevel() == 2 && task.getIsExpired() == true && task.getIsEvent() == true)
+        else if (task.getLevel().getNumberLevel() == 2 && task.getIsExpired() && task.getIsEvent())
             cardPane.setStyle("-fx-background-color: rgba(245, 245, 0, 0.1);");
-        else if(task.getLevel().getNumberLevel() == 2)
+        else if (task.getLevel().getNumberLevel() == 2)
             cardPane.setStyle("-fx-background-color: rgba(255, 255, 0, 0.8);");
-        else if(task.getLevel().getNumberLevel() == 3 && task.getIsExpired() == true && task.getIsEvent() == true)
+        else if (task.getLevel().getNumberLevel() == 3 && task.getIsExpired() && task.getIsEvent())
             cardPane.setStyle("-fx-background-color: rgba(245, 0, 0, 0.1);");
-        else if(task.getLevel().getNumberLevel() == 3)
+        else if (task.getLevel().getNumberLevel() == 3)
             cardPane.setStyle("-fx-background-color: rgba(255, 0, 0, 0.8);");
         
-        if(task.getIsCompleted()) {
+        if (task.getIsCompleted()) {
             isCompleted.setText("\u2713");
             isCompleted.setStyle("-fx-font-size: 24;");
-        }else {
+        } else {
             isCompleted.setText("\u2717");
             isCompleted.setStyle("-fx-font-size: 24;");
         }   /* if(task.getIsExpired() == true && task.getIsEvent() == true) {
@@ -105,8 +105,8 @@ public class TaskCard extends UiPart{
         hasReminders.setText("");
         UniqueReminderList reminders = task.getReminders();
         Iterator<ReminderTask> check = reminders.iterator();
-        while(check.hasNext()) {
-            if(check.next().getIsAlive() == true) {
+        while (check.hasNext()) {
+            if (check.next().getIsAlive() == true) {
                hasReminders.setText("\uD83D\uDD14");
                break;
             }

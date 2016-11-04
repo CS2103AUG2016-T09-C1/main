@@ -20,12 +20,12 @@ import seedu.inbx0.model.task.Time;
 //@@author A0139579J
 public class ReminderTask {
     
-    Toolkit toolkit;
-    Timer timer;
-    Date date;
-    Time time;
-    ReadOnlyTask task;
-    boolean isAlive;
+    private Toolkit toolkit;
+    private Timer timer;
+    private Date date;
+    private Time time;
+    private ReadOnlyTask task;
+    private boolean isAlive;
     
     public ReminderTask(Date date, Time time, ReadOnlyTask task, boolean isAlive) {
         toolkit = Toolkit.getDefaultToolkit();
@@ -41,23 +41,21 @@ public class ReminderTask {
             e.printStackTrace();
         }
         
-        if(currentDate.value.equals(date.value)) {
-            if(!("").equals(time.getTime())) {
-            int reminderTime = Integer.parseInt(time.getTime().replaceAll("\\D+",""));
-            int reminderHour = reminderTime / 100;
-            int reminderMin = reminderTime % 100;
-            
-            Calendar calendar = Calendar.getInstance();
-            calendar.set(Calendar.HOUR_OF_DAY, reminderHour);
-            calendar.set(Calendar.MINUTE, reminderMin);
-            calendar.set(Calendar.SECOND, 0);
-            
-            java.util.Date timerRemind = calendar.getTime();
-            timer = new Timer();
-            timer.schedule(new ReminderMessage(), timerRemind);
-            }
-            else
-            {
+        if (currentDate.value.equals(date.value)) {
+            if (!("").equals(time.getTime())) {
+                int reminderTime = Integer.parseInt(time.getTime().replaceAll("\\D+",""));
+                int reminderHour = reminderTime / 100;
+                int reminderMin = reminderTime % 100;
+                
+                Calendar calendar = Calendar.getInstance();
+                calendar.set(Calendar.HOUR_OF_DAY, reminderHour);
+                calendar.set(Calendar.MINUTE, reminderMin);
+                calendar.set(Calendar.SECOND, 0);
+                
+                java.util.Date timerRemind = calendar.getTime();
+                timer = new Timer();
+                timer.schedule(new ReminderMessage(), timerRemind);
+            } else {
                 timer = new Timer();
                 timer.schedule(new ReminderMessage(), 1);
             }

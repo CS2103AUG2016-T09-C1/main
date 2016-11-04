@@ -248,9 +248,9 @@ public class ModelManager extends ComponentManager implements Model {
     //@@author A0139579J
     @Override
     public void updateFilteredTaskList(String date, String preposition){
-        if(preposition.equals(""))
+        if("".equals(preposition))
             updateFilteredTaskList(new PredicateExpression(new StartOnAndEndOnDateQualifier(date)));
-        else if(preposition.equals("overdue"))
+        else if("overdue".equals(preposition))
             updateFilteredTaskList(new PredicateExpression(new OverdueTaskQualifier()));
         else
             updateFilteredTaskList(new PredicateExpression(new EndUntilDateQualifier(date)));
@@ -593,7 +593,7 @@ public class ModelManager extends ComponentManager implements Model {
     
     private class DayTaskQualifier implements Qualifier {
         
-        Date day;
+        private Date day;
         
         DayTaskQualifier(String day)  {
             try {
@@ -616,7 +616,7 @@ public class ModelManager extends ComponentManager implements Model {
     
     private class ImportanceTaskQualifier implements Qualifier {
         
-        String importance;
+        private String importance;
         
         ImportanceTaskQualifier(String importance)  {
             this.importance = importance;
@@ -679,19 +679,19 @@ public class ModelManager extends ComponentManager implements Model {
             int dueByMonth = (dueByNumberDate / 10000) % 100;
             int dueByYear = dueByNumberDate % 10000;
              
-            if(task.getEndDate().getYear() > today.getYear() |
-              (task.getEndDate().getYear() == today.getYear() && task.getEndDate().getMonth() > today.getMonth()) |
-              (task.getEndDate().getYear() == today.getYear() && task.getEndDate().getMonth() == today.getMonth() &&
-              task.getEndDate().getDay() >= today.getDay()))       
+            if (task.getEndDate().getYear() > today.getYear() | 
+               (task.getEndDate().getYear() == today.getYear() && task.getEndDate().getMonth() > today.getMonth()) |
+               (task.getEndDate().getYear() == today.getYear() && task.getEndDate().getMonth() == today.getMonth() &&
+               task.getEndDate().getDay() >= today.getDay()))       
                 taskIsAfterCurrentDate = true;
             
-            if((dueByYear > task.getEndDate().getYear()) |
+            if ((dueByYear > task.getEndDate().getYear()) |
                (dueByYear == task.getEndDate().getYear() && dueByMonth > task.getEndDate().getMonth()) |
                (dueByYear == task.getEndDate().getYear() && dueByMonth == task.getEndDate().getMonth() &&
                dueByDay >= task.getEndDate().getDay()))
                 taskIsBeforeDueDate = true;
             
-            if(taskIsAfterCurrentDate == true && taskIsBeforeDueDate == true)
+            if (taskIsAfterCurrentDate && taskIsBeforeDueDate)
                 isBeforeOrOnDueButAfterOrOnCurrent = true;
            
             return isBeforeOrOnDueButAfterOrOnCurrent;

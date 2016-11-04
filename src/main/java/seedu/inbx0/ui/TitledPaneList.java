@@ -10,7 +10,6 @@ import javafx.stage.Stage;
 import seedu.inbx0.commons.core.LogsCenter;
 import seedu.inbx0.commons.util.FxViewUtil;
 import seedu.inbx0.logic.Logic;
-import seedu.inbx0.model.task.ReadOnlyTask;
 
 public class TitledPaneList extends UiPart {
     private static final Logger logger = LogsCenter.getLogger(TitledPaneList.class);
@@ -213,62 +212,62 @@ public class TitledPaneList extends UiPart {
     }
 
     public void handleShowFilteredListRequestByShowCommand(String filterCondition) {
-        if (filterCondition.equals("today")) {
+        if ("today".equals(filterCondition)) {
             closeAllTitledPane();
             handleListToday();
             
-        } else if (filterCondition.equals("Monday")) {
+        } else if ("Monday".equals(filterCondition)) {
             DayTitledPane.setExpanded(true);
             handleListMonday();
-        } else if (filterCondition.equals("Tuesday")) {
+        } else if ("Tuesday".equals(filterCondition)) {
             DayTitledPane.setExpanded(true);
             handleListTuesday();
-        } else if (filterCondition.equals("Wednesday")) {
+        } else if ("Wednesday".equals(filterCondition)) {
             DayTitledPane.setExpanded(true);
             handleListWednesday();
-        } else if (filterCondition.equals("Thursday")) {
+        } else if ("Thursday".equals(filterCondition)) {
             DayTitledPane.setExpanded(true);
             handleListThursday();
-        } else if (filterCondition.equals("Friday")) {
+        } else if ("Friday".equals(filterCondition)) {
             DayTitledPane.setExpanded(true);
             handleListFriday();
-        } else if (filterCondition.equals("Saturday")) {
+        } else if ("Saturday".equals(filterCondition)) {
             DayTitledPane.setExpanded(true);
             handleListSaturday();
-        } else if (filterCondition.equals("Sunday")) {
+        } else if ("Sunday".equals(filterCondition)) {
             DayTitledPane.setExpanded(true);
             handleListSunday();
-        } else if (filterCondition.equals("Event")) {
+        } else if ("Event".equals(filterCondition)) {
             CategoryTitledPane.setExpanded(true);
             handleListEvent();
-        } else if (filterCondition.equals("Floating")) {
+        } else if ("Floating".equals(filterCondition)) {
             CategoryTitledPane.setExpanded(true);
             handleListFloating();
-        } else if (filterCondition.equals("Deadline")) {
+        } else if ("Deadline".equals(filterCondition)) {
             CategoryTitledPane.setExpanded(true);
             handleListDeadline();
-        } else if (filterCondition.equals("Red")) {
+        } else if ("Red".equals(filterCondition)) {
             ImportanceTitledPane.setExpanded(true);
             handleListRed();
-        } else if (filterCondition.equals("Yellow")) {
+        } else if ("Yellow".equals(filterCondition)) {
             ImportanceTitledPane.setExpanded(true);
             handleListYellow();
-        } else if (filterCondition.equals("Green")) {
+        } else if ("Green".equals(filterCondition)) {
             ImportanceTitledPane.setExpanded(true);
             handleListGreen();
-        } else if (filterCondition.equals("None")) {
+        } else if ("None".equals(filterCondition)) {
             ImportanceTitledPane.setExpanded(true);
             handleListNone();
-        } else if (filterCondition.equals("Complete")) {
+        } else if ("Complete".equals(filterCondition)) {
             CompletenessTitledPane.setExpanded(true);
             handleListComplete();
-        } else if (filterCondition.equals("Incomplete")) {
+        } else if ("Incomplete".equals(filterCondition)) {
             CompletenessTitledPane.setExpanded(true);
             handleListIncomplete();
-        } else if (filterCondition.equals("Expired")) {
+        } else if ("Expired".equals(filterCondition)) {
             ExpiredTitledPane.setExpanded(true);
             handleListExpired();
-        } else if (filterCondition.equals("Unexpired")) {
+        } else if ("Unexpired".equals(filterCondition)) {
             ExpiredTitledPane.setExpanded(true);
             handleListUnexpired();
         }

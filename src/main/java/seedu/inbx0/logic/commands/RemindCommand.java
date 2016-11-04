@@ -84,14 +84,14 @@ public class RemindCommand extends Command {
         int currentHour = currentTime / 100;
         int currentMin = currentTime % 100;
         
-        if(startTime == null) {
+        if (time == null) {
             return false;
         }
-        if(("").equals(startTime.value)) {
+        if (("").equals(time.value)) {
             isValidTime = true;
         } else {
             
-            int reminderTime = Integer.parseInt(startTime.getTime().replaceAll("\\D+",""));
+            int reminderTime = Integer.parseInt(time.getTime().replaceAll("\\D+",""));
             int reminderHour = reminderTime / 100;
             int reminderMin = reminderTime % 100;
             
@@ -104,21 +104,18 @@ public class RemindCommand extends Command {
         int currentMonth = currentDate.getMonth();
         int currentYear = currentDate.getYear();
         
-        int reminderDay = startDate.getDay();
-        int reminderMonth = startDate.getMonth();
-        int reminderYear = startDate.getYear();
+        int reminderDay = date.getDay();
+        int reminderMonth = date.getMonth();
+        int reminderYear = date.getYear();
         
-        if((reminderYear > currentYear) |
+        if ((reminderYear > currentYear) |
            (reminderYear == currentYear && reminderMonth > currentMonth) |
            (reminderYear == currentYear && reminderMonth == currentMonth && reminderDay >= currentDay))
             isValidDate = true;
         
-        if(isValidDate && isValidTime) {
-            return true;
-        } else {
-            return false;
-        }
+        return (isValidDate && isValidTime);
     }
+    
     private Task createToEditWithTask(String[] editArguments, UniqueTagList tags, UniqueReminderList reminders) throws IllegalValueException {
         Task toEditWith = new Task (
                 new Name(editArguments[TASK_NAME]),
@@ -144,8 +141,8 @@ public class RemindCommand extends Command {
         originalArguments[TASK_END_TIME] = taskToEdit.getEndTime().getTime();
         originalArguments[TASK_IMPORTANCE] = taskToEdit.getLevel().getLevel();
             
-        for(int i = 0; i < TOTAL_NUMBER_OF_ARGUMENTS; i++) {
-            if(editArguments[i] == null)
+        for (int i = 0; i < TOTAL_NUMBER_OF_ARGUMENTS; i++) {
+            if (editArguments[i] == null)
                 editArguments[i] = originalArguments[i];                       
         }
         
@@ -154,9 +151,9 @@ public class RemindCommand extends Command {
     
     private UniqueTagList obtainUniqueTagList(ReadOnlyTask taskToEdit) {
         
-        UniqueTagList original = taskToEdit.getTags();
+        UniqueTagList originalTagList = taskToEdit.getTags();
               
-        return original;
+        return originalTagList;
       }
       
       private UniqueReminderList obtainUniqueReminderList(ReadOnlyTask taskToEdit, ReminderTask reminder) {
@@ -175,7 +172,7 @@ public class RemindCommand extends Command {
 
         UnmodifiableObservableList<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
         
-        if(!isValidDateAndTime(startDate, startTime)) {
+        if (!isValidDateAndTime(startDate, startTime)) {
             return new CommandResult(MESSAGE_REMINDER_CONSTRAINTS);
         }
         if (lastShownList.size() < targetIndex) {
