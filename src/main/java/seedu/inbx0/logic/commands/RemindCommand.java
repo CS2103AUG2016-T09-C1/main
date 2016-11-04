@@ -84,14 +84,14 @@ public class RemindCommand extends Command {
         int currentHour = currentTime / 100;
         int currentMin = currentTime % 100;
         
-        if (startTime == null) {
+        if (time == null) {
             return false;
         }
-        if (("").equals(startTime.value)) {
+        if (("").equals(time.value)) {
             isValidTime = true;
         } else {
             
-            int reminderTime = Integer.parseInt(startTime.getTime().replaceAll("\\D+",""));
+            int reminderTime = Integer.parseInt(time.getTime().replaceAll("\\D+",""));
             int reminderHour = reminderTime / 100;
             int reminderMin = reminderTime % 100;
             
@@ -104,9 +104,9 @@ public class RemindCommand extends Command {
         int currentMonth = currentDate.getMonth();
         int currentYear = currentDate.getYear();
         
-        int reminderDay = startDate.getDay();
-        int reminderMonth = startDate.getMonth();
-        int reminderYear = startDate.getYear();
+        int reminderDay = date.getDay();
+        int reminderMonth = date.getMonth();
+        int reminderYear = date.getYear();
         
         if ((reminderYear > currentYear) |
            (reminderYear == currentYear && reminderMonth > currentMonth) |
@@ -115,6 +115,7 @@ public class RemindCommand extends Command {
         
         return (isValidDate && isValidTime);
     }
+    
     private Task createToEditWithTask(String[] editArguments, UniqueTagList tags, UniqueReminderList reminders) throws IllegalValueException {
         Task toEditWith = new Task (
                 new Name(editArguments[TASK_NAME]),

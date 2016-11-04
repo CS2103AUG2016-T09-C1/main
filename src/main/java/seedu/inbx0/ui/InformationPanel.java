@@ -113,9 +113,6 @@ public class InformationPanel extends UiPart {
     
     class ReminderListViewCell extends ListCell<ReminderTask> {
 
-        public ReminderListViewCell() {
-        }
-
         @Override
         protected void updateItem(ReminderTask reminder, boolean empty) {
             super.updateItem(reminder, empty);
