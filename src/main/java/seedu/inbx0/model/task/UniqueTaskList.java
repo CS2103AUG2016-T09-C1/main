@@ -107,18 +107,16 @@ public class UniqueTaskList implements Iterable<Task>{
             throw new TaskNotFoundException();
         }
         
-        if (contains(toEditWith)) {           
-            if(internalList.indexOf(toEditWith) != editTaskIndex |
+        if (contains(toEditWith) && (internalList.indexOf(toEditWith) != editTaskIndex |
               ((toEdit.getName() == toEditWith.getName()) && 
                (toEdit.getStartDate().equals(toEditWith.getStartDate())) &&
                (toEdit.getStartTime().equals(toEditWith.getStartTime())) &&
                (toEdit.getEndDate().equals(toEditWith.getEndDate())) &&
                (toEdit.getEndTime().equals(toEditWith.getEndTime())) &&                
                (toEdit.getLevel().equals(toEditWith.getLevel())) &&
-               (toEdit.getTags().equals(toEditWith.getTags()))))             
+               (toEdit.getTags().equals(toEditWith.getTags()))))) {         
                 throw new DuplicateTaskException();
         }       
-        
         
         boolean taskEdited = false;
         final Task taskFoundAndEdited = internalList.set(editTaskIndex, toEditWith);  
