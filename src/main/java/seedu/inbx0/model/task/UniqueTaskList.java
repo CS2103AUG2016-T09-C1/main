@@ -238,9 +238,9 @@ public class UniqueTaskList implements Iterable<Task>{
         return internalList.hashCode();
     }
     
+    //@@author A0148044J
     /**
      * A comparator use to compare the name of tasks
-     * @author A0148044J
      */
     class NameComparator implements Comparator<Task> {
         @Override
@@ -309,5 +309,5 @@ public class UniqueTaskList implements Iterable<Task>{
             return taskToCompare.getLevel().getNumberLevel() - task.getLevel().getNumberLevel();
         }
     }
-    
+    //@@author
 }
