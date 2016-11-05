@@ -161,6 +161,12 @@ public class ModelManager extends ComponentManager implements Model {
         indicateTaskListChanged();
     }
     
+    @Override
+    public synchronized void removeAllTasksFromShownList(UnmodifiableObservableList<ReadOnlyTask> list) {
+        taskList.removeAllTasksFromShownList(list);
+        indicateTaskListChanged();
+    }
+    
     //@@author A0139579J
     @Override
     public synchronized void editTask(ReadOnlyTask target, Task task) throws TaskNotFoundException, DuplicateTaskException {

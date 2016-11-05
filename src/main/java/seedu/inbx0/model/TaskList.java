@@ -8,6 +8,7 @@ import seedu.inbx0.model.task.ReadOnlyTask;
 import seedu.inbx0.model.task.UniqueTaskList;
 import seedu.inbx0.model.task.UniqueTaskList.DuplicateTaskException;
 import seedu.inbx0.model.task.UniqueTaskList.TaskNotFoundException;
+import seedu.inbx0.commons.core.UnmodifiableObservableList;
 import seedu.inbx0.commons.exceptions.IllegalValueException;
 import seedu.inbx0.model.reminder.ReminderTask;
 import seedu.inbx0.model.reminder.UniqueReminderList;
@@ -140,6 +141,10 @@ public class TaskList implements ReadOnlyTaskList, HistoryState<TaskList> {
         } else {
             throw new UniqueTaskList.TaskNotFoundException();
         }
+    }
+    
+    public boolean removeAllTasksFromShownList(UnmodifiableObservableList<ReadOnlyTask> list) {
+        return tasks.removeAll(list);     
     }
     
     public boolean editTask(ReadOnlyTask key, Task t) throws UniqueTaskList.TaskNotFoundException, DuplicateTaskException {
