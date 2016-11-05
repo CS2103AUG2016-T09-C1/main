@@ -24,4 +24,9 @@ public class RemoveReminder extends Command {
     public boolean canUndo() {
         return false;
     }
+    
+    @Override
+    public boolean canRedo() {
+        return false;
+    }
 }
