@@ -37,7 +37,6 @@ public class RedoCommand extends Command{
             return new CommandResult(MESSAGE_NOTHING_TO_REDO);
         }
         
-        indicateUpdateAllTitledpanesEvent();
         return new CommandResult(MESSAGE_REDO_TASK_SUCCESS);
     }
     

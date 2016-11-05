@@ -1,0 +1,9 @@
+diff a/src/main/java/seedu/inbx0/logic/commands/AddCommand.java b/src/main/java/seedu/inbx0/logic/commands/AddCommand.java	(rejected hunks)
+@@ -154,6 +154,7 @@
+         try {
+             model.addTask(toAdd);
+             indicateCloseAllTitledpanesEvent();
++            indicateUpdateAllTitledpanesEvent();
+             indicateJumpToListRequestEvent(model.getTaskList().getTaskList().indexOf(toAdd));
+             return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
+         } catch (UniqueTaskList.DuplicateTaskException e) {

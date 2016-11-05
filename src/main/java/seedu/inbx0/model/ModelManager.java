@@ -451,7 +451,7 @@ public class ModelManager extends ComponentManager implements Model {
         	} else if ("Event".equals(category)) {
         		return task.getIsEvent();
         	} else if ("Deadline".equals(category)) {
-        		return !task.getIsEvent() && !task.getIsEvent();
+        		return !task.getIsEvent() && !task.getIsFloatTask();
         	}
         	return false;
         }

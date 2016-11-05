@@ -35,8 +35,6 @@ public class UndoCommand extends Command {
         if (commandsUndone == 0){
             return new CommandResult(MESSAGE_NOTHING_TO_UNDO);
         }
-        
-        indicateUpdateAllTitledpanesEvent();
         return new CommandResult(MESSAGE_UNDO_TASK_SUCCESS);
     }
     

@@ -89,7 +89,6 @@ public class MarkCompleteCommand extends Command {
             
             try {
                 model.markTaskComplete(toMarkTaskCompleted, completedTask);
-                indicateUpdateAllTitledpanesEvent();
             } catch (TaskNotFoundException tnfe) {
                 assert false : "The target task cannot be missing";
             }

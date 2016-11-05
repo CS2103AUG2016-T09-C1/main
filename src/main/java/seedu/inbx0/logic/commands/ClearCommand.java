@@ -28,7 +28,6 @@ public class ClearCommand extends Command {
 
         model.removeAllTasksFromShownList(lastShownList);
         indicateCloseReminderListEvent();
-        indicateUpdateAllTitledpanesEvent();
         } else {
             model.resetData(TaskList.getEmptyTaskList());
         }

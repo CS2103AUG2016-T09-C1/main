@@ -7,7 +7,6 @@ import seedu.inbx0.commons.events.storage.StoragePathChangedEvent;
 import seedu.inbx0.commons.events.ui.CloseReminderListEvent;
 import seedu.inbx0.commons.events.ui.IncorrectCommandAttemptedEvent;
 import seedu.inbx0.commons.events.ui.JumpToListRequestEvent;
-import seedu.inbx0.commons.events.ui.UpdateAllTitledPanesEvent;
 import seedu.inbx0.model.Model;
 
 /**
@@ -74,13 +73,6 @@ public abstract class Command {
      */
     protected void indicateCloseAllTitledpanesEvent() {
         EventsCenter.getInstance().post(new CloseAllTitledPanesEvent());
-    }
-    
-    /**
-     * Raises an event to programmably update all titlepanes
-     */
-    protected void indicateUpdateAllTitledpanesEvent() {
-        EventsCenter.getInstance().post(new UpdateAllTitledPanesEvent());
     }
 
     /** Raises an event to indicate the storage has changed - reused from T09-C2*/
