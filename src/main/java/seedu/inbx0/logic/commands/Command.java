@@ -59,14 +59,6 @@ public abstract class Command {
      */
     public abstract boolean canUndo();
     //@@author
-    
-    //@@author A0135797M
-    /**
-     * 
-     * @return true if this command can be redone.
-     */
-    public abstract boolean canRedo();
-    //@@author
 
     /**
      * Raises an event to indicate an attempt to execute an incorrect command

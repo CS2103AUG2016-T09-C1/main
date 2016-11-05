@@ -42,6 +42,7 @@ public class ModelManager extends ComponentManager implements Model {
     private final FilteredList<Task> filteredDayTasks;
     private final FilteredList<Task> filteredImportanceTasks;
     private HistoryList<TaskList> taskListHistory;
+    private HistoryList<TaskList> redoTaskListHistory;
 
     /**
      * Initializes a ModelManager with the given TaskList
@@ -67,6 +68,7 @@ public class ModelManager extends ComponentManager implements Model {
         filteredDayTasks = new FilteredList<>(taskList.getTasks());
         filteredImportanceTasks = new FilteredList<>(taskList.getTasks());
         taskListHistory = new HistoryList<TaskList>();
+        redoTaskListHistory = new HistoryList<TaskList>();
     }
 
     public ModelManager() {
@@ -87,6 +89,7 @@ public class ModelManager extends ComponentManager implements Model {
         filteredDayTasks = new FilteredList<>(taskList.getTasks());
         filteredImportanceTasks = new FilteredList<>(taskList.getTasks());
         taskListHistory = new HistoryList<TaskList>();
+        redoTaskListHistory = new HistoryList<TaskList>();
     }
 
     @Override
@@ -119,11 +122,15 @@ public class ModelManager extends ComponentManager implements Model {
         
         int numUndone = 0;
         TaskList historyList = null;
-        TaskList redoList = null;
         try {
             for (int i = 0; i < stepsBack; i++) {
-            	redoList = taskListHistory.getLast();
+                TaskList redoTaskList = historyList;
+                if (redoTaskList == null) {
+                    redoTaskList = taskList;
+                }
+                
                 historyList = taskListHistory.popState();
+                redoTaskListHistory.pushState(redoTaskList);
                 numUndone++;
             }
         } catch (EmptyHistoryException e) {
@@ -137,7 +144,41 @@ public class ModelManager extends ComponentManager implements Model {
         return numUndone;
     }
     //@@author
+    
+    //@@author A0135797M
+    @Override
+    public int redoTaskListHistory(int numToRedo) {
+        assert numToRedo > 0;
 
+        int numRedone = 0;
+        TaskList historyList = null;
+        try {
+            for (int i = 0; i < numToRedo; i++) {
+                TaskList undoTaskList = historyList;
+                if (undoTaskList == null) {
+                    undoTaskList = taskList;
+                }
+                
+                historyList = redoTaskListHistory.popState();
+                taskListHistory.pushState(undoTaskList);
+                numRedone++;
+            }
+        } catch (EmptyHistoryException e) {
+            logger.fine(e.getMessage());
+        }
+
+        if (historyList != null) {
+            resetData(historyList);
+        }
+        return numRedone;
+    }
+
+    @Override
+    public void clearRedoTaskListHistory() {
+        redoTaskListHistory = new HistoryList<TaskList>();
+    }
+    //@@author
+    
     /** Raises an event to indicate the model has changed */
     private void indicateTaskListChanged() {
         raise(new TaskListChangedEvent(taskList));

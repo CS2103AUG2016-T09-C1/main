@@ -11,7 +11,8 @@ public class RedoCommand extends Command{
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Redo a previously entered undo command(s)\n"
-            + "Example: " + COMMAND_WORD ;
+            + "Parameters: [STEPS_FORWARD]\n"
+            + "Example: " + COMMAND_WORD  + " 2";
 
     public static final String MESSAGE_REDO_TASK_SUCCESS = "Previous Undo Command redone successfully.";
     public static final String MESSAGE_NOTHING_TO_REDO = "Please undo a command, before you use redo!";
@@ -21,14 +22,18 @@ public class RedoCommand extends Command{
     public RedoCommand() {
         stepsBack = 1;
     }
+    
+    public RedoCommand(int stepsBack) {
+        this.stepsBack = stepsBack;
+    }
      
     @Override
     public CommandResult execute() {
         assert model != null;
         
-        int commandsUndone = model.undoTaskListHistory(stepsBack);
+        int commandsRedone = model.redoTaskListHistory(stepsBack);
         
-        if (commandsUndone == 0){
+        if (commandsRedone == 0){
             return new CommandResult(MESSAGE_NOTHING_TO_REDO);
         }
         
@@ -37,11 +42,6 @@ public class RedoCommand extends Command{
     
     @Override
     public boolean canUndo() {
-        return false;
-    }
-    
-    @Override
-    public boolean canRedo() {
         return false;
     }
 }

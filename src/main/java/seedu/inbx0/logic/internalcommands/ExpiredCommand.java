@@ -50,10 +50,5 @@ public class ExpiredCommand extends Command {
     public boolean canUndo() {
         return false;
     }
-    
-    @Override
-    public boolean canRedo() {
-        return false;
-    }
 }
 

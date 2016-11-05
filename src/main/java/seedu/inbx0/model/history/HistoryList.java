@@ -58,20 +58,6 @@ public class HistoryList<T extends HistoryState<T>> {
         return historyList.removeLast();
     }
     
-    /*
-     * Implements getLast() method, found in Linked Lists
-     * 
-     * @return The HistoryState object
-     * @throws EmptyHistoryException if the history queue is empty
-     */
-    
-    public T getLast() throws EmptyHistoryException {
-        if (historyList.size() <= 0)
-            throw new EmptyHistoryException();
-        
-        return historyList.getLast();    	
-    }
-    
     @SuppressWarnings("serial")
     public static class EmptyHistoryException extends Exception {
         protected EmptyHistoryException() {

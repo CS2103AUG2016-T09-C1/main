@@ -60,8 +60,10 @@ public class LogicManager extends ComponentManager implements Logic {
         Command command = parser.parseCommand(commandText);
         previousCommandText.push(commandText);
         command.setData(model);
-        if(command.canUndo())
+        if (command.canUndo()) {
             model.saveTaskListHistory();
+            model.clearRedoTaskListHistory();
+        }
         return command.execute();
     }
     
@@ -78,11 +80,6 @@ public class LogicManager extends ComponentManager implements Logic {
         command.setData(model);
         return command.execute();
     }
-
-/*    @Override
-    public ObservableList<ReadOnlyTask> getBackingTaskList() {
-        return model.getBackingTaskList();
-    }*/
     
     @Override
     public ObservableList<ReadOnlyTask> getFilteredTaskList() {

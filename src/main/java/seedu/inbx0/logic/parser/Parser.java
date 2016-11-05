@@ -26,16 +26,9 @@ public class Parser {
     private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
 
     private static final Pattern TASK_INDEX_ARGS_FORMAT = Pattern.compile("(?<targetIndex>.+)");
-
-    private static final Pattern NORMAL_KEYWORDS_ARGS_FORMAT = // '&', '|', '(',
-                                                               // ')' are
-                                                               // reserved for
-                                                               // logic
-                                                               // operation
-            Pattern.compile("(?<keywords>[^&|()]+(?:\\s+)*)"); // one or more
-                                                               // keywords
-                                                               // separated by
-                                                               // whitespace
+    
+    // '&', '|', '(', ')' are reserved for logic operation. One or more keywords separated by whitespace
+    private static final Pattern NORMAL_KEYWORDS_ARGS_FORMAT = Pattern.compile("(?<keywords>[^&|()]+(?:\\s+)*)");
 
     private static final Pattern LOGIC_KEYWORDS_ARGS_FORMAT = // '&', '|', '(',
                                                               // ')' are
@@ -892,11 +885,11 @@ public class Parser {
         }
         
         Optional<Integer> index = parseIndex(args);
-        if(index.isPresent()){
+        if(!index.isPresent()){
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, RedoCommand.MESSAGE_USAGE));
         }
 
-        return new RedoCommand();
+        return new RedoCommand(index.get());
     }
     
     //@@author
