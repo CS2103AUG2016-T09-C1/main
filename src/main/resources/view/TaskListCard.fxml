@@ -11,14 +11,14 @@
 
 <HBox id="cardPane" fx:id="cardPane" maxHeight="80.0" minHeight="40.0" prefHeight="40.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <GridPane HBox.hgrow="ALWAYS">
+        <GridPane fx:id="gridPane" HBox.hgrow="ALWAYS">
             <columnConstraints>
-                <ColumnConstraints halignment="LEFT" maxWidth="600.0" minWidth="600.0" prefWidth="600.0" />
-            <ColumnConstraints halignment="LEFT" maxWidth="400.0" minWidth="400.0" prefWidth="400.0" />
-            <ColumnConstraints halignment="CENTER" maxWidth="200.0" minWidth="200.0" prefWidth="200.0" />
-            <ColumnConstraints halignment="CENTER" maxWidth="150.0" minWidth="150.0" prefWidth="150.0" />
-            <ColumnConstraints halignment="CENTER" maxWidth="200.0" minWidth="200.0" prefWidth="200.0" />
-            <ColumnConstraints halignment="CENTER" maxWidth="150.0" minWidth="150.0" prefWidth="150.0" />
+            <ColumnConstraints fx:id="firstColumn" halignment="LEFT"  />
+            <ColumnConstraints fx:id="secondColumn" halignment="LEFT" />
+            <ColumnConstraints fx:id="thirdColumn" halignment="CENTER" />
+            <ColumnConstraints fx:id="fourthColumn" halignment="CENTER"  />
+            <ColumnConstraints fx:id="fifthColumn" halignment="CENTER" />
+            <ColumnConstraints fx:id="sixthColumn" halignment="CENTER" />
             </columnConstraints>
             <children>
                 <VBox alignment="CENTER_LEFT" minHeight="40.0" prefHeight="40.0" spacing="6.0" GridPane.columnIndex="0">

@@ -5,6 +5,8 @@ import java.util.Iterator;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.layout.ColumnConstraints;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import seedu.inbx0.model.reminder.ReminderTask;
 import seedu.inbx0.model.reminder.UniqueReminderList;
@@ -16,6 +18,27 @@ public class TaskCard extends UiPart{
 
     @FXML
     private HBox cardPane;
+    @FXML
+    private GridPane gridPane;
+    
+    @FXML
+    private ColumnConstraints firstColumn;
+
+    @FXML
+    private ColumnConstraints secondColumn;
+
+    @FXML
+    private ColumnConstraints thirdColumn;
+
+    @FXML
+    private ColumnConstraints fourthColumn;
+
+    @FXML
+    private ColumnConstraints fifthColumn;
+
+    @FXML
+    private ColumnConstraints sixthColumn;
+    
     @FXML
     private Label name;
     @FXML
@@ -47,6 +70,7 @@ public class TaskCard extends UiPart{
 
     @FXML
     public void initialize() {
+    	setGridPaneRatio();
         name.setText(task.getName().fullName);
         id.setText(displayedIndex + ". ");
         startDate.setText(task.getStartDate().getTotalDate());
@@ -85,6 +109,15 @@ public class TaskCard extends UiPart{
         }
     }
 
+    private void setGridPaneRatio() {
+    	firstColumn.setPercentWidth(400);
+    	secondColumn.setPercentWidth(200);
+    	thirdColumn.setPercentWidth(150);
+    	fourthColumn.setPercentWidth(200);
+    	fifthColumn.setPercentWidth(150);
+    	sixthColumn.setPercentWidth(200);	
+	}
+    
     public HBox getLayout() {
         return cardPane;
     }

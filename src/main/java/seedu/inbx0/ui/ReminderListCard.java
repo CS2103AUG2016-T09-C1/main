@@ -4,6 +4,8 @@ package seedu.inbx0.ui;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.layout.ColumnConstraints;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import seedu.inbx0.model.reminder.ReminderTask;
 
@@ -14,6 +16,26 @@ public class ReminderListCard extends UiPart{
 
     @FXML
     private HBox cardPane;
+    @FXML
+    private GridPane gridPane;
+    
+    @FXML
+    private ColumnConstraints firstColumn;
+
+    @FXML
+    private ColumnConstraints secondColumn;
+
+    @FXML
+    private ColumnConstraints thirdColumn;
+
+    @FXML
+    private ColumnConstraints fourthColumn;
+
+    @FXML
+    private ColumnConstraints fifthColumn;
+
+    @FXML
+    private ColumnConstraints sixthColumn;
     @FXML
     private Label id;
     @FXML
@@ -36,8 +58,17 @@ public class ReminderListCard extends UiPart{
         id.setText(displayedIndex + ". ");
         startDate.setText(reminder.getStartDate().getTotalDate());
         startTime.setText(reminder.getStartTime().getTime()); 
-             
+        setGridPaneRatio();
     }
+    
+    private void setGridPaneRatio() {
+    	firstColumn.setPercentWidth(400);
+    	secondColumn.setPercentWidth(200);
+    	thirdColumn.setPercentWidth(150);
+    	fourthColumn.setPercentWidth(200);
+    	fifthColumn.setPercentWidth(150);
+    	sixthColumn.setPercentWidth(200);	
+	}
 
     public HBox getLayout() {
         return cardPane;

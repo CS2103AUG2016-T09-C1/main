@@ -8,10 +8,13 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SplitPane;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.ColumnConstraints;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import seedu.inbx0.commons.core.LogsCenter;
 import seedu.inbx0.commons.events.ui.TaskPanelSelectionChangedEvent;
+import seedu.inbx0.commons.util.FxViewUtil;
 import seedu.inbx0.model.task.ReadOnlyTask;
 
 import java.util.logging.Logger;
@@ -27,7 +30,28 @@ public class TaskListPanel extends UiPart {
 
     @FXML
     private ListView<ReadOnlyTask> taskListView;
+    
+    @FXML
+    private GridPane gridPane;
+    
+    @FXML
+    private ColumnConstraints name;
 
+    @FXML
+    private ColumnConstraints tags;
+
+    @FXML
+    private ColumnConstraints startDate;
+
+    @FXML
+    private ColumnConstraints startTime;
+
+    @FXML
+    private ColumnConstraints endDate;
+
+    @FXML
+    private ColumnConstraints endTime;
+    
     public TaskListPanel() {
         super();
     }
@@ -58,17 +82,28 @@ public class TaskListPanel extends UiPart {
     private void configure(ObservableList<ReadOnlyTask> taskList) {
         setConnections(taskList);
         taskListView.setFixedCellSize(50);
+        setGridPaneRatio();
         addToPlaceholder();
     }
 
-    private void setConnections(ObservableList<ReadOnlyTask> taskList) {
+    private void setGridPaneRatio() {
+    	name.setPercentWidth(400);
+    	startDate.setPercentWidth(200);
+    	startTime.setPercentWidth(150);
+    	endDate.setPercentWidth(200);
+    	endTime.setPercentWidth(150);
+    	tags.setPercentWidth(200);	
+	}
+
+	private void setConnections(ObservableList<ReadOnlyTask> taskList) {
         taskListView.setItems(taskList);
         taskListView.setCellFactory(listView -> new TaskListViewCell());
         setEventHandlerForSelectionChangeEvent();
     }
 
     private void addToPlaceholder() {
-        SplitPane.setResizableWithParent(placeHolderPane, false);
+        SplitPane.setResizableWithParent(placeHolderPane, true);
+        FxViewUtil.applyAnchorBoundaryParameters(panel, 0.0, 0.0, 0.0, 0.0);
         placeHolderPane.getChildren().add(panel);
     }
 

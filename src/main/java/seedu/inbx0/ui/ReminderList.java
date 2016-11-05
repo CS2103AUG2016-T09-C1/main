@@ -8,6 +8,8 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SplitPane;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.ColumnConstraints;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import seedu.inbx0.model.reminder.ReminderTask;
@@ -27,6 +29,25 @@ public class ReminderList extends UiPart {
     
     @FXML
     private ListView<ReminderTask> reminderListView;
+    @FXML
+    private GridPane gridPane;
+    @FXML
+    private ColumnConstraints firstColumn;
+
+    @FXML
+    private ColumnConstraints secondColumn;
+
+    @FXML
+    private ColumnConstraints thirdColumn;
+
+    @FXML
+    private ColumnConstraints fourthColumn;
+
+    @FXML
+    private ColumnConstraints fifthColumn;
+
+    @FXML
+    private ColumnConstraints sixthColumn;
     @FXML
     private Label name;
     @FXML
@@ -90,8 +111,17 @@ public class ReminderList extends UiPart {
         addToPlaceholder();    
         displayInfo(task);
         displayReminder(task);
-        
+        setGridPaneRatio();
     }
+    
+    private void setGridPaneRatio() {
+    	firstColumn.setPercentWidth(400);
+    	secondColumn.setPercentWidth(200);
+    	thirdColumn.setPercentWidth(150);
+    	fourthColumn.setPercentWidth(200);
+    	fifthColumn.setPercentWidth(150);
+    	sixthColumn.setPercentWidth(200);	
+	}
     
     
     private void displayReminder(ReadOnlyTask task) {

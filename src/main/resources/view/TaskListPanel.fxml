@@ -11,14 +11,14 @@
 
 <VBox minWidth="1559.0" prefHeight="440.0" prefWidth="1709.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seedu.inbx0.ui.TaskListPanel">
 	<children>
-      <GridPane prefHeight="40.0" prefWidth="1551.0">
+      <GridPane fx:id="gridPane" prefHeight="40.0" prefWidth="1551.0">
          <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="600.0" minWidth="600.0" prefWidth="600.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="400.0" minWidth="400.0" prefWidth="400.0" />
-            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="200.0" minWidth="200.0" prefWidth="200.0" />
-            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="150.0" minWidth="150.0" prefWidth="150.0" />
-            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="200.0" minWidth="200.0" prefWidth="200.0" />
-            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="150.0" minWidth="150.0" prefWidth="150.0" />
+            <ColumnConstraints fx:id="name" hgrow="SOMETIMES"  />
+            <ColumnConstraints fx:id="tags" hgrow="SOMETIMES"  />
+            <ColumnConstraints fx:id="startDate" halignment="CENTER" hgrow="SOMETIMES"  />
+            <ColumnConstraints fx:id="startTime" halignment="CENTER" hgrow="SOMETIMES"  />
+            <ColumnConstraints fx:id="endDate" halignment="CENTER" hgrow="SOMETIMES"  />
+            <ColumnConstraints fx:id="endTime" halignment="CENTER" hgrow="SOMETIMES"  />
          </columnConstraints>
          <rowConstraints>
             <RowConstraints />
