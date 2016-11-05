@@ -86,8 +86,7 @@ public class ReminderList extends UiPart {
     }
     
     private void configure(ReadOnlyTask task){
-        addToPlaceholder();
-        reminderListView.getStyleClass().add("pane");        
+        addToPlaceholder();    
         displayInfo(task);
         displayReminder(task);
         
@@ -96,7 +95,7 @@ public class ReminderList extends UiPart {
     
     private void displayReminder(ReadOnlyTask task) {
     	if(task == null) {
-    		reminderListView = null;
+    		reminderListView.setItems(null);;
     	} else {
 		    UniqueReminderList uniqueReminderList = new UniqueReminderList(task.getReminders());
 		    Iterator<ReminderTask> check = uniqueReminderList.iterator();

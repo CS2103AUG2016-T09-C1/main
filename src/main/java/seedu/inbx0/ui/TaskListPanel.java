@@ -57,7 +57,6 @@ public class TaskListPanel extends UiPart {
 
     private void configure(ObservableList<ReadOnlyTask> taskList) {
         setConnections(taskList);
-        taskListView.getStyleClass().add("pane");
         taskListView.setFixedCellSize(50);
         addToPlaceholder();
     }
@@ -97,7 +96,6 @@ public class TaskListPanel extends UiPart {
         @Override
         protected void updateItem(ReadOnlyTask task, boolean empty) {
             super.updateItem(task, empty);
-
             if (empty || task == null) {
                 setGraphic(null);
                 setText(null);
