@@ -2,6 +2,7 @@ package seedu.inbx0.model.task;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.inbx0.commons.core.UnmodifiableObservableList;
 import seedu.inbx0.commons.exceptions.DuplicateDataException;
 import seedu.inbx0.commons.util.CollectionUtil;
 import seedu.inbx0.model.reminder.ReminderTask;
@@ -91,6 +92,23 @@ public class UniqueTaskList implements Iterable<Task>{
             throw new TaskNotFoundException();
         }
         return taskFoundAndDeleted;
+    }
+    
+    /**
+     * Removes the all the tasks from the shown list.
+     *
+     */
+    public boolean removeAll(UnmodifiableObservableList<ReadOnlyTask> list) {
+        boolean changed = false;
+        ListIterator<ReadOnlyTask> check = list.listIterator(list.size());
+        while(check.hasPrevious()) {
+            ReadOnlyTask toRemove = check.previous();
+            if(internalList.contains(toRemove)) {
+                internalList.remove(toRemove);
+                changed = true;
+            }
+        }
+        return changed;
     }
     
     /**

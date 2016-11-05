@@ -35,6 +35,9 @@ public interface Model {
     /** Deletes the given task. */
     void deleteTask(ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException;
     
+    /** Removes all tasks from shown listk. */
+    void removeAllTasksFromShownList(UnmodifiableObservableList<ReadOnlyTask> list);
+    
     /** Marks the given task complete. */
     void markTaskComplete(ReadOnlyTask target, Task task) throws UniqueTaskList.TaskNotFoundException;
     
