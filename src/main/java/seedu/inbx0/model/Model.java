@@ -24,6 +24,12 @@ public interface Model {
     
     /** Undoes the task lists to a previous state. */
     int undoTaskListHistory(int stepsBack);
+    
+    /** Redoes the task lists. */
+    int redoTaskListHistory(int numToRedo);
+    
+    //** Clears the redo list whenever a command which cannot be undone or redone is executed. */
+    void clearRedoTaskListHistory();
     //@@author
 
     /** Deletes the given task. */

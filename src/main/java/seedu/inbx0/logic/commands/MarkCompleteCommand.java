@@ -94,5 +94,4 @@ public class MarkCompleteCommand extends Command {
     public boolean canUndo() {
         return true;
     }
-
 }

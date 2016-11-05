@@ -25,5 +25,4 @@ public class ExitCommand extends Command {
     public boolean canUndo() {
         return false;
     }
-
 }

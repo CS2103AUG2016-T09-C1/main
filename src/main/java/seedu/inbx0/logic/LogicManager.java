@@ -62,8 +62,10 @@ public class LogicManager extends ComponentManager implements Logic {
         Command command = parser.parseCommand(commandText);
         previousCommandText.push(commandText);
         command.setData(model);
-        if(command.canUndo())
+        if (command.canUndo()) {
             model.saveTaskListHistory();
+            model.clearRedoTaskListHistory();
+        }
         return command.execute();
     }
     

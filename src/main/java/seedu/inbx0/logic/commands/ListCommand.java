@@ -64,11 +64,10 @@ public class ListCommand extends Command {
             model.updateFilteredTaskListByCompleteness(false);
             indicateCloseAllTitledpanesEvent();
             return new CommandResult(MESSAGE_SUCCESS);
-        }
-        else {
-                model.updateFilteredTaskList(checkDate, preposition);
-                indicateCloseAllTitledpanesEvent();
-                return new CommandResult(getMessageForTaskListShownSummary(model.getFilteredTaskList().size()));
+        } else {
+            model.updateFilteredTaskList(checkDate, preposition);
+            indicateCloseAllTitledpanesEvent();
+            return new CommandResult(getMessageForTaskListShownSummary(model.getFilteredTaskList().size()));
         }       
     }
 
