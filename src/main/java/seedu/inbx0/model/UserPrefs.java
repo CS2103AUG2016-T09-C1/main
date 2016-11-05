@@ -10,21 +10,35 @@ import seedu.inbx0.commons.core.GuiSettings;
 public class UserPrefs {
 
     public GuiSettings guiSettings;
+    public String themeSetting;
 
     public GuiSettings getGuiSettings() {
         return guiSettings == null ? new GuiSettings() : guiSettings;
+    }
+    
+    public String getThemeSetting() {
+    	return themeSetting;
     }
 
     public void updateLastUsedGuiSetting(GuiSettings guiSettings) {
         this.guiSettings = guiSettings;
     }
+    
+    public void updateLastUsedThemeSetting(String themeSetting) {
+    	this.themeSetting = themeSetting;
+    }
 
     public UserPrefs(){
         this.setGuiSettings(1300, 800, 0, 0);
+        this.themeSetting = "default";
     }
 
     public void setGuiSettings(double width, double height, int x, int y) {
         guiSettings = new GuiSettings(width, height, x, y);
+    }
+    
+    public void setThemeSetting(String themeSetting) {
+    	this.themeSetting = themeSetting;
     }
 
     @Override

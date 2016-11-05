@@ -17,6 +17,7 @@ import seedu.inbx0.logic.LogicManager;
 import seedu.inbx0.model.*;
 import seedu.inbx0.storage.Storage;
 import seedu.inbx0.storage.StorageManager;
+import seedu.inbx0.ui.MainWindow;
 import seedu.inbx0.ui.Ui;
 import seedu.inbx0.ui.UiManager;
 

@@ -119,14 +119,7 @@ public class MainWindow extends UiPart {
         setWindowDefaultSize(prefs);
         scene = new Scene(rootLayout);
         primaryStage.setScene(scene);
-        
-        titledPanePlaceholder.getStyleClass().add("pane");
-        commandBoxPlaceholder.getStyleClass().add("pane");
-        resultDisplayPlaceholder.getStyleClass().add("pane");
-        taskListPanelPlaceholder.getStyleClass().add("pane");
-        reminderListPlaceholder.getStyleClass().add("pane");
-        statusbarPlaceholder.getStyleClass().add("pane");
-        
+        setWindowDefaultTheme(prefs);
         setAccelerators();
     }
     
@@ -196,6 +189,17 @@ public class MainWindow extends UiPart {
             primaryStage.setY(prefs.getGuiSettings().getWindowCoordinates().getY());
         }
     }
+    
+    /**
+     * Sets the default theme based on user preferences.
+     */
+    protected void setWindowDefaultTheme(UserPrefs prefs) {
+    	if("default".equals(prefs.getThemeSetting())) {
+    		scene.getStylesheets().clear();
+    	} else {
+    		scene.getStylesheets().add(prefs.getThemeSetting());
+    	}
+    }
 
     private void setWindowMinSize() {
         primaryStage.setMinHeight(MIN_HEIGHT);
@@ -208,6 +212,18 @@ public class MainWindow extends UiPart {
     public GuiSettings getCurrentGuiSetting() {
         return new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(), (int) primaryStage.getX(),
                 (int) primaryStage.getY());
+    }
+    
+    /**
+     * Set the current window's size and theme as User's preferences
+     */
+    public void updatePreferenceSetting() {
+    	userPrefs.updateLastUsedGuiSetting(getCurrentGuiSetting());
+    	if (scene.getStylesheets().size() != 0) {
+    		userPrefs.updateLastUsedThemeSetting(scene.getStylesheets().get(0));
+    	} else {
+    		userPrefs.updateLastUsedThemeSetting("default");
+    	}
     }
 
     @FXML
