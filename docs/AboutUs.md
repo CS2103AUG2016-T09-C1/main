@@ -28,8 +28,8 @@ We are a team of students based in the [School of Computing, National University
 * Code written: [[functional code](A0139481Y.md)][[test code](A0139481Y.md)][[docs](A0139481Y.md)]
 * Other major contributions:
   * Did the initial refactoring from AddressBook to Inbx_0 [[commit 0a9d924](https://github.com/CS2103AUG2016-T09-C1/main/commit/0a9d924c8ce0162c35c05172d8efa222b2039f06) ]
-  * Set up Travis and Coveralls
-  * Tried to follow coding standards using Codacy
+  * Set up Travis, Coveralls, Natty, Codacy
+  * Did refactoring of methods and tidied up code to follow coding standards
 
 -----
 
