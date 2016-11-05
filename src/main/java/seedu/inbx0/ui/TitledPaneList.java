@@ -1,7 +1,6 @@
 package seedu.inbx0.ui;
 
 
-import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.SplitPane;

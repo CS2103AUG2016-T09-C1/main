@@ -26,202 +26,97 @@ public class Parser {
     private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
 
     private static final Pattern TASK_INDEX_ARGS_FORMAT = Pattern.compile("(?<targetIndex>.+)");
+    
+    // '&', '|', '(', ')' are reserved for logic operation. One or more keywords separated by whitespace
+    private static final Pattern NORMAL_KEYWORDS_ARGS_FORMAT = Pattern.compile("(?<keywords>[^&|()]+(?:\\s+)*)");
 
-    private static final Pattern NORMAL_KEYWORDS_ARGS_FORMAT = // '&', '|', '(',
-                                                               // ')' are
-                                                               // reserved for
-                                                               // logic
-                                                               // operation
-            Pattern.compile("(?<keywords>[^&|()]+(?:\\s+)*)"); // one or more
-                                                               // keywords
-                                                               // separated by
-                                                               // whitespace
+    // '&', '|', '(', ')' are reserved for logic operation. One or more keywords separated by logic operation words.
+    private static final Pattern LOGIC_KEYWORDS_ARGS_FORMAT = Pattern.compile("(?<arguments>.*[&|()].*)");
+    
+    // keywords followed by '(' is invalid in logic operation
+    private static final Pattern INVALID_LOGIC_SEARCH_ARGS1 = Pattern.compile(".*\\w\\s*[(].*");
+    
+    // no keywords between [(&|] and [&|)] is invalid in logic operation
+    private static final Pattern INVALID_LOGIC_SEARCH_ARGS2 = Pattern.compile(".*[(&|]\\s*[&|)].*");
+    
+    // end with & or | is invalid
+    private static final Pattern INVALID_LOGIC_SEARCH_ARGS3 = Pattern.compile(".*[&|]\\s*");
+    
+    // one or two keywords separated by whitespace
+    private static final Pattern SORT_TASK_LIST_ARGS_FORMAT = Pattern.compile("(?<keywords>\\S+(?:\\s+\\S+)?)");
 
-    private static final Pattern LOGIC_KEYWORDS_ARGS_FORMAT = // '&', '|', '(',
-                                                              // ')' are
-                                                              // reserved for
-                                                              // logic operation
-            Pattern.compile("(?<arguments>.*[&|()].*)"); // one or more keywords
-                                                         // separated by logic
-                                                         // operation words
+    // one or two index numbers separated by whitespace
+    private static final Pattern INDEX_NUMBER_ARGS_FORMAT = Pattern.compile("(?<numbers>[0-9]+(?:\\s+[0-9]+)*)");
 
-    private static final Pattern INVALID_LOGIC_SEARCH_ARGS1 = Pattern.compile(".*\\w\\s*[(].*"); // keywords
-                                                                                                 // followed
-                                                                                                 // by
-                                                                                                 // '('
-                                                                                                 // is
-                                                                                                 // invalid
-                                                                                                 // in
-                                                                                                 // logic
-                                                                                                 // operation
-
-    private static final Pattern INVALID_LOGIC_SEARCH_ARGS2 = Pattern.compile(".*[(&|]\\s*[&|)].*"); // no
-                                                                                                     // keywords
-                                                                                                     // between
-                                                                                                     // [(&|]
-                                                                                                     // and
-                                                                                                     // [&|)]
-                                                                                                     // is
-                                                                                                     // invalid
-                                                                                                     // in
-                                                                                                     // logic
-                                                                                                     // operation
-
-    private static final Pattern INVALID_LOGIC_SEARCH_ARGS3 = Pattern.compile(".*[&|]\\s*"); // end
-                                                                                             // with
-                                                                                             // &
-                                                                                             // or
-                                                                                             // |
-                                                                                             // is
-                                                                                             // invalid
-
-    private static final Pattern SORT_TASK_LIST_ARGS_FORMAT = Pattern.compile("(?<keywords>\\S+(?:\\s+\\S+)?)"); // one
-                                                                                                                 // or
-                                                                                                                 // two
-                                                                                                                 // keywords
-                                                                                                                 // separated
-                                                                                                                 // by
-                                                                                                                 // whitespace
-
-    private static final Pattern INDEX_NUMBER_ARGS_FORMAT = Pattern.compile("(?<numbers>[0-9]+(?:\\s+[0-9]+)*)"); // one
-                                                                                                                  // or
-                                                                                                                  // more
-                                                                                                                  // index
-                                                                                                                  // numbers
-                                                                                                                  // separated
-                                                                                                                  // by
-                                                                                                                  // whitespace
-
-    private static final Pattern INDEX_NUM_TO_INDEX_NUM_ARGS_FORMAT = Pattern
-            .compile("(?<first>[0-9]+) to (?<last>[0-9]+)");
-
-    private static final Pattern TASK_DATA_ARGS_FORMAT = // '/' forward slashes
-                                                         // are reserved for
-                                                         // delimiter prefixes
-            Pattern.compile(
-                    "(?<name>[^=]+)" + " s=(?<startDate>[^=]+)" + " st=(?<startTime>[^=]+)" + " e=(?<endDate>[^=]+)"
-                            + " et=(?<endTime>[^=]+)" + " i=(?<level>[^=]+)" + "(?<tagArguments>(?: t=[^=]+)*)"); // variable
-                                                                                                                  // number
-                                                                                                                  // of
-                                                                                                                  // tags
-    private static final Pattern TASK_DATA_ARGS_FORMAT_2 = // '/' forward
-                                                           // slashes are
-                                                           // reserved for
-                                                           // delimiter prefixes
-            Pattern.compile("(?<name>[^=]+)" + " s=(?<startDate>[^=]+)" + " st=(?<startTime>[^=]+)"
-                    + " e=(?<endDate>[^=]+)" + " et=(?<endTime>[^=]+)" + "(?<tagArguments>(?: t=[^=]+)*)");
-    private static final Pattern TASK_DATA_ARGS_FORMAT_3 = // '/' forward
-                                                           // slashes are
-                                                           // reserved for
-                                                           // delimiter prefixes
-            Pattern.compile("(?<name>[^=]+)" + " s=(?<startDate>[^=]+)" + " e=(?<endDate>[^=]+)" + " i=(?<level>[^=]+)"
-                    + "(?<tagArguments>(?: t=[^=]+)*)");
-    private static final Pattern TASK_DATA_ARGS_FORMAT_4 = // '/' forward
-                                                           // slashes are
-                                                           // reserved for
-                                                           // delimiter prefixes
-            Pattern.compile("(?<name>[^=]+)" + " s=(?<startDate>[^=]+)" + " e=(?<endDate>[^=]+)"
-                    + "(?<tagArguments>(?: t=[^=]+)*)");
-    private static final Pattern DEADLINE_TASK_DATA_ARGS_FORMAT = // '/' forward
-                                                                  // slashes are
-                                                                  // reserved
-                                                                  // for
-                                                                  // delimiter
-                                                                  // prefixes
-            Pattern.compile("(?<name>[^=]+)" + " e=(?<endDate>[^=]+)" + " et=(?<endTime>[^=]+)" + " i=(?<level>[^=]+)"
-                    + "(?<tagArguments>(?: t=[^=]+)*)");
-    private static final Pattern DEADLINE_TASK_DATA_ARGS_FORMAT_2 = // '/'
-                                                                    // forward
-                                                                    // slashes
-                                                                    // are
-                                                                    // reserved
-                                                                    // for
-                                                                    // delimiter
-                                                                    // prefixes
-            Pattern.compile("(?<name>[^=]+)" + " e=(?<endDate>[^=]+)" + " et=(?<endTime>[^=]+)"
-                    + "(?<tagArguments>(?: t=[^=]+)*)");
-    private static final Pattern DEADLINE_TASK_DATA_ARGS_FORMAT_3 = // '/'
-                                                                    // forward
-                                                                    // slashes
-                                                                    // are
-                                                                    // reserved
-                                                                    // for
-                                                                    // delimiter
-                                                                    // prefixes
-            Pattern.compile("(?<name>[^=]+)" + " e=(?<endDate>[^=]+)" + " i=(?<level>[^=]+)"
-                    + "(?<tagArguments>(?: t=[^=]+)*)");
-    private static final Pattern DEADLINE_TASK_DATA_ARGS_FORMAT_4 = // '/'
-                                                                    // forward
-                                                                    // slashes
-                                                                    // are
-                                                                    // reserved
-                                                                    // for
-                                                                    // delimiter
-                                                                    // prefixes
-            Pattern.compile("(?<name>[^=]+)" + " e=(?<endDate>[^=]+)" + "(?<tagArguments>(?: t=[^=]+)*)");
-    private static final Pattern FLOATING_TASK_DATA_ARGS_FORMAT = // '/' forward
-                                                                  // slashes are
-                                                                  // reserved
-                                                                  // for
-                                                                  // delimiter
-                                                                  // prefixes
-            Pattern.compile("(?<name>[^=]+)" + " i=(?<level>[^=]+)" + "(?<tagArguments>(?: t=[^=]+)*)"); // variable
-                                                                                                         // number
-                                                                                                         // of
-                                                                                                         // tags
-    private static final Pattern FLOATING_TASK_DATA_ARGS_FORMAT_2 = // '/'
-                                                                    // forward
-                                                                    // slashes
-                                                                    // are
-                                                                    // reserved
-                                                                    // for
-                                                                    // delimiter
-                                                                    // prefixes
-            Pattern.compile("(?<name>[^=]+)" + "(?<tagArguments>(?: t=[^=]+)*)"); // variable
-                                                                                  // number
-                                                                                  // of
-                                                                                  // tags
-    private static final Pattern START_TASK_DATA_ARGS_FORMAT = // '/' forward
-                                                               // slashes are
-                                                               // reserved for
-                                                               // delimiter
-                                                               // prefixes
-            Pattern.compile("(?<name>[^=]+)" + " s=(?<startDate>[^=]+)" + " st=(?<startTime>[^=]+)"
-                    + " i=(?<level>[^=]+)" + "(?<tagArguments>(?: t=[^=]+)*)");
-    private static final Pattern START_TASK_DATA_ARGS_FORMAT_2 = // '/' forward
-                                                                 // slashes are
-                                                                 // reserved for
-                                                                 // delimiter
-                                                                 // prefixes
-            Pattern.compile("(?<name>[^=]+)" + " s=(?<startDate>[^=]+)" + " st=(?<startTime>[^=]+)"
-                    + "(?<tagArguments>(?: t=[^=]+)*)");
-    private static final Pattern START_TASK_DATA_ARGS_FORMAT_3 = // '/' forward
-                                                                 // slashes are
-                                                                 // reserved for
-                                                                 // delimiter
-                                                                 // prefixes
-            Pattern.compile("(?<name>[^=]+)" + " s=(?<startDate>[^=]+)" + " i=(?<level>[^=]+)"
-                    + "(?<tagArguments>(?: t=[^=]+)*)");
-    private static final Pattern START_TASK_DATA_ARGS_FORMAT_4 = // '/' forward
-                                                                 // slashes are
-                                                                 // reserved for
-                                                                 // delimiter
-                                                                 // prefixes
-            Pattern.compile("(?<name>[^=]+)" + " s=(?<startDate>[^=]+)" + "(?<tagArguments>(?: t=[^=]+)*)");
-    private static final Pattern ADD_TAGS_ARGS_FORMAT = // '/' forward slashes
-                                                        // are reserved for
-                                                        // delimiter prefixes
-            Pattern.compile("(?<targetIndex>\\S+)(?<tagArguments>(?: t=[^=]+)*)"); // variable
-                                                                                   // number
-                                                                                   // of
-                                                                                   // tags
+    private static final Pattern INDEX_NUM_TO_INDEX_NUM_ARGS_FORMAT = Pattern.compile("(?<first>[0-9]+) to (?<last>[0-9]+)");
+    
+    // '/' forward slashes are reserved for delimiter prefixes
+    private static final Pattern TASK_DATA_ARGS_FORMAT = Pattern.compile("(?<name>[^=]+)"
+            + " s=(?<startDate>[^=]+)" + " st=(?<startTime>[^=]+)" + " e=(?<endDate>[^=]+)" 
+            + " et=(?<endTime>[^=]+)" + " i=(?<level>[^=]+)" + "(?<tagArguments>(?: t=[^=]+)*)");
+                                                                                              
+    private static final Pattern TASK_DATA_ARGS_FORMAT_2 = Pattern.compile("(?<name>[^=]+)" 
+            + " s=(?<startDate>[^=]+)" + " st=(?<startTime>[^=]+)" 
+            + " e=(?<endDate>[^=]+)" + " et=(?<endTime>[^=]+)" + "(?<tagArguments>(?: t=[^=]+)*)");
+    
+    private static final Pattern TASK_DATA_ARGS_FORMAT_3 = Pattern.compile("(?<name>[^=]+)" 
+            + " s=(?<startDate>[^=]+)" + " e=(?<endDate>[^=]+)" + " i=(?<level>[^=]+)"
+            + "(?<tagArguments>(?: t=[^=]+)*)");
+    
+    private static final Pattern TASK_DATA_ARGS_FORMAT_4 = Pattern.compile("(?<name>[^=]+)" 
+            + " s=(?<startDate>[^=]+)" + " e=(?<endDate>[^=]+)"
+            + "(?<tagArguments>(?: t=[^=]+)*)");
+    
+    private static final Pattern DEADLINE_TASK_DATA_ARGS_FORMAT = Pattern.compile("(?<name>[^=]+)" 
+            + " e=(?<endDate>[^=]+)" + " et=(?<endTime>[^=]+)" + " i=(?<level>[^=]+)"
+            + "(?<tagArguments>(?: t=[^=]+)*)");
+    
+    private static final Pattern DEADLINE_TASK_DATA_ARGS_FORMAT_2 = Pattern.compile("(?<name>[^=]+)" 
+            + " e=(?<endDate>[^=]+)" + " et=(?<endTime>[^=]+)"
+            + "(?<tagArguments>(?: t=[^=]+)*)");
+    
+    private static final Pattern DEADLINE_TASK_DATA_ARGS_FORMAT_3 = Pattern.compile("(?<name>[^=]+)" 
+            + " e=(?<endDate>[^=]+)" + " i=(?<level>[^=]+)"
+            + "(?<tagArguments>(?: t=[^=]+)*)");
+    
+    private static final Pattern DEADLINE_TASK_DATA_ARGS_FORMAT_4 = Pattern.compile("(?<name>[^=]+)" 
+            + " e=(?<endDate>[^=]+)" + "(?<tagArguments>(?: t=[^=]+)*)");
+    
+    private static final Pattern FLOATING_TASK_DATA_ARGS_FORMAT = Pattern.compile("(?<name>[^=]+)" 
+            + " i=(?<level>[^=]+)" + "(?<tagArguments>(?: t=[^=]+)*)"); 
+    
+    private static final Pattern FLOATING_TASK_DATA_ARGS_FORMAT_2 = Pattern.compile("(?<name>[^=]+)" 
+            + "(?<tagArguments>(?: t=[^=]+)*)"); 
+    
+    private static final Pattern START_TASK_DATA_ARGS_FORMAT = Pattern.compile("(?<name>[^=]+)" 
+            + " s=(?<startDate>[^=]+)" + " st=(?<startTime>[^=]+)"
+            + " i=(?<level>[^=]+)" + "(?<tagArguments>(?: t=[^=]+)*)");
+    
+    private static final Pattern START_TASK_DATA_ARGS_FORMAT_2 = Pattern.compile("(?<name>[^=]+)" 
+            + " s=(?<startDate>[^=]+)" + " st=(?<startTime>[^=]+)"
+            + "(?<tagArguments>(?: t=[^=]+)*)");
+    
+    private static final Pattern START_TASK_DATA_ARGS_FORMAT_3 = Pattern.compile("(?<name>[^=]+)" 
+            + " s=(?<startDate>[^=]+)" + " i=(?<level>[^=]+)"
+            + "(?<tagArguments>(?: t=[^=]+)*)");
+    
+    private static final Pattern START_TASK_DATA_ARGS_FORMAT_4 = Pattern.compile("(?<name>[^=]+)" 
+            + " s=(?<startDate>[^=]+)" + "(?<tagArguments>(?: t=[^=]+)*)");
+    
+    private static final Pattern ADD_TAGS_ARGS_FORMAT = Pattern.compile("(?<targetIndex>\\S+)(?<tagArguments>(?: t=[^=]+)*)");
+    
     private static final Pattern DATE_TIME_FORMAT = Pattern
             .compile("(?<date>[0-9 ]+[./-][0-9 ]+[./-][0-9]+)" + "(?<time>(?: [^/]+))");
-    private static final Pattern DATE_TIME_FORMAT_2 = Pattern
-            .compile("(?<time>(?:[^/]+))" + "(?<date> [0-9 ]+[./-][0-9 ]+[./-][0-9]+)");
+    
+    private static final Pattern DATE_TIME_FORMAT_2 = Pattern.compile("(?<time>(?:[^/]+))" 
+            + "(?<date> [0-9 ]+[./-][0-9 ]+[./-][0-9]+)");
+    
     private static final Pattern DATE_TIME_FORMAT_3 = Pattern.compile("(?<date>[0-9]{8})" + "(?<time>(?: [^/]+))");
+    
     private static final Pattern DATE_TIME_FORMAT_4 = Pattern.compile("(?<time>(?:[^/]+))" + "(?<date> [0-9]{8})");
+    
     private static final Pattern DATE_TIME_FORMAT_5 = Pattern.compile("(?<date>[0-9]{8})");
+    
     private static final Pattern DATE_TIME_FORMAT_6 = Pattern.compile("(?<date>[0-9 ]+[./-][0-9 ]+[./-][0-9]+)");
 
     private static final Pattern TASK_REMINDER_ARGS_FORMAT = Pattern
@@ -281,6 +176,9 @@ public class Parser {
         
         case UndoCommand.COMMAND_WORD:
             return prepareUndo(arguments);
+            
+        case RedoCommand.COMMAND_WORD:
+            return prepareRedo(arguments);
 
         case AddTagCommand.COMMAND_WORD:
             return prepareAddTag(arguments);
@@ -875,6 +773,26 @@ public class Parser {
 
         return new UndoCommand(index.get());
     }
+    
+    //@@author A0135797M
+    /**
+     * Parses arguments in the context of the redo command.
+     * 
+     * @param args full command args string
+     * @return the prepared command
+     */
+    private Command prepareRedo(String args) {
+        if(args.trim().length() == 0) {
+            return new RedoCommand();
+        }
+        
+        Optional<Integer> index = parseIndex(args);
+        if(!index.isPresent()){
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, RedoCommand.MESSAGE_USAGE));
+        }
+
+        return new RedoCommand(index.get());
+    }
     //@@author
 
     /**
@@ -883,7 +801,6 @@ public class Parser {
      * @param args full command args string
      * @return the prepared command
      */
-    // @@author generated
     private Command prepareDelete(final String args) {
 
         Optional<Integer> index = parseIndex(args);
@@ -926,16 +843,15 @@ public class Parser {
             return Optional.empty();
         }
         return Optional.of(Integer.parseInt(index));
-
     }
-
+    
+    //@@author A0148044J
     /**
      * Parses arguments in the context of the find task command.
      * 
      * @param args full command args string
      * @return the prepared command
      */
-    //@@author A0148044J
     private Command prepareFind(final String args) {
         final Matcher matcher1 = NORMAL_KEYWORDS_ARGS_FORMAT.matcher(args.trim());
         final Matcher matcher2 = LOGIC_KEYWORDS_ARGS_FORMAT.matcher(args.trim());
@@ -1044,21 +960,6 @@ public class Parser {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
     }
-    /*
-     * // keywords delimited by whitespace final String[] keywords =
-     * matcher.group("keywords").split("\\s+"); final int type;
-     * if(keywords[0].contains(START_DATE)) { type = 1; keywords[0] =
-     * keywords[0].replace(START_DATE, "").replace("'"," "); } else
-     * if(keywords[0].contains(END_DATE)) { type = 2; keywords[0] =
-     * keywords[0].replace(END_DATE, "").replace("'"," "); } else
-     * if(keywords[0].contains(IMPORTANCE)) { type = 3; keywords[0] =
-     * keywords[0].replace(IMPORTANCE, ""); } else if(keywords[0].contains(TAG))
-     * { type = 4; keywords[0] = keywords[0].replace(TAG, ""); } else { type =
-     * 0; } final Set<String> keywordSet = new
-     * HashSet<>(Arrays.asList(keywords)); try { return new FindCommand(type,
-     * keywordSet); } catch (IllegalValueException ive) { return new
-     * IncorrectCommand(ive.getMessage()); } }
-     */
 
     private String convertKeywordsIntoDefinedFormat(final String keyword) throws IllegalValueException {
         String convertedKeyword = null;
@@ -1143,7 +1044,6 @@ public class Parser {
      * @param args full command args string
      * @return the prepared command
      */
-    // @@author generated
     private Command prepareList(final String arguments) {
         if (arguments.length() == 0) {
             return new ListCommand();

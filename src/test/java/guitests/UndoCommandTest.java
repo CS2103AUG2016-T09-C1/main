@@ -73,7 +73,7 @@ public class UndoCommandTest extends TaskListGuiTest {
      * 
      * Runs the Undo command to undo the TaskList back to a previous state and confirms the result is correct 
      * @param command Undo.
-     * @param expectedMessage The expected result messsage.
+     * @param expectedMessage The expected result message.
      * @param currentList Expected ListView.     
      */
     private void assertUndoResult(String command, String expectedMessage, TestTask... currentList) 

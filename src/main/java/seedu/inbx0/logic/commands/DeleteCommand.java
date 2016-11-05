@@ -53,5 +53,4 @@ public class DeleteCommand extends Command {
     public boolean canUndo() {
         return true;
     }
-
 }
