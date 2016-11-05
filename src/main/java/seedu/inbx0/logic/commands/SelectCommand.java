@@ -1,9 +1,7 @@
 package seedu.inbx0.logic.commands;
 
-import seedu.inbx0.commons.core.EventsCenter;
 import seedu.inbx0.commons.core.Messages;
 import seedu.inbx0.commons.core.UnmodifiableObservableList;
-import seedu.inbx0.commons.events.ui.JumpToListRequestEvent;
 import seedu.inbx0.model.task.ReadOnlyTask;
 
 /**
