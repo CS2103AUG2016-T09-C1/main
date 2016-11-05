@@ -53,7 +53,6 @@ public class StatusBarFooter extends UiPart {
     private void addMainPane() {
         FxViewUtil.applyAnchorBoundaryParameters(mainPane, 0.0, 0.0, 0.0, 0.0);
         placeHolder.getChildren().add(mainPane);
-        mainPane.getStyleClass().add("pane");
     }
 
     private void setSaveLocation(String location) {
@@ -64,8 +63,6 @@ public class StatusBarFooter extends UiPart {
         this.saveLocationStatus = new StatusBar();
         FxViewUtil.applyAnchorBoundaryParameters(saveLocationStatus, 0.0, 0.0, 0.0, 0.0);
         saveLocStatusBarPane.getChildren().add(saveLocationStatus);
-        saveLocationStatus.getStyleClass().add("pane");
-        saveLocStatusBarPane.getStyleClass().add("pane");
     }
 
     private void setSyncStatus(String status) {
@@ -76,8 +73,6 @@ public class StatusBarFooter extends UiPart {
         this.syncStatus = new StatusBar();
         FxViewUtil.applyAnchorBoundaryParameters(syncStatus, 0.0, 0.0, 0.0, 0.0);
         syncStatusBarPane.getChildren().add(syncStatus);
-        syncStatus.getStyleClass().add("pane");
-        syncStatusBarPane.getStyleClass().add("pane");
     }
 
     @Override

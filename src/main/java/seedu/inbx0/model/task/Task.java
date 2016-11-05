@@ -41,12 +41,12 @@ public class Task implements ReadOnlyTask {
           (("").equals(startDate.getDate()) && ("").equals(startTime.getTime()) && ("").equals(endDate.getDate()) && !("").equals(endTime.getTime())))
              throw new IllegalValueException(Messages.MESSAGE_INVALID_TASK);
         
-        if (startDate.getDate().equals("") && startTime.getTime().equals("") && endDate.getDate().equals("") && endTime.getTime().equals("")) {
+        if (startDate.getDate().equals("") && startTime.getTime().equals("") && endDate.getDate().equals("") && endTime.getTime().equals("") | 
+        	(!startDate.getDate().equals("") && !startTime.getTime().equals("") && endDate.getDate().equals("") && endTime.getTime().equals("")) |
+        	(!startDate.getDate().equals("") && startTime.getTime().equals("") && endDate.getDate().equals("") && endTime.getTime().equals(""))){
             this.isFloatTask = true;
             this.isEvent = false;
-        } else if ((startDate.getDate().equals("") && startTime.getTime().equals("") && !endDate.getDate().equals(""))|
-            (!startDate.getDate().equals("") && !startTime.getTime().equals("") && endDate.getDate().equals("") && endTime.getTime().equals("")) |
-            (!startDate.getDate().equals("") && startTime.getTime().equals("") && endDate.getDate().equals("") && endTime.getTime().equals(""))) {
+        } else if (startDate.getDate().equals("") && startTime.getTime().equals("") && !endDate.getDate().equals("")) {
             this.isFloatTask = false;
             this.isEvent = false;            
         } else {

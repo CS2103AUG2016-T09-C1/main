@@ -22,7 +22,7 @@ import seedu.inbx0.model.task.ReadOnlyTask;
 public class MainWindow extends UiPart {
 	private final static String FXML_FILE_FOLDER = "/view/";
     private static final String ICON = "/images/inbx0.png";
-    private static final String FXML = "MainWindow1.fxml";
+    private static final String FXML = "MainWindow.fxml";
     public static final int MIN_HEIGHT = 600;
     public static final int MIN_WIDTH = 800;
 
@@ -56,25 +56,25 @@ public class MainWindow extends UiPart {
     private MenuItem antiqueWhiteMenuItem;
     
     @FXML
-    private MenuItem darkOrchidMenuItem;
-    
-    @FXML
     private MenuItem blueMenuItem;
     
     @FXML
     private MenuItem greenMenuItem;
     
     @FXML
-    private MenuItem mediumVioletRedMenuItem;
+    private MenuItem lightGreyMenuItem;
     
     @FXML
     private MenuItem oriangeMenuItem;
     
     @FXML
     private MenuItem pinkMenuItem;
+    
+    @FXML
+    private MenuItem seaShellMenuItem;
 
     @FXML
-    private MenuItem resetMenuItem;
+    private MenuItem violetMenuItem;
     
     @FXML
     private AnchorPane taskListPanelPlaceholder;
@@ -127,13 +127,13 @@ public class MainWindow extends UiPart {
     private void setAccelerators() {
         helpMenuItem.setAccelerator(KeyCombination.valueOf("Ctrl+F1"));
         antiqueWhiteMenuItem.setAccelerator(KeyCombination.valueOf("Ctrl+1"));
-        darkOrchidMenuItem.setAccelerator(KeyCombination.valueOf("Ctrl+2"));
-        blueMenuItem.setAccelerator(KeyCombination.valueOf("Ctrl+3"));
-        greenMenuItem.setAccelerator(KeyCombination.valueOf("Ctrl+4"));
-        mediumVioletRedMenuItem.setAccelerator(KeyCombination.valueOf("Ctrl+5"));
-        oriangeMenuItem.setAccelerator(KeyCombination.valueOf("Ctrl+6"));
-        pinkMenuItem.setAccelerator(KeyCombination.valueOf("Ctrl+7"));
-        resetMenuItem.setAccelerator(KeyCombination.valueOf("Ctrl+8"));
+        blueMenuItem.setAccelerator(KeyCombination.valueOf("Ctrl+2"));
+        greenMenuItem.setAccelerator(KeyCombination.valueOf("Ctrl+3"));
+        lightGreyMenuItem.setAccelerator(KeyCombination.valueOf("Ctrl+4"));
+        oriangeMenuItem.setAccelerator(KeyCombination.valueOf("Ctrl+5"));
+        pinkMenuItem.setAccelerator(KeyCombination.valueOf("Ctrl+6"));
+        seaShellMenuItem.setAccelerator(KeyCombination.valueOf("Ctrl+7"));
+        violetMenuItem.setAccelerator(KeyCombination.valueOf("Ctrl+8"));
     }
     //@@author
     
@@ -190,6 +190,7 @@ public class MainWindow extends UiPart {
         }
     }
     
+    //@@author A0148044J
     /**
      * Sets the default theme based on user preferences.
      */
@@ -219,12 +220,9 @@ public class MainWindow extends UiPart {
      */
     public void updatePreferenceSetting() {
     	userPrefs.updateLastUsedGuiSetting(getCurrentGuiSetting());
-    	if (scene.getStylesheets().size() != 0) {
-    		userPrefs.updateLastUsedThemeSetting(scene.getStylesheets().get(0));
-    	} else {
-    		userPrefs.updateLastUsedThemeSetting("default");
-    	}
+    	userPrefs.updateLastUsedThemeSetting(scene.getStylesheets().get(0));
     }
+    //@@author
 
     @FXML
     public void handleHelp() {
@@ -273,9 +271,9 @@ public class MainWindow extends UiPart {
     }
     
     @FXML 
-    private void handleDarkOrchid () {
+    private void handleLightGrey () {
     	scene.getStylesheets().clear();
-    	scene.getStylesheets().add(FXML_FILE_FOLDER + "DarkOrchid.css");
+    	scene.getStylesheets().add(FXML_FILE_FOLDER + "LightGrey.css");
     }
     
     @FXML 
@@ -291,9 +289,9 @@ public class MainWindow extends UiPart {
     }
     
     @FXML 
-    private void handleMediumVioletRed() {
+    private void handleSeaShell() {
     	scene.getStylesheets().clear();
-    	scene.getStylesheets().add(FXML_FILE_FOLDER + "MediumVioletRed.css");
+    	scene.getStylesheets().add(FXML_FILE_FOLDER + "SeaShell.css");
     }
     
     @FXML 
@@ -309,8 +307,9 @@ public class MainWindow extends UiPart {
     }
     
     @FXML 
-    private void handleReset() {
+    private void handleViolet() {
     	scene.getStylesheets().clear();
+    	scene.getStylesheets().add(FXML_FILE_FOLDER + "Violet.css");
     }
     
     public void updateReminderList(ReadOnlyTask newSelection) {
@@ -320,5 +319,5 @@ public class MainWindow extends UiPart {
     public void closeReminderList() {
     	reminderList.updateReminderList(null);
     }
+    //@@author
 }
-//@@author

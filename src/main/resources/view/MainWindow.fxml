@@ -1,29 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!-- @@author A0148044J -->
-
-<?import java.net.URL?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Accordion?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox styleClass="background" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seedu.inbx0.ui.MainWindow">
-   <stylesheets>
-      <URL value="@DarkTheme.css" />
-      <URL value="@Extensions.css" />
-   </stylesheets>
+<VBox xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seedu.inbx0.ui.MainWindow">
    <children>
-      <MenuBar stylesheets="@DarkTheme.css" VBox.vgrow="NEVER">
+      <MenuBar VBox.vgrow="NEVER">
          <menus>
             <Menu mnemonicParsing="false" text="File">
                <items>
@@ -35,348 +22,55 @@
                   <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="Help" />
                </items>
             </Menu>
+            <Menu mnemonicParsing="false" text="Preferences">
+              <items>
+                  <MenuItem fx:id="antiqueWhiteMenuItem" mnemonicParsing="false" onAction="#handleAntiqueWhite" text="AntiqueWhite" />
+                  <MenuItem fx:id="blueMenuItem" mnemonicParsing="false" onAction="#handleBlue" text="Blue" />
+                  <MenuItem fx:id="greenMenuItem" mnemonicParsing="false" onAction="#handleGreen" text="Green" />
+                  <MenuItem fx:id="lightGreyMenuItem" mnemonicParsing="false" onAction="#handleLightGrey" text="LightGrey" />
+                  <MenuItem fx:id="oriangeMenuItem" mnemonicParsing="false" onAction="#handleOriange" text="Oriange" />
+                  <MenuItem fx:id="pinkMenuItem" mnemonicParsing="false" onAction="#handlePink" text="Pink" />
+                  <MenuItem fx:id="seaShellMenuItem" mnemonicParsing="false" onAction="#handleSeaShell" text="SeaShell" />
+                  <MenuItem fx:id="violetMenuItem" mnemonicParsing="false" onAction="#handleViolet" text="Violet" />
+              </items>
+            </Menu>
          </menus>
       </MenuBar>
-      <AnchorPane fx:id="commandBoxPlaceholder" prefHeight="35.0" prefWidth="1302.0" styleClass="anchor-pane-with-border" VBox.vgrow="NEVER">
+      <AnchorPane fx:id="commandBoxPlaceholder" prefHeight="61.0" prefWidth="1443.0" VBox.vgrow="NEVER">
          <padding>
             <Insets left="10.0" right="10.0" />
          </padding>
       </AnchorPane>
-       <AnchorPane fx:id="resultDisplayPlaceholder" prefHeight="114.0" prefWidth="1302.0" styleClass="anchor-pane-with-border" VBox.vgrow="NEVER">
+       <AnchorPane fx:id="resultDisplayPlaceholder" prefHeight="142.0" prefWidth="1443.0" VBox.vgrow="NEVER">
          <padding>
             <Insets left="10.0" right="10.0" />
          </padding>
        </AnchorPane>
-  <AnchorPane fx:id="mainDisplayPlaceholder" prefHeight="758.0" prefWidth="1302.0" styleClass="grid-pane" stylesheets="@DarkTheme.css">
-         <children>
-            <HBox layoutX="8.0" layoutY="3.0" prefHeight="754.0" prefWidth="1455.0" AnchorPane.bottomAnchor="2.0" AnchorPane.leftAnchor="-3.0" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="2.0">
-               <children>
-                <AnchorPane fx:id="titledPanePlaceholder">
-                     <children>
-                        <Accordion styleClass="label-bright" stylesheets="@DarkTheme.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                          <panes>
-                              <TitledPane animated="false" collapsible="false" expanded="false" onMouseClicked="#handleListToday" text="    Today" />
-                            <TitledPane fx:id="DayTitledPane" animated="false" text="Day">
-                                 <content>
-                                    <AnchorPane prefHeight="200.0" prefWidth="189.0">
-                                       <children>
-                                          <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.leftAnchor="10.0">
-                                             <children>
-                                                <Label mnemonicParsing="false" onMouseClicked="#handleListMonday" prefHeight="31.0" prefWidth="111.0" text="Monday">
-                                                   <padding>
-                                                      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                   </padding>
-                                                   <VBox.margin>
-                                                      <Insets />
-                                                   </VBox.margin>
-                                                </Label>
-                                                <Label mnemonicParsing="false" onMouseClicked="#handleListTuesday" prefHeight="31.0" prefWidth="117.0" text="Tuesday">
-                                                   <padding>
-                                                      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                   </padding>
-                                                   <VBox.margin>
-                                                      <Insets />
-                                                   </VBox.margin>
-                                                </Label>
-                                                <Label mnemonicParsing="false" onMouseClicked="#handleListWednesday" prefHeight="31.0" prefWidth="115.0" text="Wednesday">
-                                                   <padding>
-                                                      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                   </padding>
-                                                   <VBox.margin>
-                                                      <Insets />
-                                                   </VBox.margin>
-                                                </Label>
-                                                <Label mnemonicParsing="false" onMouseClicked="#handleListThursday" prefHeight="31.0" prefWidth="104.0" text="Thursday">
-                                                   <padding>
-                                                      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                   </padding>
-                                                   <VBox.margin>
-                                                      <Insets />
-                                                   </VBox.margin>
-                                                </Label>
-                                                <Label mnemonicParsing="false" onMouseClicked="#handleListFriday" prefHeight="31.0" prefWidth="113.0" text="Friday">
-                                                   <padding>
-                                                      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                   </padding>
-                                                   <VBox.margin>
-                                                      <Insets />
-                                                   </VBox.margin>
-                                                </Label>
-                                                <Label mnemonicParsing="false" onMouseClicked="#handleListSaturday" prefHeight="31.0" prefWidth="117.0" text="Saturday">
-                                                   <padding>
-                                                      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                   </padding>
-                                                   <VBox.margin>
-                                                      <Insets />
-                                                   </VBox.margin>
-                                                </Label>
-                                                <Label mnemonicParsing="false" onMouseClicked="#handleListSunday" prefHeight="31.0" prefWidth="123.0" text="Sunday">
-                                                   <padding>
-                                                      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                   </padding>
-                                                   <VBox.margin>
-                                                      <Insets />
-                                                   </VBox.margin>
-                                                </Label>
-                                             </children>
-                                             <padding>
-                                                <Insets top="10.0" />
-                                             </padding>
-                                          </VBox>
-                                       </children>
-                                    </AnchorPane>
-                                 </content>
-                              </TitledPane>
-                              <TitledPane fx:id="CategoryTitledPane" animated="false" text="Category">
-                                <content>
-                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                                       <children>
-                                          <VBox layoutX="14.0" prefHeight="200.0" prefWidth="100.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
-                                             <children>
-                                                <Label onMouseClicked="#handleListEvent" prefHeight="31.0" prefWidth="113.0" text="Event">
-                                                   <padding>
-                                                      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                   </padding>
-                                                   <VBox.margin>
-                                                      <Insets />
-                                                   </VBox.margin>
-                                                </Label>
-                                                <Label onMouseClicked="#handleListDeadline" prefHeight="31.0" prefWidth="113.0" text="Deadline">
-                                                   <padding>
-                                                      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                   </padding>
-                                                   <VBox.margin>
-                                                      <Insets />
-                                                   </VBox.margin>
-                                                </Label>
-                                                <Label onMouseClicked="#handleListFloating" prefHeight="31.0" prefWidth="120.0" text="Floating">
-                                                   <padding>
-                                                      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                   </padding>
-                                                   <VBox.margin>
-                                                      <Insets />
-                                                   </VBox.margin>
-                                                </Label>
-                                             </children>
-                                             <padding>
-                                                <Insets top="10.0" />
-                                             </padding>
-                                          </VBox>
-                                       </children>
-                                    </AnchorPane>
-                                </content>
-                              </TitledPane>
-                            <TitledPane fx:id="ImportanceTitledPane" animated="false" text="Importance">
-                                 <content>
-                                    <AnchorPane prefHeight="200.0" prefWidth="200.0">
-                                       <children>
-                                          <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.leftAnchor="10.0">
-                                             <children>
-                                                <Label mnemonicParsing="false" onMouseClicked="#handleListRed" prefHeight="31.0" prefWidth="115.0" text="Red">
-                                                   <padding>
-                                                      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                   </padding>
-                                                   <VBox.margin>
-                                                      <Insets />
-                                                   </VBox.margin>
-                                                </Label>
-                                                <Label mnemonicParsing="false" onMouseClicked="#handleListYellow" prefHeight="31.0" prefWidth="121.0" text="Yellow">
-                                                   <padding>
-                                                      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                   </padding>
-                                                   <VBox.margin>
-                                                      <Insets />
-                                                   </VBox.margin>
-                                                </Label>
-                                                <Label mnemonicParsing="false" onMouseClicked="#handleListGreen" prefHeight="31.0" prefWidth="110.0" text="Green">
-                                                   <padding>
-                                                      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                   </padding>
-                                                   <VBox.margin>
-                                                      <Insets />
-                                                   </VBox.margin>
-                                                </Label>
-                                                <Label mnemonicParsing="false" onMouseClicked="#handleListNone" prefHeight="31.0" prefWidth="110.0" text="None">
-                                                   <padding>
-                                                      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                   </padding>
-                                                   <VBox.margin>
-                                                      <Insets />
-                                                   </VBox.margin>
-                                                </Label>
-                                             </children>
-                                             <padding>
-                                                <Insets top="10.0" />
-                                             </padding>
-                                          </VBox>
-                                       </children>
-                                    </AnchorPane>
-                                 </content>
-                              </TitledPane>
-                              <TitledPane fx:id="CompletenessTitledPane" animated="false" text="Completeness">
-                                <content>
-                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                                       <children>
-                                          <VBox prefHeight="200.0" prefWidth="144.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
-                                             <padding>
-                                                <Insets top="10.0" />
-                                             </padding>
-                                             <children>
-                                                <Label onMouseClicked="#handleListComplete" prefHeight="31.0" prefWidth="108.0" text="Yes">
-                                                   <padding>
-                                                      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                   </padding>
-                                                   <VBox.margin>
-                                                      <Insets />
-                                                   </VBox.margin>
-                                                </Label>
-                                                <Label onMouseClicked="#handleListIncomplete" prefHeight="31.0" prefWidth="139.0" text="No">
-                                                   <padding>
-                                                      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                   </padding>
-                                                   <VBox.margin>
-                                                      <Insets />
-                                                   </VBox.margin>
-                                                </Label>
-                                             </children>
-                                          </VBox>
-                                       </children>
-                                    </AnchorPane>
-                                </content>
-                              </TitledPane>
-                              <TitledPane fx:id="ExpiredTitledPane" animated="false" text="Expired">
-                                <content>
-                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                                       <children>
-                                          <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
-                                             <children>
-                                                <Label onMouseClicked="#handleListExpire" prefHeight="31.0" prefWidth="109.0" text="Yes">
-                                                   <padding>
-                                                      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                   </padding>
-                                                   <VBox.margin>
-                                                      <Insets />
-                                                   </VBox.margin>
-                                                </Label>
-                                                <Label onMouseClicked="#handleListValid" prefHeight="31.0" prefWidth="113.0" text="No">
-                                                   <padding>
-                                                      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                   </padding>
-                                                   <VBox.margin>
-                                                      <Insets />
-                                                   </VBox.margin>
-                                                </Label>
-                                             </children>
-                                             <padding>
-                                                <Insets top="10.0" />
-                                             </padding>
-                                          </VBox>
-                                       </children>
-                                    </AnchorPane>
-                                </content>
-                              </TitledPane>
-                          </panes>
-                        </Accordion>
-                     </children>
-                  </AnchorPane>
-                <AnchorPane fx:id="listDisplayPlaceholder">
-                     <children>
-                        <VBox fx:id="listDisplayVBox" styleClass="container" stylesheets="@DarkTheme.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                           <children>
-                              <GridPane styleClass="header-panel">
-                                 <columnConstraints>
-                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="300.0" minWidth="250.0" prefWidth="250.0" />
-                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="250.0" minWidth="200.0" prefWidth="200.0" />
-                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="250.0" minWidth="200.0" prefWidth="200.0" />
-                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="250.0" minWidth="200.0" prefWidth="200.0" />
-                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="250.0" minWidth="200.0" prefWidth="200.0" />
-                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="300.0" minWidth="250.0" prefWidth="250.0" />
-                                 </columnConstraints>
-                                 <rowConstraints>
-                                    <RowConstraints />
-                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                 </rowConstraints>
-                                 <children>
-                                    <Label minWidth="125.0" styleClass="label-bright" text="Name" GridPane.rowIndex="1">
-                                       <GridPane.margin>
-                                          <Insets left="25.0" />
-                                       </GridPane.margin>
-                                       <padding>
-                                          <Insets bottom="20.0" top="5.0" />
-                                       </padding>
-                                    </Label>
-                                    <Label styleClass="label-bright" text="Start Date" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                                       <GridPane.margin>
-                                          <Insets />
-                                       </GridPane.margin>
-                                       <padding>
-                                          <Insets bottom="20.0" top="5.0" />
-                                       </padding>
-                                    </Label>
-                                    <Label minWidth="50.0" styleClass="label-bright" text="Start Time" GridPane.columnIndex="2" GridPane.rowIndex="1">
-                                       <GridPane.margin>
-                                          <Insets />
-                                       </GridPane.margin>
-                                       <padding>
-                                          <Insets bottom="20.0" top="5.0" />
-                                       </padding>
-                                    </Label>
-                                    <Label minWidth="50.0" styleClass="label-bright" text="End Date" GridPane.columnIndex="3" GridPane.rowIndex="1">
-                                       <GridPane.margin>
-                                          <Insets />
-                                       </GridPane.margin>
-                                       <padding>
-                                          <Insets bottom="20.0" top="5.0" />
-                                       </padding>
-                                    </Label>
-                                    <Label minWidth="50.0" styleClass="label-bright" text="End Time" GridPane.columnIndex="4" GridPane.rowIndex="1">
-                                       <GridPane.margin>
-                                          <Insets />
-                                       </GridPane.margin>
-                                       <padding>
-                                          <Insets bottom="20.0" top="5.0" />
-                                       </padding>
-                                    </Label>
-                                    <Label minWidth="75.0" prefHeight="21.0" prefWidth="56.0" styleClass="label-bright" text="Tags" GridPane.columnIndex="5" GridPane.rowIndex="1">
-                                       <GridPane.margin>
-                                          <Insets />
-                                       </GridPane.margin>
-                                       <padding>
-                                          <Insets bottom="20.0" top="5.0" />
-                                       </padding>
-                                    </Label>
-                                 </children>
-                                 <VBox.margin>
-                                    <Insets top="10.0" />
-                                 </VBox.margin>
-                                 <padding>
-                                    <Insets top="10.0" />
-                                 </padding>
-                              </GridPane>
-                              <AnchorPane fx:id="upperTaskListPanelPlaceholder" prefHeight="832.0" prefWidth="1150.0" styleClass="background" stylesheets="@DarkTheme.css">
-                                 <padding>
-                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                 </padding>
-                              </AnchorPane>
-                              <AnchorPane fx:id="bottomReminderListPanelPlaceholder" prefHeight="350.0" prefWidth="1148.0" styleClass="background" stylesheets="@DarkTheme.css">
-                                 <padding>
-                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                 </padding>
-                              </AnchorPane>
-                           </children>
-                        </VBox>
-                     </children>
-                  </AnchorPane>
-               </children>
-            </HBox>
-         </children>
+  <AnchorPane prefHeight="758.0" prefWidth="1302.0" VBox.vgrow="NEVER">
          <padding>
             <Insets left="10.0" right="10.0" />
          </padding>
+         <children>
+            <SplitPane dividerPositions="0.2" prefHeight="758.0" prefWidth="1443.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+              <items>
+                <AnchorPane fx:id="titledPanePlaceholder" maxWidth="200.0" />
+                <AnchorPane>
+                     <children>
+                        <SplitPane dividerPositions="0.8" orientation="VERTICAL" prefHeight="756.0" prefWidth="1054.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <items>
+                              <AnchorPane fx:id="taskListPanelPlaceholder" prefHeight="200.0" prefWidth="200.0" />
+                              <AnchorPane fx:id="reminderListPlaceholder" prefHeight="200.0" prefWidth="200.0" />
+                           </items>
+                        </SplitPane>
+                     </children>
+                  </AnchorPane>
+              </items>
+            </SplitPane>
+         </children>
       </AnchorPane>
-      <AnchorPane fx:id="statusbarPlaceholder" prefHeight="36.0" prefWidth="1443.0" styleClass="background" stylesheets="@DarkTheme.css" VBox.vgrow="NEVER">
+      <AnchorPane fx:id="statusbarPlaceholder" prefHeight="36.0" prefWidth="1443.0" VBox.vgrow="NEVER">
          <padding>
-            <Insets left="10.0" right="20.0" />
+            <Insets left="10.0" right="10.0" />
          </padding>
          <VBox.margin>
             <Insets />

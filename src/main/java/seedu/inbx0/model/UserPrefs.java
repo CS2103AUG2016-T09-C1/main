@@ -18,15 +18,24 @@ public class UserPrefs {
         return guiSettings == null ? new GuiSettings() : guiSettings;
     }
     
-    public String getThemeSetting() {
-    	return themeSetting;
-    }
-
     public void updateLastUsedGuiSetting(GuiSettings guiSettings) {
         this.guiSettings = guiSettings;
     }
     
+    public void setGuiSettings(double width, double height, int x, int y) {
+        guiSettings = new GuiSettings(width, height, x, y);
+    }
+    
+    //@@A0148044J
+    public String getThemeSetting() {
+    	return themeSetting;
+    }
+    
     public void updateLastUsedThemeSetting(String themeSetting) {
+    	this.themeSetting = themeSetting;
+    }
+    
+    public void setThemeSetting(String themeSetting) {
     	this.themeSetting = themeSetting;
     }
 
@@ -34,17 +43,10 @@ public class UserPrefs {
         Rectangle2D visualBounds = Screen.getPrimary().getVisualBounds();
         this.setGuiSettings(visualBounds.getWidth(), visualBounds.getHeight(), 
         					(int) visualBounds.getMinX(), (int) visualBounds.getMinY());
-        this.themeSetting = "default";
+        this.themeSetting = "/view/LightGrey.css";
     }
-
-    public void setGuiSettings(double width, double height, int x, int y) {
-        guiSettings = new GuiSettings(width, height, x, y);
-    }
+    //A0148044J
     
-    public void setThemeSetting(String themeSetting) {
-    	this.themeSetting = themeSetting;
-    }
-
     @Override
     public boolean equals(Object other) {
         if (other == this){

@@ -1,4 +1,4 @@
-package seedu.inbx0.commons.events.model;
+package seedu.inbx0.commons.events.ui;
 
 import seedu.inbx0.commons.events.BaseEvent;
 
@@ -7,6 +7,6 @@ public class CloseAllTitledPanesEvent extends BaseEvent {
 
     @Override
     public String toString() {
-        return "programmely close all titlepanes";
+        return "programably close all titlepanes";
     }
 }

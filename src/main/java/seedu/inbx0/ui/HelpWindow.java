@@ -54,10 +54,12 @@ public class HelpWindow extends UiPart {
         helpStage.close();
     }
     
+    //@@author A0148044J
     @FXML
     public void keyPressed(KeyEvent evt) {
         if(evt.getCode().equals(KeyCode.ENTER)) {
             handleCloseHelpWindow();
         }     
     }
+    //@@author
 }

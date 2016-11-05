@@ -66,7 +66,8 @@ public class ReminderList extends UiPart {
         infoPanel.configure(task);
         return infoPanel;
     }
-
+    
+    //@@author A0148044J
     public void displayInfo(ReadOnlyTask task) {
     	if(task == null) {
     		name.setText(null);
@@ -108,6 +109,13 @@ public class ReminderList extends UiPart {
 		    setConnections(reminderList);	
     	}
 	}
+    
+
+	public void updateReminderList(ReadOnlyTask newTask) {
+        this.displayInfo(newTask);
+        this.displayReminder(newTask);
+	}
+	//@@author
 
 	private void setConnections(ObservableList<ReminderTask> reminderList) {
         reminderListView.setItems(reminderList);
@@ -138,9 +146,4 @@ public class ReminderList extends UiPart {
             }
         }
     }
-
-	public void updateReminderList(ReadOnlyTask newTask) {
-        this.displayInfo(newTask);
-        this.displayReminder(newTask);
-	}
 }

@@ -3,6 +3,7 @@ package seedu.inbx0.ui;
 
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.control.Label;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.TitledPane;
 import javafx.scene.layout.AnchorPane;
@@ -20,7 +21,10 @@ public class TitledPaneList extends UiPart {
     private Logic logic;
     private TaskListPanel taskListPanel;
     private AnchorPane taskListPanelPlaceholder; 
-       
+    
+    @FXML
+    private TitledPane TodayTitledPane;
+    
     @FXML
     private TitledPane DayTitledPane;
 
@@ -34,7 +38,61 @@ public class TitledPaneList extends UiPart {
     private TitledPane CompletenessTitledPane;
 
     @FXML
-    private TitledPane ExpiredTitledPane; 
+    private TitledPane ExpiryTitledPane; 
+    
+    @FXML
+    private Label MondayLabel;
+    
+    @FXML
+    private Label TuesdayLabel;
+    
+    @FXML
+    private Label WednesdayLabel;
+    
+    @FXML
+    private Label ThursdayLabel;
+    
+    @FXML
+    private Label FridayLabel;
+    
+    @FXML
+    private Label SaturdayLabel;
+    
+    @FXML
+    private Label SundayLabel;
+    
+    @FXML
+    private Label EventLabel;
+    
+    @FXML
+    private Label DeadlineLabel;
+    
+    @FXML
+    private Label FloatingLabel;
+    
+    @FXML
+    private Label RedLabel;
+    
+    @FXML
+    private Label YellowLabel;
+    
+    @FXML
+    private Label GreenLabel;
+    
+    @FXML
+    private Label NoneLabel;
+    
+    @FXML
+    private Label CompleteLabel;
+    
+    @FXML
+    private Label IncompleteLabel;
+    
+    @FXML
+    private Label ExpiredLabel;
+    
+    @FXML
+    private Label UnexpiredLabel;
     
     public TitledPaneList() {
         super();
@@ -56,7 +114,7 @@ public class TitledPaneList extends UiPart {
     }
     
     public static TitledPaneList load(Stage primaryStage, AnchorPane titledPaneListPlaceholder, Logic logic, 
-             TaskListPanel taskListPanel, AnchorPane taskListPanelPlaceholder){
+        TaskListPanel taskListPanel, AnchorPane taskListPanelPlaceholder){
         TitledPaneList titlePaneList = UiPartLoader.loadUiPart(primaryStage, titledPaneListPlaceholder, new TitledPaneList()); 
         titlePaneList.configure(logic, taskListPanel, taskListPanelPlaceholder);
         titlePaneList.addToPlaceholder();
@@ -67,9 +125,86 @@ public class TitledPaneList extends UiPart {
         this.logic = logic;
         this.taskListPanel = taskListPanel;
         this.taskListPanelPlaceholder = taskListPanelPlaceholder;
+        updateTitledPanes();
     }
     
-    private AnchorPane getTaskListPanelPlaceholder() {
+    public void updateTitledPanes() {
+        displayTasksNumberInTodayTitledPane();
+        displayTasksNumberInDayTitledPane();
+        displayTasksNumberInCategoryTitledPane();
+        displayTasksNumberInImportanceTitledPane();
+        displayTasksNumberInCompletenessTitledPane();
+        displayTasksNumberInExpiryTitledPane();
+    }
+
+	private void displayTasksNumberInTodayTitledPane() {
+    	int sizeOfTodayTask = logic.getFilteredTaskListByDay("today").size();
+    	TodayTitledPane.setText("Today (" + String.valueOf(sizeOfTodayTask) + ")");
+    }
+	
+	private void displayTasksNumberInDayTitledPane() {
+		int sizeOfMondayTask = logic.getFilteredTaskListByDay("Monday").size();
+    	MondayLabel.setText("Monday (" + String.valueOf(sizeOfMondayTask) + ")");		
+    	int sizeOfTuesdayTask = logic.getFilteredTaskListByDay("Tuesday").size();
+    	TuesdayLabel.setText("Tuesday (" + String.valueOf(sizeOfTuesdayTask) + ")");
+    	int sizeOfWednesdayTask = logic.getFilteredTaskListByDay("Wednesday").size();
+    	WednesdayLabel.setText("Wednesday (" + String.valueOf(sizeOfWednesdayTask) + ")");
+    	int sizeOfThursdayTask = logic.getFilteredTaskListByDay("Thursday").size();
+    	ThursdayLabel.setText("Thursday (" + String.valueOf(sizeOfThursdayTask) + ")");
+    	int sizeOfFridayTask = logic.getFilteredTaskListByDay("Friday").size();
+    	FridayLabel.setText("Friday (" + String.valueOf(sizeOfFridayTask) + ")");
+    	int sizeOfSaturdayTask = logic.getFilteredTaskListByDay("Saturday").size();
+    	SaturdayLabel.setText("Saturday (" + String.valueOf(sizeOfSaturdayTask) + ")");
+    	int sizeOfSundayTask = logic.getFilteredTaskListByDay("Sunday").size();
+    	SundayLabel.setText("Sunday (" + String.valueOf(sizeOfSundayTask) + ")");
+    	int sizeOfDayTask = sizeOfMondayTask + sizeOfTuesdayTask + sizeOfWednesdayTask +
+    				+ sizeOfThursdayTask + sizeOfFridayTask + sizeOfSaturdayTask + sizeOfSundayTask;
+    	DayTitledPane.setText("Today (" + String.valueOf(sizeOfDayTask) + ")");
+    }
+	
+	private void displayTasksNumberInCategoryTitledPane() {
+		int sizeOfEventTask = logic.getFilteredTaskListByCategory("Event").size();
+    	EventLabel.setText("Event (" + String.valueOf(sizeOfEventTask) + ")");		
+    	int sizeOfDeadlineTask = logic.getFilteredTaskListByCategory("Deadline").size();
+    	DeadlineLabel.setText("Deadline (" + String.valueOf(sizeOfDeadlineTask) + ")");
+    	int sizeOfFloatingTask = logic.getFilteredTaskListByCategory("Floating").size();
+    	FloatingLabel.setText("Floating (" + String.valueOf(sizeOfFloatingTask) + ")");
+    	int sizeOfCategoryTask = sizeOfEventTask + sizeOfFloatingTask + sizeOfDeadlineTask;
+    	CategoryTitledPane.setText("Category (" + String.valueOf(sizeOfCategoryTask) + ")");
+	}
+	
+	private void displayTasksNumberInImportanceTitledPane() {
+		int sizeOfRedTask = logic.getFilteredTaskListByImportance("Red").size();
+    	RedLabel.setText("Red (" + String.valueOf(sizeOfRedTask) + ")");		
+    	int sizeOfYellowTask = logic.getFilteredTaskListByImportance("Yellow").size();
+    	YellowLabel.setText("Yellow (" + String.valueOf(sizeOfYellowTask) + ")");
+    	int sizeOfGreenTask = logic.getFilteredTaskListByImportance("Green").size();
+    	GreenLabel.setText("Green (" + String.valueOf(sizeOfGreenTask) + ")");
+    	int sizeOfNoneTask = logic.getFilteredTaskListByImportance("None").size();
+    	NoneLabel.setText("None (" + String.valueOf(sizeOfNoneTask) + ")");
+    	int sizeOfImportanceTask = sizeOfRedTask + + sizeOfYellowTask + + sizeOfGreenTask + sizeOfNoneTask;
+    	ImportanceTitledPane.setText("Importance (" + String.valueOf(sizeOfImportanceTask) + ")");		
+	}
+
+	private void displayTasksNumberInCompletenessTitledPane() {
+		int sizeOfCompleteTask = logic.getFilteredTaskListByCompleteness(true).size();
+    	CompleteLabel.setText("Complete (" + String.valueOf(sizeOfCompleteTask) + ")");
+    	int sizeOfIncompleteTask = logic.getFilteredTaskListByCompleteness(false).size();
+    	IncompleteLabel.setText("Incomplete (" + String.valueOf(sizeOfIncompleteTask) + ")");
+    	int sizeOfCompletenessTask = sizeOfCompleteTask + sizeOfIncompleteTask;
+    	CompletenessTitledPane.setText("Completeness (" + String.valueOf(sizeOfCompletenessTask) + ")");		
+	}
+
+	private void displayTasksNumberInExpiryTitledPane() {
+		int sizeOfExpiredTask = logic.getFilteredTaskListByExpiry(true).size();
+    	ExpiredLabel.setText("Expired (" + String.valueOf(sizeOfExpiredTask) + ")");
+    	int sizeOfUnexpiredTask = logic.getFilteredTaskListByExpiry(false).size();
+    	UnexpiredLabel.setText("Unexpired (" + String.valueOf(sizeOfUnexpiredTask) + ")");
+    	int sizeOfExpiryTask = sizeOfExpiredTask + sizeOfUnexpiredTask;
+    	ExpiryTitledPane.setText("Expiry (" + String.valueOf(sizeOfExpiryTask) + ")");				
+	}
+	
+	private AnchorPane getTaskListPanelPlaceholder() {
         return taskListPanelPlaceholder;
     }
     
@@ -289,10 +424,10 @@ public class TitledPaneList extends UiPart {
             CompletenessTitledPane.setExpanded(true);
             handleListIncomplete();
         } else if ("Expired".equals(filterCondition)) {
-            ExpiredTitledPane.setExpanded(true);
+            ExpiryTitledPane.setExpanded(true);
             handleListExpired();
         } else if ("Unexpired".equals(filterCondition)) {
-            ExpiredTitledPane.setExpanded(true);
+            ExpiryTitledPane.setExpanded(true);
             handleListUnexpired();
         }
     }
@@ -302,7 +437,7 @@ public class TitledPaneList extends UiPart {
         CategoryTitledPane.setExpanded(false);
         ImportanceTitledPane.setExpanded(false);
         CompletenessTitledPane.setExpanded(false);
-        ExpiredTitledPane.setExpanded(false);
+        ExpiryTitledPane.setExpanded(false);
     }
     
     public void scrollTo(int index) {

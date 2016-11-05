@@ -25,10 +25,10 @@ public class ClearCommand extends Command {
         
         if(toClear.length() == 0) {
         UnmodifiableObservableList<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
-                
-        indicateCloseReminderListEvent();
+
         model.removeAllTasksFromShownList(lastShownList);
         indicateCloseReminderListEvent();
+        indicateUpdateAllTitledpanesEvent();
         } else {
             model.resetData(TaskList.getEmptyTaskList());
         }

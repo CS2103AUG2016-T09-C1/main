@@ -184,7 +184,7 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
         taskList.addTask(task);
-        updateFilteredListToShowAll();
+//        updateFilteredListToShowAll();
         indicateTaskListChanged();
     }
     
@@ -535,9 +535,10 @@ public class ModelManager extends ComponentManager implements Model {
         
         @Override
         public boolean run(ReadOnlyTask task) {
-            System.out.println("task: " + task.getLevel().getLevel());
-            System.out.println("importance: " + importance);
-            return task.getLevel().getLevel().equals(this.importance);
+        	if("None".equals(importance)) {
+        		return task.getLevel().getLevel().equals("");
+        	}
+            return task.getLevel().getLevel().equals(importance);
         }
         
         @Override

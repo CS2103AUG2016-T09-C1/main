@@ -10,12 +10,13 @@ import seedu.inbx0.MainApp;
 import seedu.inbx0.commons.core.ComponentManager;
 import seedu.inbx0.commons.core.Config;
 import seedu.inbx0.commons.core.LogsCenter;
-import seedu.inbx0.commons.events.model.CloseAllTitledPanesEvent;
+import seedu.inbx0.commons.events.ui.CloseAllTitledPanesEvent;
 import seedu.inbx0.commons.events.storage.DataSavingExceptionEvent;
 import seedu.inbx0.commons.events.ui.CloseReminderListEvent;
 import seedu.inbx0.commons.events.ui.JumpToListRequestEvent;
 import seedu.inbx0.commons.events.ui.ShowFilteredListRequestEvent;
 import seedu.inbx0.commons.events.ui.TaskPanelSelectionChangedEvent;
+import seedu.inbx0.commons.events.ui.UpdateAllTitledPanesEvent;
 import seedu.inbx0.commons.events.ui.ShowHelpRequestEvent;
 import seedu.inbx0.commons.events.ui.ShowReminderRequestEvent;
 import seedu.inbx0.commons.util.StringUtil;
@@ -153,5 +154,11 @@ public class UiManager extends ComponentManager implements Ui {
     private void handleCloseAllTitledpanesEvent(CloseAllTitledPanesEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         mainWindow.getTitledPaneList().closeAllTitledPanes();
+    }
+    
+    @Subscribe 
+    private void handleUpdateAllTitledpanesEvent(UpdateAllTitledPanesEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        mainWindow.getTitledPaneList().updateTitledPanes();
     }
 }

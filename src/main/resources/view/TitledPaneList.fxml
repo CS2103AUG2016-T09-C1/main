@@ -11,14 +11,14 @@
    <children>
       <Accordion styleClass="label-bright">
          <panes>
-            <TitledPane animated="false" collapsible="false" expanded="false" onMouseClicked="#handleListToday" text="    Today" />
+            <TitledPane fx:id="TodayTitledPane" animated="false" collapsible="false" expanded="false" onMouseClicked="#handleListToday" text="    Today" />
             <TitledPane fx:id="DayTitledPane" animated="false" text="Day">
                <content>
                   <AnchorPane prefHeight="200.0" prefWidth="189.0">
                      <children>
                         <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.leftAnchor="10.0">
                            <children>
-                              <Label mnemonicParsing="false" onMouseClicked="#handleListMonday" prefHeight="31.0" prefWidth="111.0" text="Monday">
+                              <Label fx:id="MondayLabel" mnemonicParsing="false" onMouseClicked="#handleListMonday" prefHeight="31.0" prefWidth="111.0" text="Monday">
                                  <padding>
                                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                  </padding>
@@ -26,7 +26,7 @@
                                     <Insets />
                                  </VBox.margin>
                               </Label>
-                              <Label mnemonicParsing="false" onMouseClicked="#handleListTuesday" prefHeight="31.0" prefWidth="117.0" text="Tuesday">
+                              <Label fx:id="TuesdayLabel" mnemonicParsing="false" onMouseClicked="#handleListTuesday" prefHeight="31.0" prefWidth="117.0" text="Tuesday">
                                  <padding>
                                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                  </padding>
@@ -34,7 +34,7 @@
                                     <Insets />
                                  </VBox.margin>
                               </Label>
-                              <Label mnemonicParsing="false" onMouseClicked="#handleListWednesday" prefHeight="31.0" prefWidth="115.0" text="Wednesday">
+                              <Label fx:id="WednesdayLabel" mnemonicParsing="false" onMouseClicked="#handleListWednesday" prefHeight="31.0" prefWidth="115.0" text="Wednesday">
                                  <padding>
                                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                  </padding>
@@ -42,7 +42,7 @@
                                     <Insets />
                                  </VBox.margin>
                               </Label>
-                              <Label mnemonicParsing="false" onMouseClicked="#handleListThursday" prefHeight="31.0" prefWidth="104.0" text="Thursday">
+                              <Label fx:id="ThursdayLabel" mnemonicParsing="false" onMouseClicked="#handleListThursday" prefHeight="31.0" prefWidth="104.0" text="Thursday">
                                  <padding>
                                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                  </padding>
@@ -50,7 +50,7 @@
                                     <Insets />
                                  </VBox.margin>
                               </Label>
-                              <Label mnemonicParsing="false" onMouseClicked="#handleListFriday" prefHeight="31.0" prefWidth="113.0" text="Friday">
+                              <Label fx:id="FridayLabel" mnemonicParsing="false" onMouseClicked="#handleListFriday" prefHeight="31.0" prefWidth="113.0" text="Friday">
                                  <padding>
                                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                  </padding>
@@ -58,7 +58,7 @@
                                     <Insets />
                                  </VBox.margin>
                               </Label>
-                              <Label mnemonicParsing="false" onMouseClicked="#handleListSaturday" prefHeight="31.0" prefWidth="117.0" text="Saturday">
+                              <Label fx:id="SaturdayLabel" mnemonicParsing="false" onMouseClicked="#handleListSaturday" prefHeight="31.0" prefWidth="117.0" text="Saturday">
                                  <padding>
                                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                  </padding>
@@ -66,7 +66,7 @@
                                     <Insets />
                                  </VBox.margin>
                               </Label>
-                              <Label mnemonicParsing="false" onMouseClicked="#handleListSunday" prefHeight="31.0" prefWidth="123.0" text="Sunday">
+                              <Label fx:id="SundayLabel" mnemonicParsing="false" onMouseClicked="#handleListSunday" prefHeight="31.0" prefWidth="123.0" text="Sunday">
                                  <padding>
                                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                  </padding>
@@ -89,7 +89,7 @@
                      <children>
                         <VBox layoutX="14.0" prefHeight="200.0" prefWidth="100.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
                            <children>
-                              <Label onMouseClicked="#handleListEvent" prefHeight="31.0" prefWidth="113.0" text="Event">
+                              <Label fx:id="EventLabel" onMouseClicked="#handleListEvent" prefHeight="31.0" prefWidth="113.0" text="Event">
                                  <padding>
                                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                  </padding>
@@ -97,7 +97,7 @@
                                     <Insets />
                                  </VBox.margin>
                               </Label>
-                              <Label onMouseClicked="#handleListDeadline" prefHeight="31.0" prefWidth="113.0" text="Deadline">
+                              <Label fx:id="DeadlineLabel" onMouseClicked="#handleListDeadline" prefHeight="31.0" prefWidth="113.0" text="Deadline">
                                  <padding>
                                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                  </padding>
@@ -105,7 +105,7 @@
                                     <Insets />
                                  </VBox.margin>
                               </Label>
-                              <Label onMouseClicked="#handleListFloating" prefHeight="31.0" prefWidth="120.0" text="Floating">
+                              <Label fx:id="FloatingLabel" onMouseClicked="#handleListFloating" prefHeight="31.0" prefWidth="120.0" text="Floating">
                                  <padding>
                                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                  </padding>
@@ -128,7 +128,7 @@
                      <children>
                         <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.leftAnchor="10.0">
                            <children>
-                              <Label mnemonicParsing="false" onMouseClicked="#handleListRed" prefHeight="31.0" prefWidth="115.0" text="Red">
+                              <Label fx:id="RedLabel" mnemonicParsing="false" onMouseClicked="#handleListRed" prefHeight="31.0" prefWidth="115.0" text="Red">
                                  <padding>
                                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                  </padding>
@@ -136,7 +136,7 @@
                                     <Insets />
                                  </VBox.margin>
                               </Label>
-                              <Label mnemonicParsing="false" onMouseClicked="#handleListYellow" prefHeight="31.0" prefWidth="121.0" text="Yellow">
+                              <Label fx:id="YellowLabel" mnemonicParsing="false" onMouseClicked="#handleListYellow" prefHeight="31.0" prefWidth="121.0" text="Yellow">
                                  <padding>
                                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                  </padding>
@@ -144,7 +144,7 @@
                                     <Insets />
                                  </VBox.margin>
                               </Label>
-                              <Label mnemonicParsing="false" onMouseClicked="#handleListGreen" prefHeight="31.0" prefWidth="110.0" text="Green">
+                              <Label fx:id="GreenLabel" mnemonicParsing="false" onMouseClicked="#handleListGreen" prefHeight="31.0" prefWidth="110.0" text="Green">
                                  <padding>
                                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                  </padding>
@@ -152,7 +152,7 @@
                                     <Insets />
                                  </VBox.margin>
                               </Label>
-                              <Label mnemonicParsing="false" onMouseClicked="#handleListNone" prefHeight="31.0" prefWidth="110.0" text="None">
+                              <Label fx:id="NoneLabel" mnemonicParsing="false" onMouseClicked="#handleListNone" prefHeight="31.0" prefWidth="110.0" text="None">
                                  <padding>
                                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                  </padding>
@@ -178,7 +178,7 @@
                               <Insets top="10.0" />
                            </padding>
                            <children>
-                              <Label onMouseClicked="#handleListComplete" prefHeight="31.0" prefWidth="108.0" text="Yes">
+                              <Label fx:id="CompleteLabel" onMouseClicked="#handleListComplete" prefHeight="31.0" prefWidth="108.0" text="Yes">
                                  <padding>
                                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                  </padding>
@@ -186,7 +186,7 @@
                                     <Insets />
                                  </VBox.margin>
                               </Label>
-                              <Label onMouseClicked="#handleListIncomplete" prefHeight="31.0" prefWidth="139.0" text="No">
+                              <Label fx:id="IncompleteLabel" onMouseClicked="#handleListIncomplete" prefHeight="31.0" prefWidth="139.0" text="No">
                                  <padding>
                                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                  </padding>
@@ -200,13 +200,13 @@
                   </AnchorPane>
                </content>
             </TitledPane>
-            <TitledPane fx:id="ExpiredTitledPane" animated="false" text="Expired">
+            <TitledPane fx:id="ExpiryTitledPane" animated="false" text="Expiry">
                <content>
                   <AnchorPane>
                      <children>
                         <VBox AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
                            <children>
-                              <Label onMouseClicked="#handleListExpired" prefHeight="31.0" prefWidth="109.0" text="Yes">
+                              <Label fx:id="ExpiredLabel" onMouseClicked="#handleListExpired" prefHeight="31.0" prefWidth="109.0" text="Yes">
                                  <padding>
                                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                  </padding>
@@ -214,7 +214,7 @@
                                     <Insets />
                                  </VBox.margin>
                               </Label>
-                              <Label onMouseClicked="#handleListUnexpired" prefHeight="31.0" prefWidth="113.0" text="No">
+                              <Label fx:id="UnexpiredLabel" onMouseClicked="#handleListUnexpired" prefHeight="31.0" prefWidth="113.0" text="No">
                                  <padding>
                                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                  </padding>

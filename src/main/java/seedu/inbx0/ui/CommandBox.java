@@ -97,7 +97,7 @@ public class CommandBox extends UiPart {
         restoreCommandText();
         commandTextField.positionCaret(commandTextField.getText().length());
     }
-
+    
     /**
      * Restores the command box text to the previously entered command
      */
@@ -105,6 +105,7 @@ public class CommandBox extends UiPart {
         commandTextField.setText(previousCommandText);
     }
     
+    //@@author A0148044J
     /**
      * Fill in the command box text with the next command test
      */
@@ -197,6 +198,6 @@ public class CommandBox extends UiPart {
             commandTextField.positionCaret(commandTextField.getText().length());
         }
     }
-
+    //@@author
 
 }
