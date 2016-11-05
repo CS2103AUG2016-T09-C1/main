@@ -20,14 +20,13 @@ public class ListCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": \n 1. Lists all tasks associated with the date and "
             + "displays them as a list with index numbers.\n"
-            + "Without any parameters, it will display all tasks.\n"
+            + "Without any parameters, it will display all undone tasks.\n"
             + "Parameters: [DATE]\n"
             + "Example: " + COMMAND_WORD + " today\n"
             + "2. Lists all tasks that are due to a certain date \n"
             + "Parameters: due DATE\n"
             + "Example: " + COMMAND_WORD + " due next week\n"
             + "3. Lists all tasks that are overdue \n"
-            + "Parameters: overdue\n"
             + "Example: " + COMMAND_WORD + " overdue\n";
     
     private final String checkDate;
