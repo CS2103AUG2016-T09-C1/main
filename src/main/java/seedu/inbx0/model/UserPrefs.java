@@ -2,6 +2,8 @@ package seedu.inbx0.model;
 
 import java.util.Objects;
 
+import javafx.geometry.Rectangle2D;
+import javafx.stage.Screen;
 import seedu.inbx0.commons.core.GuiSettings;
 
 /**
@@ -29,7 +31,9 @@ public class UserPrefs {
     }
 
     public UserPrefs(){
-        this.setGuiSettings(1300, 800, 0, 0);
+        Rectangle2D visualBounds = Screen.getPrimary().getVisualBounds();
+        this.setGuiSettings(visualBounds.getWidth(), visualBounds.getHeight(), 
+        					(int) visualBounds.getMinX(), (int) visualBounds.getMinY());
         this.themeSetting = "default";
     }
 

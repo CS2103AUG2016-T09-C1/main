@@ -34,8 +34,6 @@ public class TaskCard extends UiPart{
     private Label isCompleted;
     @FXML
     private Label hasReminders;
-    //@FXML
-    //private Label isExpired;
 
     private ReadOnlyTask task;
     private int displayedIndex;
@@ -49,13 +47,6 @@ public class TaskCard extends UiPart{
 
     @FXML
     public void initialize() {
-     /*   name.setWrapText(true);
-        id.setWrapText(true);
-        startDate.setWrapText(true);
-        startTime.setWrapText(true);
-        endDate.setWrapText(true);
-        endTime.setWrapText(true);
-        tags.setWrapText(true);*/
         name.setText(task.getName().fullName);
         id.setText(displayedIndex + ". ");
         startDate.setText(task.getStartDate().getTotalDate());
@@ -63,14 +54,6 @@ public class TaskCard extends UiPart{
         endDate.setText(task.getEndDate().getTotalDate());
         endTime.setText(task.getEndTime().value);
         tags.setText(task.tagsString());
-        //isCompleted.setText("isCompleted: " + task.getIsCompleted());
-        
-        /*if((task.getStartDate().value.equals("") && task.getStartTime().value.equals("") && !task.getEndDate().value.equals("") && !task.getEndTime().value.equals("")) |
-           (task.getStartDate().value.equals("") && task.getStartTime().value.equals("") && !task.getEndDate().value.equals("") && task.getEndTime().value.equals("")))
-            isExpired.setText("isExpired: " + task.getIsExpired());
-        else
-            isExpired.setText("");
-        */
         if (task.getLevel().getNumberLevel() == 1 && task.getIsExpired() && task.getIsEvent()) 
             cardPane.setStyle("-fx-background-color: rgba(0, 245, 0, 0.1);");
         else if (task.getLevel().getNumberLevel() == 1)
@@ -90,18 +73,7 @@ public class TaskCard extends UiPart{
         } else {
             isCompleted.setText("\u2717");
             isCompleted.setStyle("-fx-font-size: 24;");
-        }   /* if(task.getIsExpired() == true && task.getIsEvent() == true) {
-                cardPane.setStyle("-fx-background-color: grey;");
-            } else {
-                cardPane.setStyle("-fx-background-color: black;");
-            }
-            name.setStyle("-fx-text-fill: white;");
-            id.setStyle("-fx-text-fill: white;");
-            startDate.setStyle("-fx-text-fill: white;");
-            startTime.setStyle("-fx-text-fill: white;");
-            endDate.setStyle("-fx-text-fill: white;");
-            endTime.setStyle("-fx-text-fill: white;");
-            tags.setStyle("-fx-text-fill: white;");       */    
+        } 
         hasReminders.setText("");
         UniqueReminderList reminders = task.getReminders();
         Iterator<ReminderTask> check = reminders.iterator();

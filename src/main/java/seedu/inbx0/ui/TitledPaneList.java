@@ -7,6 +7,8 @@ import javafx.scene.control.SplitPane;
 import javafx.scene.control.TitledPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import seedu.inbx0.commons.core.EventsCenter;
+import seedu.inbx0.commons.events.ui.CloseReminderListEvent;
 import seedu.inbx0.commons.util.FxViewUtil;
 import seedu.inbx0.logic.Logic;
 
@@ -80,6 +82,7 @@ public class TitledPaneList extends UiPart {
     @FXML
     public void handleListToday() {
         taskListPanel = null;
+        indicateCloseReminderListEvent();
         taskListPanel = TaskListPanel.load(primaryStage, getTaskListPanelPlaceholder(),
                 logic.getFilteredTaskListByDay("today"));
     }
@@ -87,6 +90,7 @@ public class TitledPaneList extends UiPart {
     @FXML
     public void handleListMonday() {
         taskListPanel = null;
+        indicateCloseReminderListEvent();
         taskListPanel = TaskListPanel.load(primaryStage, getTaskListPanelPlaceholder(),
                 logic.getFilteredTaskListByDay("Monday"));
     }
@@ -94,6 +98,7 @@ public class TitledPaneList extends UiPart {
     @FXML
     public void handleListTuesday() {
         taskListPanel = null;
+        indicateCloseReminderListEvent();
         taskListPanel = TaskListPanel.load(primaryStage, getTaskListPanelPlaceholder(),
                 logic.getFilteredTaskListByDay("Tuesday"));
     }
@@ -101,6 +106,7 @@ public class TitledPaneList extends UiPart {
     @FXML
     public void handleListWednesday() {
         taskListPanel = null;
+        indicateCloseReminderListEvent();
         taskListPanel = TaskListPanel.load(primaryStage, getTaskListPanelPlaceholder(),
                 logic.getFilteredTaskListByDay("Wednesday"));
     }
@@ -108,6 +114,7 @@ public class TitledPaneList extends UiPart {
     @FXML
     public void handleListThursday() {
         taskListPanel = null;
+        indicateCloseReminderListEvent();
         taskListPanel = TaskListPanel.load(primaryStage, getTaskListPanelPlaceholder(),
                 logic.getFilteredTaskListByDay("Thursday"));
     }
@@ -115,6 +122,7 @@ public class TitledPaneList extends UiPart {
     @FXML
     public void handleListFriday() {
         taskListPanel = null;
+        indicateCloseReminderListEvent();
         taskListPanel = TaskListPanel.load(primaryStage, getTaskListPanelPlaceholder(),
                 logic.getFilteredTaskListByDay("Friday"));
     }
@@ -122,6 +130,7 @@ public class TitledPaneList extends UiPart {
     @FXML
     public void handleListSaturday() {
         taskListPanel = null;
+        indicateCloseReminderListEvent();
         taskListPanel = TaskListPanel.load(primaryStage, getTaskListPanelPlaceholder(),
                 logic.getFilteredTaskListByDay("Saturday"));
     }
@@ -129,6 +138,7 @@ public class TitledPaneList extends UiPart {
     @FXML
     public void handleListSunday() {
         taskListPanel = null;
+        indicateCloseReminderListEvent();
         taskListPanel = TaskListPanel.load(primaryStage, getTaskListPanelPlaceholder(),
                 logic.getFilteredTaskListByDay("Sunday"));
     }
@@ -136,6 +146,7 @@ public class TitledPaneList extends UiPart {
     @FXML
     public void handleListEvent() {
         taskListPanel = null;
+        indicateCloseReminderListEvent();
         taskListPanel = TaskListPanel.load(primaryStage, getTaskListPanelPlaceholder(),
                 logic.getFilteredTaskListByCategory("Event"));
     }
@@ -143,6 +154,7 @@ public class TitledPaneList extends UiPart {
     @FXML
     public void handleListFloating() {
         taskListPanel = null;
+        indicateCloseReminderListEvent();
         taskListPanel = TaskListPanel.load(primaryStage, getTaskListPanelPlaceholder(),
                 logic.getFilteredTaskListByCategory("Floating"));
     }
@@ -150,6 +162,7 @@ public class TitledPaneList extends UiPart {
     @FXML
     public void handleListDeadline() {
         taskListPanel = null;
+        indicateCloseReminderListEvent();
         taskListPanel = TaskListPanel.load(primaryStage, getTaskListPanelPlaceholder(),
                 logic.getFilteredTaskListByCategory("Deadline"));
     }
@@ -157,6 +170,7 @@ public class TitledPaneList extends UiPart {
     @FXML
     public void handleListRed() {
         taskListPanel = null;
+        indicateCloseReminderListEvent();
         taskListPanel = TaskListPanel.load(primaryStage, getTaskListPanelPlaceholder(),
                 logic.getFilteredTaskListByImportance("Red"));
     }
@@ -164,6 +178,7 @@ public class TitledPaneList extends UiPart {
     @FXML
     public void handleListYellow() {
         taskListPanel = null;
+        indicateCloseReminderListEvent();
         taskListPanel = TaskListPanel.load(primaryStage, getTaskListPanelPlaceholder(),
                 logic.getFilteredTaskListByImportance("Yellow"));
     }
@@ -171,6 +186,7 @@ public class TitledPaneList extends UiPart {
     @FXML
     public void handleListGreen() {
         taskListPanel = null;
+        indicateCloseReminderListEvent();
         taskListPanel = TaskListPanel.load(primaryStage, getTaskListPanelPlaceholder(),
                 logic.getFilteredTaskListByImportance("Green"));
     }
@@ -178,6 +194,7 @@ public class TitledPaneList extends UiPart {
     @FXML
     public void handleListNone() {
         taskListPanel = null;
+        indicateCloseReminderListEvent();
         taskListPanel = TaskListPanel.load(primaryStage, getTaskListPanelPlaceholder(),
                 logic.getFilteredTaskListByImportance("None"));
     }
@@ -185,6 +202,7 @@ public class TitledPaneList extends UiPart {
     @FXML
     public void handleListComplete() {
         taskListPanel = null;
+        indicateCloseReminderListEvent();
         taskListPanel = TaskListPanel.load(primaryStage, getTaskListPanelPlaceholder(),
                 logic.getFilteredTaskListByCompleteness(true));
     }
@@ -192,6 +210,7 @@ public class TitledPaneList extends UiPart {
     @FXML
     public void handleListIncomplete() {
         taskListPanel = null;
+        indicateCloseReminderListEvent();
         taskListPanel = TaskListPanel.load(primaryStage, getTaskListPanelPlaceholder(),
                 logic.getFilteredTaskListByCompleteness(false));
     }
@@ -199,6 +218,7 @@ public class TitledPaneList extends UiPart {
     @FXML
     public void handleListExpired() {
         taskListPanel = null;
+        indicateCloseReminderListEvent();
         taskListPanel = TaskListPanel.load(primaryStage, getTaskListPanelPlaceholder(),
                 logic.getFilteredTaskListByExpiry(true));
     }
@@ -206,10 +226,15 @@ public class TitledPaneList extends UiPart {
     @FXML
     public void handleListUnexpired() {
         taskListPanel = null;
+        indicateCloseReminderListEvent();
         taskListPanel = TaskListPanel.load(primaryStage, getTaskListPanelPlaceholder(),
                 logic.getFilteredTaskListByExpiry(false));
     }
-
+    
+    private void indicateCloseReminderListEvent() {
+    	EventsCenter.getInstance().post(new CloseReminderListEvent());
+    }
+    
     public void handleShowFilteredListRequestByShowCommand(String filterCondition) {
         if ("today".equals(filterCondition)) {
             closeAllTitledPanes();
@@ -283,7 +308,6 @@ public class TitledPaneList extends UiPart {
     public void scrollTo(int index) {
         taskListPanel.scrollTo(index);
     }
-
 }
 //@@author
 

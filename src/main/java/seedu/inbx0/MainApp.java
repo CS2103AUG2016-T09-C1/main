@@ -17,7 +17,6 @@ import seedu.inbx0.logic.LogicManager;
 import seedu.inbx0.model.*;
 import seedu.inbx0.storage.Storage;
 import seedu.inbx0.storage.StorageManager;
-import seedu.inbx0.ui.MainWindow;
 import seedu.inbx0.ui.Ui;
 import seedu.inbx0.ui.UiManager;
 
@@ -130,7 +129,7 @@ public class MainApp extends Application {
 
         String prefsFilePath = config.getUserPrefsFilePath();
         logger.info("Using prefs file : " + prefsFilePath);
-
+        
         UserPrefs initializedPrefs;
         try {
             Optional<UserPrefs> prefsOptional = storage.readUserPrefs();
