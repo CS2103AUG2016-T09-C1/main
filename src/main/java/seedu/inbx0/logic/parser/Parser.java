@@ -196,7 +196,7 @@ public class Parser {
             return prepareDelete(arguments);
 
         case ClearCommand.COMMAND_WORD:
-            return new ClearCommand();
+            return prepareClear(arguments);
 
         case FindCommand.COMMAND_WORD:
             return prepareFind(arguments);
@@ -220,6 +220,7 @@ public class Parser {
             return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);
         }
     }
+
 
     /**
      * Parses arguments in the context of the add task command.
@@ -810,7 +811,20 @@ public class Parser {
 
         return new DeleteCommand(index.get());
     }
-
+    
+    /**
+     * Parses arguments in the context of the clear task command.
+     * 
+     * @param args full command args string
+     * @return the prepared command
+     */
+    private Command prepareClear(String arguments) {
+        if(arguments.trim().equals("all") | arguments.length() == 0) {
+            return new ClearCommand(arguments);
+        } else {
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ClearCommand.MESSAGE_USAGE));
+        }
+    }
     /**
      * Parses arguments in the context of the select task command.
      * 
