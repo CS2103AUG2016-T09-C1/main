@@ -15,6 +15,7 @@ public class SetDirCommandTest extends TaskListGuiTest {
     
     @Test
     public void saveAs_Reset() {
+        commandBox.runCommand("saveas temp.xml");
         commandBox.runCommand("saveas reset");
         assertResultMessage(String.format(SetDirCommand.MESSAGE_SAVE_TASK_SUCCESS, "data/tasklist.xml"));
     }

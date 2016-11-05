@@ -5,7 +5,7 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import java.util.logging.Logger;
 import seedu.inbx0.commons.core.LogsCenter;
@@ -18,7 +18,7 @@ public class HelpWindow extends UiPart {
     private static final String TITLE = "Help";
     
     private Stage helpStage;
-    private VBox mainPane;
+    private AnchorPane mainPane;
     
     public static HelpWindow load(Stage primaryStage){
         logger.fine("Showing help window");
@@ -31,12 +31,13 @@ public class HelpWindow extends UiPart {
         Scene scene = new Scene(mainPane);
         //Null passed as the parent stage to make it non-modal.
         helpStage = createDialogStage(TITLE, null, scene);
+        helpStage.setResizable(false);
         setIcon(helpStage, ICON);
     }
     
     @Override
     public void setNode(Node node) {
-        mainPane = (VBox) node;
+        mainPane = (AnchorPane) node;
     }
     
     @Override

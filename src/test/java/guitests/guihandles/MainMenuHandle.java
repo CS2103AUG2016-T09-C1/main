@@ -21,7 +21,7 @@ public class MainMenuHandle extends GuiHandle {
     }
 
     public HelpWindowHandle openHelpWindowUsingMenu() {
-        clickOn("Help", "F1");
+        clickOn("Help", "Ctrl+F1");
         return new HelpWindowHandle(guiRobot, primaryStage);
     }
 
@@ -31,7 +31,7 @@ public class MainMenuHandle extends GuiHandle {
     }
 
     private void useF1Accelerator() {
-        guiRobot.push(KeyCode.F1);
+        guiRobot.push(KeyCode.CONTROL, KeyCode.F1);
         guiRobot.sleep(500);
     }
 }
