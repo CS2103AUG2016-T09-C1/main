@@ -68,14 +68,12 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void resetData(ReadOnlyTaskList newData) {
         taskList.resetData(newData);
-//        updateFilteredListToShowAll();
         indicateTaskListChanged();
     }
     
     @Override
     public synchronized void sortTaskList(String type, boolean defaultOrder) {
         taskList.getUniqueTaskList().sortUniqueTaskList(type, defaultOrder);
-//        updateFilteredListToShowAll();
         indicateTaskListChanged();
     }
     @Override

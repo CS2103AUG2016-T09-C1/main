@@ -1,5 +1,8 @@
 package seedu.inbx0.logic.commands;
 
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 import java.util.Set;
 
 import seedu.inbx0.commons.core.Messages;
@@ -29,18 +32,22 @@ public class MarkCompleteCommand extends Command {
     public static final String MESSAGE_TASK_ALREADY_COMPLETED = "One or more tasks are already completed";
     public static final String MESSAGE_INVALID_ARGUMENTS = "The arguments provided are invalid.";
 
-    public final Set<Integer> indexNum;
+    public final List<Integer> indexNum;
 
     public MarkCompleteCommand(Set<Integer> indexNumSet) throws IllegalValueException {
-        this.indexNum = validateSet(indexNumSet);
+    	validateSet(indexNumSet);
+        this.indexNum = new ArrayList<Integer> (indexNumSet);
+        sortIndexNumInDescendingOrder();
     }
 
 
-    private Set<Integer> validateSet(Set<Integer> indexNumSet) throws IllegalValueException {
+    private void validateSet(Set<Integer> indexNumSet) throws IllegalValueException {
         if(indexNumSet.isEmpty())
-            throw new IllegalValueException(MESSAGE_INVALID_ARGUMENTS);
-        return indexNumSet;        
-        
+            throw new IllegalValueException(MESSAGE_INVALID_ARGUMENTS);        
+    }
+    
+    private void sortIndexNumInDescendingOrder() {
+    	indexNum.sort(new IndexComparator());
     }
 
 
@@ -94,4 +101,17 @@ public class MarkCompleteCommand extends Command {
     public boolean canUndo() {
         return true;
     }
+    
+    //@@author A0148044J 
+    /**
+     * A comparator use to compare the index of tasks
+     * @return true if first task is smaller than the second task
+     */
+    class IndexComparator implements Comparator<Integer> {
+        @Override
+        public int compare(Integer index, Integer indexToCompare) {
+            return indexToCompare - index;
+        }
+    }
+    //@@author
 }
