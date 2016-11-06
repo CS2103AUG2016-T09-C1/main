@@ -181,7 +181,7 @@ public class EditCommand extends Command {
         
         try {
             model.editTask(taskToEdit, updatedReminders);
-            indicateJumpToListRequestEvent(model.getTaskList().getTaskList().indexOf(taskToEdit));
+            indicateJumpToTaskRequestEvent(taskToEdit);
         } catch (TaskNotFoundException tnfe) {
             assert false : "The target task cannot be missing";
         } catch (UniqueTaskList.DuplicateTaskException e ) {    

@@ -128,6 +128,13 @@ public class TaskListPanel extends UiPart {
             taskListView.getSelectionModel().clearAndSelect(index);
         });
     }
+    
+	public void scrollTo(ReadOnlyTask task) {
+        Platform.runLater(() -> {
+            taskListView.scrollTo(task);
+            taskListView.getSelectionModel().clearAndSelect(taskListView.getItems().indexOf(task));
+        });		
+	}
 
     class TaskListViewCell extends ListCell<ReadOnlyTask> {
 

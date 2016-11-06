@@ -14,6 +14,7 @@ import seedu.inbx0.commons.events.ui.CloseAllTitledPanesEvent;
 import seedu.inbx0.commons.events.storage.DataSavingExceptionEvent;
 import seedu.inbx0.commons.events.ui.CloseReminderListEvent;
 import seedu.inbx0.commons.events.ui.JumpToListRequestEvent;
+import seedu.inbx0.commons.events.ui.JumpToTaskRequestEvent;
 import seedu.inbx0.commons.events.ui.ShowFilteredListRequestEvent;
 import seedu.inbx0.commons.events.ui.TaskPanelSelectionChangedEvent;
 import seedu.inbx0.commons.events.ui.ShowHelpRequestEvent;
@@ -130,6 +131,13 @@ public class UiManager extends ComponentManager implements Ui {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         mainWindow.getTitledPaneList().scrollTo(event.targetIndex);
     }
+    
+    //@@author A0148044J
+    @Subscribe
+    private void handleJumpToTaskRequestEvent(JumpToTaskRequestEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        mainWindow.getTitledPaneList().scrollTo(event.task);
+    }
 
     @Subscribe
     private void handleTaskPanelSelectionChangedEvent(TaskPanelSelectionChangedEvent event){
@@ -154,4 +162,5 @@ public class UiManager extends ComponentManager implements Ui {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         mainWindow.getTitledPaneList().closeAllTitledPanes();
     }
+    //@@author
 }
