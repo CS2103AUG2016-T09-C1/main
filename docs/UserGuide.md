@@ -1,7 +1,7 @@
 <!--- @@author A0135797M -->
 # User Guide
 
- > <img src="images/inbx0.png" width="200">
+<img src="images/inbx0.png" width="200">
  
 ##**Table Of Contents**
 * [About](#about)
