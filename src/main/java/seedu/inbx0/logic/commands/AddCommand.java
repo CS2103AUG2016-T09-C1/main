@@ -9,10 +9,10 @@ import seedu.inbx0.model.reminder.UniqueReminderList;
 import seedu.inbx0.model.tag.Tag;
 import seedu.inbx0.model.tag.UniqueTagList;
 
+//@@author A0139579J
 /**
  * Adds a task to the tasklist.
  */
-//@@author A0139579J
 public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";

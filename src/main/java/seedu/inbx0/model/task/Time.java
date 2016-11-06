@@ -6,11 +6,11 @@ import java.util.List;
 
 import com.joestelmach.natty.Parser;
 
+//@@author A0139579J
 /**
- * Represents Time of a Task Event in the address book.
+ * Represents Time of a Event Task in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidTime(String)}
  */
-//@@author A0139579J
 public class Time {
 
     public static final String MESSAGE_TIME_CONSTRAINTS = "Time can either be a numeric string, alphanumeric string, or alphabet string \n"
@@ -34,14 +34,14 @@ public class Time {
         }
         else {
                 try{
-                    SimpleDateFormat ft = new SimpleDateFormat ("HH:mm");
+                    SimpleDateFormat timeFormat = new SimpleDateFormat ("HH:mm");
                     List<java.util.Date> getTime = new Parser().parse(time).get(0).getDates();
-                    List<java.util.Date> current = new Parser().parse("now").get(0).getDates();
-                    
-                    if(ft.format(getTime.get(0)).equals(ft.format(current.get(0))))
+      //              List<java.util.Date> current = new Parser().parse("now").get(0).getDates();
+                    String currentTime = getCurrentTime();
+                    if(timeFormat.format(getTime.get(0)).equals(currentTime))
                         this.value = "";
                     else
-                        this.value = ft.format(getTime.get(0)); 
+                        this.value = timeFormat.format(getTime.get(0)); 
                 } catch (IndexOutOfBoundsException e) {
                     throw new IllegalValueException(MESSAGE_TIME_CONSTRAINTS);
                 }
@@ -67,6 +67,12 @@ public class Time {
         }
        
         return (hourCheck && minCheck);
+    }
+    
+    public static String getCurrentTime() {
+        SimpleDateFormat timeFormat = new SimpleDateFormat ("HH:mm");
+        List<java.util.Date> current = new Parser().parse("now").get(0).getDates();
+        return timeFormat.format(current.get(0));
     }
     
     @Override

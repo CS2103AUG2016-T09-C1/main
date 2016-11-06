@@ -16,10 +16,10 @@ import seedu.inbx0.model.task.Task;
 import seedu.inbx0.model.task.Time;
 import seedu.inbx0.model.task.UniqueTaskList.TaskNotFoundException;
 
+//@@author A0139579J
 /**
  * Marks a task identified using it's last displayed index from the tasklist as completed.
  */
-//@@author A0139579J
 public class MarkCompleteCommand extends Command {
 
     public static final String COMMAND_WORD = "done";

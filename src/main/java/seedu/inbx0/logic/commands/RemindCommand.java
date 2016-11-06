@@ -1,10 +1,5 @@
 package seedu.inbx0.logic.commands;
 
-import java.text.SimpleDateFormat;
-import java.util.List;
-
-import com.joestelmach.natty.Parser;
-
 import seedu.inbx0.commons.core.EventsCenter;
 import seedu.inbx0.commons.core.Messages;
 import seedu.inbx0.commons.core.UnmodifiableObservableList;
@@ -23,10 +18,10 @@ import seedu.inbx0.model.task.Time;
 import seedu.inbx0.model.task.UniqueTaskList.DuplicateTaskException;
 import seedu.inbx0.model.task.UniqueTaskList.TaskNotFoundException;
 
+//@@author A0139579J
 /**
  * Adds a reminder for the task identified using it's last displayed index from the address book.
  */
-//@@author A0139579J
 public class RemindCommand extends Command {
 
     public static final String COMMAND_WORD = "rem";
@@ -66,10 +61,7 @@ public class RemindCommand extends Command {
         this.startTime = startTime;
     }
     
-    private boolean isValidDateAndTime(Date date, Time time) {
-        boolean isValidDate = false;
-        boolean isValidTime = false;
-        
+    private boolean isValidDateAndTime(Date date, Time time) {               
         Date currentDate = null;
         try {
           currentDate = new Date("now");
@@ -77,18 +69,25 @@ public class RemindCommand extends Command {
             e.printStackTrace();
         }
         
-        SimpleDateFormat ft = new SimpleDateFormat ("HHmm");
-        List<java.util.Date> current = new Parser().parse("now").get(0).getDates();
-        int currentTime = Integer.parseInt(ft.format(current.get(0)));
+        if(currentDate.getDate().equals(date.getDate())) {
+           return isValidTime(time);
+        } else
+           return isValidDate(currentDate, date);      
+    }
+
+    private boolean isValidTime(Time time) {
+        boolean timeCheck = false;
+        String current = Time.getCurrentTime();
+        int currentTime = Integer.parseInt(current.replaceAll("\\D+",""));
         
         int currentHour = currentTime / 100;
         int currentMin = currentTime % 100;
         
         if (time == null) {
-            return false;
+            timeCheck = false;
         }
         if (("").equals(time.value)) {
-            isValidTime = true;
+            timeCheck = true;
         } else {
             
             int reminderTime = Integer.parseInt(time.getTime().replaceAll("\\D+",""));
@@ -97,9 +96,13 @@ public class RemindCommand extends Command {
             
             if((reminderHour > currentHour) |
                (reminderHour == currentHour && reminderMin > currentMin))
-                isValidTime = true;         
-        }
-        
+                timeCheck = true;       
+        }       
+       return timeCheck; 
+    }
+    
+    private boolean isValidDate(Date currentDate, Date date) {
+        boolean dateCheck = false;
         int currentDay = currentDate.getDay();
         int currentMonth = currentDate.getMonth();
         int currentYear = currentDate.getYear();
@@ -110,24 +113,28 @@ public class RemindCommand extends Command {
         
         if ((reminderYear > currentYear) |
            (reminderYear == currentYear && reminderMonth > currentMonth) |
-           (reminderYear == currentYear && reminderMonth == currentMonth && reminderDay >= currentDay))
-            isValidDate = true;
-        
-        return (isValidDate && isValidTime);
+           (reminderYear == currentYear && reminderMonth == currentMonth && reminderDay > currentDay)) 
+            dateCheck = true;
+        return dateCheck;
     }
     
-    private Task createToEditWithTask(String[] editArguments, UniqueTagList tags, UniqueReminderList reminders) throws IllegalValueException {
-        Task toEditWith = new Task (
-                new Name(editArguments[TASK_NAME]),
-                new Date(editArguments[TASK_START_DATE]),
-                new Time(editArguments[TASK_START_TIME]),
-                new Date(editArguments[TASK_END_DATE]),
-                new Time(editArguments[TASK_END_TIME]),
-                new Importance(editArguments[TASK_IMPORTANCE]),
+    private Task createTaskWithReminder(ReadOnlyTask taskToAddReminder, ReminderTask newReminder) throws IllegalValueException {
+        String [] arguments = new String [TOTAL_NUMBER_OF_ARGUMENTS];
+        arguments = obtainArguments(arguments, taskToAddReminder);
+        UniqueTagList tags = obtainUniqueTagList(taskToAddReminder);
+        UniqueReminderList reminders = obtainUniqueReminderList(taskToAddReminder, newReminder);
+        
+        Task taskWithReminder = new Task (
+                new Name(arguments[TASK_NAME]),
+                new Date(arguments[TASK_START_DATE]),
+                new Time(arguments[TASK_START_TIME]),
+                new Date(arguments[TASK_END_DATE]),
+                new Time(arguments[TASK_END_TIME]),
+                new Importance(arguments[TASK_IMPORTANCE]),
                 tags,
                 reminders
                 );
-        return toEditWith;
+        return taskWithReminder;
     }
     
     private String[] obtainArguments(String[] editArguments, ReadOnlyTask taskToEdit) {
@@ -172,9 +179,9 @@ public class RemindCommand extends Command {
 
         UnmodifiableObservableList<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
         
-        if (!isValidDateAndTime(startDate, startTime)) {
+        if (!isValidDateAndTime(startDate, startTime)) 
             return new CommandResult(MESSAGE_REMINDER_CONSTRAINTS);
-        }
+        
         if (lastShownList.size() < targetIndex) {
             indicateAttemptToExecuteIncorrectCommand();
             return new CommandResult(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
@@ -183,22 +190,17 @@ public class RemindCommand extends Command {
         ReadOnlyTask taskToAddReminder = lastShownList.get(targetIndex - 1);
         
         ReminderTask newReminder = new ReminderTask(startDate, startTime, taskToAddReminder, true);
-        String [] editArguments = new String [6];
-        editArguments = obtainArguments(editArguments, taskToAddReminder);
-        UniqueTagList tags = obtainUniqueTagList(taskToAddReminder);
-        UniqueReminderList reminders = obtainUniqueReminderList(taskToAddReminder, newReminder);
-        
+  
         Task withReminder = null;
         try {
-            withReminder = createToEditWithTask(editArguments, tags, reminders);
+            withReminder = createTaskWithReminder(taskToAddReminder, newReminder);
             EventsCenter.getInstance().post(new TaskPanelSelectionChangedEvent(withReminder));
         } catch (IllegalValueException e1) {
             return new CommandResult(MESSAGE_USAGE);
         }
         try {
             model.editTask(taskToAddReminder, withReminder);
-        } catch (DuplicateTaskException | TaskNotFoundException e) {
-            
+        } catch (DuplicateTaskException | TaskNotFoundException e) {       
             e.printStackTrace();
         } 
 
