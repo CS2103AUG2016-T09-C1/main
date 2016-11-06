@@ -27,7 +27,6 @@
 	* [Exiting the program : `exit`](#exit)
 	* [Autocompleting with command history](#autocomplete)
 	* [Displaying expired and overdue tasks](#overdue)
-    * [Changing the theme and size of inbx_0](#preferences)
 * [Command Summary](#command-summary)
 * [FAQ](#faq)
 
@@ -515,6 +514,16 @@ Saves the tasklist on the desktop of Jim's computer.
 
  <img src="images/SaveAsCommand.png" width="600">
  
+ 
+<!--- @@author A0148044J-->
+
+**Memorize setting**
+
+> When you close Inbx_0, it will remember your current settings, including the size and theme of your display window. Moreover, when you open the app again, it will remember these settings.
+
+**Saving the data**
+> Task Manager data is saved in the hard disk automatically after any command that changes it. There is no need to save manually.
+ 
 <br><br>  
 <!--- @@author-->
 
@@ -553,27 +562,6 @@ You can easily filter the main task list by typing: `list overdue`
 For events that had expired, the task will take a lighter shade to show that the event had already passed.
 
 <br><br>
-
-<!--- @@author A0148044J-->
-
-#### <a id="preferences"></a>19. Preference setting
-
-Feel bored of the single theme you keep looking at when you using Inbx_0? Now is time for your to beautify your Inbx_0. You can change your theme and the size of your Inbx_0
-
-1) Theme setting
-
-There are eight themes available in Inbx_0. The default setting for the Inbx_0 is the light grey theme.
-
-To implement another theme, you can use the menu at the top of the display window. Click **Preferences** and then select the theme that you want.
-Alternatively, you can key in combination of <kbd>Ctrl</kbd> and a number from <kbd>1</kbd>  to <kbd>8</kbd>  on your keyboard to change the theme
-
-2) Memorize setting
-
-When you close Inbx_0, Inbx_0 will remember your current setting including the size and theme of your display window. When you open the app the next time, it will set the settings which you had used the last time.
-
-#### Saving the data 
-Task Manager data are saved in the hard disk automatically after any command that changes the data.<br>
-There is no need to save manually.
 
 <!--- @@author A0139481Y -->
 ## **Command Summary**
