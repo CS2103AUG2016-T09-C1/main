@@ -518,7 +518,7 @@ For events that had expired, the task will take a lighter shade to show that the
 <!--- @@author A0148044J-->
 
 #### <a id="preferences"></a>19. Preference setting
-	1) Changing theme of your Inbx_0
+1)	Changing theme of your Inbx_0
 
 	Feel tedious and bored because of the single theme you keep looking at when you using Inbx_0? Now is time for your to beautify your Inbx_0. Try change your theme and the size of your Inbx_0
 
