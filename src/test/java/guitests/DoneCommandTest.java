@@ -10,6 +10,10 @@ import seedu.inbx0.testutil.TestTask;
 
 import static org.junit.Assert.assertTrue;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 //@@author A0139481Y
 public class DoneCommandTest extends TaskListGuiTest {
     
@@ -45,18 +49,23 @@ public class DoneCommandTest extends TaskListGuiTest {
         
         taskToMark.markAsDone();
         commandBox.runCommand("done " + targetIndex);
+
+        List<TestTask> doneList = new ArrayList<TestTask>(Arrays.asList(currentList));
+        doneList.remove(targetIndex-1);
+        TestTask[] doneArray = doneList.toArray(new TestTask[doneList.size()]);
+        //confirm the list now contains the list without the task marked as done
+        assertTrue(taskListPanel.isListMatching(doneArray));
         
-        //confirm the list now contains the original list + the task marked as done
-        assertTrue(taskListPanel.isListMatching(currentList));
+        //confirm the result message is correct
+        assertResultMessage(String.format(Messages.MESSAGE_TASKS_COMPLETED_OVERVIEW, 1));
         
         // find task card of marked task
+        commandBox.runCommand("show com");
         TaskCardHandle markedCard = taskListPanel.navigateToTask(taskToMark.getName().fullName);
         // confirm its the correct task
         assertMatching(taskToMark, markedCard);
         // confirm the task is marked
         assertDone(markedCard);
-        
-        //confirm the result message is correct
-        assertResultMessage(String.format(Messages.MESSAGE_TASKS_COMPLETED_OVERVIEW, 1));
+              
     }
 }
