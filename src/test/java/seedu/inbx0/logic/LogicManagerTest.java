@@ -143,7 +143,7 @@ public class LogicManagerTest {
         model.addTask(helper.generateTask(2));
         model.addTask(helper.generateTask(3));
 
-        assertCommandBehavior("clr", ClearCommand.MESSAGE_SUCCESS, new TaskList(), Collections.emptyList());
+        assertCommandBehavior("clr all", ClearCommand.MESSAGE_SUCCESS, new TaskList(), Collections.emptyList());
     }
 
 
