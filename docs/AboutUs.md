@@ -11,6 +11,7 @@ We are a team of students based in the [School of Computing, National University
 * Components in charge of: [Model](https://github.com/CS2103AUG2016-T09-C1/main/blob/master/docs/DeveloperGuide.md#model-component)
 * Features implemented:
    * [Set Directory Command](https://github.com/CS2103AUG2016-T09-C1/main/blob/master/docs/UserGuide.md#setdir)
+   * [Redo Command](https://github.com/CS2103AUG2016-T09-C1/main/blob/master/docs/UserGuide.md#redo)
 * Code written: [[functional code](A0135797M.md)][[test code](A0135797M.md)][[docs](A0135797M.md)]
 * Other major contributions:
   * Updated the documentation for User Guide and Developer Guide
