@@ -186,7 +186,7 @@ You will be able to view all of the deadline tasks are overdue by typing the fol
 #### <a id="find"></a>4. Finding specific tasks: `find`
 Want to search for important things that you need to do? Or know when is your next coming exam? If you need to find certain tasks by keywords, you can use the `find` command.
 
-1) Normal search
+1) Normal search <br>
 Format: `find KEYWORD [MORE_KEYWORDS]...`
 
 > * Normal search will display a task that matches at least one keyword (i.e. `OR` search).
@@ -201,8 +201,8 @@ Format: `find KEYWORD [MORE_KEYWORDS]...`
 Example: 
 * `find meeting CS2103quiz` will return `MEETING` or `CS2103Quiz` but not `meeting with CS2103 tutor` or `quiz` 
 
-2) Logic operation search
-Format:  `[LOGIC_OPERATOR] KEYWORD [MORE_KEYWORDS] [MORE_LOGIC_OPERATOR]...`
+2) Logic operation search <br>
+Format: `[LOGIC_OPERATOR] KEYWORD [MORE_KEYWORDS] [MORE_LOGIC_OPERATOR]...`
 
 > * Logic operation search will display a task only when it fits the logic expression
 > * LOGIC_OPERATOR: `|` means OR, `&` means AND, `(` and `)` used to group the logic operations
@@ -515,16 +515,12 @@ For events that had expired, the task will take a lighter shade to show that the
 
 <br><br>
 
-#### Saving the data 
-Task Manager data are saved in the hard disk automatically after any command that changes the data.<br>
-There is no need to save manually.
-
 <!--- @@author A0148044J-->
 
 #### <a id="preferences"></a>19. Preference setting
-1) Changing theme of your Inbx_0
+	1) Changing theme of your Inbx_0
 
-Feel tedious and bored because of the single theme you keep looking at when you using Inbx_0? Now is time for your to beautify your Inbx_0. Try change your theme and the size of your Inbx_0
+	Feel tedious and bored because of the single theme you keep looking at when you using Inbx_0? Now is time for your to beautify your Inbx_0. Try change your theme and the size of your Inbx_0
 
 1) Theme setting
 
@@ -536,6 +532,10 @@ Alternatively, you can key in combination of <kbd>Ctrl</kbd> and a number from <
 2) Memorize setting
 
 When you close Inbx_0, Inbx_0 will remember your current setting including the size and theme of your display window. Next time when your open the app, it will give you your "preferred" setting you used last time.
+
+#### Saving the data 
+Task Manager data are saved in the hard disk automatically after any command that changes the data.<br>
+There is no need to save manually.
 
 <!--- @@author A0139481Y -->
 ## **Command Summary**
