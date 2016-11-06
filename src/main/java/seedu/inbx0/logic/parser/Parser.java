@@ -43,10 +43,10 @@ public class Parser {
     private static final Pattern INVALID_LOGIC_SEARCH_ARGS3 = Pattern.compile(".*[&|]\\s*");
     
     //start with & or | is invalid
-    private static final Pattern INVALID_LOGIC_SEARCH_ARGS4 = Pattern.compile("\\s+[&|].*");
+    private static final Pattern INVALID_LOGIC_SEARCH_ARGS4 = Pattern.compile("\\s*[&|].*");
     
     // keywords or '(' after ')' is invalid in logic operation
-    private static final Pattern INVALID_LOGIC_SEARCH_ARGS5 = Pattern.compile(".*[)][^&|)].*");
+    private static final Pattern INVALID_LOGIC_SEARCH_ARGS5 = Pattern.compile(".*[)][\\s*][^&|)].*");
     
     // one or two keywords separated by whitespace
     private static final Pattern SORT_TASK_LIST_ARGS_FORMAT = Pattern.compile("(?<keywords>\\S+(?:\\s+\\S+)?)");

@@ -15,18 +15,18 @@
 	* [Showing the various filtered lists: `show`](#show)
 	* [Editing a task: `edit`](#edit)
 	* [Modifying the taglist: `addtag` / `deltag`](#tag)
-	* [Deleting a task: `del`](#del)
-	* [Selecting a task : `sel`](#sel)
+	* [Deleting a task: `del`](#del)	
 	* [Undoing previous action: `undo`](#undo)
 	* [Redoing previous action: `redo`](#redo)
 	* [Clearing all tasks : `clr`](#clr)
 	* [Marking a task as completed : `done`](#done)
 	* [Setting a reminder for your task : `rem`](#reminder)
+	* [Selecting a task : `sel`](#sel)
 	* [Saving your tasklist to a specific directory : `saveas`](#setdir)
 	* [Exiting the program : `exit`](#exit)
 	* [Autocompleting with command history](#autocomplete)
 	* [Displaying expired and overdue tasks](#overdue)
-       * [Changing the theme and size of inbx_0](#preferences)
+    * [Changing the theme and size of inbx_0](#preferences)
 * [Command Summary](#command-summary)
 * [FAQ](#faq)
 
@@ -42,8 +42,8 @@ Unlike all the other task managers out there, Inbx_0 is a simple program that ru
    This app will not work with earlier versions of Java 8.
    
 1. Download the latest `inbx_0.jar` from the [releases](../../../releases) tab.
-2. Copy the file to the folder you want to use as the home folder for inbx_0
-3. Double-click the inbx_0 icon
+2. Copy the file to the folder you want to use as the home folder for Inbx_0
+3. Double-click the Inbx_0 icon
 4. Double-click the Task Manager.jar file to start the app. The GUI should appear in a few seconds. 
  > <img src="images/GUI.png" width="600">
 
@@ -106,7 +106,7 @@ Alternatively, you can use the keyboard shortcut <kbd>Ctrl</kbd> + <kbd>F1</kbd>
 #### <a id="add"></a>2. Adding a task: `add`
 Let's get started by adding tasks to the tasklist! You may use any of the formats below to get started.
 
-1. Add a floating task.<br>
+1) Add a floating task.<br>
 Format: `add TASK [s= START_DATE START_TIME][i=IMPORTANCE] [t=TAGS]...` 
 
 > Floating tasks are tasks without any end dates. You can use this to keep track of tasks which may not follow
@@ -123,8 +123,10 @@ Examples:
 > * Under the s= parameter, it requires either the START_DATE or START_TIME. By providing only START_DATE, the START_TIME would not be specified.
 > *	If the START_DATE is not provided, the start date will be automatically assigned as the current date.
 
-2. Add a task with deadlines.<br>
+2) Add a task with deadlines.<br>
 Format: `add TASK e=[END_DATE] [END_TIME] [i=IMPORTANCE] [t=TAGS]...` 
+
+> Deadline Tasks are tasks only with an ending point.
 
 Examples: 
 * `add Do CS2103 Homework e=tomorrow i=red`
@@ -134,7 +136,7 @@ Examples:
 > * Under the e= parameter, it requires either the END_DATE or END_TIME. By providing only END_DATE, the END_TIME would not be specified.
 > *	If the END_DATE is not provided, the end date will be automatically assigned as the current date.
 
-4. Add an event.<br>
+3) Add an event.<br>
 Format: `add TASK s=[START_DATE] [START_TIME] e=[END_DATE] [END_TIME] [i=IMPORTANCE] [t=TAGS]...`
 
 > Events are tasks with a starting and ending point.
@@ -148,14 +150,14 @@ Examples:
 <br><br>
 
 #### <a id="list"></a>3. Listing tasks: `list`
-1. Listing all the tasks you have yet to complete. <br>
+1) Listing all the tasks you have yet to complete. <br>
 Format: `list`
 
 The List Command shows a list of all incompleted tasks in the task manager so that you can take a look at your tasks all at one go.
 
 There will be index numbers allocated at the side of each task which will be needed for other operations such as deleting a task or selecting a task.
  
-2. Listing all the tasks on the specific date. <br>
+2) Listing all the tasks on the specific date. <br>
 Format: `list DATE`
 
 By typing in `list DATE`, it will display all the tasks that start on and end on that date.
@@ -164,7 +166,7 @@ Examples:
 * `list next week` shows every task from that starts on and ends on next week <br>
 * `list 16.11.2016` shows every task from that starts on and ends on 16 November 2016 <br>
 
-3. Listing tasks due before a specific date. <br>
+3) Listing tasks due before a specific date. <br>
 Format: `list due DATE`
 
 You will be able to view all of today’s tasks and tasks that are due before a specific date. By keying in `list due DATE`, it will display a list of all the tasks due before the input date in the task manager.
@@ -173,7 +175,7 @@ Examples:
 * `list due tomorrow` shows every task from now to the end of tomorrow <br>
 * `list due 1st Jan` shows every task from now till the end of 1st January 2017 <br>
 
-4. Listing tasks that are overdue <br>
+4) Listing tasks that are overdue <br>
 Format: `list overdue`
 
 You will be able to view all of the deadline tasks are overdue by typing the following: `list overdue`
@@ -186,12 +188,12 @@ You will be able to view all of the deadline tasks are overdue by typing the fol
 #### <a id="find"></a>4. Finding specific tasks: `find`
 Want to search for important things that you need to do? Or know when is your next coming exam? If you need to find certain tasks by keywords, you can use the `find` command.
 
-1. Normal search
+1) Normal search <br>
 Format: `find KEYWORD [MORE_KEYWORDS]...`
 
-> * Normal search will display a task that matches at least one keyword (i.e. `OR` search).
+Normal search will display a task that matches at least one keyword (i.e. `OR` search).
 > * You can use `INDICATOR/KEYWORD` to specify the keyword belong to a specific attributes, available INDICATOR: n=, s=, st=, e=, et=, i=
-> * You can use `'` to replace the whitespace if one search keyword contains whitespace, or inbx_0 treat it as multiple keywords
+> * You can use `'` to replace the whitespace if one search keyword contains whitespace, or Inbx_0 treat it as multiple keywords
  eg: `do'CS2103'homework` will match `do CS2103 homework' 
 > * Tasks matching at least one keyword will be returned (i.e. `OR` search).
 > * Keywords are non case-sensitive, ie, `homework` will match `HOMEWORK`
@@ -201,11 +203,10 @@ Format: `find KEYWORD [MORE_KEYWORDS]...`
 Example: 
 * `find meeting CS2103quiz` will return `MEETING` or `CS2103Quiz` but not `meeting with CS2103 tutor` or `quiz` 
 
-2. Logic operation search
+2) Logic operation search <br>
+Format: `[LOGIC_OPERATOR] KEYWORD [MORE_KEYWORDS] [MORE_LOGIC_OPERATOR]...`
 
-> Format:  `[LOGIC_OPERATOR] KEYWORD [MORE_KEYWORDS] [MORE_LOGIC_OPERATOR]...`
-
-> * Logic operation search will display a task only when it fits the logic expression
+Logic operation search will display a task only when it fits the logic expression
 > * LOGIC_OPERATOR: `|` means OR, `&` means AND, `(` and `)` used to group the logic operations
 > * You can use `INDICATOR/KEYWORD` to specify the keyword belong to a specific attributes, available INDICATOR: n=, s=, st=, e=, et=, i=
 > * You can use any valid logic operation format
@@ -227,10 +228,8 @@ Examples:
 #### <a id="sort"></a>5. Sorting the tasks by using a specific criteria: `sort`
 Format: sort `[NAME]`/`[START_TIME]`/`[END_TIME]`/`[IMPORTANCE]` `[ASCENDING]`/`[DESCENDING]`
 
-The Sort Command
-
-> * Sort the tasks according to name, start time, end time or importance in descending or ascending order
-> * acceptable input for 
+You will be able to sort the tasks according to name, start time, end time or importance in descending or ascending order
+> * Acceptable input for Sort Command
 > * `NAME`: n, Name, `Start Time`: s, start, `End Time`: e, end, `Importance`: i, importance
 > *  `ASCENDING`: ASC, ascending, ascend, `DECENDING`: DESC, descending, descend
 > * All sort keywords are non-case sensitive, ie, `Importance` is `importance` 
@@ -248,10 +247,8 @@ Examples:
 #### <a id="show"></a>6. Showing the various filtered lists: `show`
 Format: show `[DAY]`/`[CATEGORY]`/`[IMPORTANCE]`/`[COMPLETENESS]` /`[EXPIRED]`
 
-The Show Command
-
-> * Navigates the various filtered lists according to day, category, importance, completeness and whether the task has expired
-> * acceptable input for 
+You can navigate the various filtered lists according to day, category, importance, completeness and whether the task has expired
+> * Acceptable input for Show Command
 > * `DAY`: mon, monday, `CATEGORY`: dea, deadline, `IMPORTANCE`: gre, green, `COMPLETENESS`: com, inc
 > *  `EXPIRED`: exp,  
 > * All show keywords are non-case sensitive, ie, `WED` is `wed` 
@@ -269,7 +266,7 @@ Examples:
 
 <!--- @@author A0139579J -->
 #### <a id="edit"></a>7. Editing a task: `edit`
-1. Editing any parameter of a task <br>
+1) Editing any parameter of a task <br>
 Format: `edit INDEX [n=NAME] [s=START_DATE] [st=START_TIME] [e=END_DATE] [et=END_TIME] [i=IMPORTANCE]`
 
 Made a spelling mistake or your event was postponed? You can use the Edit Command to swiftly rectify any tasks on the task list.
@@ -290,7 +287,7 @@ Examples:
   `edit 1 n=Business Lunch st=1pm`<br>
   Changes the name of 1st task in the results of the `find` command to ‘Business Lunch at 1 pm’  
 
-2. Converting a task to a floating task. <br>
+2) Converting a task to a floating task. <br>
 Format: `edit INDEX float`
 
 Use the keyword "float" to convert any task into a floating task by removing the starting and ending dates and times.
@@ -374,14 +371,14 @@ Made a mistake? Not to worry! You can use the `redo` command to rectify your mis
 <br><br>
 
 #### <a id="clr"></a>12. Clearing all tasks : `clr`
-1.Clearing the shown list
+1) Clearing the shown list
 Format: `clr`
 
 Tasks can easily become obsolete and checking off tasks individually can be quite a hassle. The clear command will help you to remove all tasks on the shown list and can be accessed by typing the following: `clr`
 
  > <img src="images/ClearCommand.png" width="600">
 
-2. Clearing out the entire tasklist
+2) Clearing out the entire tasklist
 Format: `clr all`
 
 You can remove all the tasks from the tasklist by typing `clr all` in the command box.
@@ -389,7 +386,7 @@ You can remove all the tasks from the tasklist by typing `clr all` in the comman
 
 <!--- @@author A0139579J -->
 #### <a id="done"></a>13. Marking a task as completed : `done`
-1. Mark selected tasks as done
+1) Mark selected tasks as done
 Format: `done INDEX [INDEX]...`
 
 If you have finished a certain task and wish to mark it as finished you can give a complete a specified task in the task list by typing the following: `done INDEX [INDEX]`<br>
@@ -403,7 +400,7 @@ Example:
   `done 2 4 7` <br>
  Marks the 2nd, 4th and 7th tasks as completed in today’s list
  
-2. Mark tasks in consecutive index numbers as done
+2) Mark tasks in consecutive index numbers as done
 Format: `done FIRST_INDEX to LAST_INDEX`
 
 This will allow multiple tasks specified by the first index to the last index to be marked as completed.
@@ -461,6 +458,8 @@ Examples:
 * `find project`<br>
   `sel 1`<br>
   Selects the 1st task in the results of the `find` command.
+  
+  > <img src="images/SelectCommand.png" width="600">
 
 <br><br>
 <!--- @@author A0135797M-->
@@ -475,7 +474,9 @@ Example:
 * `saveas  C:\Users\Jim\Desktop\taklist.xml` <br>
 Saves the tasklist on the desktop of Jim's computer.
 
->To reset the save directory for inbx_0, simple type: `saveas reset`. This will reset the save file to /data/tasklist.xml 
+>To reset the save directory for Inbx_0, simple type: `saveas reset`. This will reset the save file to /data/tasklist.xml 
+
+ > <img src="images/SaveAsCommand.png" width="600">
  
 <br><br>  
 <!--- @@author-->
@@ -516,27 +517,26 @@ For events that had expired, the task will take a lighter shade to show that the
 
 <br><br>
 
-#### Saving the data 
-Task Manager data are saved in the hard disk automatically after any command that changes the data.<br>
-There is no need to save manually.
-
 <!--- @@author A0148044J-->
 
 #### <a id="preferences"></a>19. Preference setting
-1) Changing theme of your inbx_0
 
-Feel tedious and bored because of the single theme you keep looking at when you using inbx_0? Now is time for your to beautify your inbx_0. Try change your theme and the size of your inbx_0
+Feel bored of the single theme you keep looking at when you using Inbx_0? Now is time for your to beautify your Inbx_0. You can change your theme and the size of your Inbx_0
 
 1) Theme setting
 
-There are 8 theme available in inbx_0, the default setting for the user is light gray theme.
+There are eight themes available in Inbx_0. The default setting for the Inbx_0 is the light grey theme.
 
-To implement other theme, you can using the menu on the top of the display window. Click preferences and then click on the theme you like to get the theme.
-Alternatively, you can key in combination of <kbd>Ctrl</kbd> and a number from 1 to 8 on your keyboards to change your theme
+To implement another theme, you can use the menu at the top of the display window. Click **Preferences** and then select the theme that you want.
+Alternatively, you can key in combination of <kbd>Ctrl</kbd> and a number from <kbd>1</kbd>  to <kbd>8</kbd>  on your keyboard to change the theme
 
 2) Memorize setting
 
-When you close inbx_0, inbx_0 will remember your current setting including the size and theme of your display window. Next time when your open the app, it will give you your "preferred" setting you used last time.
+When you close Inbx_0, Inbx_0 will remember your current setting including the size and theme of your display window. When you open the app the next time, it will set the settings which you had used the last time.
+
+#### Saving the data 
+Task Manager data are saved in the hard disk automatically after any command that changes the data.<br>
+There is no need to save manually.
 
 <!--- @@author A0139481Y -->
 ## **Command Summary**
