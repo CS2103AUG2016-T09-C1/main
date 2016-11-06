@@ -43,7 +43,7 @@ public class UserPrefs {
         //Rectangle2D visualBounds = Screen.getPrimary().getVisualBounds();
         //this.setGuiSettings(visualBounds.getWidth(), visualBounds.getHeight(), 
         					//(int) visualBounds.getMinX(), (int) visualBounds.getMinY());
-        this.setGuiSettings(500, 500, 0, 0);
+        this.setGuiSettings(1300, 800, 0, 0);
         this.themeSetting = "/view/LightGrey.css";
     }
     //@@author

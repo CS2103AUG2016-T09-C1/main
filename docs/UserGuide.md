@@ -26,7 +26,7 @@
 	* [Exiting the program : `exit`](#exit)
 	* [Autocompleting with command history](#autocomplete)
 	* [Displaying expired and overdue tasks](#overdue)
-       * [Changing the theme and size of inbx_0] (#preferences)
+       * [Changing the theme and size of inbx_0](#preferences)
 * [Command Summary](#command-summary)
 * [FAQ](#faq)
 
