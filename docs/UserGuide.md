@@ -67,35 +67,35 @@ Currently we offer 8 colors:
 
 **1. Antique White**
 
-> <img src="images/AntiqueWhiteTheme.png" width="800">
+ <img src="images/AntiqueWhiteTheme.png" width="800">
 
 **2. Blue**
 
-> <img src="images/BlueTheme.png" width="800">
+ <img src="images/BlueTheme.png" width="800">
 
 **3. Green**
 
-> <img src="images/GreenTheme.png" width="800">
+ <img src="images/GreenTheme.png" width="800">
 
 **4. Light Grey**
 
-> <img src="images/LightGreyTheme.png" width="800">
+ <img src="images/LightGreyTheme.png" width="800">
 
 **5. Orange**
 
-> <img src="images/OrangeTheme.png" width="800">
+ <img src="images/OrangeTheme.png" width="800">
 
 **6. Pink**
 
-> <img src="images/PinkTheme.png" width="800">
+ <img src="images/PinkTheme.png" width="800">
 
 **7. Seashell**
 
-> <img src="images/SeashellTheme.png" width="800">
+ <img src="images/SeashellTheme.png" width="800">
 
 **8. Violet**
 
-> <img src="images/VioletTheme.png" width="800">
+ <img src="images/VioletTheme.png" width="800">
 
 ## **Features**
 
@@ -182,7 +182,7 @@ Examples:
 * `add Doctor's appointment s=2 July 2016 5pm e=2 July 2016 7:30pm i=green t=painful`
 * `add SO’s Birthday s=29 Feb 12am e=1 March 12am i=green t=flowers t=chocolates`
 
- > <img src="images/AddCommand.png" width="600">
+ <img src="images/AddCommand.png" width="600">
 
 <br><br>
 
@@ -217,7 +217,7 @@ Format: `list overdue`
 
 You will be able to view all of the deadline tasks are overdue by typing the following: `list overdue`
 
- > <img src="images/ListCommand.png" width="600">
+ <img src="images/ListCommand.png" width="600">
 
 <br><br>
 
@@ -258,7 +258,7 @@ Examples:
 * `find homework & e=tmr`: return `homework` that ends `tomorrow`
 * `find (homework | assignment) & s=tmr & i=r`: return `homework` or `meeting` that start on `tomorrow` with high importance `Red`
 
- > <img src="images/FindCommand.png" width="600">
+ <img src="images/FindCommand.png" width="600">
 
 <br><br>
 
@@ -277,7 +277,7 @@ Examples:
 * `sort i`: Sort the lists such that the importance of the tasks decrease
 * `sort n DESC`: Sort the lists such that the name of the tasks is in the reverse of natural alphabet order 
 
- > <img src="images/SortCommand.png" width="600">
+ <img src="images/SortCommand.png" width="600">
  
 <br><br>  
 
@@ -296,7 +296,7 @@ Examples:
 
 * `show tuesday`: Navigates to the filtered list which contains those tasks that are on tuesday
 
- > <img src="images/ShowCommand.png" width="600">
+ <img src="images/ShowCommand.png" width="600">
  
 <br><br>  
 <!--- @@author  -->
@@ -334,7 +334,7 @@ This can be done by typing the following: `edit INDEX float` <br>
 Example:
 * `edit 2 float` will convert the 2nd task in the list into a floating task.
 
- > <img src="images/EditCommand.png" width="600">
+ <img src="images/EditCommand.png" width="600">
  
 > *	You can remove any of the fields in the task except NAME by typing in the relevant delimiter and nil
 > *	For example, s=nil
@@ -360,7 +360,7 @@ Format: `deltag INDEX t=TAGS [t=MORE_TAGS]`
 
 Is you wish to remove specific tags from the list of tags, simply type in `deltag INDEX t=TAGS [t=MORE_TAGS]` to remove it/them.
 
- > <img src="images/AddOrDeleteTag.png" width="600">
+ <img src="images/AddOrDeleteTag.png" width="600">
 
 <!--- @@author  -->
 
@@ -380,7 +380,7 @@ Examples:
   `del 1`<br>
   Deletes the 1st task in the results of the `find` command for ‘meeting’.
 
- > <img src="images/DeleteCommand.png" width="600">  
+ <img src="images/DeleteCommand.png" width="600">  
 
 <br><br>
 
@@ -392,7 +392,7 @@ Made a mistake? Not to worry! You can use the `undo` command to rectify your mis
 
 > note that some commands cannot be undone, such as `find`, `select`, `show`.
 
- > <img src="images/UndoCommand.png" width="600">
+ <img src="images/UndoCommand.png" width="600">
 
  <br><br>
 
@@ -401,7 +401,7 @@ Format: `redo`
 
 Made a mistake? Not to worry! You can use the `redo` command to rectify your mistake or to redo any undesirable changes. You may also type `redo X-STEPS` to redo the past X number of commands, up to the number of commands undone.
 
- > <img src="images/RedoCommand.png" width="600">
+ <img src="images/RedoCommand.png" width="600">
 
 <!--- @@author -->
 
@@ -413,7 +413,7 @@ Format: `clr`
 
 Tasks can easily become obsolete and checking off tasks individually can be quite a hassle. The clear command will help you to remove all tasks on the shown list and can be accessed by typing the following: `clr`
 
- > <img src="images/ClearCommand.png" width="600">
+ <img src="images/ClearCommand.png" width="600">
 
 2) Clearing out the entire tasklist
 Format: `clr all`
@@ -447,7 +447,7 @@ Example:
   `done 1 to 5` <br>
  Marks the 1st to 5th tasks as completed in next week’s list
  
-  > <img src="images/DoneCommand.png" width="600">
+ <img src="images/DoneCommand.png" width="600">
   
 <br><br>
 
@@ -496,7 +496,7 @@ Examples:
   `sel 1`<br>
   Selects the 1st task in the results of the `find` command.
   
-  > <img src="images/SelectCommand.png" width="600">
+ <img src="images/SelectCommand.png" width="600">
 
 <br><br>
 <!--- @@author A0135797M-->
@@ -513,7 +513,7 @@ Saves the tasklist on the desktop of Jim's computer.
 
 >To reset the save directory for Inbx_0, simple type: `saveas reset`. This will reset the save file to /data/tasklist.xml 
 
- > <img src="images/SaveAsCommand.png" width="600">
+ <img src="images/SaveAsCommand.png" width="600">
  
 <br><br>  
 <!--- @@author-->
@@ -639,3 +639,4 @@ On Linux:
 >user@user-desktop:~$ java -version <br>
 java version "1.7.0\_15"Java(TM) SE Runtime Environment (build 1.7.0_05-b06) <br>
 Java HotSpot(TM) Client VM (build 23.1-b03, mixed mode)
+	
