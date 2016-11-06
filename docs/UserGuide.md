@@ -474,7 +474,7 @@ Examples:
 * `rem 2 s=next week 10a` <br>
  Sets a reminder for the 2nd task on the list which will display a reminder next week at 10am.
  
-> <img src="images/RemindCommand.png" width="600"> 
+<img src="images/RemindCommand.png" width="600"> 
   
 <br><br>
 
