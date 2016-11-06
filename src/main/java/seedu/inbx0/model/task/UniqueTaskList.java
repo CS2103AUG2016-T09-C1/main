@@ -43,19 +43,29 @@ public class UniqueTaskList implements Iterable<Task>{
      */
     public void sortUniqueTaskList(String type, boolean defaultOrder) {
         if("Name".equals(type)) {
-            FXCollections.sort(internalList, new NameComparator());
-        }
-        else if("Start Time".equals(type)) {
-            FXCollections.sort(internalList, new StartTimeComparator());
-        }
-        else if("End Time".equals(type)) {
-            FXCollections.sort(internalList, new EndTimeComparator());
-        }
-        else if("Importance".equals(type)) {
-            FXCollections.sort(internalList, new ImportanceComparator());
-        }
-        if(!defaultOrder) {
-            FXCollections.reverse(internalList);
+        	if(defaultOrder) {
+        		FXCollections.sort(internalList, new ASCNameComparator());
+        	} else {
+        		FXCollections.sort(internalList, new DESCNameComparator());
+        	}
+        } else if("Start Time".equals(type)) {
+        	if(defaultOrder) {
+        		FXCollections.sort(internalList, new ASCStartTimeComparator());
+        	} else {
+        		FXCollections.sort(internalList, new DESCStartTimeComparator());
+        	}
+        } else if("End Time".equals(type)) {
+        	if(defaultOrder) {
+        		FXCollections.sort(internalList, new ASCEndTimeComparator());
+        	} else {
+        		FXCollections.sort(internalList, new DESCEndTimeComparator());
+        	}        
+        } else if("Importance".equals(type)) {
+        	if(defaultOrder) {
+        		FXCollections.sort(internalList, new DESCImportanceComparator());
+        	} else {
+        		FXCollections.sort(internalList, new ASCImportanceComparator());
+        	}
         }
     }
     
@@ -257,9 +267,9 @@ public class UniqueTaskList implements Iterable<Task>{
     
     //@@author A0148044J
     /**
-     * A comparator use to compare the name of tasks
+     * A comparator use to compare the name of tasks, in ascending order
      */
-    class NameComparator implements Comparator<Task> {
+    class ASCNameComparator implements Comparator<Task> {
         @Override
         public int compare(Task task, Task taskToCompare) {
             String name = task.getName().getName().toLowerCase();
@@ -267,12 +277,23 @@ public class UniqueTaskList implements Iterable<Task>{
             return name.compareTo(nameToCompare);
         }
     }
+    
+    /**
+     * A comparator use to compare the name of tasks, in descending order
+     */
+    class DESCNameComparator implements Comparator<Task> {
+        @Override
+        public int compare(Task task, Task taskToCompare) {
+            ASCNameComparator comparator = new ASCNameComparator();
+            return - comparator.compare(task, taskToCompare);
+        }
+    }
 
     /**
-     * A comparator use to compare the start time of tasks
+     * A comparator use to compare the start time of tasks in ascending order
      * float task is considered as appear lastly in the natural order
      */
-    class StartTimeComparator implements Comparator<Task> {
+    class ASCStartTimeComparator implements Comparator<Task> {
         @Override
         public int compare(Task task, Task taskToCompare) {
             String startDate = task.getStartDate().getDateYYYYMMDDFormat();
@@ -293,10 +314,22 @@ public class UniqueTaskList implements Iterable<Task>{
     }
     
     /**
-     * A comparator use to compare the end time of tasks
+     * A comparator use to compare the start time of tasks in descending order
      * float task is considered as appear lastly in the natural order
      */
-    class EndTimeComparator implements Comparator<Task> {
+    class DESCStartTimeComparator implements Comparator<Task> {
+        @Override
+        public int compare(Task task, Task taskToCompare) {
+            ASCStartTimeComparator comparator = new ASCStartTimeComparator();
+            return - comparator.compare(task, taskToCompare);
+        }
+    }
+    
+    /**
+     * A comparator use to compare the end time of tasks in ascending order
+     * float task is considered as appear lastly in the natural order
+     */
+    class ASCEndTimeComparator implements Comparator<Task> {
         @Override
         public int compare(Task task, Task taskToCompare) {
             String endDate = task.getEndDate().getDateYYYYMMDDFormat();
@@ -317,13 +350,36 @@ public class UniqueTaskList implements Iterable<Task>{
     }
     
     /**
-     * A comparator use to compare the importance of tasks
-     * Importance: Red > Yellow > Green > NULL 
+     * A comparator use to compare the end time of tasks in descending order
+     * float task is considered as appear lastly in the natural order
      */
-    class ImportanceComparator implements Comparator<Task> {
+    class DESCEndTimeComparator implements Comparator<Task> {
         @Override
         public int compare(Task task, Task taskToCompare) {
-            return taskToCompare.getLevel().getNumberLevel() - task.getLevel().getNumberLevel();
+            ASCEndTimeComparator comparator = new ASCEndTimeComparator();
+            return - comparator.compare(task, taskToCompare);
+        }
+    }
+    
+    /**
+     * A comparator use to compare the importance of tasks in ascending order
+     * Importance: Red > Yellow > Green > NULL 
+     */
+    class ASCImportanceComparator implements Comparator<Task> {
+        @Override
+        public int compare(Task task, Task taskToCompare) {
+            return task.getLevel().getNumberLevel() - taskToCompare.getLevel().getNumberLevel();
+        }
+    }
+    
+    /**
+     * A comparator use to compare the importance of tasks in descending order
+     * Importance: Red > Yellow > Green > NULL 
+     */
+    class DESCImportanceComparator implements Comparator<Task> {
+        @Override
+        public int compare(Task task, Task taskToCompare) {
+            return -(task.getLevel().getNumberLevel() - taskToCompare.getLevel().getNumberLevel());
         }
     }
     //@@author
