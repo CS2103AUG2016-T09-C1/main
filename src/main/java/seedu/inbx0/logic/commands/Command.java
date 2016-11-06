@@ -7,7 +7,9 @@ import seedu.inbx0.commons.events.storage.StoragePathChangedEvent;
 import seedu.inbx0.commons.events.ui.CloseReminderListEvent;
 import seedu.inbx0.commons.events.ui.IncorrectCommandAttemptedEvent;
 import seedu.inbx0.commons.events.ui.JumpToListRequestEvent;
+import seedu.inbx0.commons.events.ui.JumpToTaskRequestEvent;
 import seedu.inbx0.model.Model;
+import seedu.inbx0.model.task.ReadOnlyTask;
 
 /**
  * Represents a command with hidden internal logic and the ability to be executed.
@@ -86,6 +88,13 @@ public abstract class Command {
      */
     protected void indicateJumpToListRequestEvent(int index) {
         EventsCenter.getInstance().post(new JumpToListRequestEvent(index));
+    }
+    
+    /**
+     * Raises an event to indicate to jump to task 
+     */
+    protected void indicateJumpToTaskRequestEvent(ReadOnlyTask task) {
+        EventsCenter.getInstance().post(new JumpToTaskRequestEvent(task));
     }
     
     /**

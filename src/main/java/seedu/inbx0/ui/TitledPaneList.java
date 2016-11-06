@@ -12,6 +12,7 @@ import seedu.inbx0.commons.core.EventsCenter;
 import seedu.inbx0.commons.events.ui.CloseReminderListEvent;
 import seedu.inbx0.commons.util.FxViewUtil;
 import seedu.inbx0.logic.Logic;
+import seedu.inbx0.model.task.ReadOnlyTask;
 
 //@@author A0148044J
 public class TitledPaneList extends UiPart {
@@ -365,6 +366,10 @@ public class TitledPaneList extends UiPart {
     
     public void scrollTo(int index) {
         taskListPanel.scrollTo(index);
+    }
+    
+    public void scrollTo(ReadOnlyTask task) {
+        taskListPanel.scrollTo(task);
     }
 }
 //@@author

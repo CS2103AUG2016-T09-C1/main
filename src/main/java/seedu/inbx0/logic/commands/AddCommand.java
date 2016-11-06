@@ -178,7 +178,7 @@ public class AddCommand extends Command {
         try {
             model.addTask(toAdd);
             indicateCloseAllTitledpanesEvent();
-            indicateJumpToListRequestEvent(model.getTaskList().getTaskList().indexOf(toAdd));
+            indicateJumpToTaskRequestEvent(toAdd);
             return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
         } catch (UniqueTaskList.DuplicateTaskException e) {
             return new CommandResult(MESSAGE_DUPLICATE_TASK);

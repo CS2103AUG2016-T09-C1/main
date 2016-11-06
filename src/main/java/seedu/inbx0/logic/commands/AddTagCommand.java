@@ -98,7 +98,7 @@ public class AddTagCommand extends Command {
         
         try {
             model.editTask(taskToEdit, toEditWith);
-            indicateJumpToListRequestEvent(model.getTaskList().getTaskList().indexOf(taskToEdit));
+            indicateJumpToTaskRequestEvent(taskToEdit);
         } catch (TaskNotFoundException tnfe) {
             assert false : "The target task cannot be missing";
         } catch (UniqueTaskList.DuplicateTaskException e ) {    
