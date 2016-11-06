@@ -86,7 +86,7 @@ interface and exposes its functionality using the `LogicManager.java` class.<br>
 <img src="images/LogicClassDiagram.png" width="800"><br>
 
 The _Sequence Diagram_ below shows how the components interact with each other in the scenario where the user issues the
-command `delete 3`.
+command `delete 1`.
 
 <img src="images\SDforDeleteTask.png" width="800">
 
@@ -110,7 +110,7 @@ The sections below provide more detailed explainations for each component.
 **API** : [`Ui.java`](../src/main/java/seedu/inbx0/ui/Ui.java)
 
 The UI consists of a `MainWindow` that is made up of multiple different parts e.g.`CommandBox`, `ResultDisplay`, `TaskListPanel`,
-`StatusBarFooter`, `BrowserPanel` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class
+`StatusBarFooter`, `InfoPanel` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class
 and they can be loaded using the `UiPartLoader`.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files
@@ -158,8 +158,8 @@ The `Model`,
 **API** : [`Storage.java`](../src/main/java/seedu/inbx0/storage/Storage.java)
 
 The `Storage` component,
-* can save `UserPref` objects in a json format and read it back.
-* can save the Task List data in an xml format and read it back.
+* can save `UserPref` objects in a Json format and read it back.
+* can save the Task List data in an XML format and read it back.
 
 ### Common classes
 
