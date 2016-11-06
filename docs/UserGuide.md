@@ -126,6 +126,8 @@ Examples:
 2) Add a task with deadlines.<br>
 Format: `add TASK e=[END_DATE] [END_TIME] [i=IMPORTANCE] [t=TAGS]...` 
 
+> Deadline Tasks are tasks only with an ending point.
+
 Examples: 
 * `add Do CS2103 Homework e=tomorrow i=red`
 * `add Finish Project Paper e=1 March 12am i=green t=GEH1027` <br>
@@ -189,7 +191,7 @@ Want to search for important things that you need to do? Or know when is your ne
 1) Normal search <br>
 Format: `find KEYWORD [MORE_KEYWORDS]...`
 
-> * Normal search will display a task that matches at least one keyword (i.e. `OR` search).
+Normal search will display a task that matches at least one keyword (i.e. `OR` search).
 > * You can use `INDICATOR/KEYWORD` to specify the keyword belong to a specific attributes, available INDICATOR: n=, s=, st=, e=, et=, i=
 > * You can use `'` to replace the whitespace if one search keyword contains whitespace, or Inbx_0 treat it as multiple keywords
  eg: `do'CS2103'homework` will match `do CS2103 homework' 
@@ -204,7 +206,7 @@ Example:
 2) Logic operation search <br>
 Format: `[LOGIC_OPERATOR] KEYWORD [MORE_KEYWORDS] [MORE_LOGIC_OPERATOR]...`
 
-> * Logic operation search will display a task only when it fits the logic expression
+Logic operation search will display a task only when it fits the logic expression
 > * LOGIC_OPERATOR: `|` means OR, `&` means AND, `(` and `)` used to group the logic operations
 > * You can use `INDICATOR/KEYWORD` to specify the keyword belong to a specific attributes, available INDICATOR: n=, s=, st=, e=, et=, i=
 > * You can use any valid logic operation format
@@ -226,10 +228,8 @@ Examples:
 #### <a id="sort"></a>5. Sorting the tasks by using a specific criteria: `sort`
 Format: sort `[NAME]`/`[START_TIME]`/`[END_TIME]`/`[IMPORTANCE]` `[ASCENDING]`/`[DESCENDING]`
 
-The Sort Command
-
-> * Sort the tasks according to name, start time, end time or importance in descending or ascending order
-> * acceptable input for 
+You will be able to sort the tasks according to name, start time, end time or importance in descending or ascending order
+> * Acceptable input for Sort Command
 > * `NAME`: n, Name, `Start Time`: s, start, `End Time`: e, end, `Importance`: i, importance
 > *  `ASCENDING`: ASC, ascending, ascend, `DECENDING`: DESC, descending, descend
 > * All sort keywords are non-case sensitive, ie, `Importance` is `importance` 
@@ -247,10 +247,8 @@ Examples:
 #### <a id="show"></a>6. Showing the various filtered lists: `show`
 Format: show `[DAY]`/`[CATEGORY]`/`[IMPORTANCE]`/`[COMPLETENESS]` /`[EXPIRED]`
 
-The Show Command
-
-> * Navigates the various filtered lists according to day, category, importance, completeness and whether the task has expired
-> * acceptable input for 
+You can navigate the various filtered lists according to day, category, importance, completeness and whether the task has expired
+> * Acceptable input for Show Command
 > * `DAY`: mon, monday, `CATEGORY`: dea, deadline, `IMPORTANCE`: gre, green, `COMPLETENESS`: com, inc
 > *  `EXPIRED`: exp,  
 > * All show keywords are non-case sensitive, ie, `WED` is `wed` 
@@ -518,20 +516,19 @@ For events that had expired, the task will take a lighter shade to show that the
 <!--- @@author A0148044J-->
 
 #### <a id="preferences"></a>19. Preference setting
-1)	Changing theme of your Inbx_0
 
-	Feel tedious and bored because of the single theme you keep looking at when you using Inbx_0? Now is time for your to beautify your Inbx_0. Try change your theme and the size of your Inbx_0
+Feel bored of the single theme you keep looking at when you using Inbx_0? Now is time for your to beautify your Inbx_0. You can change your theme and the size of your Inbx_0
 
 1) Theme setting
 
-There are 8 themes available in Inbx_0. The default setting for the Inbx_0 is the light grey theme.
+There are eight themes available in Inbx_0. The default setting for the Inbx_0 is the light grey theme.
 
-To implement other theme, you can using the menu on the top of the display window. Click preferences and then click on the theme you like to get the theme.
-Alternatively, you can key in combination of <kbd>Ctrl</kbd> and a number from <kbd>1</kbd>  to <kbd>8</kbd>  on your keyboards to change your theme
+To implement another theme, you can use the menu at the top of the display window. Click **Preferences** and then select the theme that you want.
+Alternatively, you can key in combination of <kbd>Ctrl</kbd> and a number from <kbd>1</kbd>  to <kbd>8</kbd>  on your keyboard to change the theme
 
 2) Memorize setting
 
-When you close Inbx_0, Inbx_0 will remember your current setting including the size and theme of your display window. Next time when your open the app, it will give you your "preferred" setting you used last time.
+When you close Inbx_0, Inbx_0 will remember your current setting including the size and theme of your display window. When you open the app the next time, it will set the settings which you had used the last time.
 
 #### Saving the data 
 Task Manager data are saved in the hard disk automatically after any command that changes the data.<br>
