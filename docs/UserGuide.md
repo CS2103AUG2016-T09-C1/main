@@ -6,6 +6,7 @@
 ##**Table Of Contents**
 * [About](#about)
 * [Quick Start](#quick-start)
+* [Color Schemes](#color-schemes)
 * [Features](#features)
 	* [Getting help: `help`](#help)
 	* [Adding a task: `add`](#add)
@@ -57,7 +58,44 @@ Unlike all the other task managers out there, Inbx_0 is a simple program that ru
    * **`exit`** : exits the app
 7. Refer to the [Features](#features) section below for details of each command.<br>
 
+## **Color Schemes**
 
+We understand that everyone is unique, and so when using our app, you can express your uniqueness with our fun different color schemes!
+Upon opening the app, you can either use the keyboard shortcut <kbd>Ctrl</kbd> + <kbd>1</kbd> to <kbd>8</kbd> to cycle between various themes, or use your mouse to click on individual themes, via the `Preferences` menu.
+
+Currently we offer 8 colors:
+
+**1. Antique White**
+
+> <img src="images/AntiqueWhiteTheme.png" width="800">
+
+**2. Blue**
+
+> <img src="images/BlueTheme.png" width="800">
+
+**3. Green**
+
+> <img src="images/GreenTheme.png" width="800">
+
+**4. Light Grey**
+
+> <img src="images/LightGreyTheme.png" width="800">
+
+**5. Orange**
+
+> <img src="images/OrangeTheme.png" width="800">
+
+**6. Pink**
+
+> <img src="images/PinkTheme.png" width="800">
+
+**7. Seashell**
+
+> <img src="images/SeashellTheme.png" width="800">
+
+**8. Violet**
+
+> <img src="images/VioletTheme.png" width="800">
 
 ## **Features**
 
@@ -87,7 +125,6 @@ Parameter | Description
 The `IMPORTANCE` parameter takes in variations of the colours `red`, `green` or `yellow`, such as `Red, Green, Yellow`, `r, g, y`, or `R, G, Y`.
 
 The rest of the guide will be using the general command format to describe what is needed to execute each command.
-
 <br><br>
 
 #### <a id="help"></a>1. Getting help: `help`
