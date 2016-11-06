@@ -25,7 +25,6 @@ public class Time {
      * @throws IllegalValueException if given start time string is invalid.
      * !isValidTime(time) &&
      */
-    
     public Time(String time) throws IllegalValueException {
         assert time != null;
        
@@ -36,7 +35,6 @@ public class Time {
                 try{
                     SimpleDateFormat timeFormat = new SimpleDateFormat ("HH:mm");
                     List<java.util.Date> getTime = new Parser().parse(time).get(0).getDates();
-      //              List<java.util.Date> current = new Parser().parse("now").get(0).getDates();
                     String currentTime = getCurrentTime();
                     if(timeFormat.format(getTime.get(0)).equals(currentTime))
                         this.value = "";
@@ -64,8 +62,7 @@ public class Time {
             if((Integer.parseInt(test) % 100) < 60) {
                 minCheck = true;
             }
-        }
-       
+        }       
         return (hourCheck && minCheck);
     }
     

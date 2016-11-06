@@ -33,6 +33,7 @@ public class RemindCommand extends Command {
 
     public static final String MESSAGE_REMINDER_TASK_SUCCESS = "Added Reminder for Task: %1$s";
     public static final String MESSAGE_REMINDER_CONSTRAINTS = "The reminder date or time is invalid.";
+    public static final String MESSAGE_DUPLICATE_REMINDER = "There is already a reminder during that time.";
     public static final int TOTAL_NUMBER_OF_ARGUMENTS = 6;
     private static final int TASK_NAME = 0;
     private static final int TASK_START_DATE = 1;
@@ -122,18 +123,18 @@ public class RemindCommand extends Command {
         String [] arguments = new String [TOTAL_NUMBER_OF_ARGUMENTS];
         arguments = obtainArguments(arguments, taskToAddReminder);
         UniqueTagList tags = obtainUniqueTagList(taskToAddReminder);
-        UniqueReminderList reminders = obtainUniqueReminderList(taskToAddReminder, newReminder);
+        UniqueReminderList reminders = addReminder(taskToAddReminder, newReminder);
         
         Task taskWithReminder = new Task (
-                new Name(arguments[TASK_NAME]),
-                new Date(arguments[TASK_START_DATE]),
-                new Time(arguments[TASK_START_TIME]),
-                new Date(arguments[TASK_END_DATE]),
-                new Time(arguments[TASK_END_TIME]),
-                new Importance(arguments[TASK_IMPORTANCE]),
-                tags,
-                reminders
-                );
+            new Name(arguments[TASK_NAME]),
+            new Date(arguments[TASK_START_DATE]),
+            new Time(arguments[TASK_START_TIME]),
+            new Date(arguments[TASK_END_DATE]),
+            new Time(arguments[TASK_END_TIME]),
+            new Importance(arguments[TASK_IMPORTANCE]),
+            tags,
+            reminders
+            );
         return taskWithReminder;
     }
     
@@ -156,23 +157,16 @@ public class RemindCommand extends Command {
         return editArguments;
     }
     
-    private UniqueTagList obtainUniqueTagList(ReadOnlyTask taskToEdit) {
-        
-        UniqueTagList originalTagList = taskToEdit.getTags();
-              
+    private UniqueTagList obtainUniqueTagList(ReadOnlyTask taskToEdit) {       
+        UniqueTagList originalTagList = taskToEdit.getTags();            
         return originalTagList;
-      }
+    }
       
-      private UniqueReminderList obtainUniqueReminderList(ReadOnlyTask taskToEdit, ReminderTask reminder) {
-          UniqueReminderList original = taskToEdit.getReminders();
-          try {
-            original.add(reminder);
-        } catch (DuplicateReminderException e) {
-
-            e.printStackTrace();
-        }
-          return original;
-      }
+    private UniqueReminderList addReminder(ReadOnlyTask taskToAddReminder, ReminderTask newReminder) throws DuplicateReminderException {
+        UniqueReminderList originalReminderList = taskToAddReminder.getReminders();
+        originalReminderList.add(newReminder);
+        return originalReminderList;
+    }
 
     @Override
     public CommandResult execute() {
@@ -189,15 +183,18 @@ public class RemindCommand extends Command {
 
         ReadOnlyTask taskToAddReminder = lastShownList.get(targetIndex - 1);
         
-        ReminderTask newReminder = new ReminderTask(startDate, startTime, taskToAddReminder, true);
+        ReminderTask newReminder = new ReminderTask(startDate, startTime, taskToAddReminder, false);
   
         Task withReminder = null;
         try {
             withReminder = createTaskWithReminder(taskToAddReminder, newReminder);
             EventsCenter.getInstance().post(new TaskPanelSelectionChangedEvent(withReminder));
+        } catch (DuplicateReminderException d) {
+            newReminder.cancel();
+            return new CommandResult(MESSAGE_DUPLICATE_REMINDER);
         } catch (IllegalValueException e1) {
             return new CommandResult(MESSAGE_USAGE);
-        }
+        } 
         try {
             model.editTask(taskToAddReminder, withReminder);
         } catch (DuplicateTaskException | TaskNotFoundException e) {       

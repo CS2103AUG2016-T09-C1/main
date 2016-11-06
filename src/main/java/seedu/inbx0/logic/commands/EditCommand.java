@@ -19,11 +19,10 @@ import seedu.inbx0.model.task.Time;
 import seedu.inbx0.model.task.UniqueTaskList;
 import seedu.inbx0.model.task.UniqueTaskList.TaskNotFoundException;
 
-
+//@@author A0139579J
 /**
  * Edits a task identified using it's last displayed index from the tasklist.
  */
-//@@author A0139579J
 public class EditCommand extends Command {
     
     public static final String COMMAND_WORD = "edit";

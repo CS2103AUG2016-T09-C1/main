@@ -48,14 +48,14 @@ public class AddCommand extends Command {
             tagSet.add(new Tag(tagName));
         }
         this.toAdd = new Task(
-                new Name(name),
-                new Date(startDate),
-                new Time(startTime),
-                new Date(endDate),
-                new Time(endTime),
-                new Importance(level),
-                new UniqueTagList(tagSet),
-                new UniqueReminderList()
+            new Name(name),
+            new Date(startDate),
+            new Time(startTime),
+            new Date(endDate),
+            new Time(endTime),
+            new Importance(level),
+            new UniqueTagList(tagSet),
+            new UniqueReminderList()
         );
     }
     
@@ -67,14 +67,14 @@ public class AddCommand extends Command {
             tagSet.add(new Tag(tagName));
         }
         this.toAdd = new Task(
-                new Name(name),
-                new Date(startDate),
-                new Time(startTime),
-                new Date(endDate),
-                new Time(endTime),
-                new Importance(""),
-                new UniqueTagList(tagSet),
-                new UniqueReminderList()
+            new Name(name),
+            new Date(startDate),
+            new Time(startTime),
+            new Date(endDate),
+            new Time(endTime),
+            new Importance(""),
+            new UniqueTagList(tagSet),
+            new UniqueReminderList()
         );
     }
 
@@ -84,14 +84,14 @@ public class AddCommand extends Command {
             tagSet.add(new Tag(tagName));
         }
         this.toAdd = new Task(
-                new Name(name),
-                new Date(""),
-                new Time(""),
-                new Date(""),
-                new Time(""),
-                new Importance(""),
-                new UniqueTagList(tagSet),
-                new UniqueReminderList()
+            new Name(name),
+            new Date(""),
+            new Time(""),
+            new Date(""),
+            new Time(""),
+            new Importance(""),
+            new UniqueTagList(tagSet),
+            new UniqueReminderList()
         );
     }
     
@@ -101,14 +101,14 @@ public class AddCommand extends Command {
             tagSet.add(new Tag(tagName));
         }
         this.toAdd = new Task(
-                new Name(name),
-                new Date(""),
-                new Time(""),
-                new Date(""),
-                new Time(""),
-                new Importance(level),
-                new UniqueTagList(tagSet),
-                new UniqueReminderList()
+            new Name(name),
+            new Date(""),
+            new Time(""),
+            new Date(""),
+            new Time(""),
+            new Importance(level),
+            new UniqueTagList(tagSet),
+            new UniqueReminderList()
         );
     }
     
@@ -119,14 +119,14 @@ public class AddCommand extends Command {
             tagSet.add(new Tag(tagName));
         }
         this.toAdd = new Task(
-                new Name(name),
-                new Date(""),
-                new Time(""),
-                new Date(endDate),
-                new Time(endTime),
-                new Importance(level),
-                new UniqueTagList(tagSet),
-                new UniqueReminderList()
+            new Name(name),
+            new Date(""),
+            new Time(""),
+            new Date(endDate),
+            new Time(endTime),
+            new Importance(level),
+            new UniqueTagList(tagSet),
+            new UniqueReminderList()
         );
     }
     
@@ -137,14 +137,14 @@ public class AddCommand extends Command {
             tagSet.add(new Tag(tagName));
         }
         this.toAdd = new Task(
-                new Name(name),
-                new Date(""),
-                new Time(""),
-                new Date(endDate),
-                new Time(endTime),
-                new Importance(""),
-                new UniqueTagList(tagSet),
-                new UniqueReminderList()
+            new Name(name),
+            new Date(""),
+            new Time(""),
+            new Date(endDate),
+            new Time(endTime),
+            new Importance(""),
+            new UniqueTagList(tagSet),
+            new UniqueReminderList()
         );
     }
     

@@ -366,6 +366,7 @@ public class Parser {
         return dateTimeString;
     }
     
+    // @@author A0139579J
     /**
      * Checks whether the string contains a date
      *
@@ -373,7 +374,6 @@ public class Parser {
      *        may contain date and time together
      * @return the date
      */
-    // @@author A0139579J
     private String dateParse(final String dateTimeString) {
         Matcher matcher1 = DATE_TIME_FORMAT.matcher(dateTimeString.trim());
         Matcher matcher2 = DATE_TIME_FORMAT_2.matcher(dateTimeString.trim());
@@ -398,7 +398,8 @@ public class Parser {
 
         return dateTimeString;
     }
-
+    
+    // @@author
     /**
      * Extracts the new task's tags from the add command's tag arguments string.
      * Merges duplicate tag strings.
@@ -412,14 +413,13 @@ public class Parser {
         final Collection<String> tagStrings = Arrays.asList(tagArguments.replaceFirst(" t=", "").split(" t="));
         return new HashSet<>(tagStrings);
     }
-
+    
     /**
      * Parses arguments in the context of the edit task command.
      *
      * @param args full command args string
      * @return the prepared command
      */
-    // @@author A0139579J
     private Command prepareEdit(final String args) {
         final Matcher matcher = TASK_EDIT_DATA_ARGS_FORMAT.matcher(args.trim());
         if (!matcher.matches()) {
@@ -545,6 +545,7 @@ public class Parser {
         }
     }
     
+    // @@author A0139579J
     /**
      * Builds the regex pattern based on the user's input of parameters
      *
@@ -552,7 +553,6 @@ public class Parser {
      *            
      * @return the regex pattern
      */
-    // @@author A0139579J
     private Pattern scanArgumentsAndBuildRegex(final String arguments) {
         String regex = "";
 
@@ -637,14 +637,13 @@ public class Parser {
             return new IncorrectCommand(ive.getMessage());
         }
     }
-
+    
     /**
      * Parses arguments in the context of the Mark Complete task command.
      * 
      * @param args full command args string
      * @return the prepared command
      */
-    // @@author A0139579J
     private Command prepareMarkComplete(final String args) {
         final Matcher matcher = INDEX_NUMBER_ARGS_FORMAT.matcher(args.trim());
         final Matcher matcher2 = INDEX_NUM_TO_INDEX_NUM_ARGS_FORMAT.matcher(args.trim());
@@ -667,7 +666,6 @@ public class Parser {
             Integer[] indexNumInteger = new Integer[back - front + 1];
             int index = 0;
             for (Integer i = front; i <= back; i++) {
-
                 indexNumInteger[index] = i;
                 index++;
             }
@@ -688,14 +686,14 @@ public class Parser {
             return new IncorrectCommand(e.getMessage());
         }
     }
-
+    
+    // @@author A0139579J
     /**
      * Parses arguments in the context of the Remind command.
      * 
      * @param args full command args string
      * @return the prepared command
      */
-    // @@author A0139579J
     private Command prepareRemind(String arguments) {
         final Matcher matcher = TASK_REMINDER_ARGS_FORMAT.matcher(arguments.trim());
         if (!matcher.matches()) {
