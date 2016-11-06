@@ -46,7 +46,7 @@ Unlike all the other task managers out there, Inbx_0 is a simple program that ru
 2. Copy the file to the folder you want to use as the home folder for Inbx_0
 3. Double-click the Inbx_0 icon
 4. Double-click the Task Manager.jar file to start the app. The GUI should appear in a few seconds. 
- > <img src="images/GUI.png" width="600">
+ <img src="images/GUI.png" width="600">
 
 5. Type a command in the command box and press <kbd>Enter</kbd> to execute it. <br>
    e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window. 
