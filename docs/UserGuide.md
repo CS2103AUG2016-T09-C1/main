@@ -79,10 +79,10 @@ Parameter | Description
 [st=START_TIME] | The time of the start of the task 
 [e=END_DATE] | The date of the task that the task will end on 
 [et=END_TIME] | The time of the end of the task 
-[i=IMPORTANCE] | The priority of the task. Can be `green`, `yellow` or `red`, from low to high importance 
+[i=IMPORTANCE] | The priority of the task. It can be `green`, `yellow` or `red`, from low to high importance 
 [t=TAGS] | Tags that are assigned to the task 
 
->  For Dates and Times, the program utiilises natural language processing. This means that you can enter commands in multiple formats such as "tmr, next week, next wed, 3 days later, noon, 8am, 1400" and inbx_0 will read them just fine! <br>
+>  For Dates and Times, the program utiilises natural language processing. This means that you can enter commands in multiple formats such as "tmr, next week, next wed, 3 days later, noon, 8am, 1400" and Inbx_0 will read them just fine! <br>
 
 The `IMPORTANCE` parameter takes in variations of the colours `red`, `green` or `yellow`, such as `Red, Green, Yellow`, `r, g, y`, or `R, G, Y`.
 
@@ -93,10 +93,12 @@ The rest of the guide will be using the general command format to describe what 
 #### <a id="help"></a>1. Getting help: `help`
 Format: `help`
 
-If you ever get confused while using our app, typing in help will instantly open up a help window, showing you the complete list of commands that you can enter, instantly putting you back on the right path! 
+If you ever get confused while using our app, you can type in "help" in the command box and hit <kbd>Enter</kbd>
+It will instantly open up a help window, showing you the complete list of commands that you can enter, instantly putting you back on the right path! 
 
 > <img src="images/command_summary.png" width="800">
 
+Alternatively, you can use the keyboard shortcut <kbd>Ctrl</kbd> + <kbd>F1</kbd> to open the help window quickly.
 <br><br>
  
 <!--- @@author A0139579J -->
@@ -104,19 +106,24 @@ If you ever get confused while using our app, typing in help will instantly open
 #### <a id="add"></a>2. Adding a task: `add`
 Let's get started by adding tasks to the tasklist! You may use any of the formats below to get started.
 
-1) Add a floating task.<br>
-Format: `add TASK [i=IMPORTANCE] [t=TAGS]...` 
+1. Add a floating task.<br>
+Format: `add TASK [s= START_DATE START_TIME][i=IMPORTANCE] [t=TAGS]...` 
 
-> Floating tasks are tasks without any start dates or end dates. You can use this to keep track of tasks which may not be follow
+> Floating tasks are tasks without any end dates. You can use this to keep track of tasks which may not follow
 a time schedule.
 
 Examples: 
 * `add Buy Groceries` <br>
 * `add Wash dishes i=green` <br>
 * `add Buy bunny i=green t=cute` <br>
+* `add Started Gym Training s=10012016 10am i=red` <br>
+* `add On Diet s=18/10/2016 i=y t=health` <br>
 <br>
 
-2) Add a task with deadlines.<br>
+> * Under the s= parameter, it requires either the START_DATE or START_TIME. By providing only START_DATE, the START_TIME would not be specified.
+> *	If the START_DATE is not provided, the start date will be automatically assigned as the current date.
+
+2. Add a task with deadlines.<br>
 Format: `add TASK e=[END_DATE] [END_TIME] [i=IMPORTANCE] [t=TAGS]...` 
 
 Examples: 
@@ -127,18 +134,7 @@ Examples:
 > * Under the e= parameter, it requires either the END_DATE or END_TIME. By providing only END_DATE, the END_TIME would not be specified.
 > *	If the END_DATE is not provided, the end date will be automatically assigned as the current date.
 
-3) Add a task with starting point only.<br>
-Format: `add TASK s=[START_DATE] [START_TIME][i=IMPORTANCE] [t=TAGS]...`
-
-Examples: 
-* `add Started Gym Training s=10012016 10am i=red`
-* `add On Diet s=18/10/2016 i=y t=health` <br>
-<br>
-
-> * Under the s= parameter, it requires either the START_DATE or START_TIME. By providing only START_DATE, the START_TIME would not be specified.
-> *	If the START_DATE is not provided, the start date will be automatically assigned as the current date.
-
-4) Add an event.<br>
+4. Add an event.<br>
 Format: `add TASK s=[START_DATE] [START_TIME] e=[END_DATE] [END_TIME] [i=IMPORTANCE] [t=TAGS]...`
 
 > Events are tasks with a starting and ending point.
@@ -152,16 +148,23 @@ Examples:
 <br><br>
 
 #### <a id="list"></a>3. Listing tasks: `list`
-1) Listing all the tasks. <br>
-Format: `list [DATE]`
+1. Listing all the tasks you have yet to complete. <br>
+Format: `list`
 
-The List Command shows a list of all tasks in the task manager so that you can take a look at your tasks all at one go.
+The List Command shows a list of all incompleted tasks in the task manager so that you can take a look at your tasks all at one go.
 
- There will be index numbers allocated at the side of each task which will be needed for other operations such as deleting a task or selecting a task.
+There will be index numbers allocated at the side of each task which will be needed for other operations such as deleting a task or selecting a task.
  
-If you input a date, it will show all the tasks associated with that date.
+2. Listing all the tasks on the specific date. <br>
+Format: `list DATE`
 
-2) Listing tasks due before a specific date. <br>
+By typing in `list DATE`, it will display all the tasks that start on and end on that date.
+
+Examples:
+* `list next week` shows every task from that starts on and ends on next week <br>
+* `list 16.11.2016` shows every task from that starts on and ends on 16 November 2016 <br>
+
+3. Listing tasks due before a specific date. <br>
 Format: `list due DATE`
 
 You will be able to view all of today’s tasks and tasks that are due before a specific date. By keying in `list due DATE`, it will display a list of all the tasks due before the input date in the task manager.
@@ -170,7 +173,7 @@ Examples:
 * `list due tomorrow` shows every task from now to the end of tomorrow <br>
 * `list due 1st Jan` shows every task from now till the end of 1st January 2017 <br>
 
-3) Listing tasks that are overdue <br>
+4. Listing tasks that are overdue <br>
 Format: `list overdue`
 
 You will be able to view all of the deadline tasks are overdue by typing the following: `list overdue`
@@ -249,7 +252,7 @@ The Show Command
 
 > * Navigates the various filtered lists according to day, category, importance, completeness and whether the task has expired
 > * acceptable input for 
-> * `DAY`: mon, monday, `CATEGORY`: dea, deadline, `IMPORTANCE`: gre, green, `COMPLETENESS`: com, 
+> * `DAY`: mon, monday, `CATEGORY`: dea, deadline, `IMPORTANCE`: gre, green, `COMPLETENESS`: com, inc
 > *  `EXPIRED`: exp,  
 > * All show keywords are non-case sensitive, ie, `WED` is `wed` 
 
@@ -266,7 +269,7 @@ Examples:
 
 <!--- @@author A0139579J -->
 #### <a id="edit"></a>7. Editing a task: `edit`
-1) Editing any parameter of a task <br>
+1. Editing any parameter of a task <br>
 Format: `edit INDEX [n=NAME] [s=START_DATE] [st=START_TIME] [e=END_DATE] [et=END_TIME] [i=IMPORTANCE]`
 
 Made a spelling mistake or your event was postponed? You can use the Edit Command to swiftly rectify any tasks on the task list.
@@ -287,7 +290,7 @@ Examples:
   `edit 1 n=Business Lunch st=1pm`<br>
   Changes the name of 1st task in the results of the `find` command to ‘Business Lunch at 1 pm’  
 
-2) Converting a task to a floating task. <br>
+2. Converting a task to a floating task. <br>
 Format: `edit INDEX float`
 
 Use the keyword "float" to convert any task into a floating task by removing the starting and ending dates and times.
@@ -299,6 +302,9 @@ Example:
 
  > <img src="images/EditCommand.png" width="600">
  
+> *	You can remove any of the fields in the task except NAME by typing in the relevant delimiter and nil
+> *	For example, s=nil
+
 <br><br>
 
 <!--- @@author A0139481Y -->
@@ -344,28 +350,8 @@ Examples:
 
 <br><br>
 
-#### <a id="sel"></a>10. Selecting a task : `sel`
-Format: `sel INDEX`
-
-In order to view more details on a task that you have created, you can select the task identified by the index number in the last listing. The Select Command can be performed by typing:
-
-> sel INDEX
-
-This will automatically display the selected task and you will be able to see whether you have placed any reminders on the task. You will also be able to view tags that are associated with the task.
-
-Examples: 
-* `list`<br>
-  `sel 2`<br>
-  Selects the 2nd task in the task list.
-  
-* `find project`<br>
-  `sel 1`<br>
-  Selects the 1st task in the results of the `find` command.
-
-<br><br>
-
 <!--- @@author A0139481Y -->
-#### <a id="undo"></a>11. Undoing previous action: `undo`
+#### <a id="undo"></a>10. Undoing previous action: `undo`
 Format: `undo`
 
 Made a mistake? Not to worry! You can use the `undo` command to rectify your mistake or to undo any undesirable changes. You may also type `undo X-STEPS` to undo the past X number of commands, up to a maximum of 10.
@@ -376,7 +362,7 @@ Made a mistake? Not to worry! You can use the `undo` command to rectify your mis
 
  <br><br>
 
-#### <a id="redo"></a>12. Redoing previous action: `redo`
+#### <a id="redo"></a>11. Redoing previous action: `redo`
 Format: `redo`
 
 Made a mistake? Not to worry! You can use the `redo` command to rectify your mistake or to redo any undesirable changes. You may also type `redo X-STEPS` to redo the past X number of commands, up to the number of commands undone.
@@ -387,18 +373,23 @@ Made a mistake? Not to worry! You can use the `redo` command to rectify your mis
 
 <br><br>
 
-#### <a id="clr"></a>13. Clearing all tasks : `clr`
+#### <a id="clr"></a>12. Clearing all tasks : `clr`
+1.Clearing the shown list
 Format: `clr`
 
-Tasks can easily become obsolete and checking off tasks individually can be quite a hassle. The clear command will help you to remove all tasks and can be accessed by typing the following: `clr`
+Tasks can easily become obsolete and checking off tasks individually can be quite a hassle. The clear command will help you to remove all tasks on the shown list and can be accessed by typing the following: `clr`
 
  > <img src="images/ClearCommand.png" width="600">
 
+2. Clearing out the entire tasklist
+Format: `clr all`
+
+You can remove all the tasks from the tasklist by typing `clr all` in the command box.
 <br><br>
 
 <!--- @@author A0139579J -->
-#### <a id="done"></a>14. Marking a task as completed : `done`
-1) Mark selected tasks as done
+#### <a id="done"></a>13. Marking a task as completed : `done`
+1. Mark selected tasks as done
 Format: `done INDEX [INDEX]...`
 
 If you have finished a certain task and wish to mark it as finished you can give a complete a specified task in the task list by typing the following: `done INDEX [INDEX]`<br>
@@ -412,7 +403,7 @@ Example:
   `done 2 4 7` <br>
  Marks the 2nd, 4th and 7th tasks as completed in today’s list
  
-2) Mark tasks in consecutive index numbers as done
+2. Mark tasks in consecutive index numbers as done
 Format: `done FIRST_INDEX to LAST_INDEX`
 
 This will allow multiple tasks specified by the first index to the last index to be marked as completed.
@@ -426,7 +417,7 @@ Example:
   
 <br><br>
 
-#### <a id="reminder"></a>15. Setting a reminder for your task : `rem`
+#### <a id="reminder"></a>14. Setting a reminder for your task : `rem`
 Format: `rem INDEX s=START_DATE/START_TIME/START_DATE and START_TIME`
 
 You can add a reminder to a task by typing the following: `rem INDEX s=START_DATE/START_TIME/START_DATE and START_TIME` <br>
@@ -453,6 +444,25 @@ Examples:
   
 <br><br>
 
+#### <a id="sel"></a>15. Selecting a task : `sel`
+Format: `sel INDEX`
+
+In order to view more details on a task that you have created, you can select the task identified by the index number in the last listing. The Select Command can be performed by typing:
+
+> sel INDEX
+
+This will automatically display the selected task and you will be able to see the reminders that you have placed on the task. You will also be able to view tags that are associated with the task.
+
+Examples: 
+* `list`<br>
+  `sel 2`<br>
+  Selects the 2nd task in the task list.
+  
+* `find project`<br>
+  `sel 1`<br>
+  Selects the 1st task in the results of the `find` command.
+
+<br><br>
 <!--- @@author A0135797M-->
 #### <a id="setdir"></a>16. Saving your tasklist to a specific directory : `saveas`
 Format: `saveas FILE_DIRECTORY`
@@ -482,9 +492,9 @@ This will initiate a final save and after which, the program will close automati
 <!--- @@author A0148044J-->
 #### <a id="autocomplete"></a>18. Autocompleting with command history
 
-You can access autocompletion by using the arrow keys Up and Down to browse through command history <br>
+You can access autocompletion by using the arrow keys <kbd>Up</kbd> and <kbd>Down</kbd> to browse through command history <br>
 
-You can autocomplete your command words by using the arrow keys Right, applicable command words are list in the command summary.
+You can autocomplete your command words by using the arrow key <kbd>Right</kbd>, applicable command words are list in the command summary.
 
 This will allow you to type your commands much more easily and at a increased speed.
  <br><br>
@@ -522,7 +532,7 @@ Feel tedious and bored because of the single theme you keep looking at when you 
 There are 8 theme available in inbx_0, the default setting for the user is light gray theme.
 
 To implement other theme, you can using the menu on the top of the display window. Click preferences and then click on the theme you like to get the theme.
-Alternatively, you can key in combination of "Ctrl" and a number from 1 to 8 on your keyboards to change your theme
+Alternatively, you can key in combination of <kbd>Ctrl</kbd> and a number from 1 to 8 on your keyboards to change your theme
 
 2) Memorize setting
 
@@ -547,13 +557,14 @@ Command | Format
 [Edit](#edit) | `edit INDEX [n=NAME] [s=START_DATE] [st=START_TIME] [e=END_DATE] [et=END_TIME] [i=IMPORTANCE]`
 [Addtag / Deltag](#tag) | `tag INDEX t=TAGS [t=MORE_TAGS]`
 [Delete](#del) | `del INDEX`
-[Select](#sel) | `sel INDEX`
 [Undo](#undo) | `undo [STEPS]`
 [Redo](#redo) | `redo [STEPS]`
 [Clear](#clr) | `clr`
+&nbsp; | `clr all`
 [Done](#done) | `done INDEX [INDEX]...`
 &nbsp; | `done FIRST_INDEX to LAST_INDEX`
 [Remind](#remind) | `rem INDEX s=START_DATE/START_TIME/START_DATE and START_TIME`
+[Select](#sel) | `sel INDEX`
 [Set Directory](#setdir) | `saveas FILE_DIRECTORY`
 &nbsp; | `saveas reset`
 [Exit](#exit) | `exit`
