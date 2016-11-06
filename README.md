@@ -11,8 +11,7 @@
   
 #### Site Map
 * [User Guide](docs/UserGuide.md) 
-* [Developer Guide](docs/DeveloperGuide.md) 
-* [Learning Outcomes](docs/LearningOutcomes.md) 
+* [Developer Guide](docs/DeveloperGuide.md)  
 * [About Us](docs/AboutUs.md)
 * [Contact Us](docs/ContactUs.md)
 
@@ -23,7 +22,8 @@
   [Java FX tutorial](http://code.makery.ch/library/javafx-8-tutorial/) by *Marco Jakob*.
 
 * Original source of this code was used from the sample project created by SE-EDU initiative at 
-  (https://github.com/se-edu/).
+  (https://github.com/se-edu/addressbook-level4).
 
+* Natural Date Parser [Natty](http://natty.joestelmach.com/)
 
 #### Licence : [MIT](LICENSE)
