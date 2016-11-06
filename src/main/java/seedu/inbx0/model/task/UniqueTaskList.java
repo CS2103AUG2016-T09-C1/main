@@ -19,7 +19,9 @@ import java.util.*;
  * @see CollectionUtil#elementsAreUnique(Collection)
  */
 public class UniqueTaskList implements Iterable<Task>{
-
+    
+    private final ObservableList<Task> internalList = FXCollections.observableArrayList();
+    
     /**
      * Signals that an operation would have violated the 'no duplicates' property of the list.
      */
@@ -34,8 +36,6 @@ public class UniqueTaskList implements Iterable<Task>{
      * there is no such matching task in the list.
      */
     public static class TaskNotFoundException extends Exception {}
-
-    private final ObservableList<Task> internalList = FXCollections.observableArrayList();
 
     /**
      * Sorts the task list according to the sorting type and order 
@@ -181,19 +181,18 @@ public class UniqueTaskList implements Iterable<Task>{
         boolean changed = false;
         for(Task t : internalList) { 
             if(t.getEndDate().value.length() != 0 && t.getEndTime().value.length() != 0) {        
-                if((t.getEndDate().getYear() < currentDate.getYear()) |
-               ((t.getEndDate().getYear() == currentDate.getYear()) && (t.getEndDate().getMonth() < currentDate.getMonth())) |
-               ((t.getEndDate().getYear() == currentDate.getYear()) && (t.getEndDate().getMonth() == currentDate.getMonth())
-                 && (t.getEndDate().getDay() < currentDate.getDay())) |
-               (t.getEndDate().value.equals(currentDate.value) && (Integer.parseInt(t.getEndTime().value.replaceAll("\\D+","")) <= Integer.parseInt(currentTime.replaceAll("\\D+",""))))) {          
+                if ((t.getEndDate().getYear() < currentDate.getYear()) | 
+                    ((t.getEndDate().getYear() == currentDate.getYear()) && (t.getEndDate().getMonth() < currentDate.getMonth())) | 
+                    ((t.getEndDate().getYear() == currentDate.getYear()) && (t.getEndDate().getMonth() == currentDate.getMonth()) && (t.getEndDate().getDay() < currentDate.getDay())) |
+                    (t.getEndDate().value.equals(currentDate.value) && (Integer.parseInt(t.getEndTime().value.replaceAll("\\D+","")) <= Integer.parseInt(currentTime.replaceAll("\\D+",""))))) {          
                     if(!t.getIsExpired()) {
                         t.setExpired(true);
                         changed = true;
                     }
                 }
             }
-            else if(t.getEndDate().value.length() != 0 && t.getEndTime().value.length() == 0) {
-                    if((t.getEndDate().getYear() < currentDate.getYear()) |
+            else if (t.getEndDate().value.length() != 0 && t.getEndTime().value.length() == 0) {
+                    if ((t.getEndDate().getYear() < currentDate.getYear()) |
                        ((t.getEndDate().getYear() == currentDate.getYear()) && (t.getEndDate().getMonth() < currentDate.getMonth())) |
                        ((t.getEndDate().getYear() == currentDate.getYear()) && (t.getEndDate().getMonth() == currentDate.getMonth())
                        && (t.getEndDate().getDay() < currentDate.getDay()))) {

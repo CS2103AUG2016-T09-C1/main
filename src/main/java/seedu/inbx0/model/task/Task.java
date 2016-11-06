@@ -54,10 +54,8 @@ public class Task implements ReadOnlyTask {
             this.isFloatTask = false;
         }
 
-        if (isEvent) {
-            if (!isValidEvent(startDate, startTime, endDate, endTime)) {
+        if (isEvent && !isValidEvent(startDate, startTime, endDate, endTime)) {
                 throw new IllegalValueException(MESSAGE_TIME_CONSTRAINTS);
-            }
         }
 
         this.name = name;
@@ -73,8 +71,9 @@ public class Task implements ReadOnlyTask {
 
     }
     
-    public Task(final Name name, final Date startDate, final Time startTime, final Date endDate, final Time endTime, final Importance level, final UniqueTagList tags,
-            final UniqueReminderList reminders, final boolean isCompleted, final boolean isExpired, final boolean isFloatTask) throws IllegalValueException {
+    public Task(final Name name, final Date startDate, final Time startTime, final Date endDate, final Time endTime, 
+            final Importance level, final UniqueTagList tags, final UniqueReminderList reminders, final boolean isCompleted, 
+            final boolean isExpired, final boolean isFloatTask) throws IllegalValueException {
         assert !CollectionUtil.isAnyNull(name, startDate, startTime, endDate, endTime, level, tags, isCompleted);
         
         if((("").equals(startDate.getDate()) && !("").equals(startTime.getTime()) && ("").equals(endDate.getDate()) && ("").equals(endTime.getTime())) |

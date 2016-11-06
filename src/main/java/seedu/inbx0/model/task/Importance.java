@@ -72,12 +72,7 @@ public class Importance {
      */
     public static boolean isValidImportance(String test) {
         
-        if(test.matches(IMPORTANCE_VALIDATION_REGEX)) {
-            if(Arrays.asList(ALLOWED_IMPORTANCE_NAMES).contains(test)) 
-                return true;           
-        }
-        
-        return false;
+        return (test.matches(IMPORTANCE_VALIDATION_REGEX) && Arrays.asList(ALLOWED_IMPORTANCE_NAMES).contains(test));
     }
     
     @Override

@@ -94,7 +94,7 @@ Format: `help`
 
 If you ever get confused while using our app, typing in help will instantly open up a help window, showing you the complete list of commands that you can enter, instantly putting you back on the right path! 
 
-> <img src="images/HelpWindow.png" width="800">
+> <img src="images/command_summary.png" width="800">
 
 <br><br>
  
