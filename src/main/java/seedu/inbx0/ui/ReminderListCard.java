@@ -29,14 +29,6 @@ public class ReminderListCard extends UiPart{
     private ColumnConstraints thirdColumn;
 
     @FXML
-    private ColumnConstraints fourthColumn;
-
-    @FXML
-    private ColumnConstraints fifthColumn;
-
-    @FXML
-    private ColumnConstraints sixthColumn;
-    @FXML
     private Label id;
     @FXML
     private Label startDate;
@@ -62,12 +54,12 @@ public class ReminderListCard extends UiPart{
     }
     
     private void setGridPaneRatio() {
-    	firstColumn.setPercentWidth(400);
-    	secondColumn.setPercentWidth(200);
-    	thirdColumn.setPercentWidth(150);
-    	fourthColumn.setPercentWidth(200);
-    	fifthColumn.setPercentWidth(150);
-    	sixthColumn.setPercentWidth(200);	
+    	firstColumn.setMaxWidth(200);
+    	secondColumn.setMaxWidth(200);
+    	thirdColumn.setMaxWidth(200);
+    	firstColumn.setMinWidth(200);
+    	secondColumn.setMinWidth(200);
+    	thirdColumn.setMinWidth(200);
 	}
 
     public HBox getLayout() {

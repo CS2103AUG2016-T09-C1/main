@@ -184,7 +184,7 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
         taskList.addTask(task);
-//        updateFilteredListToShowAll();
+        updateFilteredListToShowAll();
         indicateTaskListChanged();
     }
     
@@ -249,7 +249,7 @@ public class ModelManager extends ComponentManager implements Model {
     
     @Override
     public void updateFilteredListToShowAll() {
-        filteredTasks.setPredicate(null);
+        updateFilteredTaskListByCompleteness(false);
     }
     
     /*
