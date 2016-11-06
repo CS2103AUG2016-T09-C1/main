@@ -2,6 +2,11 @@
 
 * [Setting Up](#setting-up)
 * [Design](#design)
+	* [Commmons] (#common-classes)
+	* [UI] (#ui-component)
+	* [Logic] (#logic-component)
+	* [Model] (#model-component)
+	* [Storage] (#storage-component)
 * [Implementation](#implementation)
 * [Testing](#testing)
 * [Dev Ops](#dev-ops)
