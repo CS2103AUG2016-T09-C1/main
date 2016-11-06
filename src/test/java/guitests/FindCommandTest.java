@@ -32,7 +32,7 @@ public class FindCommandTest extends TaskListGuiTest {
         assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
     }
     
-    //@@author A0139481Y
+    //@@author A0148044J
     @Test
     public void find_byTags() throws IllegalArgumentException, IllegalValueException {
         assertFindResult("find t=friends", td.benson);

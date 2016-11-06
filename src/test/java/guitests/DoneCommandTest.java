@@ -10,7 +10,7 @@ import seedu.inbx0.testutil.TestTask;
 
 import static org.junit.Assert.assertTrue;
 
-//@@author A0139481Y
+//@@author A0139579J
 public class DoneCommandTest extends TaskListGuiTest {
     
     @Test
