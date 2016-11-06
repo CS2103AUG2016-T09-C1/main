@@ -115,12 +115,18 @@ public class ReminderList extends UiPart {
     }
     
     private void setGridPaneRatio() {
-    	firstColumn.setPercentWidth(400);
-    	secondColumn.setPercentWidth(200);
-    	thirdColumn.setPercentWidth(150);
-    	fourthColumn.setPercentWidth(200);
-    	fifthColumn.setPercentWidth(150);
-    	sixthColumn.setPercentWidth(200);	
+    	firstColumn.setMaxWidth(700);
+    	secondColumn.setMaxWidth(300);
+    	thirdColumn.setMaxWidth(170);
+    	fourthColumn.setMaxWidth(130);
+    	fifthColumn.setMaxWidth(170);
+    	sixthColumn.setMaxWidth(130);	
+    	firstColumn.setMinWidth(700);
+    	secondColumn.setMinWidth(300);
+    	thirdColumn.setMinWidth(170);
+    	fourthColumn.setMinWidth(130);
+    	fifthColumn.setMinWidth(170);
+    	sixthColumn.setMinWidth(130);	
 	}
     
     

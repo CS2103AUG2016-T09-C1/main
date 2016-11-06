@@ -26,6 +26,7 @@
 	* [Exiting the program : `exit`](#exit)
 	* [Autocompleting with command history](#autocomplete)
 	* [Displaying expired and overdue tasks](#overdue)
+       * [Changing the theme and size of inbx_0] (#preferences)
 * [Command Summary](#command-summary)
 * [FAQ](#faq)
 
@@ -260,6 +261,7 @@ Examples:
  > <img src="images/ShowCommand.png" width="600">
  
 <br><br>  
+<!--- @@author  -->
 
 <!--- @@author A0139579J -->
 #### <a id="edit"></a>7. Editing a task: `edit`
@@ -481,9 +483,11 @@ This will initiate a final save and after which, the program will close automati
 
 You can access autocompletion by using the arrow keys Up and Down to browse through command history <br>
 
-This will allow you to type your commands much more easily and at a increased speed.
+You can autocomplete your command words by using the arrow keys Right, applicable command words are list in the command summary.
 
-<br><br>
+This will allow you to type your commands much more easily and at a increased speed.
+ <br><br>
+<!--- @@author-->
 
 <!--- @@author A0139579J -->
 #### <a id="overdue"></a>19. Displaying expired and overdue tasks
@@ -505,9 +509,26 @@ For events that had expired, the task will take a lighter shade to show that the
 Task Manager data are saved in the hard disk automatically after any command that changes the data.<br>
 There is no need to save manually.
 
+<!--- @@author A0148044J-->
+
+#### <a id="preferences"></a>19. Preference setting
+1) Changing theme of your inbx_0
+
+Feel tedious and bored because of the single theme you keep looking at when you using inbx_0? Now is time for your to beautify your inbx_0. Try change your theme and the size of your inbx_0
+
+1) Theme setting
+
+There are 8 theme available in inbx_0, the default setting for the user is light gray theme.
+
+To implement other theme, you can using the menu on the top of the display window. Click preferences and then click on the theme you like to get the theme.
+Alternatively, you can key in combination of "Ctrl" and a number from 1 to 8 on your keyboards to change your theme
+
+2) Memorize setting
+
+When you close inbx_0, inbx_0 will remember your current setting including the size and theme of your display window. Next time when your open the app, it will give you your "preferred" setting you used last time.
+
 <!--- @@author A0139481Y -->
 ## **Command Summary**
-
 Command | Format  
 -------- | :-------- 
 [Help](#help) | `help`

@@ -87,12 +87,18 @@ public class TaskListPanel extends UiPart {
     }
 
     private void setGridPaneRatio() {
-    	name.setPercentWidth(400);
-    	startDate.setPercentWidth(200);
-    	startTime.setPercentWidth(150);
-    	endDate.setPercentWidth(200);
-    	endTime.setPercentWidth(150);
-    	tags.setPercentWidth(200);	
+    	name.setMaxWidth(700);
+    	tags.setMaxWidth(300);
+    	startDate.setMaxWidth(170);
+    	startTime.setMaxWidth(130);
+    	endDate.setMaxWidth(170);
+    	endTime.setMaxWidth(130);	
+    	name.setMinWidth(700);
+    	tags.setMinWidth(300);
+    	startDate.setMinWidth(170);
+    	startTime.setMinWidth(130);
+    	endDate.setMinWidth(170);
+    	endTime.setMinWidth(130);	
 	}
 
 	private void setConnections(ObservableList<ReadOnlyTask> taskList) {
@@ -102,7 +108,7 @@ public class TaskListPanel extends UiPart {
     }
 
     private void addToPlaceholder() {
-        SplitPane.setResizableWithParent(placeHolderPane, true);
+        SplitPane.setResizableWithParent(placeHolderPane, false);
         FxViewUtil.applyAnchorBoundaryParameters(panel, 0.0, 0.0, 0.0, 0.0);
         placeHolderPane.getChildren().add(panel);
     }

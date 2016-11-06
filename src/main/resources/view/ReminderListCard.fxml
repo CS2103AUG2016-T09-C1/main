@@ -15,9 +15,6 @@
             <ColumnConstraints fx:id="firstColumn" halignment="LEFT"  />
             <ColumnConstraints fx:id="secondColumn" halignment="LEFT" />
             <ColumnConstraints fx:id="thirdColumn" halignment="CENTER" />
-            <ColumnConstraints fx:id="fourthColumn" halignment="CENTER"  />
-            <ColumnConstraints fx:id="fifthColumn" halignment="CENTER" />
-            <ColumnConstraints fx:id="sixthColumn" halignment="CENTER" />
             </columnConstraints>
             <children>
                   <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="205.0" spacing="5.0">
