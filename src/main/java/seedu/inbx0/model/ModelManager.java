@@ -403,7 +403,7 @@ public class ModelManager extends ComponentManager implements Model {
         @Override
         public boolean run(ReadOnlyTask task) {
             logicKeywords = new ArrayList<String>();
-            for(String keyword: copyKeywords) {
+            for(String keyword: copyKeywords) {                
                 if(!keyword.matches("[(&|)]")){
                     if(task.getAsTextSet().contains(keyword.toLowerCase())) {
                         logicKeywords.add("true");
@@ -427,7 +427,7 @@ public class ModelManager extends ComponentManager implements Model {
             try {
                 result = (boolean) se.eval(logicExpression);
             } catch (ScriptException e) {
-                e.printStackTrace();
+            	e.printStackTrace();
             }
             return result;       
         }

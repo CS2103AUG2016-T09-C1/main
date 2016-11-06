@@ -27,7 +27,7 @@ public class FindCommand extends Command {
     public static final String MESSAGE_BRACKET_USAGE = "Bracket must be closed properly";
 
     public static final String INVALID_LOGIC_SEARCH = "Input format must match normal logic operation format.\n" 
-            + "Parameters: [LOGIC_OPERATOR] KEYWORD [MORE_KEYWORDS] [MORE_LOGIC_OPERATOR]...\n"
+            + "Parameters: [(] KEYWORD [MORE_KEYWORDS] [MORE_LOGIC_OPERATOR] [)]...\n"
             + "Example: " + COMMAND_WORD + " (homework | assignment) & s/tmr & i/r";
     
     private final List<String> keywordSet;

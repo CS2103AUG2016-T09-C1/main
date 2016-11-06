@@ -42,6 +42,12 @@ public class Parser {
     // end with & or | is invalid
     private static final Pattern INVALID_LOGIC_SEARCH_ARGS3 = Pattern.compile(".*[&|]\\s*");
     
+    //start with & or | is invalid
+    private static final Pattern INVALID_LOGIC_SEARCH_ARGS4 = Pattern.compile("\\s+[&|].*");
+    
+    // keywords or '(' after ')' is invalid in logic operation
+    private static final Pattern INVALID_LOGIC_SEARCH_ARGS5 = Pattern.compile(".*[)][^&|)].*");
+    
     // one or two keywords separated by whitespace
     private static final Pattern SORT_TASK_LIST_ARGS_FORMAT = Pattern.compile("(?<keywords>\\S+(?:\\s+\\S+)?)");
 
@@ -876,10 +882,11 @@ public class Parser {
         if (matcher2.matches()) {
             logicRelation = true;
             String arguments = matcher2.group("arguments").trim();
-            System.out.println(arguments);
             if (INVALID_LOGIC_SEARCH_ARGS1.matcher(arguments).matches()
                     || INVALID_LOGIC_SEARCH_ARGS2.matcher(arguments).matches()
-                    || INVALID_LOGIC_SEARCH_ARGS3.matcher(arguments).matches()) {
+                    || INVALID_LOGIC_SEARCH_ARGS3.matcher(arguments).matches()
+                    || INVALID_LOGIC_SEARCH_ARGS4.matcher(arguments).matches()
+                    || INVALID_LOGIC_SEARCH_ARGS5.matcher(arguments).matches()) {
                 return new IncorrectCommand(
                         String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.INVALID_LOGIC_SEARCH));
             }
@@ -967,6 +974,7 @@ public class Parser {
             }
         }
         try {
+        	keywordSet.remove("");
             return new FindCommand(logicRelation, keywordSet);
         } catch (IllegalValueException ive) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
