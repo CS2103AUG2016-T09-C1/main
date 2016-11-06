@@ -26,7 +26,7 @@ public class UserPrefs {
         guiSettings = new GuiSettings(width, height, x, y);
     }
     
-    //@@A0148044J
+    //@@author A0148044J
     public String getThemeSetting() {
     	return themeSetting;
     }
@@ -40,12 +40,13 @@ public class UserPrefs {
     }
 
     public UserPrefs(){
-        Rectangle2D visualBounds = Screen.getPrimary().getVisualBounds();
-        this.setGuiSettings(visualBounds.getWidth(), visualBounds.getHeight(), 
-        					(int) visualBounds.getMinX(), (int) visualBounds.getMinY());
+        //Rectangle2D visualBounds = Screen.getPrimary().getVisualBounds();
+        //this.setGuiSettings(visualBounds.getWidth(), visualBounds.getHeight(), 
+        					//(int) visualBounds.getMinX(), (int) visualBounds.getMinY());
+        this.setGuiSettings(500, 500, 0, 0);
         this.themeSetting = "/view/LightGrey.css";
     }
-    //A0148044J
+    //@@author
     
     @Override
     public boolean equals(Object other) {

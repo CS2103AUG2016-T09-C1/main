@@ -38,29 +38,22 @@
 
 1. Type `add Wash the dishes`
 
-**Result:** A new floating task for "Read the newspaper" is created at the bottom of the list, and will be automatically be selected.
+**Result:** A new floating task for "Wash the dishes" is created at the bottom of the list, and will be automatically be selected.
 
 ## Add new task with deadline
+1. Type `add Finish 2101 Report e=28/11/2016 6pm i=r`
 
-1. Type `add "Finish movie editing" by 6pm`
-
-**Result:** A new task "Finish movie editing" with deadline 6pm TODAY is created at the bottom of the list. The calendar is updated to highlight the new task in yellow.
+**Result:** A new task "Finish 2101 Report" with deadline 6pm on the 28th November 2016 is created at the bottom of the list. The task will be highlighted in red.
 
 ## Add new event
 
-1. Type `add "Visit friend's home" from tomorrow 6pm to 9pm`.
+1. Type `add CS2101 Oral Presentation s=tmr 10am e=tmr noon i=r`.
 
-**Result:** A new task "Visit friend's home" with period of 6pm to 9pm tomorrow is created at the bottom of the list. The calendar is updated to highlight the new task in blue.
-
-## Add recurring tasks
-
-1. Type `add "Submit daily report" by 5pm repeat daily 5`.
-
-**Result:** A new task "Submit daily report" with deadline 5pm everyday for 5 times is added (only once) to the task list. The calendar itself displays multiple instances of the same task, on the daily basis.
+**Result:** A new task "CS2101 Oral Presentation" with start time of 10am next monday to 12 noon is created at the bottom of the list. The task will be highlighted in red.
 
 ## Add tags to task
 
-1. Type `add "Very Important Stuff" tag Important`.
+1. Type `addtag 1 t=important`.
 
 **Result:** A new task "Very Important Stuff" with a tag "Important" is added to the task list.
 
