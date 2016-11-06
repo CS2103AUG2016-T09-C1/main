@@ -18,6 +18,7 @@
 	* [Deleting a task: `del`](#del)
 	* [Selecting a task : `sel`](#sel)
 	* [Undoing previous action: `undo`](#undo)
+	* [Redoing previous action: `redo`](#redo)
 	* [Clearing all tasks : `clr`](#clr)
 	* [Marking a task as completed : `done`](#done)
 	* [Setting a reminder for your task : `rem`](#reminder)
@@ -49,9 +50,10 @@ Unlike all the other task managers out there, Inbx_0 is a simple program that ru
 5. Type a command in the command box and press <kbd>Enter</kbd> to execute it. <br>
    e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window. 
 6. Some example commands you can try:
-   * **`add`**:`add EE2020` :  adds a task called `EE2020 Midterms` to the Task Manager
+   * **`add`**:`add EE2020 Midterms` :  adds a task called `EE2020 Midterms` to the Task Manager
    * **`list`** : lists all tasks
    * **`delete`**`1` : deletes the 1st task shown in the current list
+   * **`undo`**`1` : undoes the last command
    * **`exit`** : exits the app
 7. Refer to the [Features](#features) section below for details of each command.<br>
 
@@ -73,12 +75,12 @@ Inbx_0 can perform multiple different functions based on various commands that y
 Parameter | Description
 --------- | : ---------
 [`TASK`](#task) | Name of the task 
-[`s/START_DATE`](#start_date) | The date that the task will start on 
-[`st/START_TIME`](#start_time) | The time of the start of the task 
-[`e/END_DATE`](#end_date) | The date of the task that the task will end on 
-[`et/END_TIME`](#end_time) | The time of the end of the task 
-[`i/IMPORTANCE`](#importance) | The priority of the task. Can be `green`, `yellow` or `red`, from low to high importance. 
-[`t/TAGS`](#tags) | Tags that are assigned to the task 
+[`s=START_DATE`](#start_date) | The date that the task will start on 
+[`st=START_TIME`](#start_time) | The time of the start of the task 
+[`e=END_DATE`](#end_date) | The date of the task that the task will end on 
+[`et=END_TIME`](#end_time) | The time of the end of the task 
+[`i=IMPORTANCE`](#importance) | The priority of the task. Can be `green`, `yellow` or `red`, from low to high importance. 
+[`t=TAGS`](#tags) | Tags that are assigned to the task 
 
 >  For Dates and Times, the program utiilises natural language processing. This means that you can enter commands in multiple formats such as "tmr, next week, next wed, 3 days later, noon, 8am, 1400" and inbx_0 will read them just fine! <br>
 The IMPORTANCE parameter takes in these formats "red, green, yellow, r, g, y, R, G, Y, Red".
@@ -96,11 +98,12 @@ If you ever get confused while using our app, typing in help will instantly open
 
 <br><br>
  
+<!--- @@author A0139579J -->
+
 #### <a id="add"></a>2. Adding a task: `add`
 Let's get started by adding tasks to the tasklist! You may use any of the formats below to get started.
 
-<!--- @@author A0139579J -->
-1) Adds a floating task.<br>
+1) Add a floating task.<br>
 Format: `add TASK [i=IMPORTANCE] [t=TAGS]...` 
 
 > Floating tasks are tasks without any start dates or end dates. You can use this to keep track of tasks which may not be follow
@@ -112,7 +115,7 @@ Examples:
 * `add Buy bunny i=green t=cute` <br>
 <br>
 
-2) Adds a task with deadlines.<br>
+2) Add a task with deadlines.<br>
 Format: `add TASK e=[END_DATE] [END_TIME] [i=IMPORTANCE] [t=TAGS]...` 
 
 Examples: 
@@ -123,7 +126,7 @@ Examples:
 > * Under the e= parameter, it requires either the END_DATE or END_TIME. By providing only END_DATE, the END_TIME would not be specified.
 > *	If the END_DATE is not provided, the end date will be automatically assigned as the current date.
 
-3) Adds a task with starting point only.<br>
+3) Add a task with starting point only.<br>
 Format: `add TASK s=[START_DATE] [START_TIME][i=IMPORTANCE] [t=TAGS]...`
 
 Examples: 
@@ -134,7 +137,7 @@ Examples:
 > * Under the s= parameter, it requires either the START_DATE or START_TIME. By providing only START_DATE, the START_TIME would not be specified.
 > *	If the START_DATE is not provided, the start date will be automatically assigned as the current date.
 
-4) Adds an event.<br>
+4) Add an event.<br>
 Format: `add TASK s=[START_DATE] [START_TIME] e=[END_DATE] [END_TIME] [i=IMPORTANCE] [t=TAGS]...`
 
 > Events are tasks with a starting and ending point.
@@ -192,9 +195,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]...`
 > * Only full words will be matched e.g. `visit` will not match `visiting`
 
 Example: 
-`find meeting CS2103quiz`
-
-Return `MEETING` or `CS2103Quiz` but not `meeting with CS2103 tutor` or `quiz` 
+* `find meeting CS2103quiz` will return `MEETING` or `CS2103Quiz` but not `meeting with CS2103 tutor` or `quiz` 
 
 2. Logic operation search
 
@@ -211,14 +212,9 @@ Return `MEETING` or `CS2103Quiz` but not `meeting with CS2103 tutor` or `quiz`
 
 Examples:
 
-`find homework | assignment`: 
-Return  `homework` or `assignment`
-
-`find homework & e=tmr`:
-Return `homework` that ends `tomorrow`
-
-`find (homework | assignment) & s=tmr & i=r`:
-Return `homework` or `meeting` that start on `tomorrow` with high importance `Red`
+* `find homework | assignment`: return  `homework` or `assignment`
+* `find homework & e=tmr`: return `homework` that ends `tomorrow`
+* `find (homework | assignment) & s=tmr & i=r`: return `homework` or `meeting` that start on `tomorrow` with high importance `Red`
 
  > <img src="images/FindCommand.png" width="600">
 
@@ -238,11 +234,8 @@ The Sort Command
 
 Examples:
 
-`sort i`:
-Sort the lists such that the importance of the tasks decrease
-
-`sort n DESC`:
-Sort the lists such that the name of the tasks is in the reverse of natural alphabet order 
+* `sort i`: Sort the lists such that the importance of the tasks decrease
+* `sort n DESC`: Sort the lists such that the name of the tasks is in the reverse of natural alphabet order 
 
  > <img src="images/SortCommand.png" width="600">
  
@@ -261,11 +254,9 @@ The Show Command
 
 Examples:
 
-`show green`:
-Navigates to the filtered list which contains those tasks that are green in importance
+* `show green`: Navigates to the filtered list which contains those tasks that are green in importance
 
-`show tuesday`:
-Navigates to the filtered list which contains those tasks that are on tuesday
+* `show tuesday`: Navigates to the filtered list which contains those tasks that are on tuesday
 
  > <img src="images/ShowCommand.png" width="600">
  
@@ -329,6 +320,7 @@ Format: `deltag INDEX t=TAGS [t=MORE_TAGS]`
 Is you wish to remove specific tags from the list of tags, simply type in `deltag INDEX t=TAGS [t=MORE_TAGS]` to remove it/them.
 
  > <img src="images/AddOrDeleteTag.png" width="600">
+
 <!--- @@author  -->
 
 <br><br>
@@ -348,6 +340,7 @@ Examples:
   Deletes the 1st task in the results of the `find` command for ‘meeting’.
 
  > <img src="images/DeleteCommand.png" width="600">  
+
 <br><br>
 
 #### <a id="sel"></a>10. Selecting a task : `sel`
@@ -379,26 +372,37 @@ Made a mistake? Not to worry! You can use the `undo` command to rectify your mis
 > note that some commands cannot be undone, such as `find`, `select`, `show`.
 
  > <img src="images/UndoCommand.png" width="600">
+
+ <br><br>
+
+#### <a id="redo"></a>12. Redoing previous action: `redo`
+Format: `redo`
+
+Made a mistake? Not to worry! You can use the `redo` command to rectify your mistake or to redo any undesirable changes. You may also type `redo X-STEPS` to redo the past X number of commands, up to the number of commands undone.
+
+ > <img src="images/RedoCommand.png" width="600">
+
 <!--- @@author -->
 
 <br><br>
 
-#### <a id="clr"></a>12. Clearing all tasks : `clr`
+#### <a id="clr"></a>13. Clearing all tasks : `clr`
 Format: `clr`
 
 Tasks can easily become obsolete and checking off tasks individually can be quite a hassle. The clear command will help you to remove all tasks and can be accessed by typing the following: `clr`
 
  > <img src="images/ClearCommand.png" width="600">
+
 <br><br>
+
 <!--- @@author A0139579J -->
-#### <a id="done"></a>13. Marking a task as completed : `done`
+#### <a id="done"></a>14. Marking a task as completed : `done`
 1) Mark selected tasks as done
 Format: `done INDEX [INDEX]...`
 
 If you have finished a certain task and wish to mark it as finished you can give a complete a specified task in the task list by typing the following: `done INDEX [INDEX]`<br>
 
-This will turn the cross beside the name of the task into a checkmark, signifying that the task had been completed. If there are more than one tasks that need to be
-marked, you can enter more index numbers with all of them separated with a whitespace. The tasks will be marked complete accordingly
+This will turn the cross beside the name of the task into a checkmark, signifying that the task had been completed. They will then be removed from the current task list view. If there are more than one tasks that need to be marked, you can enter more index numbers with all of them separated with a whitespace. The tasks will be marked complete accordingly
 
 > If the task is already marked completed for one of the index numbers given, it will remind you that one of the tasks is already completed
 
@@ -421,7 +425,7 @@ Example:
   
 <br><br>
 
-#### <a id="reminder"></a>14. Setting a reminder for your task : `rem`
+#### <a id="reminder"></a>15. Setting a reminder for your task : `rem`
 Format: `rem INDEX s=START_DATE/START_TIME/START_DATE and START_TIME`
 
 You can add a reminder to a task by typing the following: `rem INDEX s=START_DATE/START_TIME/START_DATE and START_TIME` <br>
@@ -434,7 +438,7 @@ If Inbx_0 is closed during the time the reminder is supposed to be shown, the re
 
 > A task can have multiple reminders
 
-Example: 
+Examples: 
 * `rem 1 s=8a` <br>
  Sets a reminder for the 1st task on the list which will display a reminder at the current date at 8am.
  
@@ -444,13 +448,12 @@ Example:
 * `rem 2 s=next week 10a` <br>
  Sets a reminder for the 2nd task on the list which will display a reminder next week at 10am.
  
-  > <img src="images/RemindCommand.png" width="600"> 
+> <img src="images/RemindCommand.png" width="600"> 
   
 <br><br>
 
 <!--- @@author A0135797M-->
-
-#### <a id="setdir"></a>15. Saving your tasklist to a specific directory : `saveas`
+#### <a id="setdir"></a>16. Saving your tasklist to a specific directory : `saveas`
 Format: `saveas FILE_DIRECTORY`
 
 You can specify a directory for saving your tasklist by typing the following: `saveas FILE_DIRECTORY` <br>
@@ -463,12 +466,10 @@ Saves the tasklist on the desktop of Jim's computer.
 
 >To reset the save directory for inbx_0, simple type: `saveas reset`. This will reset the save file to /data/tasklist.xml 
  
- <br><br> 
- 
- 
+<br><br>  
 <!--- @@author-->
 
-#### <a id="exit"></a>16. Exiting the program : `exit` 
+#### <a id="exit"></a>17. Exiting the program : `exit` 
 Format: `exit`
 
 After using Inbx_0, you can easily exit the program by typing the following in the command line: `exit`
@@ -478,20 +479,18 @@ This will initiate a final save and after which, the program will close automati
 <br><br>
 
 <!--- @@author A0148044J-->
-
-#### <a id="autocomplete"></a>17. Autocompleting with command history
+#### <a id="autocomplete"></a>18. Autocompleting with command history
 
 You can access autocompletion by using the arrow keys Up and Down to browse through command history <br>
 
 You can autocomplete your command words by using the arrow keys Right, applicable command words are list in the command summary.
 
 This will allow you to type your commands much more easily and at a increased speed.
-
  <br><br>
 <!--- @@author-->
 
 <!--- @@author A0139579J -->
-#### <a id="overdue"></a>18. Displaying expired and overdue tasks
+#### <a id="overdue"></a>19. Displaying expired and overdue tasks
 1) Overdue Deadline Tasks
 
 If the deadline task has not been marked as completed and is end date is before the current date, Inbx_0 will mark the task as overdue.
@@ -548,7 +547,8 @@ Command | Format
 [Addtag / Deltag](#tag) | `tag INDEX t=TAGS [t=MORE_TAGS]`
 [Delete](#del) | `del INDEX`
 [Select](#sel) | `sel INDEX`
-[Undo](#undo) | `undo`
+[Undo](#undo) | `undo [STEPS]`
+[Redo](#redo) | `redo [STEPS]`
 [Clear](#clr) | `clr`
 [Done](#done) | `done INDEX [INDEX]...`
 &nbsp; | `done FIRST_INDEX to LAST_INDEX`
