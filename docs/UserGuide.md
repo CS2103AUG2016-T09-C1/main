@@ -73,17 +73,18 @@ Inbx_0 can perform multiple different functions based on various commands that y
 4.  The order of parameters is fixed and needs to be strictly followed.
 
 Parameter | Description
---------- | : ---------
-[`TASK`](#task) | Name of the task 
-[`s=START_DATE`](#start_date) | The date that the task will start on 
-[`st=START_TIME`](#start_time) | The time of the start of the task 
-[`e=END_DATE`](#end_date) | The date of the task that the task will end on 
-[`et=END_TIME`](#end_time) | The time of the end of the task 
-[`i=IMPORTANCE`](#importance) | The priority of the task. Can be `green`, `yellow` or `red`, from low to high importance. 
-[`t=TAGS`](#tags) | Tags that are assigned to the task 
+---------|:---------
+[TASK] | Name of the task 
+[s=START_DATE] | The date that the task will start on 
+[st=START_TIME] | The time of the start of the task 
+[e=END_DATE] | The date of the task that the task will end on 
+[et=END_TIME] | The time of the end of the task 
+[i=IMPORTANCE] | The priority of the task. Can be `green`, `yellow` or `red`, from low to high importance 
+[t=TAGS] | Tags that are assigned to the task 
 
 >  For Dates and Times, the program utiilises natural language processing. This means that you can enter commands in multiple formats such as "tmr, next week, next wed, 3 days later, noon, 8am, 1400" and inbx_0 will read them just fine! <br>
-The IMPORTANCE parameter takes in these formats "red, green, yellow, r, g, y, R, G, Y, Red".
+
+The `IMPORTANCE` parameter takes in variations of the colours `red`, `green` or `yellow`, such as `Red, Green, Yellow`, `r, g, y`, or `R, G, Y`.
 
 The rest of the guide will be using the general command format to describe what is needed to execute each command.
 
@@ -94,7 +95,7 @@ Format: `help`
 
 If you ever get confused while using our app, typing in help will instantly open up a help window, showing you the complete list of commands that you can enter, instantly putting you back on the right path! 
 
-> <img src="images/HelpWindow.png" width="800">
+> <img src="images/command_summary.png" width="800">
 
 <br><br>
  

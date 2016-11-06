@@ -37,10 +37,6 @@ public class SetDirCommand extends Command{
         this.taskListFilePath = filePath;
     }
 
-    public static void setConfigFilePath (String newConfigFilePath) {
-        configFilePath = newConfigFilePath;
-    }
-
     @Override
     public CommandResult execute() {
         if (!FileUtil.isValidPath(taskListFilePath)) {

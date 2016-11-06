@@ -30,6 +30,15 @@ public class RedoCommandTest extends TaskListGuiTest {
     }
     
     @Test
+    public void redoTwoCommandFromTwoUndoes() throws IllegalArgumentException, IllegalValueException {
+        commandBox.runCommand("del 1");
+        commandBox.runCommand("del 1");
+        commandBox.runCommand("undo 2");
+        assertRedoResult("redo 2", RedoCommand.MESSAGE_REDO_TASK_SUCCESS, 
+                td.carl, td.daniel, td.elle, td.fiona, td.george);
+    }
+    
+    @Test
     public void redo_noHistory() throws IllegalArgumentException, IllegalValueException {
         commandBox.runCommand("del 1");
         assertRedoResult("redo", RedoCommand.MESSAGE_NOTHING_TO_REDO, 
