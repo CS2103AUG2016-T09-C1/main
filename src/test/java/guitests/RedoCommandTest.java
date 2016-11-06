@@ -7,7 +7,6 @@ import static org.junit.Assert.assertTrue;
 import seedu.inbx0.commons.exceptions.IllegalValueException;
 import seedu.inbx0.logic.commands.RedoCommand;
 import seedu.inbx0.testutil.TestTask;
-import seedu.inbx0.testutil.TestUtil;
 
 //@@author A0139481Y
 public class RedoCommandTest extends TaskListGuiTest {
