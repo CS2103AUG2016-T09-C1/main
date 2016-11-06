@@ -458,6 +458,8 @@ Examples:
 * `find project`<br>
   `sel 1`<br>
   Selects the 1st task in the results of the `find` command.
+  
+  > <img src="images/SelectCommand.png" width="600">
 
 <br><br>
 <!--- @@author A0135797M-->
@@ -473,6 +475,8 @@ Example:
 Saves the tasklist on the desktop of Jim's computer.
 
 >To reset the save directory for Inbx_0, simple type: `saveas reset`. This will reset the save file to /data/tasklist.xml 
+
+ > <img src="images/SaveAsCommand.png" width="600">
  
 <br><br>  
 <!--- @@author-->
