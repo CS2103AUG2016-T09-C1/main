@@ -7,9 +7,9 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane fx:id="helpWindow1Root" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="853.0" prefWidth="806.0" styleClass="background" stylesheets="@DarkTheme.css" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seedu.inbx0.ui.HelpWindow">
+<AnchorPane fx:id="helpWindow1Root" maxHeight="-Infinity" prefHeight="853.0" styleClass="background" stylesheets="@DarkTheme.css" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seedu.inbx0.ui.HelpWindow">
    <children>
-      <ImageView fitHeight="803.0" fitWidth="815.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="803.0" fitWidth="854.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <image>
             <Image url="@../images/command_summary.png" />
          </image>
