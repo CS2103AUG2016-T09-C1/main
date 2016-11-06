@@ -74,8 +74,10 @@ public class EditCommand extends Command {
         }
         this.editArguments = argumentsToEdit;    
     }
-
-
+    
+    /**
+     * Retrieves the original tag list from the task that the user wants to edit.
+     */
     private UniqueTagList obtainUniqueTagList(ReadOnlyTask taskToEdit) {
         
       UniqueTagList original = taskToEdit.getTags();
@@ -83,6 +85,9 @@ public class EditCommand extends Command {
       return original;
     }
     
+    /**
+     * Retrieves the original reminder list from the task that the user wants to edit.
+     */
     private UniqueReminderList obtainUniqueReminderList(ReadOnlyTask taskToEdit) {
         
         UniqueReminderList original = taskToEdit.getReminders();
@@ -90,6 +95,9 @@ public class EditCommand extends Command {
         return original;
     }
     
+    /**
+     * Updates all the reminders in the reminder list from so that it displays the edited task.
+     */
     private Task updateReminders(Task toEditWith) {
         Task newTask = toEditWith;
         UniqueReminderList reminders = toEditWith.getReminders();
@@ -103,7 +111,9 @@ public class EditCommand extends Command {
         
     }
 
-
+    /**
+     * Retrieves the remaining arguments from the task that the user wishes to be kept the same.
+     */
     private String[] obtainArguments(String[] editArguments, ReadOnlyTask taskToEdit) {
        
         String [] originalArguments = new String[TOTAL_NUMBER_OF_ARGUMENTS];
@@ -122,7 +132,12 @@ public class EditCommand extends Command {
         
         return editArguments;
     }
-
+    
+    /**
+     * Creates the task with the updated arguments or tags that the user inputs
+     *
+     * @throws IllegalValueException if any of the values are invalid
+     */
     private Task createToEditWithTask(String[] editArguments, UniqueTagList tags, UniqueReminderList reminders) throws IllegalValueException {
         Task toEditWith = new Task (
                 new Name(editArguments[TASK_NAME]),

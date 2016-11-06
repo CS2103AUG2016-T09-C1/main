@@ -33,6 +33,9 @@ public class ListCommand extends Command {
     private final String preposition;
     private static final Pattern TASKS_DUE_UNTIL_DATE_LIST_FORMAT = Pattern.compile(" due (?<date>[^$]+)");
     
+    /**
+     * ListCommand constructor to display all incomplete tasks
+     */
     public ListCommand() {
         this.checkDate = "";
         this.preposition = "";

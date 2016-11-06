@@ -20,7 +20,7 @@ import seedu.inbx0.model.task.UniqueTaskList.TaskNotFoundException;
 
 //@@author A0139579J
 /**
- * Adds a reminder for the task identified using it's last displayed index from the address book.
+ * Adds a reminder for the task identified using it's last displayed index from the tasklist.
  */
 public class RemindCommand extends Command {
 
@@ -62,6 +62,9 @@ public class RemindCommand extends Command {
         this.startTime = startTime;
     }
     
+    /**
+     * Checks if the user has given a valid date and time
+     */
     private boolean isValidDateAndTime(Date date, Time time) {               
         Date currentDate = null;
         try {
@@ -75,7 +78,10 @@ public class RemindCommand extends Command {
         } else
            return isValidDate(currentDate, date);      
     }
-
+    
+    /**
+     * Checks if the start time of the reminder has already passed
+     */
     private boolean isValidTime(Time time) {
         boolean timeCheck = false;
         String current = Time.getCurrentTime();
@@ -102,6 +108,9 @@ public class RemindCommand extends Command {
        return timeCheck; 
     }
     
+    /**
+     * Checks if the start date of the reminder has already passed
+     */
     private boolean isValidDate(Date currentDate, Date date) {
         boolean dateCheck = false;
         int currentDay = currentDate.getDay();
@@ -119,6 +128,11 @@ public class RemindCommand extends Command {
         return dateCheck;
     }
     
+    /**
+     * Creates the task with the new reminder
+     *
+     * @throws IllegalValueException if any of the values are invalid or if there is a duplicate reminder
+     */
     private Task createTaskWithReminder(ReadOnlyTask taskToAddReminder, ReminderTask newReminder) throws IllegalValueException {
         String [] arguments = new String [TOTAL_NUMBER_OF_ARGUMENTS];
         arguments = obtainArguments(arguments, taskToAddReminder);
@@ -138,30 +152,39 @@ public class RemindCommand extends Command {
         return taskWithReminder;
     }
     
-    private String[] obtainArguments(String[] editArguments, ReadOnlyTask taskToEdit) {
+    /**
+     * Retrieves the arguments from the original task
+     */
+    private String[] obtainArguments(String[] arguments, ReadOnlyTask taskToAddReminder) {
         
         String [] originalArguments = new String[TOTAL_NUMBER_OF_ARGUMENTS];
                     
-        originalArguments[TASK_NAME] = taskToEdit.getName().getName();
-        originalArguments[TASK_START_DATE] = taskToEdit.getStartDate().getDate();
-        originalArguments[TASK_START_TIME] = taskToEdit.getStartTime().getTime();
-        originalArguments[TASK_END_DATE] = taskToEdit.getEndDate().getDate();
-        originalArguments[TASK_END_TIME] = taskToEdit.getEndTime().getTime();
-        originalArguments[TASK_IMPORTANCE] = taskToEdit.getLevel().getLevel();
+        originalArguments[TASK_NAME] = taskToAddReminder.getName().getName();
+        originalArguments[TASK_START_DATE] = taskToAddReminder.getStartDate().getDate();
+        originalArguments[TASK_START_TIME] = taskToAddReminder.getStartTime().getTime();
+        originalArguments[TASK_END_DATE] = taskToAddReminder.getEndDate().getDate();
+        originalArguments[TASK_END_TIME] = taskToAddReminder.getEndTime().getTime();
+        originalArguments[TASK_IMPORTANCE] = taskToAddReminder.getLevel().getLevel();
             
         for (int i = 0; i < TOTAL_NUMBER_OF_ARGUMENTS; i++) {
-            if (editArguments[i] == null)
-                editArguments[i] = originalArguments[i];                       
+            if (arguments[i] == null)
+                arguments[i] = originalArguments[i];                       
         }
         
-        return editArguments;
+        return arguments;
     }
     
-    private UniqueTagList obtainUniqueTagList(ReadOnlyTask taskToEdit) {       
-        UniqueTagList originalTagList = taskToEdit.getTags();            
+    /**
+     * Retrieves the original tag list from the task.
+     */
+    private UniqueTagList obtainUniqueTagList(ReadOnlyTask taskToAddReminder) {       
+        UniqueTagList originalTagList = taskToAddReminder.getTags();            
         return originalTagList;
     }
-      
+    
+    /**
+     * Adds the new reminder to the existing reminder list
+     */
     private UniqueReminderList addReminder(ReadOnlyTask taskToAddReminder, ReminderTask newReminder) throws DuplicateReminderException {
         UniqueReminderList originalReminderList = taskToAddReminder.getReminders();
         originalReminderList.add(newReminder);
@@ -183,7 +206,7 @@ public class RemindCommand extends Command {
 
         ReadOnlyTask taskToAddReminder = lastShownList.get(targetIndex - 1);
         
-        ReminderTask newReminder = new ReminderTask(startDate, startTime, taskToAddReminder, false);
+        ReminderTask newReminder = new ReminderTask(startDate, startTime, taskToAddReminder, true);
   
         Task withReminder = null;
         try {

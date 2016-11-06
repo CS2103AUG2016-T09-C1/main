@@ -48,7 +48,7 @@ public class Time {
     }
     
     /**
-     * Returns true if a given string is a valid task start time.
+     * Returns true if a given string is a valid task start time or task end time.
      */
     public static boolean isValidTime(String test) {
         boolean hourCheck = false;
@@ -66,6 +66,9 @@ public class Time {
         return (hourCheck && minCheck);
     }
     
+    /**
+     * Returns the current time as a string
+     */
     public static String getCurrentTime() {
         SimpleDateFormat timeFormat = new SimpleDateFormat ("HH:mm");
         List<java.util.Date> current = new Parser().parse("now").get(0).getDates();
@@ -89,7 +92,10 @@ public class Time {
     public int hashCode() {
         return value.hashCode();
     }
-
+    
+    /**
+     * Getter method for Time
+     */
     public String getTime() {
         return value;
     }

@@ -40,12 +40,17 @@ public class MarkCompleteCommand extends Command {
         sortIndexNumInDescendingOrder();
     }
 
-
+    /**
+     * Checks if the user has input any numerical values
+     */
     private void validateSet(Set<Integer> indexNumSet) throws IllegalValueException {
         if(indexNumSet.isEmpty())
             throw new IllegalValueException(MESSAGE_INVALID_ARGUMENTS);        
     }
     
+    /**
+     * Sorts the set of numbers in descending order in preparation to mark them as complete
+     */
     private void sortIndexNumInDescendingOrder() {
     	indexNum.sort(new IndexComparator());
     }

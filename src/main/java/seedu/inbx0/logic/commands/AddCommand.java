@@ -37,9 +37,9 @@ public class AddCommand extends Command {
     private final Task toAdd;
 
     /**
-     * Convenience constructor using raw values.
+     * AddCommand constructor for Events with Importance
      *
-     * @throws IllegalValueException if any of the raw values are invalid
+     * @throws IllegalValueException if any of the values are invalid
      */
     public AddCommand(String name, String startDate, String startTime, String endDate, String endTime, String level, Set<String> tags)
             throws IllegalValueException {
@@ -59,7 +59,11 @@ public class AddCommand extends Command {
         );
     }
     
-    
+    /**
+     * AddCommand constructor for Events without Importance
+     *
+     * @throws IllegalValueException if any of the values are invalid
+     */
     public AddCommand(String name, String startDate, String startTime, String endDate, String endTime, Set<String> tags)
             throws IllegalValueException {
         final Set<Tag> tagSet = new HashSet<>();
@@ -77,24 +81,12 @@ public class AddCommand extends Command {
             new UniqueReminderList()
         );
     }
-
-    public AddCommand(String name, Set<String> tags) throws IllegalValueException {
-        final Set<Tag> tagSet = new HashSet<>();
-        for (String tagName : tags) {
-            tagSet.add(new Tag(tagName));
-        }
-        this.toAdd = new Task(
-            new Name(name),
-            new Date(""),
-            new Time(""),
-            new Date(""),
-            new Time(""),
-            new Importance(""),
-            new UniqueTagList(tagSet),
-            new UniqueReminderList()
-        );
-    }
     
+    /**
+     * AddCommand constructor for Floating Tasks with Importance
+     *
+     * @throws IllegalValueException if any of the values are invalid
+     */
     public AddCommand(String name, String level, Set<String> tags) throws IllegalValueException {
         final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tags) {
@@ -112,6 +104,33 @@ public class AddCommand extends Command {
         );
     }
     
+    /**
+     * AddCommand constructor for Floating Tasks without Importance
+     *
+     * @throws IllegalValueException if any of the values are invalid
+     */
+    public AddCommand(String name, Set<String> tags) throws IllegalValueException {
+        final Set<Tag> tagSet = new HashSet<>();
+        for (String tagName : tags) {
+            tagSet.add(new Tag(tagName));
+        }
+        this.toAdd = new Task(
+            new Name(name),
+            new Date(""),
+            new Time(""),
+            new Date(""),
+            new Time(""),
+            new Importance(""),
+            new UniqueTagList(tagSet),
+            new UniqueReminderList()
+        );
+    } 
+    
+    /**
+     * AddCommand constructor for Deadline Tasks with Importance.
+     *
+     * @throws IllegalValueException if any of the values are invalid
+     */
     public AddCommand(String name, String endDate, String endTime, String level, Set<String> tags)
             throws IllegalValueException {
         final Set<Tag> tagSet = new HashSet<>();
@@ -130,6 +149,11 @@ public class AddCommand extends Command {
         );
     }
     
+    /**
+     * AddCommand constructor for Deadline Tasks without Importance.
+     *
+     * @throws IllegalValueException if any of the values are invalid
+     */
     public AddCommand(String name, String endDate, String endTime, Set<String> tags)
             throws IllegalValueException {
         final Set<Tag> tagSet = new HashSet<>();

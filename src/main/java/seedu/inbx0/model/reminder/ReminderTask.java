@@ -78,6 +78,9 @@ public class ReminderTask {
         this(source.getStartDate(), source.getStartTime(),source.getReadableOnlyTask(), source.getIsAlive());
     }
     
+    /**
+     * Getter methods for ReminderTask
+     */
     public Date getStartDate() {
         return date;
     }
@@ -94,10 +97,16 @@ public class ReminderTask {
         return isAlive;
     }
     
+    /**
+     * Setter method for ReminderTask
+     */
     public void setReadableOnlyTask(ReadOnlyTask task) {
        this.task = task;
     }
     
+    /**
+     * Cancels the ReminderTask
+     */
     public void cancel() {
         timer.cancel();
      }
