@@ -1,3 +1,4 @@
+<!--- @@author A0135797M -->
 # User Guide
 
  > <img src="images/inbx0.png" width="200">
@@ -68,16 +69,17 @@ Inbx_0 can perform multiple different functions based on various commands that y
 <br>
 4.  The order of parameters is fixed and needs to be strictly followed.
 
-Common Parameters used: <br>
-TASK: Name of the task <br>
-s/START_DATE: The date that the task will start on <br>
-st/START_TIME: The time of the start of the task <br>
-e/END_DATE: The date of the task that the task will end on <br>
-et/END_TIME: The time of the end of the task <br>
-i/IMPORTANCE: The priority of the task. Can be `green`, `yellow` or `red`, in that order of importance <br>
-t/TAGS: Tags that are assigned to the task <br>
+Parameter | Description
+--------- | : ---------
+[`TASK`](#task) | Name of the task 
+[`s/START_DATE`](#start_date) | The date that the task will start on 
+[`st/START_TIME`](#start_time) | The time of the start of the task 
+[`e/END_DATE`](#end_date) | The date of the task that the task will end on 
+[`et/END_TIME`](#end_time) | The time of the end of the task 
+[`i/IMPORTANCE`](#importance) | The priority of the task. Can be `green`, `yellow` or `red`, from low to high importance. 
+[`t/TAGS`](#tags) | Tags that are assigned to the task 
 
->  For Dates and Times, the program utiilises natural language processing and can take in multiple formats such as "tmr, next week, next wed, 3 days later, noon, 8am, 1400" <br>
+>  For Dates and Times, the program utiilises natural language processing. This means that you can enter commands in multiple formats such as "tmr, next week, next wed, 3 days later, noon, 8am, 1400" and inbx_0 will read them just fine! <br>
 The IMPORTANCE parameter takes in these formats "red, green, yellow, r, g, y, R, G, Y, Red".
 
 The rest of the guide will be using the general command format to describe what is needed to execute each command.
@@ -87,21 +89,20 @@ The rest of the guide will be using the general command format to describe what 
 #### <a id="help"></a>1. Getting help: `help`
 Format: `help`
 
-Looking for help? If you ever need a reminder on how to input certain commands or have some troubleshooting issues, just type `help` and we will guide you in the right direction.
+If you ever get confused while using our app, typing in help will instantly open up a help window, showing you the complete list of commands that you can enter, instantly putting you back on the right path! 
 
-This will open up a help window that will give you a quick glance of the commands that are available.
 > <img src="images/HelpWindow.png" width="800">
 
 <br><br>
  
 #### <a id="add"></a>2. Adding a task: `add`
-Let's get started by adding tasks to the tasklist! You may use any of the below formats to get started.
+Let's get started by adding tasks to the tasklist! You may use any of the formats below to get started.
 
 <!--- @@author A0139579J -->
 1) Adds a floating task.<br>
 Format: `add TASK [i=IMPORTANCE] [t=TAGS]...` 
 
-> Floating tasks are tasks without without any start dates or end dates. You can use this to keep track of tasks which may not be follow
+> Floating tasks are tasks without any start dates or end dates. You can use this to keep track of tasks which may not be follow
 a time schedule.
 
 Examples: 

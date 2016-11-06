@@ -6,12 +6,12 @@ import java.util.regex.Pattern;
 import seedu.inbx0.commons.exceptions.IllegalValueException;
 import seedu.inbx0.model.task.Date;
 
+//@@author A0139579J
 /**
  * Lists all tasks in the tasks to the user.
  * or tasks that are overdue
  * or tasks associated with the date
  */
-//@@author A0139579J
 public class ListCommand extends Command {
 
     public static final String COMMAND_WORD = "list";
@@ -33,6 +33,9 @@ public class ListCommand extends Command {
     private final String preposition;
     private static final Pattern TASKS_DUE_UNTIL_DATE_LIST_FORMAT = Pattern.compile(" due (?<date>[^$]+)");
     
+    /**
+     * ListCommand constructor to display all incomplete tasks
+     */
     public ListCommand() {
         this.checkDate = "";
         this.preposition = "";

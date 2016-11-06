@@ -111,13 +111,13 @@ public class UniqueTaskList implements Iterable<Task>{
         return changed;
     }
     
+    //@@author A0139579J
     /**
      * Edits the equivalent task from the list.
      *
      * @throws TaskNotFoundException if no such task could be found in the list.
      * @throws DuplicateTaskException if the task that was edited is a duplicate of an existing task in the list
-     */
-    //@@author A0139579J
+     */    
     public boolean edit(ReadOnlyTask toEdit, Task toEditWith) throws TaskNotFoundException, DuplicateTaskException {
         assert toEdit != null;
         int editTaskIndex = internalList.indexOf(toEdit);
@@ -145,12 +145,12 @@ public class UniqueTaskList implements Iterable<Task>{
         return taskEdited;
     }
     
+    //@@author A0139579J
     /**
      * Marks the equivalent task from the list as completed.
      *
      * @throws TaskNotFoundException if no such task could be found in the list.
      */
-    //@@author A0139579J
     public boolean markComplete(ReadOnlyTask toMarkComplete, Task completedTask) throws TaskNotFoundException {
         assert toMarkComplete != null;
         int markCompletedTaskIndex = internalList.indexOf(toMarkComplete);
@@ -167,12 +167,12 @@ public class UniqueTaskList implements Iterable<Task>{
         return taskMarkedCompleted;
     }
     
+    //@@author A0139579J
     /**
      * Checks expiry and sets the boolean isExpired accordingly for the tasks in the list.
      *
      * @throws TaskNotFoundException if no such task could be found in the list.
-     */
-    //@@author A0139579J
+     */    
     public boolean checkExpiry(Date currentDate, String currentTime) {
         if(internalList.isEmpty()) {
             return false;
@@ -207,12 +207,12 @@ public class UniqueTaskList implements Iterable<Task>{
         return changed;
     }
     
+    //@@author A0139579J
     /**
      * Checks reminders and remove them if they have been activated.
      *
      * @throws TaskNotFoundException if no such task could be found in the list.
      */
-    //@@author A0139579J
     public boolean checkReminders() {
         if(internalList.isEmpty()) {
             return false;

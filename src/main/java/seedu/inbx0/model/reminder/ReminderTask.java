@@ -9,15 +9,16 @@ import javafx.application.Platform;
 
 import seedu.inbx0.commons.core.EventsCenter;
 import seedu.inbx0.commons.events.ui.ShowReminderRequestEvent;
+import seedu.inbx0.commons.events.ui.TaskPanelSelectionChangedEvent;
 import seedu.inbx0.commons.exceptions.IllegalValueException;
 import seedu.inbx0.model.task.Date;
 import seedu.inbx0.model.task.ReadOnlyTask;
 import seedu.inbx0.model.task.Time;
 
+//@@author A0139579J
 /**
  * Represents a Reminder for the task 
  */
-//@@author A0139579J
 public class ReminderTask {
     
     private Toolkit toolkit;
@@ -43,23 +44,30 @@ public class ReminderTask {
         
         if (currentDate.value.equals(date.value)) {
             if (!("").equals(time.getTime())) {
-                int reminderTime = Integer.parseInt(time.getTime().replaceAll("\\D+",""));
-                int reminderHour = reminderTime / 100;
-                int reminderMin = reminderTime % 100;
-                
-                Calendar calendar = Calendar.getInstance();
-                calendar.set(Calendar.HOUR_OF_DAY, reminderHour);
-                calendar.set(Calendar.MINUTE, reminderMin);
-                calendar.set(Calendar.SECOND, 0);
-                
-                java.util.Date timerRemind = calendar.getTime();
-                timer = new Timer();
-                timer.schedule(new ReminderMessage(), timerRemind);
+                setTimer(time);
             } else {
                 timer = new Timer();
                 timer.schedule(new ReminderMessage(), 1);
             }
         }
+    }
+    
+    /**
+     * Sets the timer according to the start time of the Reminder
+     */
+    private void setTimer(Time time) {
+        int reminderTime = Integer.parseInt(time.getTime().replaceAll("\\D+",""));
+        int reminderHour = reminderTime / 100;
+        int reminderMin = reminderTime % 100;
+        
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.HOUR_OF_DAY, reminderHour);
+        calendar.set(Calendar.MINUTE, reminderMin);
+        calendar.set(Calendar.SECOND, 0);
+        
+        java.util.Date timerRemind = calendar.getTime();
+        timer = new Timer();
+        timer.schedule(new ReminderMessage(), timerRemind);
     }
     
     /**
@@ -70,6 +78,9 @@ public class ReminderTask {
         this(source.getStartDate(), source.getStartTime(),source.getReadableOnlyTask(), source.getIsAlive());
     }
     
+    /**
+     * Getter methods for ReminderTask
+     */
     public Date getStartDate() {
         return date;
     }
@@ -86,9 +97,19 @@ public class ReminderTask {
         return isAlive;
     }
     
+    /**
+     * Setter method for ReminderTask
+     */
     public void setReadableOnlyTask(ReadOnlyTask task) {
        this.task = task;
     }
+    
+    /**
+     * Cancels the ReminderTask
+     */
+    public void cancel() {
+        timer.cancel();
+     }
     
     /**
      * Format state as text for viewing.
@@ -109,6 +130,7 @@ public class ReminderTask {
                 || (other instanceof ReminderTask // this is first to avoid NPE below 
                 && this.date.value.equals(((ReminderTask) other).date.value) // state checks here onwards
                 && this.time.value.equals(((ReminderTask) other).time.value)
+                && this.isAlive == (((ReminderTask) other).isAlive)
                 && this.task.getName().equals(((ReminderTask) other).task.getName())
                 && this.task.getStartDate().equals(((ReminderTask) other).task.getStartDate())
                 && this.task.getStartTime().equals(((ReminderTask) other).task.getStartTime())
@@ -126,6 +148,7 @@ public class ReminderTask {
             }
             Platform.runLater(() -> {
             EventsCenter.getInstance().post(new ShowReminderRequestEvent(task));
+            EventsCenter.getInstance().post(new TaskPanelSelectionChangedEvent(task));
             });
             isAlive = false;
             timer.cancel();            

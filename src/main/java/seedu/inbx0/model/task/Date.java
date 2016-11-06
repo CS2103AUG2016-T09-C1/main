@@ -13,17 +13,13 @@ import seedu.inbx0.commons.exceptions.IllegalValueException;
  * Represents Date of a Task Event in the tasklist.
  * Guarantees: immutable; is valid as declared in {@link #isValidDate(String)}
  */
-//@@author A0139579J
 public class Date {
 
     public static final String MESSAGE_DATE_CONSTRAINTS = "Date can either be a numeric string, alphanumeric string, or alphabet string \n"
                                                         + "Example: DD/MM/YYYY format OR 3rd Jan OR next year";
     public static final Pattern DATE_NUMERIC_VALIDATION_REGEX = Pattern.compile("(?<front>[0-9 ]+)[./-](?<middle>[0-9 ]+)[./-](?<back>[0-9 ]+)");
     public static final String DATE_NUMERIC_VALIDATION_REGEX_2 = "^[0-9]{8,8}$";
-/*    public static final String DATE_ALPHANUMERIC_VALIDATION_REGEX = "(?<=\\D)(?=\\d)|(?<=\\d)(?=\\D)";
-    public static final String DATE_ALPHABETICAL_VALIDATION_REGEX = "[\\p{Alpha} ]+";
-    public static final String SPLIT_NUM_AND_ALPHABET_REGEX = "(?<=\\D)(?=\\d)|(?<=\\d)(?=\\D)";
-*/
+
     public final String value;
     public final int day;
     public final int month;
@@ -121,86 +117,8 @@ public class Date {
                 throw new IllegalValueException(MESSAGE_DATE_CONSTRAINTS);
             }
             
-        }
-        
-       
- /*       if (!isValidDate(date) &&  (date != "")) {
-            throw new IllegalValueException(MESSAGE_DATE_CONSTRAINTS);
-        }*/
-        
+        }        
     }
-    
-    /**
-     * Returns true if a given string is a valid task date.
-     */
-//    public static boolean isValidDate(String test) {
-//        return (test.matches(DATE_NUMERIC_VALIDATION_REGEX) && (test.length() == 8));
-//    }
- /*       boolean numericCheck = false;
-        boolean alphanumericCheck = false;
-        boolean alphabeticalCheck = false;
-        
-        if(test.matches(DATE_NUMERIC_VALIDATION_REGEX) && (test.length() == 8)) {
-            numericCheck = true;
-        }
-        
-        if (test.matches(DATE_ALPHABETICAL_VALIDATION_REGEX)) {
-            for (int i = 0; i < NUM_OF_STRINGS_IN_ALLOWED_DATE_EXPRESSIONS; i++) {
-                
-                if(test == ALLOWED_DATE_EXPRESSIONS[i])              
-                    alphabeticalCheck = true;                
-            }
-   
-            test = test.toLowerCase();
-            String [] alphabeticalTestCheck = test.split(" ");
-            
-            if (alphabeticalTestCheck.length == 2) {
-                boolean datePrepositionCheck = false;
-                boolean dayNameCheck = false;
-                for(int i = 0;  i < NUM_OF_STRINGS_IN_ALLOWED_DATE_PREPOSITIONS; i++) {
-                    if(alphabeticalTestCheck[0] == ALLOWED_DATE_PREPOSITIONS[i])
-                        datePrepositionCheck = true;
-                }
-                
-                for(int i = 0; i < NUM_OF_STRINGS_IN_ALLOWED_DAY_NAMES; i++) {
-                    if(alphabeticalTestCheck[1] == ALLOWED_DAY_NAMES[i])
-                        dayNameCheck = true;
-                }
-                
-                if(datePrepositionCheck == true && dayNameCheck == true)
-                    alphabeticalCheck = true;
-            }
-            
-        }
-        
-        if(test.matches(DATE_ALPHANUMERIC_VALIDATION_REGEX)) {
-            test = test.replace(" ", "");
-            test = test.toLowerCase();
-            String [] alphanumericTestCheck = test.split(SPLIT_NUM_AND_ALPHABET_REGEX);
-            
-            if(alphanumericTestCheck.length == 2) {
-                if(alphanumericTestCheck[0].matches("[a-zA-Z]+") && alphanumericTestCheck[1].matches("\\d+")) {
-                    if(alphanumericTestCheck[1].length() == 1 | alphanumericTestCheck[1].length() == 2) {
-                        for(int i = 0; i < NUM_OF_STRINGS_IN_ALLOWED_MONTH_NAMES; i++ ) {
-                            if(alphanumericTestCheck[0] == ALLOWED_MONTH_NAMES[i])
-                                alphanumericCheck = true;
-                        }
-                    }
-                }
-                
-                if(alphanumericTestCheck[0].matches("\\d+") && alphanumericTestCheck[1].matches("[a-zA-Z]+")) {
-                    if(alphanumericTestCheck[0].length() == 1 | alphanumericTestCheck[0].length() == 2) {
-                        for(int i = 0; i < NUM_OF_STRINGS_IN_ALLOWED_MONTH_NAMES; i++ ) {
-                            if(alphanumericTestCheck[1] == ALLOWED_MONTH_NAMES[i])
-                                alphanumericCheck = true;
-                        }
-                    }
-                }
-            }
-        } 
-            
-        return (numericCheck | alphanumericCheck | alphabeticalCheck);
-    } */
     
     @Override
     public String toString() {      

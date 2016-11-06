@@ -11,6 +11,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.inbx0.commons.exceptions.DuplicateDataException;
 import seedu.inbx0.commons.util.CollectionUtil;
+
+//@@author A0139579J
 /**
  * A list of reminders that enforces no nulls.
  *
@@ -19,7 +21,6 @@ import seedu.inbx0.commons.util.CollectionUtil;
  * @see ReminderTask#equals(Object)
  * @see CollectionUtil#elementsAreUnique(Collection)
  */
-//@@author A0139579J
 public class UniqueReminderList implements Iterable<ReminderTask> {
     
     private final ObservableList<ReminderTask> internalList = FXCollections.observableArrayList();
@@ -82,14 +83,14 @@ public class UniqueReminderList implements Iterable<ReminderTask> {
         CollectionUtil.assertNoNullElements(reminders);
         internalList.addAll(reminders);
     }
+    
     /**
      * All reminders in this list as a Set. This set is mutable and change-insulated against the internal list.
      */
     public Set<ReminderTask> toSet() {
         return new HashSet<>(internalList);
     }
-    
-    
+     
     /**
      * Adds a Reminder to the list.
      *
