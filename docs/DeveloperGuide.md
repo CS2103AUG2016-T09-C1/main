@@ -186,6 +186,30 @@ The Edit Command changes the atrributes of a particular task that are specified 
 | String[] | obtainArguments(String[] editArguments, ReadOnlyTask taskToEdit) <br><br> Retrieves all the arguments that the user wish to keep the same from the task and returns all the arguments as a String Array|
 | Task | createToEditWithTask(String[] editArguments, UniqueTagList tags, UniqueReminderList reminders) <br><br> Returns the new Task with the new edited attributes|
 
+#####Remind Command
+
+The Remind Command adds a reminder to a task specified by the user.
+
+| Constructor & Description                                                                                                                                                        |
+|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| public RemindCommand(int targetIndex, String date) <br><br>Constructs the Remind Command given the index number of the task that the reminder is added to and the start date of the reminder |
+
+| Methods            |                                                                                                                             |
+|--------------------|-----------------------------------------------------------------------------------------------------------------------------|
+| UniqueTagList      | obtainUniqueTagList(ReadOnlyTask taskToAddReminder) <br><br> Returns the UniqueTagList from the task that is going to have a reminder added |
+| UniqueReminderList | addReminder(ReadOnlyTask taskToAddReminder, ReminderTask newReminder) <br><br> Adds the reminder to the UniqueReminderList from the task that is chosen to have reminder added and returns the UniqueReminderList |
+| boolean | isValidDateAndTime(Date date, Time time) <br><br> Checks if the time and date given is valid and not in the past|
+| String[] | obtainArguments(String[] arguments, ReadOnlyTask taskToAddReminder) <br><br> Retrieves all the arguments from the task that is going to have a reminder added and returns all the arguments as a String Array|
+| Task | createTaskWithReminder(ReadOnlyTask taskToAddReminder, ReminderTask newReminder) <br><br> Returns the new Task with the new added reminder|
+
+#####Select Command
+
+The Select Command selects a task specified by the index number from the shown list and displays the task's details in the info panel.
+
+| Constructor & Description                                                                                                                                                        |
+|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| public SelectCommand(int targetIndex) <br><br>Constructs the Select Command given the index number for the task that is to be selected |
+
 ### Model component
 
 <img src="images/ModelClassDiagram.png" width="800"><br>
