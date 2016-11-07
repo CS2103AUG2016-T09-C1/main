@@ -136,6 +136,7 @@ It will instantly open up a help window, showing you the complete list of comman
 
 Alternatively, you can use the keyboard shortcut <kbd>Ctrl</kbd> + <kbd>F1</kbd> to open the help window quickly.
 <br><br>
+<!--- @@author  -->
  
 <!--- @@author A0139579J -->
 
@@ -513,8 +514,8 @@ Saves the tasklist on the desktop of Jim's computer.
 >To reset the save directory for Inbx_0, simple type: `saveas reset`. This will reset the save file to /data/tasklist.xml 
 
  <img src="images/SaveAsCommand.png" width="600">
- 
- 
+
+<!--- @@author--> 
 <!--- @@author A0148044J-->
 
 **Memorize setting**
