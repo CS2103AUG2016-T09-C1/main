@@ -1,25 +1,6 @@
 # generated
 ###### \java\seedu\inbx0\logic\parser\Parser.java
 ``` java
-    private Command prepareDelete(final String args) {
-
-        Optional<Integer> index = parseIndex(args);
-        if (!index.isPresent()) {
-            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
-        }
-
-        return new DeleteCommand(index.get());
-    }
-
-    /**
-     * Parses arguments in the context of the select task command.
-     * 
-     * @param args full command args string
-     * @return the prepared command
-     */
-```
-###### \java\seedu\inbx0\logic\parser\Parser.java
-``` java
     private Command prepareSelect(final String args) {
         Optional<Integer> index = parseIndex(args);
         if (!index.isPresent()) {
@@ -45,33 +26,6 @@
             return Optional.empty();
         }
         return Optional.of(Integer.parseInt(index));
-
     }
-
-    /**
-     * Parses arguments in the context of the find task command.
-     * 
-     * @param args full command args string
-     * @return the prepared command
-     */
-```
-###### \java\seedu\inbx0\logic\parser\Parser.java
-``` java
-    private Command prepareList(final String arguments) {
-        if (arguments.length() == 0) {
-            return new ListCommand();
-        } else {
-            try {
-                return new ListCommand(arguments);
-            } catch (IllegalValueException e) {
-                return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE));
-            }
-        }
-    }
-    /**
-     * Parses arguments in the context of the save as command.
-     * 
-     * @param full command args string
-     * @return the prepared command
-     */
+    
 ```
