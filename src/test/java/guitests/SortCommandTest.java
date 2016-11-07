@@ -10,11 +10,11 @@ import seedu.inbx0.testutil.TestTask;
 
 import static org.junit.Assert.assertTrue;
 
-//@@author A048044J
 public class SortCommandTest extends TaskListGuiTest {
     
 	//sort by name ascending order
     @Test
+    //@@author A0148044J
     public void sort_byName_ASC() throws IllegalArgumentException, IllegalValueException {
         commandBox.runCommand("sort name");  //default order
         assertShowResult("sort", "name", "", td.alice, td.benson, td.carl, td.daniel, td.elle,
