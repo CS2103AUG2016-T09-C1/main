@@ -143,12 +143,12 @@ Given below is the Sequence Diagram for interactions within the `Logic` componen
  API call.<br>
 <img src="images/DeleteTaskSdForLogic.png" width="800"><br>
 
-##Commands
+####Commands
 
 Each command inherits the implementation of the abstract class Command. <br>
 The commands mainly consist of constructors, getters and the execute method inherited from the abstract class Command. <br>
 
-#Add Command
+#####Add Command
 
 The Add Command has various constructors catering to the various tasks such as floating, events and deadline tasks. <br>
 
@@ -162,7 +162,7 @@ The Add Command has various constructors catering to the various tasks such as f
 | public AddCommand(String name, String endDate, String endTime, Set tags) <br> Constructs the Add Command for Deadline Tasks with Importance                                           |
 
 
-#Delete Command
+#####Delete Command
 
 The Delete Command removes the 
 
