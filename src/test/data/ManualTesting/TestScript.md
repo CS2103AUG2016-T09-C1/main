@@ -18,10 +18,8 @@
 	* [Marking a task as completed : `done`](#done)
 	* [Setting a reminder for your task : `rem`](#reminder)
 	* [Saving your tasklist to a specific directory : `saveas`](#setdir)
-	* [Exiting the program : `exit`](#exit)
 	* [Autocompleting with command history](#autocomplete)
-	* [Displaying expired and overdue tasks](#overdue)
-       * [Changing the theme and size of inbx_0](#preferences)
+    * [Changing the theme and size of inbx_0](#preferences)
 
 ## Load sample data
 
@@ -36,7 +34,7 @@
 
 1. Type `help`
 
-**Result:** A new window appears with a command summary page, listing out all the commands available for use.
+**Result:** A new window appears with a command summary page, listing out all the commands available for use. Can be dismissed by pressing <kbd>Enter</kbd>.
 
 ## Add Command
 
@@ -79,31 +77,121 @@
 
 **Result:** Only tasks with 24th October in either start date or end date will be shown (3 such tasks).
 
-## Find Command
-
-### Find tasks with a certain tag
-
-1. Type `find t=urgent`.
-
-**Result:** Only tasks that are tagged "urgent" are shown (2 such tasks).
-
-### Show only floating tasks
-
-1. Type `show flo`.
-
-**Result:** Only floating tasks are shown (10 such tasks).
-
-### Show uncompleted tasks
-
-1. Type `show unc`.
-
-**Result:** Only tasks with isCompleted = false are shown (42 such tasks).
-
 ### List overdue tasks
 
 1. Type `list overdue`.
 
-**Result:** Only overdue tasks are shown (9 such tasks).
+**Result:** Only overdue tasks are shown (5 such tasks).
+
+## Find Command
+
+### Find tasks with a certain name
+
+1. Type `find meeting`.
+
+**Result:** Only tasks that have the word "meeting" are shown (3 such tasks).
+
+### Find tasks with a certain tag
+
+1. Type `find t=CS2103`.
+
+**Result:** Only tasks that are tagged "urgent" are shown (2 such tasks).
+
+### Find tasks using logic operators
+
+1. Type `find EE2021 & i=r`.
+
+**Result:** Only tasks that have the name EE2021 in them and are of importance red are shown (3 such tasks).
+
+2. Type `find meeting or buy`.
+
+**Result:** Only tasks that have the name "meeting" or "buy" in them red are shown (15 such tasks).
+
+## Sort Command
+
+### Sort list by earliest start date 
+
+1. Type `sort s asc`.
+
+**Result:**  The floating task will be at bottom then followed by the earliest start date task first, order until the last task is the latest
+
+### Sort list by earliest start date 
+
+1. Type `sort s desc`.
+
+**Result:** The floating tasks will be at the top, then ordered by decreasing latest (until the last one is the earliest). 
+
+### Sort list by name (ascending order)
+
+1. Type `sort name asc`.
+
+**Result:** The list is sorted from a to z (a at the top, z at the bottom).
+
+### Sort list by name (descending order)
+
+1. Type `sort name desc`.
+
+**Result:** The list is sorted from z to a (z at the top, a at the bottom).
+
+## Show Command
+
+### Show uncompleted tasks
+
+1. Type `show inc`.
+
+**Result:** Only tasks with isCompleted = false are shown (59 such tasks).
+
+### Show high priority tasks
+
+1. Type `show red`.
+
+**Result:** Only tasks with importance = red are shown (11 such tasks).
+
+### Show tasks happening on a day of the upcoming week.
+
+1. Type `show momday`.
+
+**Result:** Only tasks occuring on Monday are shown (3 such tasks).
+
+### Show different categories of tasks.
+
+1. Type `show floating`.
+
+**Result:** Only floating tasks (no end dates / times) are shown (29 such tasks).
+
+2. Type `show event`.
+
+**Result:** Only event tasks are shown (10 such tasks).
+
+3. Type `show deadline`.
+
+**Result:** Only deadline tasks (no start dates / times) are shown (20 such tasks).
+
+## Edit command
+
+### Edit the task name
+
+1. Type `edit 1 n=clear the table`
+
+**Result:** The first task is renamed to "clear the table".
+
+### Edit the task deadline
+
+1. Type `edit 1 e= 26 Nov 3pm`
+
+**Result:** The first task's deadline is edited to 26 Nov, 3pm.
+
+### Edit the task period
+
+1. Type `edit 2 s= 24 oct 12 pm e= 25 oct 10am`
+
+**Result:** The second task's period is edited to 24 Oct 12pm to 25 Oct 10am.
+
+### Edit the importance
+
+1. Type `edit 4 i=g`
+
+**Result:** The fourth task's importance is edited to green.  
 
 ## Adding and deleting tags
 
@@ -131,109 +219,52 @@
 
 **Result:** The tags "important" and "fake" will be removed from 1st task's taglist.
 
+## Delete Command
+
+### Delete a task
+
+1. Type `del 1`
+
+**Result:** The first task is deleted. The list is updated.
+
+2. Type `del 1`
+
+**Result:** The first task in the list is deleted. The list is updated.
+
+3. Type `del 100`.
+
+**Result:** There will be an error message "The task index provided is invalid".
+
+## Select Command
+
 ### Select a task in task list
 
-1. Type `select 2`.
+1. Type `sel 2`.
 
-**Result:** Task with index 2 will be selected
+**Result:** Task with index 2 will be selected. The information panel at the bottom will show the task details.
 
-### Sort list by earliest start date 
+2. Type `sel 100`.
 
-1. Type `sort s asc`.
+**Result:** There will be an error message "The task index provided is invalid".
 
-**Result:**  The floating task will be at bottom then followed by the earliest start date task first, order until the last task is the latest
-
-### Sort list by earliest start date 
-
-1. Type `sort s desc`.
-
-**Result:** The floating tasks will be at the top, then ordered by decreasing latest (until the last one is the earliest). 
-
-### Sort list by name (ascending order)
-
-1. Type `sort name asc`.
-
-**Result:** The list is sorted from a to z (a at the top, z at the bottom).
-
-### Sort list by name (descending order)
-
-1. Type `sort name desc`.
-
-**Result:** The list is sorted from z to a (z at the top, a at the bottom).
-
-### Update the task name
-
-1. Type `edit 1 n=New task`
-
-**Result:** The first task is renamed to New task.
-
-### Update the task deadline
-
-1. Type `edit 1 e= 20 Nov 5pm`
-
-**Result:** The first task's deadline is updated to 20 Nov, 5pm.
-
-### Update the task period
-
-1. Type `edit 1 s= 20 Nov 12 pm e= 20 Nov 3pm`
-
-**Result:** The first task's period is updated to 20 Nov, 12pm to 3pm. 
-
-
-### Remove the deadline of the task
-
-1. Ensure that the first task has a deadline.
-2. Type `edit 1 e=nil`.
-
-**Result:** The first task's deadline is removed. It is also removed from the calendar.
-
-### Remove the period of the task
-
-1. Ensure that the first task has a period.
-2. Type `edit 1 float`.
-
-**Result:**  The first task's period is removed.
-
-
-### Find tasks by name
-
-1. Type `find go`.
-
-**Result:** Tasks that contains the word "go" or part of it (al*go*rithm) will be shown (5 such tasks).
-
-### Find tasks by tags
-
-1. Type `find t=important`.
-
-**Result:** Tasks that are tagged with "important" are shown (6 such tasks). Note that find command does not discriminate tags and names.
-
-### Mark an uncompleted task as completed
-
-1. Type `add "Slack"`.
-2. Type `done **X**` (whereby X is the index of the task for "Slack").
-
-**Result:** The task "Slack" is marked as completed.
-
-### Mark a completed task as completed
-
-1. Type `find go lifting`
-2. Type `complete **X**` (whereby X is the index of the task for "Go lifting").
-
-**Result:** The task list is unaffected. A message "Task is already completed" is shown.
+## Undo Command
 
 ### Undo a previous action
 
-1. Type `add "Wrong Task"`.
+1. Type `add abcd1234`.
 2. Type `undo`.
 
-**Result:** The task list is restored back to the state before step 1 was executed (i.e. "Wrong Task" should not exist after step 2).
+**Result:** The task list first added a task called "abcd1234" to the list. Undo removes the task from the list.
 
-### Undo when we first start the program
+### Undo multiple actions
 
-1. Ensure that we just started the program and did not do anything yet.
-2. Type `undo`.
+1. Type `del 1`.
+2. Type `del 2`.
+2. Type `undo 2`.
 
-**Result:** The task list is unaffected. A message "There is no past command to undo" is shown.
+**Result:** The first and second tasks gets deleted. Undo restores them back into the list.
+
+## Redo Command
 
 ### Redo something that we previously undo
 
@@ -243,18 +274,16 @@
 
 **Result:** The "Some new task" is added back to the list even though we undo it in step 2.
 
-### Redo when we did not undo anything
+### Undo multiple actions
 
-1. Ensure that we never execute any undo.
-2. Type `redo`.
+1. Type `add Some task 1234`.
+2. Type `add Some task 5678`.
+3. Type `undo 2`.
+2. Type `redo 2`.
 
-**Result:** The task list is unaffected. A message "There is no past command to redo" is shown.
+**Result:** The "Some task 1234" and "Soem task 5678" tasks are added back to the list even though we undo them in step 3.
 
-### Delete a certain task
-
-1. Type `del 3`
-
-**Result:** The third task is deleted.
+## Clear Command
 
 ### Clear the entire list
 
@@ -262,8 +291,61 @@
 
 **Result:** The entire task list is empty.
 
+2. Type `undo` to restore the tasklist back.
+
+### Mark an uncompleted task as completed
+
+1. Type `add "Slack"`.
+2. Type `done **X**` (whereby X is the index of the task for "Slack").
+
+**Result:** The task "Slack" is marked as completed.
+
+## Done Command
+
+### Mark a completed task as completed
+
+1. Type `done 1`.
+
+**Result:** The first task in the list is marked as completed and removed from the list view.
+
+### Mark multiple tasks as completed
+
+1. Type `done 1 4 5`.
+
+**Result:** The first, fourth and fifth task in the list is marked as completed and removed from the list view.
+
+2. Type `show com`.
+
+**Result:** The completed  tasks will be shown. (4 such tasks)
+
+## Reminder Command
+
+### Set a reminder
+1. Type `list`
+2. Type `rem 1 s=now`.
+
+**Result:** A reminder is set for the 1st task to display a reminder "now". A popup window appears showing the task details. It can be dismissed by pressing the OK button or pressing <kbd>Enter</kbd>.
+
+### Set multiple reminders
+1. Type `rem 1 s=1 hour`.
+2. Type `rem 1 s=2 hour`.
+
+**Result:** A reminder is set for the 1st task to display a reminder "1 hour from now". Another reminder is set to display a reminder "2 hours from now". The information panel at the bottom will show both the reminders.
+
+## Saveas Command
+
 ### Create a copy of the tasklist anywhere
 
-1. Type `saveas C:\Dropbox\`
+1. Type `saveas C:\Dropbox\tasklist.xml`
 
-**Result:** The files inside `data\` should be relocated to `C:\Dropbox\`. The status bar changes to `C:\Dropbox\SampleData.xml`.
+**Result:** The xml file inside `data\` should be saved to `C:\Dropbox\`.
+
+## Command History / Autocomplete
+
+1. Use the up and down arrow keys to cycle through pass commands that have been typed in.
+
+## Color Preferences
+
+1. Use <kbd>Ctrl</kbd>  + any number from 1 to 8 on the keyboard to change the color of the app to your liking.
+
+# End of test script
