@@ -236,6 +236,424 @@
         <isFloatTask>true</isFloatTask>
         <tagged>CS2103</tagged>
     </tasks>
+    <tasks>
+        <name>CS2103 project retrospective</name>
+        <startDate></startDate>
+        <startTime></startTime>
+        <endDate>14112016</endDate>
+        <endTime>23:59</endTime>
+        <level>Red</level>
+        <isCompleted>false</isCompleted>
+        <isExpired>false</isExpired>
+        <isFloatTask>false</isFloatTask>
+    </tasks>
+    <tasks>
+        <name>CS2103 individual report</name>
+        <startDate></startDate>
+        <startTime></startTime>
+        <endDate>16112016</endDate>
+        <endTime>23:59</endTime>
+        <level>Red</level>
+        <isCompleted>false</isCompleted>
+        <isExpired>false</isExpired>
+        <isFloatTask>false</isFloatTask>
+    </tasks>
+    <tasks>
+        <name>EE2020 lab report</name>
+        <startDate></startDate>
+        <startTime></startTime>
+        <endDate>14112016</endDate>
+        <endTime></endTime>
+        <level>Yellow</level>
+        <isCompleted>false</isCompleted>
+        <isExpired>false</isExpired>
+        <isFloatTask>false</isFloatTask>
+    </tasks>
+    <tasks>
+        <name>watch a movie after final</name>
+        <startDate>30112016</startDate>
+        <startTime></startTime>
+        <endDate></endDate>
+        <endTime></endTime>
+        <level></level>
+        <isCompleted>false</isCompleted>
+        <isExpired>false</isExpired>
+        <isFloatTask>true</isFloatTask>
+    </tasks>
+    <tasks>
+        <name>CS2013 exam</name>
+        <startDate>26112016</startDate>
+        <startTime>13:00</startTime>
+        <endDate></endDate>
+        <endTime></endTime>
+        <level>Red</level>
+        <isCompleted>false</isCompleted>
+        <isExpired>false</isExpired>
+        <isFloatTask>true</isFloatTask>
+    </tasks>
+    <tasks>
+        <name>ee2021 exam</name>
+        <startDate>29112016</startDate>
+        <startTime>09:00</startTime>
+        <endDate></endDate>
+        <endTime></endTime>
+        <level>Red</level>
+        <isCompleted>false</isCompleted>
+        <isExpired>false</isExpired>
+        <isFloatTask>true</isFloatTask>
+    </tasks>
+    <tasks>
+        <name>cfg1010 essay</name>
+        <startDate></startDate>
+        <startTime></startTime>
+        <endDate>06112016</endDate>
+        <endTime>21:00</endTime>
+        <level></level>
+        <isCompleted>false</isCompleted>
+        <isExpired>false</isExpired>
+        <isFloatTask>false</isFloatTask>
+    </tasks>
+    <tasks>
+        <name>clean room</name>
+        <startDate>30112016</startDate>
+        <startTime></startTime>
+        <endDate></endDate>
+        <endTime></endTime>
+        <level></level>
+        <isCompleted>false</isCompleted>
+        <isExpired>false</isExpired>
+        <isFloatTask>true</isFloatTask>
+    </tasks>
+    <tasks>
+        <name>buy a new bag</name>
+        <startDate>01122016</startDate>
+        <startTime></startTime>
+        <endDate></endDate>
+        <endTime></endTime>
+        <level></level>
+        <isCompleted>false</isCompleted>
+        <isExpired>false</isExpired>
+        <isFloatTask>true</isFloatTask>
+    </tasks>
+    <tasks>
+        <name>learn html</name>
+        <startDate></startDate>
+        <startTime></startTime>
+        <endDate></endDate>
+        <endTime></endTime>
+        <level></level>
+        <isCompleted>false</isCompleted>
+        <isExpired>false</isExpired>
+        <isFloatTask>true</isFloatTask>
+    </tasks>
+    <tasks>
+        <name>revise for cs2103</name>
+        <startDate>14112016</startDate>
+        <startTime></startTime>
+        <endDate></endDate>
+        <endTime></endTime>
+        <level>Yellow</level>
+        <isCompleted>false</isCompleted>
+        <isExpired>false</isExpired>
+        <isFloatTask>true</isFloatTask>
+    </tasks>
+    <tasks>
+        <name>prepare cs2101 reflection</name>
+        <startDate></startDate>
+        <startTime></startTime>
+        <endDate>11112016</endDate>
+        <endTime>10:00</endTime>
+        <level></level>
+        <isCompleted>false</isCompleted>
+        <isExpired>false</isExpired>
+        <isFloatTask>false</isFloatTask>
+    </tasks>
+    <tasks>
+        <name>cs2101 reflection assignment</name>
+        <startDate>11112016</startDate>
+        <startTime>10:00</startTime>
+        <endDate>11112016</endDate>
+        <endTime>12:00</endTime>
+        <level></level>
+        <isCompleted>false</isCompleted>
+        <isExpired>false</isExpired>
+        <isFloatTask>false</isFloatTask>
+    </tasks>
+    <tasks>
+        <name>DP's birthday</name>
+        <startDate>20112016</startDate>
+        <startTime></startTime>
+        <endDate>20112016</endDate>
+        <endTime></endTime>
+        <level>Yellow</level>
+        <isCompleted>false</isCompleted>
+        <isExpired>false</isExpired>
+        <isFloatTask>false</isFloatTask>
+    </tasks>
+    <tasks>
+        <name>buy air ticket</name>
+        <startDate></startDate>
+        <startTime></startTime>
+        <endDate>14112016</endDate>
+        <endTime></endTime>
+        <level>Red</level>
+        <isCompleted>false</isCompleted>
+        <isExpired>false</isExpired>
+        <isFloatTask>false</isFloatTask>
+    </tasks>
+    <tasks>
+        <name>revise for ee2021</name>
+        <startDate>14112016</startDate>
+        <startTime></startTime>
+        <endDate></endDate>
+        <endTime></endTime>
+        <level></level>
+        <isCompleted>false</isCompleted>
+        <isExpired>false</isExpired>
+        <isFloatTask>true</isFloatTask>
+    </tasks>
+    <tasks>
+        <name>revise cs2012</name>
+        <startDate>14112016</startDate>
+        <startTime></startTime>
+        <endDate></endDate>
+        <endTime></endTime>
+        <level></level>
+        <isCompleted>false</isCompleted>
+        <isExpired>false</isExpired>
+        <isFloatTask>true</isFloatTask>
+    </tasks>
+    <tasks>
+        <name>EE2020 lab demo</name>
+        <startDate>08112016</startDate>
+        <startTime>14:00</startTime>
+        <endDate>08112016</endDate>
+        <endTime>15:00</endTime>
+        <level></level>
+        <isCompleted>false</isCompleted>
+        <isExpired>false</isExpired>
+        <isFloatTask>false</isFloatTask>
+    </tasks>
+    <tasks>
+        <name>finish ee2021 tutorial</name>
+        <startDate></startDate>
+        <startTime></startTime>
+        <endDate>09112016</endDate>
+        <endTime></endTime>
+        <level></level>
+        <isCompleted>false</isCompleted>
+        <isExpired>false</isExpired>
+        <isFloatTask>false</isFloatTask>
+    </tasks>
+    <tasks>
+        <name>cca meeting</name>
+        <startDate>11112016</startDate>
+        <startTime>20:00</startTime>
+        <endDate>11112016</endDate>
+        <endTime>22:00</endTime>
+        <level></level>
+        <isCompleted>false</isCompleted>
+        <isExpired>false</isExpired>
+        <isFloatTask>false</isFloatTask>
+    </tasks>
+    <tasks>
+        <name>learn ui design</name>
+        <startDate>01122016</startDate>
+        <startTime></startTime>
+        <endDate></endDate>
+        <endTime></endTime>
+        <level></level>
+        <isCompleted>false</isCompleted>
+        <isExpired>false</isExpired>
+        <isFloatTask>true</isFloatTask>
+    </tasks>
+    <tasks>
+        <name>wash car</name>
+        <startDate>03122016</startDate>
+        <startTime></startTime>
+        <endDate>03122016</endDate>
+        <endTime></endTime>
+        <level>Yellow</level>
+        <isCompleted>false</isCompleted>
+        <isExpired>false</isExpired>
+        <isFloatTask>false</isFloatTask>
+    </tasks>
+    <tasks>
+        <name>buy tissue paper</name>
+        <startDate>12112016</startDate>
+        <startTime></startTime>
+        <endDate></endDate>
+        <endTime></endTime>
+        <level></level>
+        <isCompleted>false</isCompleted>
+        <isExpired>false</isExpired>
+        <isFloatTask>true</isFloatTask>
+    </tasks>
+    <tasks>
+        <name>cs2101 survey</name>
+        <startDate>11112016</startDate>
+        <startTime>16:00</startTime>
+        <endDate>11112016</endDate>
+        <endTime>18:00</endTime>
+        <level></level>
+        <isCompleted>false</isCompleted>
+        <isExpired>false</isExpired>
+        <isFloatTask>false</isFloatTask>
+    </tasks>
+    <tasks>
+        <name>repair camera lens</name>
+        <startDate></startDate>
+        <startTime></startTime>
+        <endDate>05122016</endDate>
+        <endTime></endTime>
+        <level></level>
+        <isCompleted>false</isCompleted>
+        <isExpired>false</isExpired>
+        <isFloatTask>false</isFloatTask>
+    </tasks>
+    <tasks>
+        <name>buy milk and bread</name>
+        <startDate>12112016</startDate>
+        <startTime></startTime>
+        <endDate>12112016</endDate>
+        <endTime></endTime>
+        <level></level>
+        <isCompleted>false</isCompleted>
+        <isExpired>false</isExpired>
+        <isFloatTask>false</isFloatTask>
+    </tasks>
+    <tasks>
+        <name>buy shampoo</name>
+        <startDate>08112016</startDate>
+        <startTime></startTime>
+        <endDate></endDate>
+        <endTime></endTime>
+        <level></level>
+        <isCompleted>false</isCompleted>
+        <isExpired>false</isExpired>
+        <isFloatTask>true</isFloatTask>
+    </tasks>
+    <tasks>
+        <name>buy birthday gift for mom</name>
+        <startDate></startDate>
+        <startTime></startTime>
+        <endDate>07122016</endDate>
+        <endTime></endTime>
+        <level>Red</level>
+        <isCompleted>false</isCompleted>
+        <isExpired>false</isExpired>
+        <isFloatTask>false</isFloatTask>
+    </tasks>
+    <tasks>
+        <name>collating lec notes</name>
+        <startDate>01122016</startDate>
+        <startTime></startTime>
+        <endDate></endDate>
+        <endTime></endTime>
+        <level></level>
+        <isCompleted>false</isCompleted>
+        <isExpired>false</isExpired>
+        <isFloatTask>true</isFloatTask>
+    </tasks>
+    <tasks>
+        <name>learn cooking</name>
+        <startDate></startDate>
+        <startTime></startTime>
+        <endDate></endDate>
+        <endTime></endTime>
+        <level></level>
+        <isCompleted>false</isCompleted>
+        <isExpired>false</isExpired>
+        <isFloatTask>true</isFloatTask>
+    </tasks>
+    <tasks>
+        <name>buy instant noodle</name>
+        <startDate>12112016</startDate>
+        <startTime></startTime>
+        <endDate></endDate>
+        <endTime></endTime>
+        <level></level>
+        <isCompleted>false</isCompleted>
+        <isExpired>false</isExpired>
+        <isFloatTask>true</isFloatTask>
+    </tasks>
+    <tasks>
+        <name>appointment with friends</name>
+        <startDate>13112016</startDate>
+        <startTime>12:00</startTime>
+        <endDate>13112016</endDate>
+        <endTime></endTime>
+        <level></level>
+        <isCompleted>false</isCompleted>
+        <isExpired>false</isExpired>
+        <isFloatTask>false</isFloatTask>
+    </tasks>
+    <tasks>
+        <name>morning exercise</name>
+        <startDate>12112016</startDate>
+        <startTime>07:00</startTime>
+        <endDate></endDate>
+        <endTime></endTime>
+        <level></level>
+        <isCompleted>false</isCompleted>
+        <isExpired>false</isExpired>
+        <isFloatTask>true</isFloatTask>
+    </tasks>
+    <tasks>
+        <name>morning exercise</name>
+        <startDate>13112016</startDate>
+        <startTime>07:00</startTime>
+        <endDate></endDate>
+        <endTime></endTime>
+        <level></level>
+        <isCompleted>false</isCompleted>
+        <isExpired>false</isExpired>
+        <isFloatTask>true</isFloatTask>
+    </tasks>
+    <tasks>
+        <name>buy calculator</name>
+        <startDate></startDate>
+        <startTime></startTime>
+        <endDate>19112016</endDate>
+        <endTime></endTime>
+        <level></level>
+        <isCompleted>false</isCompleted>
+        <isExpired>false</isExpired>
+        <isFloatTask>false</isFloatTask>
+    </tasks>
+    <tasks>
+        <name>buy jacket</name>
+        <startDate></startDate>
+        <startTime></startTime>
+        <endDate></endDate>
+        <endTime></endTime>
+        <level></level>
+        <isCompleted>false</isCompleted>
+        <isExpired>false</isExpired>
+        <isFloatTask>true</isFloatTask>
+    </tasks>
+    <tasks>
+        <name>finish cfg1010 survey</name>
+        <startDate></startDate>
+        <startTime></startTime>
+        <endDate>12112016</endDate>
+        <endTime></endTime>
+        <level></level>
+        <isCompleted>false</isCompleted>
+        <isExpired>false</isExpired>
+        <isFloatTask>false</isFloatTask>
+    </tasks>
+    <tasks>
+        <name>ee2020 mid-term2</name>
+        <startDate>14111000</startDate>
+        <startTime>10:00</startTime>
+        <endDate>14112016</endDate>
+        <endTime>12:00</endTime>
+        <level>Red</level>
+        <isCompleted>false</isCompleted>
+        <isExpired>false</isExpired>
+        <isFloatTask>false</isFloatTask>
+    </tasks>
     <tags>
         <tagName>office</tagName>
     </tags>

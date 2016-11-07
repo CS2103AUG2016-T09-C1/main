@@ -20,9 +20,9 @@ We are a team of students based in the [School of Computing, National University
 
 #### [Ashley Ong](http://github.com/ashleyyy94)
 <img src="images/AshleyOng.png" width="150"><br>
+**Role**: Testing, Integration, Git<br>
 
 * Components in charge of: [Logic](https://github.com/CS2103AUG2016-T09-C1/main/blob/master/docs/DeveloperGuide.md#Logic)
-* Aspects/tools in charge of: Testing, Integration, Git
 * Features implemented:
    * [Add and delete tags](https://github.com/CS2103AUG2016-T09-C1/main/blob/master/docs/UserGuide.md#tag)
    * [Undo Command](https://github.com/CS2103AUG2016-T09-C1/main/blob/master/docs/UserGuide.md#undo)

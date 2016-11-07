@@ -15,16 +15,16 @@
 	* [Sorting the tasks by using a specific criteria: `sort`](#sort)
 	* [Showing the various filtered lists: `show`](#show)
 	* [Editing a task: `edit`](#edit)
-	* [Modifying the taglist: `addtag` / `deltag`](#tag)
+	* [Modifying the tag list: `addtag` / `deltag`](#tag)
 	* [Deleting a task: `del`](#del)	
 	* [Undoing previous action: `undo`](#undo)
 	* [Redoing previous action: `redo`](#redo)
-	* [Clearing all tasks : `clr`](#clr)
-	* [Marking a task as completed : `done`](#done)
+	* [Clearing all tasks: `clr`](#clr)
+	* [Marking a task as completed: `done`](#done)
 	* [Setting a reminder for your task : `rem`](#reminder)
-	* [Selecting a task : `sel`](#sel)
-	* [Saving your tasklist to a specific directory : `saveas`](#setdir)
-	* [Exiting the program : `exit`](#exit)
+	* [Selecting a task: `sel`](#sel)
+	* [Saving your task list to a specific directory: `saveas`](#setdir)
+	* [Exiting the program: `exit`](#exit)
 	* [Autocompleting with command history](#autocomplete)
 	* [Displaying expired and overdue tasks](#overdue)
 * [Command Summary](#command-summary)
@@ -50,7 +50,7 @@ Unlike all the other task managers out there, Inbx_0 is a simple program that ru
 5. Type a command in the command box and press <kbd>Enter</kbd> to execute it. <br>
    e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window. 
 6. Some example commands you can try:
-   * **`add`**:`add EE2020 Midterms` :  adds a task called `EE2020 Midterms` to the Task Manager
+   * **`add EE2020 Midterms`** :  adds a task called `EE2020 Midterms` to the Task Manager
    * **`list`** : lists all tasks
    * **`delete`**`1` : deletes the 1st task shown in the current list
    * **`undo`**`1` : undoes the last command
@@ -189,7 +189,7 @@ Examples:
 1) Listing all the tasks you have yet to complete. <br>
 Format: `list`
 
-The List Command shows a list of all incompleted tasks in the task manager so that you can take a look at your tasks all at one go.
+The List Command shows a list of all uncompleted tasks in the task manager so that you can take a look at your tasks all at one go.
 
 There will be index numbers allocated at the side of each task which will be needed for other operations such as deleting a task or selecting a task.
  
@@ -214,7 +214,7 @@ Examples:
 4) Listing tasks that are overdue <br>
 Format: `list overdue`
 
-You will be able to view all of the deadline tasks are overdue by typing the following: `list overdue`
+You will be able to view all the deadline tasks are overdue by typing the following: `list overdue`
 
  <img src="images/ListCommand.png" width="600">
 
@@ -307,10 +307,6 @@ Format: `edit INDEX [n=NAME] [s=START_DATE] [st=START_TIME] [e=END_DATE] [et=END
 
 Made a spelling mistake or your event was postponed? You can use the Edit Command to swiftly rectify any tasks on the task list.
 
-This can be done by typing the following:
-
-> edit INDEX [n=NAME] [s=START_DATE] [st=START_TIME] [e=END_DATE] [et=END_TIME] [i=IMPORTANCE] [t=TAG]...
-
 By specifying the parameters of the task and typing the corrected parameters, you will be able to change multiple parameters in that
 single task. Do note that one of the optional parameters is necessary.
 
@@ -342,19 +338,19 @@ Example:
 
 <!--- @@author A0139481Y -->
 #### <a id="tag"></a>8. Modifying the taglist: `addtag` / `deltag`
-1) Adding more tags
+1) Adding more tags <br>
 Format: `addtag INDEX t=TAGS [t=MORE_TAGS]`
 
 If you wish to add additional tags to any existing tasks, you can do it by typing the following: `addtag INDEX t=TAGS [t=MORE_TAGS]` <br>
 
-Note that adding tags and editing tags are different commands. Edit tags will remove all tags and add in the editted tag. This addtag command will just append the new tag behind any existing tag names.
+Note that adding tags and editing tags are different commands. Edit tags will remove all tags and add in the edited tag. This addtag command will just append the new tag behind any existing tag names.
 
 Example: 
 * `list today`<br>
   `addtag 2 t=tonight`<br>
    Adds the "tonight" tag to the 2nd task in the list.
 
-2) Deleting a particular tag
+2) Deleting a particular tag <br>
 Format: `deltag INDEX t=TAGS [t=MORE_TAGS]`
 
 Is you wish to remove specific tags from the list of tags, simply type in `deltag INDEX t=TAGS [t=MORE_TAGS]` to remove it/them.
@@ -406,15 +402,15 @@ Made a mistake? Not to worry! You can use the `redo` command to rectify your mis
 
 <br><br>
 
-#### <a id="clr"></a>12. Clearing all tasks : `clr`
-1) Clearing the shown list
+#### <a id="clr"></a>12. Clearing all tasks: `clr`
+1) Clearing the shown list <br>
 Format: `clr`
 
 Tasks can easily become obsolete and checking off tasks individually can be quite a hassle. The clear command will help you to remove all tasks on the shown list and can be accessed by typing the following: `clr`
 
  <img src="images/ClearCommand.png" width="600">
 
-2) Clearing out the entire tasklist
+2) Clearing out the entire tasklist <br>
 Format: `clr all`
 
 You can remove all the tasks from the tasklist by typing `clr all` in the command box.
@@ -422,7 +418,7 @@ You can remove all the tasks from the tasklist by typing `clr all` in the comman
 
 <!--- @@author A0139579J -->
 #### <a id="done"></a>13. Marking a task as completed : `done`
-1) Mark selected tasks as done
+1) Mark selected tasks as done <br>
 Format: `done INDEX [INDEX]...`
 
 If you have finished a certain task and wish to mark it as finished you can give a complete a specified task in the task list by typing the following: `done INDEX [INDEX]`<br>
@@ -436,7 +432,7 @@ Example:
   `done 2 4 7` <br>
  Marks the 2nd, 4th and 7th tasks as completed in today’s list
  
-2) Mark tasks in consecutive index numbers as done
+2) Mark tasks in consecutive index numbers as done <br>
 Format: `done FIRST_INDEX to LAST_INDEX`
 
 This will allow multiple tasks specified by the first index to the last index to be marked as completed.
@@ -450,7 +446,7 @@ Example:
   
 <br><br>
 
-#### <a id="reminder"></a>14. Setting a reminder for your task : `rem`
+#### <a id="reminder"></a>14. Setting a reminder for your task: `rem`
 Format: `rem INDEX s=START_DATE/START_TIME/START_DATE and START_TIME`
 
 You can add a reminder to a task by typing the following: `rem INDEX s=START_DATE/START_TIME/START_DATE and START_TIME` <br>
@@ -477,7 +473,7 @@ Examples:
   
 <br><br>
 
-#### <a id="sel"></a>15. Selecting a task : `sel`
+#### <a id="sel"></a>15. Selecting a task: `sel`
 Format: `sel INDEX`
 
 In order to view more details on a task that you have created, you can select the task identified by the index number in the last listing. The Select Command can be performed by typing:
@@ -499,7 +495,7 @@ Examples:
 
 <br><br>
 <!--- @@author A0135797M-->
-#### <a id="setdir"></a>16. Saving your tasklist to a specific directory : `saveas`
+#### <a id="setdir"></a>16. Saving your tasklist to a specific directory: `saveas`
 Format: `saveas FILE_DIRECTORY`
 
 You can specify a directory for saving your tasklist by typing the following: `saveas FILE_DIRECTORY` <br>
@@ -527,7 +523,7 @@ Saves the tasklist on the desktop of Jim's computer.
 <br><br>  
 <!--- @@author-->
 
-#### <a id="exit"></a>17. Exiting the program : `exit` 
+#### <a id="exit"></a>17. Exiting the program: `exit` 
 Format: `exit`
 
 After using Inbx_0, you can easily exit the program by typing the following in the command line: `exit`

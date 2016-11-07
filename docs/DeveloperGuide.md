@@ -2,19 +2,19 @@
 
 * [Setting Up](#setting-up)
 * [Design](#design)	
-	* [UI] (#ui-component)
-	* [Logic] (#logic-component)
-	* [Model] (#model-component)
-	* [Storage] (#storage-component)
-	* [Commmons] (#common-classes)
+	* [UI](#ui-component)
+	* [Logic](#logic-component)
+	* [Model](#model-component)
+	* [Storage](#storage-component)
+	* [Commons](#common-classes)
 * [Implementation](#implementation)
 * [Testing](#testing)
 * [Dev Ops](#dev-ops)
 * [Appendix A: User Stories](#appendix-a--user-stories)
 * [Appendix B: Use Cases](#appendix-b--use-cases)
-* [Appendix C: Non Functional Requirements](#appendix-c--non-functional-requirements)
+* [Appendix C: Non-Functional Requirements](#appendix-c--non-functional-requirements)
 * [Appendix D: Glossary](#appendix-d--glossary)
-* [Appendix E : Product Survey](#appendix-e--product-survey)
+* [Appendix E: Product Survey](#appendix-e--product-survey)
 
 
 ## Setting up
@@ -72,15 +72,15 @@ Given below is a quick overview of each component.
 
 [**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
 Two of those classes play important roles at the architecture level.
-* `EventsCentre` : This class (written using [Google's Event Bus library](https://github.com/google/guava/wiki/EventBusExplained))
+* `EventsCentre`: This class (written using [Google's Event Bus library](https://github.com/google/guava/wiki/EventBusExplained))
   is used by components to communicate with other components using events (i.e. a form of _Event Driven_ design)
-* `LogsCenter` : Used by many classes to write log messages to the App's log file.
+* `LogsCenter`: Used by many classes to write log messages to the App's log file.
 
 The rest of the App consists of four components:
-* [**`UI`**](#ui-component) : The UI of the App.
-* [**`Logic`**](#logic-component) : The command executor.
-* [**`Model`**](#model-component) : Holds the data of the App in-memory.
-* [**`Storage`**](#storage-component) : Reads data from, and writes data to, the hard disk.
+* [**`UI`**](#ui-component): The UI of the App.
+* [**`Logic`**](#logic-component): The command executor.
+* [**`Model`**](#model-component): Holds the data of the App in-memory.
+* [**`Storage`**](#storage-component): Reads data from, and writes data to, the hard disk.
 
 Each of the four components
 * Defines its _API_ in an `interface` with the same name as the Component.
@@ -106,7 +106,7 @@ being saved to the hard disk and the status bar of the UI being updated to refle
   to be coupled to either of them. This is an example of how this Event Driven approach helps us reduce direct 
   coupling between components.
 
-The sections below provide more detailed explainations for each component.
+The sections below provide more detailed explanations for each component.
 
 ### UI component
 
@@ -124,9 +124,9 @@ The `UI` component uses the JavaFx UI framework. The layout of these UI parts ar
  [`MainWindow.fxml`](../src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
-* Executes user commands using the `Logic` component.
-* Binds itself to specific data in the `Model` component so that the UI can auto-update when this data in the `Model` component changes.
-* Responds to events raised from various parts of the App and updates the UI accordingly.
+1. Executes user commands using the `Logic` component.
+2. Binds itself to specific data in the `Model` component so that the UI can auto-update when this data in the `Model` component changes.
+3. Responds to events raised from various parts of the App and updates the UI accordingly.
 
 ### Logic component
 
