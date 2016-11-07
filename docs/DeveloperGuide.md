@@ -155,11 +155,11 @@ The Add Command has various constructors catering to the various tasks such as f
 | Constructor & Description                                                                                                                                                        |
 |----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | public AddCommand(String name, String startDate, String startTime, String endDate, String endTime, String level, Set&lt;String&gt; tags) <br><br>Constructs the Add Command for Events with Importance |
-| public AddCommand(String name, String startDate, String startTime, String endDate, String endTime, Set&ltString&gt tags) <br><br> Constructs the Add Command for Events with no Importance            |
-| public AddCommand(String name, String level, Set&ltString&gt tags) <br><br> Constructs the Add Command for Floating Tasks with Importance                                                             |
-| public AddCommand(String name, Set&ltString&gt tags) <br><br> Constructs the Add Command for Floating Tasks with no Importance                                                                        |
-| public AddCommand(String name, String endDate, String endTime, String level, Set&ltString&gt tags) <br><br> Constructs the Add Command for Deadline Tasks with Importance                             |
-| public AddCommand(String name, String endDate, String endTime, Set&ltString&gt tags) <br><br> Constructs the Add Command for Deadline Tasks with Importance                                           |
+| public AddCommand(String name, String startDate, String startTime, String endDate, String endTime, Set&lt;String&gt; tags) <br><br> Constructs the Add Command for Events with no Importance            |
+| public AddCommand(String name, String level, Set&lt;String&gt; tags) <br><br> Constructs the Add Command for Floating Tasks with Importance                                                             |
+| public AddCommand(String name, Set&lt;String&gt; tags) <br><br> Constructs the Add Command for Floating Tasks with no Importance                                                                        |
+| public AddCommand(String name, String endDate, String endTime, String level, Set&lt;String&gt; tags) <br><br> Constructs the Add Command for Deadline Tasks with Importance                             |
+| public AddCommand(String name, String endDate, String endTime, Set&lt;String&gt; tags) <br><br> Constructs the Add Command for Deadline Tasks with Importance                                           |
 
 
 #####Delete Command
@@ -176,8 +176,15 @@ The Edit Command changes the atrributes of a particular task that are specified 
 
 | Constructor & Description                                                                                                                                                        |
 |----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| public EditCommand(int targetIndex, String [] argumentsToEdit, Set&ltString&gt tags) <br><br>Constructs the Edit Command given the index number for the task that is to be edited and the arguments to be edited |
+| public EditCommand(int targetIndex, String [] argumentsToEdit, Set&lt;String&gt; tags) <br><br>Constructs the Edit Command given the index number for the task that is to be edited and the arguments to be edited |
 
+| Methods            |                                                                                                                             |
+|--------------------|-----------------------------------------------------------------------------------------------------------------------------|
+| UniqueTagList      | obtainUniqueTagList(ReadOnlyTask taskToEdit) <br><br> Returns the UniqueTagList from the task that is chosen to be edited           |
+| UniqueReminderList | obtainUniqueReminderList(ReadOnlyTask taskToEdit) <br><br> Returns the UniqueReminderList from the task that is chosen to be edited |
+| Task | updateReminders(Task toEditWith) <br><br> Updates all the Reminders in the Task with the new task arguments so that it will be correctly displayed to the user|
+| String[] | obtainArguments(String[] editArguments, ReadOnlyTask taskToEdit) <br><br> Retrieves all the arguments that the user wish to keep the same from the task and returns all the arguments as a String Array|
+| Task | createToEditWithTask(String[] editArguments, UniqueTagList tags, UniqueReminderList reminders) <br><br> Returns the new Task with the new edited attributes|
 
 ### Model component
 
