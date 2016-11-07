@@ -154,7 +154,7 @@ The Add Command has various constructors catering to the various tasks such as f
 
 | Constructor & Description                                                                                                                                                        |
 |----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| public AddCommand(String name, String startDate, String startTime, String endDate, String endTime, String level, Set&ltString&gt tags) <br><br>Constructs the Add Command for Events with Importance |
+| public AddCommand(String name, String startDate, String startTime, String endDate, String endTime, String level, Set&lt;String&gt; tags) <br><br>Constructs the Add Command for Events with Importance |
 | public AddCommand(String name, String startDate, String startTime, String endDate, String endTime, Set&ltString&gt tags) <br><br> Constructs the Add Command for Events with no Importance            |
 | public AddCommand(String name, String level, Set&ltString&gt tags) <br><br> Constructs the Add Command for Floating Tasks with Importance                                                             |
 | public AddCommand(String name, Set&ltString&gt tags) <br><br> Constructs the Add Command for Floating Tasks with no Importance                                                                        |
