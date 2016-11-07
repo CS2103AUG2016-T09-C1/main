@@ -1,12 +1,12 @@
 # Developer Guide 
 
 * [Setting Up](#setting-up)
-* [Design](#design)
-	* [Commmons] (#common-classes)
+* [Design](#design)	
 	* [UI] (#ui-component)
 	* [Logic] (#logic-component)
 	* [Model] (#model-component)
 	* [Storage] (#storage-component)
+	* [Commmons] (#common-classes)
 * [Implementation](#implementation)
 * [Testing](#testing)
 * [Dev Ops](#dev-ops)
@@ -142,6 +142,30 @@ The `UI` component,
 Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete 1")`
  API call.<br>
 <img src="images/DeleteTaskSdForLogic.png" width="800"><br>
+
+##Commands
+
+Each command inherits the implementation of the abstract class Command. <br>
+The commands mainly consist of constructors, getters and the execute method inherited from the abstract class Command. <br>
+
+#Add Command
+
+The Add Command has various constructors catering to the various tasks such as floating, events and deadline tasks. <br>
+
+| Constructor & Description                                                                                                                                                        |
+|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| public AddCommand(String name, String startDate, String startTime, String endDate, String endTime, String level, Set tags) <br> Constructs the Add Command for Events with Importance |
+| public AddCommand(String name, String startDate, String startTime, String endDate, String endTime, Set tags) <br> Constructs the Add Command for Events with no Importance            |
+| public AddCommand(String name, String level, Set tags) <br> Constructs the Add Command for Floating Tasks with Importance                                                             |
+| public AddCommand(String name, Set tags) <br> Constructs the Add Command for Floating Tasks with no Importance                                                                        |
+| public AddCommand(String name, String endDate, String endTime, String level, Set tags) <br> Constructs the Add Command for Deadline Tasks with Importance                             |
+| public AddCommand(String name, String endDate, String endTime, Set tags) <br> Constructs the Add Command for Deadline Tasks with Importance                                           |
+
+
+#Delete Command
+
+The Delete Command removes the 
+
 
 ### Model component
 
