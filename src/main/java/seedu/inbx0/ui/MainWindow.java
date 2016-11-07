@@ -231,12 +231,15 @@ public class MainWindow extends UiPart {
     }
     
     //@@author A0139579J
+    /**
+     * Loads the Overdue Task Window.
+     */
     @FXML
     public void handleOverdueTasks() {
         OverdueTaskWindow overdueTaskWindow = OverdueTaskWindow.load(primaryStage, logic);
         overdueTaskWindow.show();
     }
-  //@@author 
+    //@@author 
     
     public void show() {
         primaryStage.show();
@@ -250,6 +253,10 @@ public class MainWindow extends UiPart {
         raise(new ExitAppRequestEvent());
     }
     
+    //@@author A0139579J
+    /**
+     * Loads the Reminder Window.
+     */
     public void handleReminder(ReadOnlyTask task) {
         ReminderWindow reminderWindow = ReminderWindow.load(primaryStage, task);
         reminderWindow.show();
