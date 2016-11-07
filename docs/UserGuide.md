@@ -136,8 +136,7 @@ It will instantly open up a help window, showing you the complete list of comman
 
 Alternatively, you can use the keyboard shortcut <kbd>Ctrl</kbd> + <kbd>F1</kbd> to open the help window quickly.
 <br><br>
-<!--- @@author  -->
- 
+<!--- @@author  --> 
 <!--- @@author A0139579J -->
 
 #### <a id="add"></a>2. Adding a task: `add`
