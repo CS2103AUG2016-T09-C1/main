@@ -329,14 +329,14 @@ public class Parser {
         }
     }
     
+    // @@author A0139579J
     /**
      * Checks whether the string contains a time
      *
      * @param the string that the user inputs in s= or e= which
      *        may contain date and time together
      * @return the time
-     */
-    // @@author A0139579J
+     */  
     private String timeParse(final String dateTimeString) {
         Matcher matcher1 = DATE_TIME_FORMAT.matcher(dateTimeString.trim());
         Matcher matcher2 = DATE_TIME_FORMAT_2.matcher(dateTimeString.trim());
@@ -715,7 +715,7 @@ public class Parser {
 
         return new RemindCommand(targetIndex, matcher.group("startDate"));
     }
-
+    //@@author
     /**
      * Parses arguments in the context of the sort task command.
      * 

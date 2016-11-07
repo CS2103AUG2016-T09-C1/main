@@ -80,9 +80,9 @@ public class EditCommand extends Command {
      */
     private UniqueTagList obtainUniqueTagList(ReadOnlyTask taskToEdit) {
         
-      UniqueTagList original = taskToEdit.getTags();
+      UniqueTagList originalTagList = taskToEdit.getTags();
             
-      return original;
+      return originalTagList;
     }
     
     /**
@@ -90,9 +90,9 @@ public class EditCommand extends Command {
      */
     private UniqueReminderList obtainUniqueReminderList(ReadOnlyTask taskToEdit) {
         
-        UniqueReminderList original = taskToEdit.getReminders();
+        UniqueReminderList originalReminderList = taskToEdit.getReminders();
               
-        return original;
+        return originalReminderList;
     }
     
     /**

@@ -1,12 +1,12 @@
 # Developer Guide 
 
 * [Setting Up](#setting-up)
-* [Design](#design)
-	* [Commmons] (#common-classes)
+* [Design](#design)	
 	* [UI] (#ui-component)
 	* [Logic] (#logic-component)
 	* [Model] (#model-component)
 	* [Storage] (#storage-component)
+	* [Commmons] (#common-classes)
 * [Implementation](#implementation)
 * [Testing](#testing)
 * [Dev Ops](#dev-ops)
@@ -143,6 +143,189 @@ Given below is the Sequence Diagram for interactions within the `Logic` componen
  API call.<br>
 <img src="images/DeleteTaskSdForLogic.png" width="800"><br>
 
+<!--- @@author A0139579J -->
+####Commands
+
+Each command inherits the implementation of the abstract class Command. <br>
+The commands mainly consist of constructors and the execute method inherited from the abstract class Command. <br>
+
+#####Add Command
+
+The Add Command has various constructors catering to the various tasks such as floating, events and deadline tasks. <br>
+
+| Constructor & Description                                                                                                                                                        |
+|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| public AddCommand(String name, String startDate, String startTime, String endDate, String endTime, String level, Set&lt;String&gt; tags) <br><br>Constructs the Add Command for Events with Importance |
+| public AddCommand(String name, String startDate, String startTime, String endDate, String endTime, Set&lt;String&gt; tags) <br><br> Constructs the Add Command for Events with no Importance            |
+| public AddCommand(String name, String level, Set&lt;String&gt; tags) <br><br> Constructs the Add Command for Floating Tasks with Importance                                                             |
+| public AddCommand(String name, Set&lt;String&gt; tags) <br><br> Constructs the Add Command for Floating Tasks with no Importance                                                                        |
+| public AddCommand(String name, String endDate, String endTime, String level, Set&lt;String&gt; tags) <br><br> Constructs the Add Command for Deadline Tasks with Importance                             |
+| public AddCommand(String name, String endDate, String endTime, Set&lt;String&gt; tags) <br><br> Constructs the Add Command for Deadline Tasks with Importance                                           |
+
+
+#####Delete Command
+
+The Delete Command removes the task from the tasklist based on the index number that is given.
+
+| Constructor & Description                                                                                                                                                        |
+|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| public DeleteCommand(int targetIndex) <br><br>Constructs the Delete Command given the index number for the task that is to be deleted |
+
+#####Edit Command
+
+The Edit Command changes the atrributes of a particular task that are specified by the user.
+
+| Constructor & Description                                                                                                                                                        |
+|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| public EditCommand(int targetIndex, String [] argumentsToEdit, Set&lt;String&gt; tags) <br><br>Constructs the Edit Command given the index number for the task that is to be edited and the arguments to be edited |
+
+| Type            |  Methods and Description                                                                                                                           |
+|--------------------|-----------------------------------------------------------------------------------------------------------------------------|
+| UniqueTagList      | obtainUniqueTagList(ReadOnlyTask taskToEdit) <br><br> Returns the UniqueTagList from the task that is chosen to be edited           |
+| UniqueReminderList | obtainUniqueReminderList(ReadOnlyTask taskToEdit) <br><br> Returns the UniqueReminderList from the task that is chosen to be edited |
+| Task | updateReminders(Task toEditWith) <br><br> Updates all the Reminders in the Task with the new task arguments so that it will be correctly displayed to the user|
+| String[] | obtainArguments(String[] editArguments, ReadOnlyTask taskToEdit) <br><br> Retrieves all the arguments that the user wish to keep the same from the task and returns all the arguments as a String Array|
+| Task | createToEditWithTask(String[] editArguments, UniqueTagList tags, UniqueReminderList reminders) <br><br> Returns the new Task with the new edited attributes|
+
+#####Remind Command
+
+The Remind Command adds a reminder to a task specified by the user.
+
+| Constructor & Description                                                                                                                                                        |
+|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| public RemindCommand(int targetIndex, String date) <br><br>Constructs the Remind Command given the index number of the task that the reminder is added to and the start date of the reminder |
+
+| Type            |  Methods and Description                                                                                                                           |
+|--------------------|-----------------------------------------------------------------------------------------------------------------------------|
+| UniqueTagList      | obtainUniqueTagList(ReadOnlyTask taskToAddReminder) <br><br> Returns the UniqueTagList from the task that is going to have a reminder added |
+| UniqueReminderList | addReminder(ReadOnlyTask taskToAddReminder, ReminderTask newReminder) <br><br> Adds the reminder to the UniqueReminderList from the task that is chosen to have reminder added and returns the UniqueReminderList |
+| boolean | isValidDateAndTime(Date date, Time time) <br><br> Checks if the time and date given is valid and not in the past|
+| String[] | obtainArguments(String[] arguments, ReadOnlyTask taskToAddReminder) <br><br> Retrieves all the arguments from the task that is going to have a reminder added and returns all the arguments as a String Array|
+| Task | createTaskWithReminder(ReadOnlyTask taskToAddReminder, ReminderTask newReminder) <br><br> Returns the new Task with the new added reminder|
+
+#####Select Command
+
+The Select Command selects a task specified by the index number from the shown list and displays the task's details in the info panel.
+
+| Constructor & Description                                                                                                                                                        |
+|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| public SelectCommand(int targetIndex) <br><br>Constructs the Select Command given the index number for the task that is to be selected |
+
+#####Find Command
+
+The Find Command allows the user to search for tasks based on the arguments given.
+
+| Constructor & Description                                                                                                                                                        |
+|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| public FindCommand(boolean logicRelation, List&lt;String&gt; keywordSet) <br><br>Constructs the Find Command given the various arguments given and if there is any logical operator |
+
+#####Clear Command
+
+The Clear Command allows the user to clear the entire tasklist or clear the shown list.
+
+| Constructor & Description                                                                                                                                                        |
+|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| public ClearCommand(String toClear) <br><br>Constructs the Clear Command based on the user input whether it is the entire tasklist or the shown list |
+
+#####List Command
+
+The List Command displays the various lists to the user based on input.
+
+| Constructor & Description                                                                                                                                                        |
+|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| public ListCommand() <br><br>Constructs the List Command to show the entire list of undone tasks |
+| public ListCommand(String arguments) <br><br>Constructs the List Command to show tasks due by a certain date or tasks on a certain date |
+
+#####Mark Complete Command
+
+The Mark Complete Command marks a certain task as completed specified by the index number.
+
+| Constructor & Description                                                                                                                                                        |
+|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| public MarkCompleteCommand(Set<Integer> indexNumSet) <br><br>Constructs the Mark Complete Command given a set of index numbers |
+
+| Type            |  Methods and Description                                                                                                                           |
+|--------------------|-----------------------------------------------------------------------------------------------------------------------------|
+| void | validateSet(Set&lt;Integer&gt; indexNumSet) <br><br> Checks if the index numbers given are valid |
+| void | sortIndexNumInDescendingOrder() <br><br> Sorts the set of index numbers in a descending order in preparation of marking those tasks complete |
+
+#####Add Tag Command
+
+The Add Tag Command allows the user to add tags to a task's existing tag list.
+
+| Constructor & Description                                                                                                                                                        |
+|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| public AddTagCommand(int targetIndex,  Set&lt;String&gt; tags) <br><br>Constructs the Add Tag Command given a set of of Strings which are the tags and the index number of the task that the tags are going to be added to |
+
+| Type            |  Methods and Description                                                                                                                           |
+|--------------------|-----------------------------------------------------------------------------------------------------------------------------|
+| UniqueTagList      | obtainUniqueTagList(ReadOnlyTask taskToEdit)) <br><br> Returns the UniqueTagList from the task that is going to have the tags added |
+| Task | createToEditWithTask(ReadOnlyTask taskToEdit, UniqueTagList tags) <br><br> Returns the new Task with the new added tags|
+
+#####Delete Tag Command
+
+The Delete Tag Command allows the user to remove tags from a task's existing tag list.
+
+| Constructor & Description                                                                                                                                                        |
+|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| public DelTagCommand(int targetIndex,  Set&lt;String&gt; tags) <br><br>Constructs the Delete Tag Command given a set of of Strings which are the tags and the index number of the task that the tags are going to be removed from |
+
+| Type            |  Methods and Description                                                                                                                           |
+|--------------------|-----------------------------------------------------------------------------------------------------------------------------|
+| UniqueTagList      | obtainUniqueTagList(ReadOnlyTask taskToEdit) <br><br> Returns the UniqueTagList from the task that is going to have the tags removed |
+| Task | createToEditWithTask(ReadOnlyTask taskToEdit, UniqueTagList tags) <br><br> Returns the new Task with the tag list that had the tags removed|
+
+#####Show Command
+
+The Show Command navigates to the various filtered lists.
+
+| Constructor & Description                                                                                                                                                        |
+|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| public ShowCommand (String filterCondition) <br><br>Constructs the Show Command which will display the list based on the filter condition |
+
+#####Sort Command
+
+The Sort Command sorts the tasks in the tasklist.
+
+| Constructor & Description                                                                                                                                                        |
+|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| public SortCommand(String type, boolean defaultOrder) <br><br>Constructs the Sort Command given the type of sort and whether in ascending or descending order |
+
+#####Set Directory Command
+
+The Set Directory Command allows the user to specify the file path of the storage of the tasklist.
+
+| Constructor & Description                                                                                                                                                        |
+|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|  public SetDirCommand (String filePath) <br><br>Constructs the Set Directory Command given the filepath of which the tasklist is to be stored |
+
+#####Undo Command
+
+The Undo Command allows the user to undo any previous action.
+
+| Constructor & Description                                                                                                                                                        |
+|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| public UndoCommand() <br><br>Constructs the Undo Command which will undo the previous action |
+| public UndoCommand(int stepsBack) <br><br>Constructs the Undo Command which will undo the number of actions given|
+
+#####Redo Command
+
+The Redo Command allows the user to redo previous undone action.
+
+| Constructor & Description                                                                                                                                                        |
+|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| public RedoCommand() <br><br>Constructs the Redo Command which will redo the previous undone action |
+| public RedoCommand(int stepsBack) <br><br>Constructs the Redo Command which will redo the number of undo actions given|
+
+#####Help Command
+
+The Help Command displays the help window by raising a ShowHelpRequestEvent.
+
+#####Exit Command
+
+The Exit Command terminates the program by raising an ExitAppRequestEvent.
+
+<!--- @@author  -->
 ### Model component
 
 <img src="images/ModelClassDiagram.png" width="800"><br>
@@ -156,6 +339,46 @@ The `Model`,
   so that the UI automatically updates when the data in the list changes.
 * does not depend on any of the other three components.
 
+<!--- @@author A0139579J -->
+####Task
+
+The Task object represents a task in the tasklist.
+
+| Constructor & Description                                                                                                                                                        |
+|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| public Task(final Name name, final Date startDate, final Time startTime, final Date endDate, final Time endTime, final Importance level, final UniqueTagList tags, final UniqueReminderList reminders) <br><br>Constructs the Task object which wil the contain a Name object, two Date objects, two Time objects, one Importance object, one UniqueTagList and one UniqueReminderList |
+| public Task(final Name name, final Date startDate, final Time startTime, final Date endDate, final Time endTime, final Importance level, final UniqueTagList tags, final UniqueReminderList reminders, final boolean isCompleted, final boolean isExpired, final boolean isFloatTask) <br><br>Constructs the Task object which wil the contain a Name object, two Date objects, two Time objects, one Importance object, one UniqueTagList and one UniqueReminderList and with all the specific boolean values|
+
+| Type            |  Methods and Description                                                                                                                           |
+|--------------------|-----------------------------------------------------------------------------------------------------------------------------|
+| boolean | isValidEvent(final Date startDate, final Time startTime, final Date endDate, final Time endTime) <br><br> Returns the boolean value if the task is a valid event |
+| Name | getName() <br><br> Returns the Name object of the task|
+| Date | getStartDate() <br><br> Returns the start date of the task which is a Date object|
+| Time | getStartTime() <br><br> Returns the start time of the task which is a Time object|
+| Date | getEndDate() <br><br> Returns the end date of the task which is a Date object|
+| Time | getEndTime() <br><br> Returns the end time of the task which is a Time object|
+| Importance | getLevel() <br><br> Returns the Importance object of the task |
+| UniqueTagList | getTags() <br><br> Returns the UniqueTagList of the task |
+| UniqueReminderList | getReminders() <br><br> Returns the UniqueReminderList of the task |
+| boolean | getIsCompleted() <br><br> Returns boolean value of the task on whether the task is completed |
+| boolean | getIsExpired() <br><br> Returns boolean value of the task on whether the task is expired |
+| boolean | getIsFloatTask() <br><br> Returns boolean value of the task on whether the task is a floating task |
+| boolean | getIsEvent() <br><br> Returns boolean value of the task on whether the task is an event |
+| void | setTags(final UniqueTagList replacement) <br><br> Replaces the task's tags with tags in the argument tag list |
+| void | setStartDate(final Date startDate) <br><br> Replaces the task's start date with Date Object in the argument |
+| void | setStartTime(final Time startTime) <br><br> Replaces the task's start time with Time Object in the argument |
+| void | setEndDate(final Date endDate) <br><br> Replaces the task's end date with Date Object in the argument |
+| void | setEndTime(final Time endTime) <br><br> Replaces the task's end time with Time Object in the argument |
+| void | setLevel(final Importance level) <br><br> Replaces the task's importance with Importance Object in the argument |
+| void | setCompleted(final boolean isCompleted) <br><br> Changes the boolean variable of whether the task is completed with the boolean value in the argument |
+| void | setExpired(final boolean isExpired) <br><br> Changes the boolean variable of whether the task is expired with the boolean value in the argument |
+| void | setFloatTask(final boolean isFloatTask) <br><br> Changes the boolean variable of whether the task is a floating task with the boolean value in the argument |
+| void | setReminders(final UniqueReminderList reminders) <br><br> Replaces the task's reminders with reminders in the argument reminder list |
+| boolean | equals(final Object other) <br><br> Compares the specified task if it is the same as another task |
+| int | hashCode() <br><br> Returns the hash code value of the task |
+| String | toString() <br><br> Returns the string representation of the task |
+
+<!--- @@author  -->
 ### Storage component
 
 <img src="images/StorageClassDiagram.png" width="800"><br>

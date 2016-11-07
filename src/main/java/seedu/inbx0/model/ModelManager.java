@@ -168,12 +168,18 @@ public class ModelManager extends ComponentManager implements Model {
     }
     
     //@@author A0139579J
+    /**
+     * Edits a task in the tasklist
+     */
     @Override
     public synchronized void editTask(ReadOnlyTask target, Task task) throws TaskNotFoundException, DuplicateTaskException {
         taskList.editTask(target, task);
         indicateTaskListChanged();
     }
     
+    /**
+     * Marks a task in the tasklist as complete
+     */
     @Override
     public synchronized void markTaskComplete(ReadOnlyTask target, Task task) throws TaskNotFoundException {
         taskList.markTaskComplete(target, task);
@@ -189,12 +195,18 @@ public class ModelManager extends ComponentManager implements Model {
     }
     
     //@@author A0139579J
+    /**
+     * Checks if the tasks in the tasklist if the task has expired
+     */
     @Override
     public synchronized void checkExpiry(Date currentDate, String currentTime) {
         if(taskList.checkExpiry(currentDate, currentTime))
             indicateTaskListChanged();
     }
-
+    
+    /**
+     * Checks if the reminders in the tasks in the tasklist had already activated
+     */
     @Override
     public synchronized void checkReminders() {
         if(taskList.checkReminders())
@@ -208,6 +220,9 @@ public class ModelManager extends ComponentManager implements Model {
     }
     
     //@@author A0139579J
+    /**
+     * Filters the tasklist to show overdue tasks
+     */
     @Override
     public UnmodifiableObservableList<ReadOnlyTask> getFilteredOverdueTaskList() {    
         updateFilteredOverdueTaskList();
@@ -252,10 +267,10 @@ public class ModelManager extends ComponentManager implements Model {
         updateFilteredTaskListByCompleteness(false);
     }
     
-    /*
+    //@@author A0139579J
+    /**
      * Updates the list according to list command parameters
      */
-    //@@author A0139579J
     @Override
     public void updateFilteredTaskList(String date, String preposition){
         if("".equals(preposition))
@@ -267,6 +282,9 @@ public class ModelManager extends ComponentManager implements Model {
     }
         
     //@@author A0139579J
+    /**
+     * Updates the tasklist to show overdue tasks
+     */
     @Override
     public void updateFilteredOverdueTaskList() {
         updateFilteredOverdueTaskList(new PredicateExpression(new OverdueTaskQualifier()));
@@ -549,6 +567,9 @@ public class ModelManager extends ComponentManager implements Model {
     //@@author
     
     //@@author A0139579J
+    /**
+     * Qualifier to determine if a task is expired
+     */
     private class OverdueTaskQualifier implements Qualifier {
         
         OverdueTaskQualifier() {
@@ -557,11 +578,11 @@ public class ModelManager extends ComponentManager implements Model {
         @Override
         public boolean run(ReadOnlyTask task) {
             return (task.getIsExpired() && !task.getIsCompleted() &&
-                    task.getStartDate().value.equals("") && task.getStartTime().value.equals("") &&
-                    !task.getEndDate().equals("") && !task.getEndDate().equals("")) | 
-                    (task.getIsExpired() && !task.getIsCompleted() &&
-                     task.getStartDate().value.equals("") && task.getStartTime().value.equals("") &&
-                     !task.getEndDate().equals("") && task.getEndDate().equals(""));
+                   ("").equals(task.getStartDate().value) && ("").equals(task.getStartTime().value) &&
+                   !("").equals(task.getEndDate()) && !("").equals(task.getEndDate())) | 
+                   (task.getIsExpired() && !task.getIsCompleted() &&
+                   ("").equals(task.getStartDate().value) && ("").equals(task.getStartTime().value) &&
+                   !("").equals(task.getEndDate()) && ("").equals(task.getEndDate()));
         }
         
         @Override
@@ -571,6 +592,9 @@ public class ModelManager extends ComponentManager implements Model {
     }
     
     //@@author A0139579J
+    /**
+     * Qualifier to determine if a task starts or ends on a certain date
+     */
     private class StartOnAndEndOnDateQualifier implements Qualifier {
         private String date;
         
@@ -589,6 +613,9 @@ public class ModelManager extends ComponentManager implements Model {
         }
     }
     
+    /*
+     * Qualifier to determine if a task is due by a certain date
+     */
     private class EndUntilDateQualifier implements Qualifier {
         private String date;
         
@@ -602,7 +629,7 @@ public class ModelManager extends ComponentManager implements Model {
            
             boolean taskIsAfterCurrentDate = false;
             boolean taskIsBeforeDueDate = false;
-            boolean isBeforeOrOnDueButAfterOrOnCurrent = false;
+            boolean dueByDate = false;
             try {
                 today = new Date("today");
             } catch (IllegalValueException e) {
@@ -627,9 +654,9 @@ public class ModelManager extends ComponentManager implements Model {
                 taskIsBeforeDueDate = true;
             
             if (taskIsAfterCurrentDate && taskIsBeforeDueDate)
-                isBeforeOrOnDueButAfterOrOnCurrent = true;
+                dueByDate = true;
            
-            return isBeforeOrOnDueButAfterOrOnCurrent && !task.getIsCompleted();
+            return dueByDate && !task.getIsCompleted();
                    
         }
         

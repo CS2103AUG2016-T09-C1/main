@@ -3,10 +3,10 @@ package seedu.inbx0.commons.events.ui;
 import seedu.inbx0.commons.events.BaseEvent;
 import seedu.inbx0.model.task.ReadOnlyTask;
 
+//@@author A0139579J
 /**
  * An event requesting to display the reminder.
  */
-//@@author A0139579J
 public class ShowReminderRequestEvent extends BaseEvent {
     
     public final ReadOnlyTask task;
