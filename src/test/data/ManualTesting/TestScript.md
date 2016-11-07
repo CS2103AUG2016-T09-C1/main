@@ -1,25 +1,25 @@
 # Test Script for Manual Testing
 
-* [Loading sample data](#load)
-* [Features](#features)
-	* [Getting help: `help`](#help)
-	* [Adding a task: `add`](#add)
-	* [Listing tasks: `list`](#list)
-	* [Finding specific tasks: `find`](#find)
-	* [Sorting the tasks by using a specific criteria: `sort`](#sort)
-	* [Showing the various filtered lists: `show`](#show)
-	* [Editing a task: `edit`](#edit)
-	* [Modifying the taglist: `addtag` / `deltag`](#tag)
-	* [Deleting a task: `del`](#del)
-	* [Selecting a task : `sel`](#sel)
-	* [Undoing previous action: `undo`](#undo)
-	* [Redoing previous action: `redo`](#redo)
-	* [Clearing all tasks : `clr`](#clr)
-	* [Marking a task as completed : `done`](#done)
-	* [Setting a reminder for your task : `rem`](#reminder)
-	* [Saving your tasklist to a specific directory : `saveas`](#setdir)
-	* [Autocompleting with command history](#autocomplete)
-    * [Changing the theme and size of inbx_0](#preferences)
+* Loading sample data
+* Features
+	* Getting help: `help`
+	* Adding a task: `add`
+	* Listing tasks: `list`
+	* Finding specific tasks: `find`
+	* Sorting the tasks by using a specific criteria: `sort`
+	* Showing the various filtered lists: `show`
+	* Editing a task: `edit`
+	* Modifying the taglist: `addtag` / `deltag`
+	* Deleting a task: `del`
+	* Selecting a task : `sel`
+	* Undoing previous action: `undo`
+	* Redoing previous action: `redo`
+	* Clearing all tasks : `clr`
+	* Marking a task as completed : `done`
+	* Setting a reminder for your task : `rem`
+	* Saving your tasklist to a specific directory : `saveas`
+	* Autocompleting with command history
+    * Changing the theme and size of inbx_0
 
 ## Load sample data
 
@@ -76,12 +76,6 @@
 1. Type `list 24 oct`.
 
 **Result:** Only tasks with 24th October in either start date or end date will be shown (3 such tasks).
-
-### List overdue tasks
-
-1. Type `list overdue`.
-
-**Result:** Only overdue tasks are shown (5 such tasks).
 
 ## Find Command
 
