@@ -154,17 +154,29 @@ The Add Command has various constructors catering to the various tasks such as f
 
 | Constructor & Description                                                                                                                                                        |
 |----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| public AddCommand(String name, String startDate, String startTime, String endDate, String endTime, String level, Set tags) <br> Constructs the Add Command for Events with Importance |
-| public AddCommand(String name, String startDate, String startTime, String endDate, String endTime, Set tags) <br> Constructs the Add Command for Events with no Importance            |
-| public AddCommand(String name, String level, Set tags) <br> Constructs the Add Command for Floating Tasks with Importance                                                             |
-| public AddCommand(String name, Set tags) <br> Constructs the Add Command for Floating Tasks with no Importance                                                                        |
-| public AddCommand(String name, String endDate, String endTime, String level, Set tags) <br> Constructs the Add Command for Deadline Tasks with Importance                             |
-| public AddCommand(String name, String endDate, String endTime, Set tags) <br> Constructs the Add Command for Deadline Tasks with Importance                                           |
+| public AddCommand(String name, String startDate, String startTime, String endDate, String endTime, String level, Set&ltString&gt tags) <br><br>Constructs the Add Command for Events with Importance |
+| public AddCommand(String name, String startDate, String startTime, String endDate, String endTime, Set&ltString&gt tags) <br><br> Constructs the Add Command for Events with no Importance            |
+| public AddCommand(String name, String level, Set&ltString&gt tags) <br><br> Constructs the Add Command for Floating Tasks with Importance                                                             |
+| public AddCommand(String name, Set&ltString&gt tags) <br><br> Constructs the Add Command for Floating Tasks with no Importance                                                                        |
+| public AddCommand(String name, String endDate, String endTime, String level, Set&ltString&gt tags) <br><br> Constructs the Add Command for Deadline Tasks with Importance                             |
+| public AddCommand(String name, String endDate, String endTime, Set&ltString&gt tags) <br><br> Constructs the Add Command for Deadline Tasks with Importance                                           |
 
 
 #####Delete Command
 
-The Delete Command removes the 
+The Delete Command removes the task from the tasklist based on the index number that is given.
+
+| Constructor & Description                                                                                                                                                        |
+|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| public DeleteCommand(int targetIndex) <br><br>Constructs the Delete Command given the index number for the task that is to be deleted |
+
+#####Edit Command
+
+The Edit Command changes the atrributes of a particular task that are specified by the user.
+
+| Constructor & Description                                                                                                                                                        |
+|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| public EditCommand(int targetIndex, String [] argumentsToEdit, Set&ltString&gt tags) <br><br>Constructs the Edit Command given the index number for the task that is to be edited and the arguments to be edited |
 
 
 ### Model component
