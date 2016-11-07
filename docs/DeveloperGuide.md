@@ -345,9 +345,7 @@ The Task object represents a task in the tasklist.
 |----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | public Task(final Name name, final Date startDate, final Time startTime, final Date endDate, final Time endTime, final Importance level, final UniqueTagList tags, final UniqueReminderList reminders) <br><br>
 Constructs the Task object which wil the contain a Name object, two Date objects, two Time objects, one Importance object, one UniqueTagList and one UniqueReminderList |
-| public Task(final Name name, final Date startDate, final Time startTime, final Date endDate, final Time endTime, 
-            final Importance level, final UniqueTagList tags, final UniqueReminderList reminders, final boolean isCompleted, 
-            final boolean isExpired, final boolean isFloatTask) <br><br>
+| public Task(final Name name, final Date startDate, final Time startTime, final Date endDate, final Time endTime, final Importance level, final UniqueTagList tags, final UniqueReminderList reminders, final boolean isCompleted, final boolean isExpired, final boolean isFloatTask) <br><br>
 Constructs the Task object which wil the contain a Name object, two Date objects, two Time objects, one Importance object, one UniqueTagList and one UniqueReminderList and with all the specific boolean values|
 
 | Type            |  Methods and Description                                                                                                                           |
