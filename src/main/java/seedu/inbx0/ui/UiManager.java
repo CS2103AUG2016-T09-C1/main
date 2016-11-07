@@ -119,6 +119,9 @@ public class UiManager extends ComponentManager implements Ui {
     }
    
     //@@author A0139579J
+    /**
+     * Handles ShowReminderEvent and displays the reminder window
+     */
     @Subscribe
     private void handleShowReminderEvent(ShowReminderRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));

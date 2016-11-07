@@ -9,7 +9,7 @@ import seedu.inbx0.model.tag.UniqueTagList;
 import seedu.inbx0.model.reminder.UniqueReminderList;
 
 /**
- * Represents a Task in the address book.
+ * Represents a Task in the tasklist.
  * Guarantees: details are present and not null, field values are validated.
  */
 public class Task implements ReadOnlyTask {
