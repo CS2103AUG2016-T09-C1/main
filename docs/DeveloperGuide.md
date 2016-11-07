@@ -143,6 +143,7 @@ Given below is the Sequence Diagram for interactions within the `Logic` componen
  API call.<br>
 <img src="images/DeleteTaskSdForLogic.png" width="800"><br>
 
+<!--- @@author A0139579J -->
 ####Commands
 
 Each command inherits the implementation of the abstract class Command. <br>
@@ -324,6 +325,7 @@ The Help Command displays the help window by raising a ShowHelpRequestEvent.
 
 The Exit Command terminates the program by raising an ExitAppRequestEvent.
 
+<!--- @@author  -->
 ### Model component
 
 <img src="images/ModelClassDiagram.png" width="800"><br>
@@ -337,6 +339,7 @@ The `Model`,
   so that the UI automatically updates when the data in the list changes.
 * does not depend on any of the other three components.
 
+<!--- @@author A0139579J -->
 ####Task
 
 The Task object represents a task in the tasklist.
@@ -375,6 +378,7 @@ The Task object represents a task in the tasklist.
 | int | hashCode() <br><br> Returns the hash code value of the task |
 | String | toString() <br><br> Returns the string representation of the task |
 
+<!--- @@author  -->
 ### Storage component
 
 <img src="images/StorageClassDiagram.png" width="800"><br>
